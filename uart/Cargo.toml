@@ -1,0 +1,36 @@
+[package]
+authors = ["bwg"]
+edition = "2018"
+readme = "README.md"
+name = "blinky"
+version = "0.1.0"
+
+[dependencies]
+cortex-m = "0.6.3"
+panic-halt = "0.2.0"
+volatile-register="0.2.0"
+
+[dependencies.psoc6-02]
+path = "../devices/psoc6-02"
+features = ["rt"]
+
+[dependencies.psoc6hal]
+path = "../devices/psoc6hal"
+
+[dependencies.cy8c624abzi-d44]
+path = "../devices/psoc/cy8c624abzi-d44"
+
+[dependencies.cortex-m-rt]
+version="0.6.12"
+features = ["device"]
+
+# this lets you use `cargo fix`!
+[[bin]]
+name = "blinky"
+test = false
+bench = false
+
+[profile.release]
+codegen-units = 1 # better optimizations
+debug = true # symbols are nice and they don't increase the size on Flash
+lto = true # better optimizations
