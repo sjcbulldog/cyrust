@@ -10,7 +10,7 @@
     //mtb//      macOS  : $HOME/Library/Application Support/Code/User/settings.json
     //mtb//      Linux  : $HOME/.config/Code/User/settings.json
     //mtb//
-    "modustoolbox.toolsPath": "C:/users/bwg/ModusToolbox/tools_3.1",
+    "modustoolbox.toolsPath": "C:/users/butch/ModusToolbox/tools_3.1",
     "cortex-debug.armToolchainPath": "${config:modustoolbox.toolsPath}/gcc/bin",
     "cortex-debug.openocdPath": "${config:modustoolbox.toolsPath}/openocd/bin/openocd",
 }

@@ -1,5 +1,4 @@
 #![doc = "Peripheral access API for PSOC6_04 microcontrollers (generated using svd2rust v0.17.0)\n\nYou can find an overview of the API [here].\n\n[here]: https://docs.rs/svd2rust/0.17.0/svd2rust/#peripheral-api"]
-#![deny(const_err)]
 #![deny(dead_code)]
 #![deny(improper_ctypes)]
 #![deny(missing_docs)]

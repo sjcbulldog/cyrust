@@ -13,6 +13,7 @@ pub mod peri ;
 pub mod srss ;
 pub mod wdt ;
 pub mod backup ;
+pub mod systick;
 
 type HalStatus = Result<u32, u32> ;
 

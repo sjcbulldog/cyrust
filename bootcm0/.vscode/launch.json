@@ -75,7 +75,6 @@
             "postRestartSessionCommands": [
             ],
             // svdFile is optional, it can be very large.
-            "svdFile": "../../mtb_shared/mtb-pdl-cat1/release-v3.4.0/devices/COMPONENT_CAT1A/svd/psoc6_02.svd",
             "breakAfterReset": true,
             "runToEntryPoint": "main",  // Specifies application entry point name where program will halt
             "showDevDebugOutput": "none",
@@ -84,5 +83,58 @@
                 "group": "CM0+"
             }
         },
+        {
+            "name": "Erase (KitProg3)",
+            "type": "cortex-debug",
+            "request": "launch",
+            "cwd": "${workspaceRoot}",
+            "executable": "./target/thumbv6m-none-eabi/debug/bootcm0",
+            "servertype": "openocd",
+            "searchDir": [
+                "${workspaceRoot}",
+                "${config:modustoolbox.toolsPath}/openocd/scripts/"
+            ],
+            "openOCDPreConfigLaunchCommands": [
+                "set DISABLE_SMIF 1"
+            ],
+            "configFiles": [
+                "openocd.tcl"
+            ],
+            "overrideLaunchCommands": [
+                "monitor reset init",
+                "monitor psoc6 sflash_restrictions 1",
+                "monitor erase_all",
+                "quit"
+            ],
+            "numberOfProcessors": 2,
+            "showDevDebugOutput": "none" // When set to true, displays output of GDB.
+                                        // This is helpful when something is not working right
+        },
+        {
+            "name": "Program (KitProg3)",
+            "type": "cortex-debug",
+            "request": "launch",
+            "cwd": "${workspaceRoot}",
+            "executable": "target/thumbv6m-none-eabi/debug/bootcm0",
+            "servertype": "openocd",
+            "searchDir": [
+                "${workspaceRoot}",
+                "${config:modustoolbox.toolsPath}/openocd/scripts/"
+            ],
+            "configFiles": [
+                "openocd.tcl"
+            ],
+            "overrideLaunchCommands": [
+                "monitor psoc6 sflash_restrictions 1",
+                "monitor program {target/thumbv6m-none-eabi/debug/bootcm0}",
+                "monitor reset_config srst_only",
+                "monitor reset run",
+                "monitor psoc6.dap dpreg 0x04 0x00",
+                "quit"
+            ],
+            "numberOfProcessors": 2,
+            "showDevDebugOutput": "none" // When set to true, displays output of GDB.
+                                        // This is helpful when something is not working right
+        }        
     ]
 }

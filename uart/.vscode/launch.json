@@ -73,9 +73,9 @@
             ],
             // svdFile is optional, it can be very large.
             "svdFile": "",
-            "runToMain": true,          // if true, program will halt at main. Not used for a restart
+            "runToEntryPoint": "main",          // if true, program will halt at main. Not used for a restart
             "preLaunchTask": "",        // Set this to run a task from tasks.json before starting a debug session
-            "showDevDebugOutput": false // When set to true, displays output of GDB.
+            "showDevDebugOutput": "none" // When set to true, displays output of GDB.
                                         // This is helpful when something is not working right
         },
         // When using 'attach', make sure your program is running on the board and that your
@@ -144,7 +144,7 @@
                 "quit"
             ],
             "numberOfProcessors": 2,
-            "showDevDebugOutput": false // When set to true, displays output of GDB.
+            "showDevDebugOutput": "none" // When set to true, displays output of GDB.
                                         // This is helpful when something is not working right
         },
         {
@@ -170,7 +170,7 @@
                 "quit"
             ],
             "numberOfProcessors": 2,
-            "showDevDebugOutput": false // When set to true, displays output of GDB.
+            "showDevDebugOutput": "none" // When set to true, displays output of GDB.
                                         // This is helpful when something is not working right
         }
     ]

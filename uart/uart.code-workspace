@@ -1,0 +1,17 @@
+{
+	"folders": [
+        {
+            "path": "."
+        },
+        {
+            "path": "../devices"
+        }
+    ],
+    "settings": {
+        "cortex-debug.armToolchainPath": "${config:modustoolbox.toolsPath}/gcc/bin",
+        "cortex-debug.openocdPath": "${config:modustoolbox.toolsPath}/openocd/bin/openocd",
+        "rust-analyzer.linkedProjects": [
+            ".\\psoc6hal\\Cargo.toml"
+        ]
+    }
+}
