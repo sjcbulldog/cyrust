@@ -1,41 +1,24 @@
 #!/bin/bash
 
-CHIPTOOL=../chiptool/target/debug/chiptool.exe
+CHIPTOOL=../../chiptool/target/debug/chiptool.exe
 
 
 TARGET=$1
 SVDFILE=$2
 PERIFILE=$3
 
-readarray -t PERIPHERALS < ../svd/$TARGET.peris
+echo TARGET is $TARGET, SVDFILE is $SVDFILE, PERIFILE is $PERIFILE
+
+readarray -t PERIPHERALS < $PERIFILE
 
 mkdir -p yaml
 mkdir -p src
-cat > Cargo.toml << EOF
-[package]
-name = "psoc6-02"
-description="PSoC 6 02 Cortex-M peripheral access library"
-license="MIT"
-version = "0.1.0"
-readme = "README.md"
-authors = ["Jack (Butch) Griffin <butchg@comcast.net>"]
-edition = "2018"
-keywords = ["cortex-m", "psoc", "no_std", "embedded"]
-categories = ["embedded", "no-std"]
-
-[features]
-rt = ["cortex-m-rt/device"]
-
-[dependencies]
-cortex-m = "0.6.3"
-cortex-m-rt = "0.6.12"
-EOF
 
 for key in "${PERIPHERALS[@]}"
 do
     PERIPHERAL=`echo $key | tr -d '\r'`
     echo -n "Processing peripheral $PERIPHERAL ... "
-    echo "pub mod $PERIPHERAL;" >> src/lib.rs
+    echo "pub mod $PERIPHERAL;" >> src/mod.rs
     echo -n "Generating YAML ... "
     $CHIPTOOL extract-peripheral --svd $SVDFILE --peripheral $PERIPHERAL > yaml/$PERIPHERAL.yaml
     echo -n "Generating rust ... "
@@ -43,7 +26,5 @@ do
     echo done
 done
 
-echo -n "Reformatting library source code ... "
-cargo fmt
-echo done
+
 

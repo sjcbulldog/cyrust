@@ -1,32 +1,24 @@
 [package]
-authors = ["bwg"]
-edition = "2018"
+authors = ["Jack (Butch) Griffin <butchg@comcast.net>"]
+edition = "2021"
 readme = "README.md"
-name = "blinky"
+name = "uarttest"
 version = "0.1.0"
 
 [dependencies]
-cortex-m = "0.6.3"
+cortex-m = "0.7.7"
 panic-halt = "0.2.0"
 volatile-register="0.2.0"
 
-[dependencies.psoc6-02]
-path = "../devices/psoc6-02"
-features = ["rt"]
+[dependencies.psoc6dev]
+path = "../devices/psoc6dev"
 
-[dependencies.psoc6hal]
-path = "../devices/psoc6hal"
-
-[dependencies.cy8c624abzi-d44]
-path = "../devices/psoc/cy8c624abzi-d44"
-
-[dependencies.cortex-m-rt]
-version="0.6.12"
-features = ["device"]
+[dependencies.psoc6pdl]
+path = "../devices/psoc6pdl"
 
 # this lets you use `cargo fix`!
 [[bin]]
-name = "blinky"
+name = "uarttest"
 test = false
 bench = false
 

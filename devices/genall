@@ -14,15 +14,52 @@ else
     echo "Chiptool already exists"
 fi
 
-for SVD in svd/*.svd
+rm -rf psoc6dev
+if [ -d psoc6dev ]; then
+    echo "Cannot remove psoc6dev directory. Aborting."
+    exit 1
+fi
+
+mkdir psoc6dev
+pushd psoc6dev >& /dev/null 2>&1
+
+cat > Cargo.toml << EOF
+[package]
+name = "psoc6dev"
+description="PSoC 6 Cortex-M peripheral device definitions"
+license="MIT"
+version = "0.1.0"
+readme = "README.md"
+authors = ["Jack (Butch) Griffin <butchg@comcast.net>"]
+edition = "2018"
+keywords = ["cortex-m", "psoc", "no_std", "embedded"]
+categories = ["embedded", "no-std"]
+
+[features]
+rt = ["cortex-m-rt/device"]
+
+[dependencies]
+cortex-m = "0.6.3"
+cortex-m-rt = "0.6.12"
+EOF
+
+for SVD in ../svd/*.svd
 do
     SVDFILE="$(basename -- $SVD)"
-    TARGET="${SVDFILE%.*}"
-    echo $TARGET
+    TARGETFILE="${SVDFILE%.*}"
+    TARGET="${TARGETFILE/_/}"
+    echo "pub mod $TARGET ;" >> lib.rs
     rm -rf $TARGET
     mkdir $TARGET
-    pushd $TARGET
+    pushd $TARGET >& /dev/null 2>&1
     echo Processing SVD file $SVDFILE
-    ../genrs $TARGET ../svd/$TARGET.svd ../svd/$TARGET.peris
-    popd
+
+    ../../genrs $TARGET ../../svd/$TARGETFILE.svd ../../svd/$TARGET.peris
+    popd >& /dev/null 2>&1
 done
+
+echo -n "Reformatting library source code ... "
+cargo fmt
+echo done
+
+popd >& /dev/null 2>&1
