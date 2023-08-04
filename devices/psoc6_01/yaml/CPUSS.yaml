@@ -1,0 +1,768 @@
+---
+block/CPUSS:
+  description: CPU subsystem (CPUSS)
+  items:
+    - name: CM0_CTL
+      description: CM0+ control
+      byte_offset: 0
+      fieldset: CM0_CTL
+    - name: CM0_STATUS
+      description: CM0+ status
+      byte_offset: 8
+      access: Read
+      fieldset: CM0_STATUS
+    - name: CM0_CLOCK_CTL
+      description: CM0+ clock control
+      byte_offset: 16
+      fieldset: CM0_CLOCK_CTL
+    - name: CM0_INT_CTL0
+      description: CM0+ interrupt control 0
+      byte_offset: 32
+      fieldset: CM0_INT_CTL0
+    - name: CM0_INT_CTL1
+      description: CM0+ interrupt control 1
+      byte_offset: 36
+      fieldset: CM0_INT_CTL1
+    - name: CM0_INT_CTL2
+      description: CM0+ interrupt control 2
+      byte_offset: 40
+      fieldset: CM0_INT_CTL2
+    - name: CM0_INT_CTL3
+      description: CM0+ interrupt control 3
+      byte_offset: 44
+      fieldset: CM0_INT_CTL3
+    - name: CM0_INT_CTL4
+      description: CM0+ interrupt control 4
+      byte_offset: 48
+      fieldset: CM0_INT_CTL4
+    - name: CM0_INT_CTL5
+      description: CM0+ interrupt control 5
+      byte_offset: 52
+      fieldset: CM0_INT_CTL5
+    - name: CM0_INT_CTL6
+      description: CM0+ interrupt control 6
+      byte_offset: 56
+      fieldset: CM0_INT_CTL6
+    - name: CM0_INT_CTL7
+      description: CM0+ interrupt control 7
+      byte_offset: 60
+      fieldset: CM0_INT_CTL7
+    - name: CM4_PWR_CTL
+      description: CM4 power control
+      byte_offset: 128
+      fieldset: CM4_PWR_CTL
+    - name: CM4_PWR_DELAY_CTL
+      description: CM4 power control
+      byte_offset: 132
+      fieldset: CM4_PWR_DELAY_CTL
+    - name: CM4_STATUS
+      description: CM4 status
+      byte_offset: 136
+      access: Read
+      fieldset: CM4_STATUS
+    - name: CM4_CLOCK_CTL
+      description: CM4 clock control
+      byte_offset: 144
+      fieldset: CM4_CLOCK_CTL
+    - name: CM4_NMI_CTL
+      description: CM4 NMI control
+      byte_offset: 160
+      fieldset: CM4_NMI_CTL
+    - name: RAM0_CTL0
+      description: RAM 0 control 0
+      byte_offset: 256
+      fieldset: RAM0_CTL0
+    - name: RAM0_PWR_MACRO_CTL
+      description: RAM 0 power control
+      array:
+        len: 16
+        stride: 4
+      byte_offset: 320
+      fieldset: RAM0_PWR_MACRO_CTL
+    - name: RAM1_CTL0
+      description: RAM 1 control 0
+      byte_offset: 384
+      fieldset: RAM1_CTL0
+    - name: RAM1_PWR_CTL
+      description: RAM1 power control
+      byte_offset: 400
+      fieldset: RAM1_PWR_CTL
+    - name: RAM2_CTL0
+      description: RAM 2 control 0
+      byte_offset: 416
+      fieldset: RAM2_CTL0
+    - name: RAM2_PWR_CTL
+      description: RAM2 power control
+      byte_offset: 432
+      fieldset: RAM2_PWR_CTL
+    - name: RAM_PWR_DELAY_CTL
+      description: Power up delay used for all SRAM power domains
+      byte_offset: 448
+      fieldset: RAM_PWR_DELAY_CTL
+    - name: ROM_CTL
+      description: ROM control
+      byte_offset: 464
+      fieldset: ROM_CTL
+    - name: UDB_PWR_CTL
+      description: UDB power control
+      byte_offset: 496
+      fieldset: UDB_PWR_CTL
+    - name: UDB_PWR_DELAY_CTL
+      description: UDB power control
+      byte_offset: 500
+      fieldset: UDB_PWR_DELAY_CTL
+    - name: DP_STATUS
+      description: Debug port status
+      byte_offset: 520
+      access: Read
+      fieldset: DP_STATUS
+    - name: BUFF_CTL
+      description: Buffer control
+      byte_offset: 544
+      fieldset: BUFF_CTL
+    - name: DDFT_CTL
+      description: DDFT control
+      byte_offset: 560
+      fieldset: DDFT_CTL
+    - name: SYSTICK_CTL
+      description: SysTick timer control
+      byte_offset: 576
+      fieldset: SYSTICK_CTL
+    - name: CM0_VECTOR_TABLE_BASE
+      description: CM0+ vector table base
+      byte_offset: 688
+      fieldset: CM0_VECTOR_TABLE_BASE
+    - name: CM4_VECTOR_TABLE_BASE
+      description: CM4 vector table base
+      byte_offset: 704
+      fieldset: CM4_VECTOR_TABLE_BASE
+    - name: CM0_PC0_HANDLER
+      description: CM0+ protection context 0 handler
+      byte_offset: 800
+      fieldset: CM0_PC0_HANDLER
+    - name: IDENTITY
+      description: Identity
+      byte_offset: 1024
+      access: Read
+      fieldset: IDENTITY
+    - name: PROTECTION
+      description: Protection status
+      byte_offset: 1280
+      fieldset: PROTECTION
+    - name: CM0_NMI_CTL
+      description: CM0+ NMI control
+      byte_offset: 1312
+      fieldset: CM0_NMI_CTL
+    - name: AP_CTL
+      description: Access port control
+      byte_offset: 1344
+      fieldset: AP_CTL
+    - name: MBIST_STAT
+      description: Memory BIST status
+      byte_offset: 1440
+      access: Read
+      fieldset: MBIST_STAT
+    - name: TRIM_ROM_CTL
+      description: ROM trim control
+      byte_offset: 61440
+      fieldset: TRIM_ROM_CTL
+    - name: TRIM_RAM_CTL
+      description: RAM trim control
+      byte_offset: 61444
+      fieldset: TRIM_RAM_CTL
+fieldset/AP_CTL:
+  description: Access port control
+  fields:
+    - name: CM0_ENABLE
+      description: "Enables the CM0 AP interface: '0': Disabled. '1': Enabled."
+      bit_offset: 0
+      bit_size: 1
+    - name: CM4_ENABLE
+      description: "Enables the CM4 AP interface: '0': Disabled. '1': Enabled."
+      bit_offset: 1
+      bit_size: 1
+    - name: SYS_ENABLE
+      description: "Enables the system AP interface: '0': Disabled. '1': Enabled."
+      bit_offset: 2
+      bit_size: 1
+    - name: CM0_DISABLE
+      description: "Disables the CM0 AP interface: '0': Enabled. '1': Disabled. Typically, this field is set by the Cypress boot code with information from eFUSE. The access port is only enabled when CM0_DISABLE is '0' and CM0_ENABLE is '1'."
+      bit_offset: 16
+      bit_size: 1
+    - name: CM4_DISABLE
+      description: "Disables the CM4 AP interface: '0': Enabled. '1': Disabled. Typically, this field is set by the Cypress boot code with information from eFUSE. The access port is only enabled when CM4_DISABLE is '0' and CM4_ENABLE is '1'."
+      bit_offset: 17
+      bit_size: 1
+    - name: SYS_DISABLE
+      description: "Disables the system AP interface: '0': Enabled. '1': Disabled. Typically, this field is set by the Cypress boot code with information from eFUSE. The access port is only enabled when SYS_DISABLE is '0' and SYS_ENABLE is '1'."
+      bit_offset: 18
+      bit_size: 1
+fieldset/BUFF_CTL:
+  description: Buffer control
+  fields:
+    - name: WRITE_BUFF
+      description: "Specifies if write transfer can be buffered in the bus infrastructure bridges: '0': Write transfers are not buffered, independent of the transfer's bufferable attribute. '1': Write transfers can be buffered, if the transfer's bufferable attribute indicates that the transfer is a bufferable/posted write."
+      bit_offset: 0
+      bit_size: 1
+fieldset/CM0_CLOCK_CTL:
+  description: CM0+ clock control
+  fields:
+    - name: SLOW_INT_DIV
+      description: "Specifies the slow clock divider (from the peripheral clock 'clk_peri' to the slow clock 'clk_slow'). Integer division by (1+SLOW_INT_DIV). Allows for integer divisions in the range [1, 256] (SLOW_INT_DIV is in the range [0, 255]). Note that this field is retained. However, the counter that is used to implement the division is not and will be initialized by HW to '0' when transitioning from DeepSleep to Active power mode."
+      bit_offset: 8
+      bit_size: 8
+    - name: PERI_INT_DIV
+      description: "Specifies the peripheral clock divider (from the high frequency clock 'clk_hf' to the peripheral clock 'clk_peri'). Integer division by (1+PERI_INT_DIV). Allows for integer divisions in the range [1, 256] (PERI_INT_DIV is in the range [0, 255]). Note that this field is retained. However, the counter that is used to implement the division is not and will be initialized by HW to '0' when transitioning from DeepSleep to Active power mode. Note that Fperi <= Fperi_max. Fperi_max is likely to be smaller than Fhf_max. In other words, if Fhf = Fhf_max, PERI_INT_DIV should not be set to '0'."
+      bit_offset: 24
+      bit_size: 8
+fieldset/CM0_CTL:
+  description: CM0+ control
+  fields:
+    - name: SLV_STALL
+      description: "Processor debug access control: '0': Access. '1': Stall access. This field is used to stall/delay debug accesses. This is useful to protect execution of code that needs to be protected from debug accesses."
+      bit_offset: 0
+      bit_size: 1
+    - name: ENABLED
+      description: "Processor enable: '0': Disabled. Processor clock is turned off and reset is activated. After SW clears this field to '0', HW automatically sets this field to '1'. This effectively results in a CM0+ reset, followed by a CM0+ warm boot. '1': Enabled. Note: The intent is that this bit is modified only through an external probe or by the CM4 while the CM0+ is in Sleep or DeepSleep power mode. If this field is cleared to '0' by the CM0+ itself, it should be done under controlled conditions (such that undesirable side effects can be prevented). Note: The CM0+ CPU has a AIRCR.SYSRESETREQ register field that allows the CM0+ to reset the complete device (ENABLED only disables/enables the CM0+), resulting in a warm boot. This CPU register field has similar 'built-in protection' as this CM0_CTL register to prevent accidental system writes (the upper 16-bits of the register need to be written with a 0x05fa key value; see CPU user manual for more details)."
+      bit_offset: 1
+      bit_size: 1
+    - name: VECTKEYSTAT
+      description: Register key (to prevent accidental writes). - Should be written with a 0x05fa key value for the write to take effect. - Always reads as 0xfa05.
+      bit_offset: 16
+      bit_size: 16
+fieldset/CM0_INT_CTL0:
+  description: CM0+ interrupt control 0
+  fields:
+    - name: MUX0_SEL
+      description: "System interrupt select for CPU interrupt source 0. If the field value is 240, no system interrupt is connected and the CPU interrupt source is always '0'/de-activated."
+      bit_offset: 0
+      bit_size: 8
+    - name: MUX1_SEL
+      description: System interrupt select for CPU interrupt source 1.
+      bit_offset: 8
+      bit_size: 8
+    - name: MUX2_SEL
+      description: System interrupt select for CPU interrupt source 2.
+      bit_offset: 16
+      bit_size: 8
+    - name: MUX3_SEL
+      description: System interrupt select for CPU interrupt source 3.
+      bit_offset: 24
+      bit_size: 8
+fieldset/CM0_INT_CTL1:
+  description: CM0+ interrupt control 1
+  fields:
+    - name: MUX0_SEL
+      description: System interrupt select for CPU interrupt source 4.
+      bit_offset: 0
+      bit_size: 8
+    - name: MUX1_SEL
+      description: System interrupt select for CPU interrupt source 5.
+      bit_offset: 8
+      bit_size: 8
+    - name: MUX2_SEL
+      description: System interrupt select for CPU interrupt source 6.
+      bit_offset: 16
+      bit_size: 8
+    - name: MUX3_SEL
+      description: System interrupt select for CPU interrupt source 7.
+      bit_offset: 24
+      bit_size: 8
+fieldset/CM0_INT_CTL2:
+  description: CM0+ interrupt control 2
+  fields:
+    - name: MUX0_SEL
+      description: System interrupt select for CPU interrupt source 8.
+      bit_offset: 0
+      bit_size: 8
+    - name: MUX1_SEL
+      description: System interrupt select for CPU interrupt source 9.
+      bit_offset: 8
+      bit_size: 8
+    - name: MUX2_SEL
+      description: System interrupt select for CPU interrupt source 10.
+      bit_offset: 16
+      bit_size: 8
+    - name: MUX3_SEL
+      description: System interrupt select for CPU interrupt source 11.
+      bit_offset: 24
+      bit_size: 8
+fieldset/CM0_INT_CTL3:
+  description: CM0+ interrupt control 3
+  fields:
+    - name: MUX0_SEL
+      description: System interrupt select for CPU interrupt source 12.
+      bit_offset: 0
+      bit_size: 8
+    - name: MUX1_SEL
+      description: System interrupt select for CPU interrupt source 13.
+      bit_offset: 8
+      bit_size: 8
+    - name: MUX2_SEL
+      description: System interrupt select for CPU interrupt source 14.
+      bit_offset: 16
+      bit_size: 8
+    - name: MUX3_SEL
+      description: System interrupt select for CPU interrupt source 15.
+      bit_offset: 24
+      bit_size: 8
+fieldset/CM0_INT_CTL4:
+  description: CM0+ interrupt control 4
+  fields:
+    - name: MUX0_SEL
+      description: System interrupt select for CPU interrupt source 16.
+      bit_offset: 0
+      bit_size: 8
+    - name: MUX1_SEL
+      description: System interrupt select for CPU interrupt source 17.
+      bit_offset: 8
+      bit_size: 8
+    - name: MUX2_SEL
+      description: System interrupt select for CPU interrupt source 18.
+      bit_offset: 16
+      bit_size: 8
+    - name: MUX3_SEL
+      description: System interrupt select for CPU interrupt source 19.
+      bit_offset: 24
+      bit_size: 8
+fieldset/CM0_INT_CTL5:
+  description: CM0+ interrupt control 5
+  fields:
+    - name: MUX0_SEL
+      description: System interrupt select for CPU interrupt source 20.
+      bit_offset: 0
+      bit_size: 8
+    - name: MUX1_SEL
+      description: System interrupt select for CPU interrupt source 21.
+      bit_offset: 8
+      bit_size: 8
+    - name: MUX2_SEL
+      description: System interrupt select for CPU interrupt source 22.
+      bit_offset: 16
+      bit_size: 8
+    - name: MUX3_SEL
+      description: System interrupt select for CPU interrupt source 23.
+      bit_offset: 24
+      bit_size: 8
+fieldset/CM0_INT_CTL6:
+  description: CM0+ interrupt control 6
+  fields:
+    - name: MUX0_SEL
+      description: System interrupt select for CPU interrupt source 24.
+      bit_offset: 0
+      bit_size: 8
+    - name: MUX1_SEL
+      description: System interrupt select for CPU interrupt source 25.
+      bit_offset: 8
+      bit_size: 8
+    - name: MUX2_SEL
+      description: System interrupt select for CPU interrupt source 26.
+      bit_offset: 16
+      bit_size: 8
+    - name: MUX3_SEL
+      description: System interrupt select for CPU interrupt source 27.
+      bit_offset: 24
+      bit_size: 8
+fieldset/CM0_INT_CTL7:
+  description: CM0+ interrupt control 7
+  fields:
+    - name: MUX0_SEL
+      description: System interrupt select for CPU interrupt source 28.
+      bit_offset: 0
+      bit_size: 8
+    - name: MUX1_SEL
+      description: System interrupt select for CPU interrupt source 29.
+      bit_offset: 8
+      bit_size: 8
+    - name: MUX2_SEL
+      description: System interrupt select for CPU interrupt source 30.
+      bit_offset: 16
+      bit_size: 8
+    - name: MUX3_SEL
+      description: System interrupt select for CPU interrupt source 31.
+      bit_offset: 24
+      bit_size: 8
+fieldset/CM0_NMI_CTL:
+  description: CM0+ NMI control
+  fields:
+    - name: MUX0_SEL
+      description: System interrupt select for CPU NMI. The reset value ensures that the CPU NMI is NOT connected to any system interrupt after DeepSleep reset.
+      bit_offset: 0
+      bit_size: 8
+fieldset/CM0_PC0_HANDLER:
+  description: CM0+ protection context 0 handler
+  fields:
+    - name: ADDR
+      description: "Address of the protection context 0 handler. This field is used to detect entry to Cypress 'trusted' code through an exception/interrupt."
+      bit_offset: 0
+      bit_size: 32
+fieldset/CM0_STATUS:
+  description: CM0+ status
+  fields:
+    - name: SLEEPING
+      description: "Specifies if the CPU is in Active, Sleep or DeepSleep power mode: - Active power mode: SLEEPING is '0'. - Sleep power mode: SLEEPING is '1' and SLEEPDEEP is '0'. - DeepSleep power mode: SLEEPING is '1' and SLEEPDEEP is '1'."
+      bit_offset: 0
+      bit_size: 1
+    - name: SLEEPDEEP
+      description: Specifies if the CPU is in Sleep or DeepSleep power mode. See SLEEPING field.
+      bit_offset: 1
+      bit_size: 1
+fieldset/CM0_VECTOR_TABLE_BASE:
+  description: CM0+ vector table base
+  fields:
+    - name: ADDR24
+      description: "Address of CM0+ vector table. Note: the CM0+ vector table is at an address that is a 256 B multiple."
+      bit_offset: 8
+      bit_size: 24
+fieldset/CM4_CLOCK_CTL:
+  description: CM4 clock control
+  fields:
+    - name: FAST_INT_DIV
+      description: "Specifies the fast clock divider (from the high frequency clock 'clk_hf' to the peripheral clock 'clk_fast'). Integer division by (1+FAST_INT_DIV). Allows for integer divisions in the range [1, 256] (FAST_INT_DIV is in the range [0, 255]). Note that this field is retained. However, the counter that is used to implement the division is not and will be initialized by HW to '0' when transitioning from DeepSleep to Active power mode."
+      bit_offset: 8
+      bit_size: 8
+fieldset/CM4_NMI_CTL:
+  description: CM4 NMI control
+  fields:
+    - name: MUX0_SEL
+      description: System interrupt select for CPU NMI. The reset value ensure that the CPU NMI is NOT connected to any system interrupt after DeepSleep reset.
+      bit_offset: 0
+      bit_size: 8
+fieldset/CM4_PWR_CTL:
+  description: CM4 power control
+  fields:
+    - name: PWR_MODE
+      description: Set Power mode for CM4
+      bit_offset: 0
+      bit_size: 2
+      enum: CM4_PWR_CTL_PWR_MODE
+    - name: VECTKEYSTAT
+      description: Register key (to prevent accidental writes). - Should be written with a 0x05fa key value for the write to take effect. - Always reads as 0xfa05.
+      bit_offset: 16
+      bit_size: 16
+fieldset/CM4_PWR_DELAY_CTL:
+  description: CM4 power control
+  fields:
+    - name: UP
+      description: Number clock cycles delay needed after power domain power up
+      bit_offset: 0
+      bit_size: 10
+fieldset/CM4_STATUS:
+  description: CM4 status
+  fields:
+    - name: SLEEPING
+      description: "Specifies if the CPU is in Active, Sleep or DeepSleep power mode: - Active power mode: SLEEPING is '0'. - Sleep power mode: SLEEPING is '1' and SLEEPDEEP is '0'. - DeepSleep power mode: SLEEPING is '1' and SLEEPDEEP is '1'."
+      bit_offset: 0
+      bit_size: 1
+    - name: SLEEPDEEP
+      description: Specifies if the CPU is in Sleep or DeepSleep power mode. See SLEEPING field.
+      bit_offset: 1
+      bit_size: 1
+    - name: PWR_DONE
+      description: "After a PWR_MODE change this flag indicates if the new power mode has taken effect or not. Note: this flag can also change as a result of a change in debug power up req"
+      bit_offset: 4
+      bit_size: 1
+fieldset/CM4_VECTOR_TABLE_BASE:
+  description: CM4 vector table base
+  fields:
+    - name: ADDR22
+      description: "Address of CM4 vector table. Note: the CM4 vector table is at an address that is a 1024 B multiple."
+      bit_offset: 10
+      bit_size: 22
+fieldset/DDFT_CTL:
+  description: DDFT control
+  fields:
+    - name: DDFT_OUT0_SEL
+      description: "Select signal for CPUSS DDFT[0] 0: clk_r of the Main flash (which is clk_hf for SONOS Flash) 1: Flash data output bit '0' (r_q[0]) 2: Flash data output bit '32' (r_q[32]) 3: Flash data output bit '64' (r_q[64]) 4: Flash data output bit '127' (r_q[127]) 5: bist_fm_enabled 6: bist_fail 7: cm0_sleeping 8: cm0_sleepdeep 9: cm0_sleep_hold_ack_n 10: cm4_sleeping 11: cm4_sleepdeep 12: cm4_sleep_hold_ack_n 13: cm4_power 14: cm4_act_retain_n 15: cm4_act_isolate_n 16: cm4_enabled 17: cm4_reset_n 18: cm4_pwr_done 19: mmio_ram0_ctl1_power[0] (Power control for SRAM0 macro0) 20: mmio_ram0_ctl1_retain_n[0] (Retention control for SRAM0 macro0) 21: mmio_ram0_ctl1_isolate_n[0] (Isolation control for SRAM0 macro0)"
+      bit_offset: 0
+      bit_size: 5
+    - name: DDFT_OUT1_SEL
+      description: "Select signal for CPUSS DDFT[0] 0: clk_r of the Main flash (which is clk_hf for SONOS Flash) 1: Flash data output bit '0' (r_q[0]) 2: Flash data output bit '32' (r_q[32]) 3: Flash data output bit '64' (r_q[64]) 4: Flash data output bit '127' (r_q[127]) 5: bist_fm_enabled 6: bist_fail 7: cm0_sleeping 8: cm0_sleepdeep 9: cm0_sleep_hold_ack_n 10: cm4_sleeping 11: cm4_sleepdeep 12: cm4_sleep_hold_ack_n 13: cm4_power 14: cm4_act_retain_n 15: cm4_act_isolate_n 16: cm4_enabled 17: cm4_reset_n 18: cm4_pwr_done 19: mmio_ram0_ctl1_power[0] (Power control for SRAM0 macro0) 20: mmio_ram0_ctl1_retain_n[0] (Retention control for SRAM0 macro0) 21: mmio_ram0_ctl1_isolate_n[0] (Isolation control for SRAM0 macro0)"
+      bit_offset: 8
+      bit_size: 5
+fieldset/DP_STATUS:
+  description: Debug port status
+  fields:
+    - name: SWJ_CONNECTED
+      description: "Specifies if the SWJ debug port is connected; i.e. debug host interface is active: '0': Not connected/not active. '1': Connected/active."
+      bit_offset: 0
+      bit_size: 1
+    - name: SWJ_DEBUG_EN
+      description: "Specifies if SWJ debug is enabled, i.e. CDBGPWRUPACK is '1' and thus debug clocks are on: '0': Disabled. '1': Enabled."
+      bit_offset: 1
+      bit_size: 1
+    - name: SWJ_JTAG_SEL
+      description: "Specifies if the JTAG or SWD interface is selected. This signal is valid when DP_CTL.PTM_SEL is '0' (SWJ mode selected) and SWJ_CONNECTED is '1' (SWJ is connected). '0': SWD selected. '1': JTAG selected."
+      bit_offset: 2
+      bit_size: 1
+fieldset/IDENTITY:
+  description: Identity
+  fields:
+    - name: P
+      description: "This field specifies the privileged setting ('0': user mode; '1': privileged mode) of the transfer that reads the register."
+      bit_offset: 0
+      bit_size: 1
+    - name: NS
+      description: "This field specifies the security setting ('0': secure mode; '1': non-secure mode) of the transfer that reads the register."
+      bit_offset: 1
+      bit_size: 1
+    - name: PC
+      description: This field specifies the protection context of the transfer that reads the register.
+      bit_offset: 4
+      bit_size: 4
+    - name: MS
+      description: This field specifies the bus master identifier of the transfer that reads the register.
+      bit_offset: 8
+      bit_size: 4
+fieldset/MBIST_STAT:
+  description: Memory BIST status
+  fields:
+    - name: SFP_READY
+      description: Flag indicating the BIST run is done. Note that after starting a BIST run this flag must be set before a new run can be started. For the first BIST run this will be 0.
+      bit_offset: 0
+      bit_size: 1
+    - name: SFP_FAIL
+      description: "Report status of the BIST run, only valid if SFP_READY=1"
+      bit_offset: 1
+      bit_size: 1
+fieldset/PROTECTION:
+  description: Protection status
+  fields:
+    - name: STATE
+      description: "Protection state: '0': UNKNOWN. '1': VIRGIN. '2': NORMAL. '3': SECURE. '4': DEAD. The following state transitions are allowed (and enforced by HW): - UNKNOWN => VIRGIN/NORMAL/SECURE/DEAD - NORMAL => DEAD - SECURE => DEAD An attempt to make a NOT allowed state transition will NOT affect this register field."
+      bit_offset: 0
+      bit_size: 3
+fieldset/RAM0_CTL0:
+  description: RAM 0 control 0
+  fields:
+    - name: SLOW_WS
+      description: "Memory wait states for the slow clock domain ('clk_slow'). The number of wait states is expressed in 'clk_hf' clock domain cycles."
+      bit_offset: 0
+      bit_size: 2
+    - name: FAST_WS
+      description: "Memory wait states for the fast clock domain ('clk_fast'). The number of wait states is expressed in 'clk_hf' clock domain cycles."
+      bit_offset: 8
+      bit_size: 2
+fieldset/RAM0_PWR_MACRO_CTL:
+  description: RAM 0 power control
+  fields:
+    - name: PWR_MODE
+      description: Set Power mode for 1 SRAM0 Macro
+      bit_offset: 0
+      bit_size: 2
+      enum: RAM0_PWR_MACRO_CTL_PWR_MODE
+    - name: VECTKEYSTAT
+      description: Register key (to prevent accidental writes). - Should be written with a 0x05fa key value for the write to take effect. - Always reads as 0xfa05.
+      bit_offset: 16
+      bit_size: 16
+fieldset/RAM1_CTL0:
+  description: RAM 1 control 0
+  fields:
+    - name: SLOW_WS
+      description: "Memory wait states for the slow clock domain ('clk_slow'). The number of wait states is expressed in 'clk_hf' clock domain cycles."
+      bit_offset: 0
+      bit_size: 2
+    - name: FAST_WS
+      description: "Memory wait states for the fast clock domain ('clk_fast'). The number of wait states is expressed in 'clk_hf' clock domain cycles."
+      bit_offset: 8
+      bit_size: 2
+fieldset/RAM1_PWR_CTL:
+  description: RAM1 power control
+  fields:
+    - name: PWR_MODE
+      description: Set Power mode for SRAM1
+      bit_offset: 0
+      bit_size: 2
+      enum: RAM1_PWR_CTL_PWR_MODE
+    - name: VECTKEYSTAT
+      description: Register key (to prevent accidental writes). - Should be written with a 0x05fa key value for the write to take effect. - Always reads as 0xfa05.
+      bit_offset: 16
+      bit_size: 16
+fieldset/RAM2_CTL0:
+  description: RAM 2 control 0
+  fields:
+    - name: SLOW_WS
+      description: "Memory wait states for the slow clock domain ('clk_slow'). The number of wait states is expressed in 'clk_hf' clock domain cycles."
+      bit_offset: 0
+      bit_size: 2
+    - name: FAST_WS
+      description: "Memory wait states for the fast clock domain ('clk_fast'). The number of wait states is expressed in 'clk_hf' clock domain cycles."
+      bit_offset: 8
+      bit_size: 2
+fieldset/RAM2_PWR_CTL:
+  description: RAM2 power control
+  fields:
+    - name: PWR_MODE
+      description: Set Power mode for SRAM2
+      bit_offset: 0
+      bit_size: 2
+      enum: RAM2_PWR_CTL_PWR_MODE
+    - name: VECTKEYSTAT
+      description: Register key (to prevent accidental writes). - Should be written with a 0x05fa key value for the write to take effect. - Always reads as 0xfa05.
+      bit_offset: 16
+      bit_size: 16
+fieldset/RAM_PWR_DELAY_CTL:
+  description: Power up delay used for all SRAM power domains
+  fields:
+    - name: UP
+      description: Number clock cycles delay needed after power domain power up
+      bit_offset: 0
+      bit_size: 10
+fieldset/ROM_CTL:
+  description: ROM control
+  fields:
+    - name: SLOW_WS
+      description: "Memory wait states for the slow clock domain ('clk_slow'). The number of wait states is expressed in 'clk_hf' clock domain cycles. Timing paths to and from the memory have a (fixed) minimum duration that always needs to be considered/met. The 'clk_hf' clock domain frequency determines this field's value such that the timing paths minimum duration is met. A table/formula will be provided for this field's values for different 'clk_hf' frequencies."
+      bit_offset: 0
+      bit_size: 2
+    - name: FAST_WS
+      description: "Memory wait states for the fast clock domain ('clk_fast'). The number of wait states is expressed in 'clk_hf' clock domain cycles."
+      bit_offset: 8
+      bit_size: 2
+fieldset/SYSTICK_CTL:
+  description: SysTick timer control
+  fields:
+    - name: TENMS
+      description: "Specifies the number of clock source cycles (minus 1) that make up 10 ms. E.g., for a 32,768 Hz reference clock, TENMS is 328 - 1 = 327."
+      bit_offset: 0
+      bit_size: 24
+    - name: CLOCK_SOURCE
+      description: "Specifies an external clock source: '0': The low frequency clock 'clk_lf' is selected. The precision of this clock depends on whether the low frequency clock source is a SRSS internal RC oscillator (imprecise) or a device external crystal oscillator (precise). '1': The internal main oscillator (IMO) clock 'clk_imo' is selected. The MXS40 platform uses a fixed frequency IMO clock. o '2': The external crystal oscillator (ECO) clock 'clk_eco' is selected. '3': The SRSS 'clk_timer' is selected ('clk_timer' is a divided/gated version of 'clk_hf' or 'clk_imo'). Note: If NOREF is '1', the CLOCK_SOURCE value is NOT used. Note: It is SW's responsibility to provide the correct NOREF, SKEW and TENMS field values for the selected clock source."
+      bit_offset: 24
+      bit_size: 2
+    - name: SKEW
+      description: "Specifies the precision of the clock source and if the TENMS field represents exactly 10 ms (clock source frequency is a multiple of 100 Hz). This affects the suitability of the SysTick timer as a SW real-time clock: '0': Precise. '1': Imprecise."
+      bit_offset: 30
+      bit_size: 1
+    - name: NOREF
+      description: "Specifies if an external clock source is provided: '0': An external clock source is provided. '1': An external clock source is NOT provided and only the CPU internal clock can be used as SysTick timer clock source."
+      bit_offset: 31
+      bit_size: 1
+fieldset/TRIM_RAM_CTL:
+  description: RAM trim control
+  fields:
+    - name: RM
+      description: N/A
+      bit_offset: 0
+      bit_size: 4
+    - name: RME
+      description: "Read-Write margin enable control. This selects between the default Read-Write margin setting, and the external RM[3:0] Read-Write margin setting."
+      bit_offset: 4
+      bit_size: 1
+    - name: WPULSE
+      description: Write Assist Pulse to control pulse width of negative voltage on SRAM bitline.
+      bit_offset: 5
+      bit_size: 3
+    - name: RA
+      description: Read Assist control for WL under-drive.
+      bit_offset: 8
+      bit_size: 2
+    - name: WA
+      description: "Write assist enable control (Active High). - WA[1:0] Write Assist pins to control negative voltage on SRAM bitline."
+      bit_offset: 12
+      bit_size: 3
+fieldset/TRIM_ROM_CTL:
+  description: ROM trim control
+  fields:
+    - name: RM
+      description: N/A
+      bit_offset: 0
+      bit_size: 4
+    - name: RME
+      description: "Read-Write margin enable control. This selects between the default Read-Write margin setting, and the external pin Read-Write margin setting."
+      bit_offset: 4
+      bit_size: 1
+fieldset/UDB_PWR_CTL:
+  description: UDB power control
+  fields:
+    - name: PWR_MODE
+      description: Set Power mode for UDBs
+      bit_offset: 0
+      bit_size: 2
+      enum: UDB_PWR_CTL_PWR_MODE
+    - name: VECTKEYSTAT
+      description: Register key (to prevent accidental writes). - Should be written with a 0x05fa key value for the write to take effect. - Always reads as 0xfa05.
+      bit_offset: 16
+      bit_size: 16
+fieldset/UDB_PWR_DELAY_CTL:
+  description: UDB power control
+  fields:
+    - name: UP
+      description: Number clock cycles delay needed after power domain power up
+      bit_offset: 0
+      bit_size: 10
+enum/CM4_PWR_CTL_PWR_MODE:
+  bit_size: 2
+  variants:
+    - name: "OFF"
+      description: "Switch CM4 off Power off, clock off, isolate, reset and no retain."
+      value: 0
+    - name: RESET
+      description: "Reset CM4 Clock off, no isolated, no retain and reset. Note: The CM4 CPU has a AIRCR.SYSRESETREQ register field that allows the CM4 to reset the complete device (RESET only resets the CM4), resulting in a warm boot."
+      value: 1
+    - name: RETAINED
+      description: "Put CM4 in Retained mode This can only become effective if CM4 is in SleepDeep mode. Check PWR_DONE flag to see if CM4 RETAINED state has been reached. Power off, clock off, isolate, no reset and retain."
+      value: 2
+    - name: ENABLED
+      description: "Switch CM4 on. Power on, clock on, no isolate, no reset and no retain."
+      value: 3
+enum/RAM0_PWR_MACRO_CTL_PWR_MODE:
+  bit_size: 2
+  variants:
+    - name: "OFF"
+      description: See CM4_PWR_CTL
+      value: 0
+    - name: RSVD
+      description: undefined
+      value: 1
+    - name: RETAINED
+      description: See CM4_PWR_CTL
+      value: 2
+    - name: ENABLED
+      description: See CM4_PWR_CTL
+      value: 3
+enum/RAM1_PWR_CTL_PWR_MODE:
+  bit_size: 2
+  variants:
+    - name: "OFF"
+      description: See CM4_PWR_CTL
+      value: 0
+    - name: RSVD
+      description: undefined
+      value: 1
+    - name: RETAINED
+      description: See CM4_PWR_CTL
+      value: 2
+    - name: ENABLED
+      description: See CM4_PWR_CTL
+      value: 3
+enum/RAM2_PWR_CTL_PWR_MODE:
+  bit_size: 2
+  variants:
+    - name: "OFF"
+      description: See CM4_PWR_CTL
+      value: 0
+    - name: RSVD
+      description: undefined
+      value: 1
+    - name: RETAINED
+      description: See CM4_PWR_CTL
+      value: 2
+    - name: ENABLED
+      description: See CM4_PWR_CTL
+      value: 3
+enum/UDB_PWR_CTL_PWR_MODE:
+  bit_size: 2
+  variants:
+    - name: "OFF"
+      description: See CM4_PWR_CTL
+      value: 0
+    - name: RESET
+      description: See CM4_PWR_CTL
+      value: 1
+    - name: RETAINED
+      description: See CM4_PWR_CTL
+      value: 2
+    - name: ENABLED
+      description: See CM4_PWR_CTL
+      value: 3

@@ -1,0 +1,1331 @@
+---
+block/FLASHC:
+  description: Flash controller
+  items:
+    - name: FLASH_CTL
+      description: Control
+      byte_offset: 0
+      fieldset: FLASH_CTL
+    - name: FLASH_PWR_CTL
+      description: Flash power control
+      byte_offset: 4
+      fieldset: FLASH_PWR_CTL
+    - name: FLASH_CMD
+      description: Command
+      byte_offset: 8
+      fieldset: FLASH_CMD
+    - name: BIST_CTL
+      description: BIST control
+      byte_offset: 256
+      fieldset: BIST_CTL
+    - name: BIST_CMD
+      description: BIST command
+      byte_offset: 260
+      fieldset: BIST_CMD
+    - name: BIST_ADDR_START
+      description: BIST address start register
+      byte_offset: 264
+      fieldset: BIST_ADDR_START
+    - name: BIST_DATA
+      description: BIST data register(s)
+      array:
+        len: 8
+        stride: 4
+      byte_offset: 268
+      fieldset: BIST_DATA
+    - name: BIST_DATA_ACT
+      description: BIST data actual register(s)
+      array:
+        len: 8
+        stride: 4
+      byte_offset: 300
+      access: Read
+      fieldset: BIST_DATA_ACT
+    - name: BIST_DATA_EXP
+      description: BIST data expected register(s)
+      array:
+        len: 8
+        stride: 4
+      byte_offset: 332
+      access: Read
+      fieldset: BIST_DATA_EXP
+    - name: BIST_ADDR
+      description: BIST address register
+      byte_offset: 364
+      access: Read
+      fieldset: BIST_ADDR
+    - name: BIST_STATUS
+      description: BIST status register
+      byte_offset: 368
+      fieldset: BIST_STATUS
+    - name: CM0_CA_CTL0
+      description: CM0+ cache control
+      byte_offset: 1024
+      fieldset: CM0_CA_CTL0
+    - name: CM0_CA_CTL1
+      description: CM0+ cache control
+      byte_offset: 1028
+      fieldset: CM0_CA_CTL1
+    - name: CM0_CA_CTL2
+      description: CM0+ cache control
+      byte_offset: 1032
+      fieldset: CM0_CA_CTL2
+    - name: CM0_CA_CMD
+      description: CM0+ cache command
+      byte_offset: 1036
+      fieldset: CM0_CA_CMD
+    - name: CM0_CA_STATUS0
+      description: CM0+ cache status 0
+      byte_offset: 1088
+      access: Read
+      fieldset: CM0_CA_STATUS0
+    - name: CM0_CA_STATUS1
+      description: CM0+ cache status 1
+      byte_offset: 1092
+      access: Read
+      fieldset: CM0_CA_STATUS1
+    - name: CM0_CA_STATUS2
+      description: CM0+ cache status 2
+      byte_offset: 1096
+      access: Read
+      fieldset: CM0_CA_STATUS2
+    - name: CM4_CA_CTL0
+      description: CM4 cache control
+      byte_offset: 1152
+      fieldset: CM4_CA_CTL0
+    - name: CM4_CA_CTL1
+      description: CM4 cache control
+      byte_offset: 1156
+      fieldset: CM4_CA_CTL1
+    - name: CM4_CA_CTL2
+      description: CM4 cache control
+      byte_offset: 1160
+      fieldset: CM4_CA_CTL2
+    - name: CM4_CA_CMD
+      description: CM4 cache command
+      byte_offset: 1164
+      fieldset: CM4_CA_CMD
+    - name: CM4_CA_STATUS0
+      description: CM4 cache status 0
+      byte_offset: 1216
+      access: Read
+      fieldset: CM4_CA_STATUS0
+    - name: CM4_CA_STATUS1
+      description: CM4 cache status 1
+      byte_offset: 1220
+      access: Read
+      fieldset: CM4_CA_STATUS1
+    - name: CM4_CA_STATUS2
+      description: CM4 cache status 2
+      byte_offset: 1224
+      access: Read
+      fieldset: CM4_CA_STATUS2
+    - name: CRYPTO_BUFF_CTL
+      description: Cryptography buffer control
+      byte_offset: 1280
+      fieldset: CRYPTO_BUFF_CTL
+    - name: CRYPTO_BUFF_CMD
+      description: Cryptography buffer command
+      byte_offset: 1288
+      fieldset: CRYPTO_BUFF_CMD
+    - name: DW0_BUFF_CTL
+      description: Datawire 0 buffer control
+      byte_offset: 1408
+      fieldset: DW0_BUFF_CTL
+    - name: DW0_BUFF_CMD
+      description: Datawire 0 buffer command
+      byte_offset: 1416
+      fieldset: DW0_BUFF_CMD
+    - name: DW1_BUFF_CTL
+      description: Datawire 1 buffer control
+      byte_offset: 1536
+      fieldset: DW1_BUFF_CTL
+    - name: DW1_BUFF_CMD
+      description: Datawire 1 buffer command
+      byte_offset: 1544
+      fieldset: DW1_BUFF_CMD
+    - name: DAP_BUFF_CTL
+      description: Debug access port buffer control
+      byte_offset: 1664
+      fieldset: DAP_BUFF_CTL
+    - name: DAP_BUFF_CMD
+      description: Debug access port buffer command
+      byte_offset: 1672
+      fieldset: DAP_BUFF_CMD
+    - name: EXT_MS0_BUFF_CTL
+      description: External master 0 buffer control
+      byte_offset: 1792
+      fieldset: EXT_MS0_BUFF_CTL
+    - name: EXT_MS0_BUFF_CMD
+      description: External master 0 buffer command
+      byte_offset: 1800
+      fieldset: EXT_MS0_BUFF_CMD
+    - name: EXT_MS1_BUFF_CTL
+      description: External master 1 buffer control
+      byte_offset: 1920
+      fieldset: EXT_MS1_BUFF_CTL
+    - name: EXT_MS1_BUFF_CMD
+      description: External master 1 buffer command
+      byte_offset: 1928
+      fieldset: EXT_MS1_BUFF_CMD
+    - name: FM_CTL
+      description: Flash Macro Registers
+      byte_offset: 61440
+      block: FM_CTL
+block/FM_CTL:
+  description: Flash Macro Registers
+  items:
+    - name: FM_CTL
+      description: Flash macro control
+      byte_offset: 0
+      fieldset: FM_CTL
+    - name: STATUS
+      description: Status
+      byte_offset: 4
+      access: Read
+      fieldset: STATUS
+    - name: FM_ADDR
+      description: Flash macro address
+      byte_offset: 8
+      fieldset: FM_ADDR
+    - name: GEOMETRY
+      description: Regular flash geometry
+      byte_offset: 12
+      access: Read
+      fieldset: GEOMETRY
+    - name: GEOMETRY_SUPERVISORY
+      description: Supervisory flash geometry
+      byte_offset: 16
+      access: Read
+      fieldset: GEOMETRY_SUPERVISORY
+    - name: TIMER_CTL
+      description: Timer control
+      byte_offset: 20
+      fieldset: TIMER_CTL
+    - name: ANA_CTL0
+      description: Analog control 0
+      byte_offset: 24
+      fieldset: ANA_CTL0
+    - name: ANA_CTL1
+      description: Analog control 1
+      byte_offset: 28
+      fieldset: ANA_CTL1
+    - name: GEOMETRY_GEN
+      description: "N/A, DNU"
+      byte_offset: 32
+      access: Read
+      fieldset: GEOMETRY_GEN
+    - name: TEST_CTL
+      description: Test mode control
+      byte_offset: 36
+      fieldset: TEST_CTL
+    - name: WAIT_CTL
+      description: Wiat State control
+      byte_offset: 40
+      fieldset: WAIT_CTL
+    - name: MONITOR_STATUS
+      description: Monitor Status
+      byte_offset: 44
+      access: Read
+      fieldset: MONITOR_STATUS
+    - name: SCRATCH_CTL
+      description: Scratch Control
+      byte_offset: 48
+      fieldset: SCRATCH_CTL
+    - name: HV_CTL
+      description: High voltage control
+      byte_offset: 52
+      fieldset: HV_CTL
+    - name: ACLK_CTL
+      description: Aclk control
+      byte_offset: 56
+      access: Write
+      fieldset: ACLK_CTL
+    - name: INTR
+      description: Interrupt
+      byte_offset: 60
+      fieldset: INTR
+    - name: INTR_SET
+      description: Interrupt set
+      byte_offset: 64
+      fieldset: INTR_SET
+    - name: INTR_MASK
+      description: Interrupt mask
+      byte_offset: 68
+      fieldset: INTR_MASK
+    - name: INTR_MASKED
+      description: Interrupt masked
+      byte_offset: 72
+      access: Read
+      fieldset: INTR_MASKED
+    - name: FM_HV_DATA_ALL
+      description: Flash macro high Voltage page latches data (for all page latches)
+      byte_offset: 76
+      access: Write
+      fieldset: FM_HV_DATA_ALL
+    - name: CAL_CTL0
+      description: Cal control BG LO trim bits
+      byte_offset: 80
+      fieldset: CAL_CTL0
+    - name: CAL_CTL1
+      description: Cal control BG HI trim bits
+      byte_offset: 84
+      fieldset: CAL_CTL1
+    - name: CAL_CTL2
+      description: "Cal control BG LO&HI ipref trim, ref sel, fm_active, turbo_ext"
+      byte_offset: 88
+      fieldset: CAL_CTL2
+    - name: CAL_CTL3
+      description: "Cal control osc trim bits, idac, sdac, itim, bdac."
+      byte_offset: 92
+      fieldset: CAL_CTL3
+    - name: BOOKMARK
+      description: Bookmark register - keeps the current FW HV seq
+      byte_offset: 96
+      access: Write
+      fieldset: BOOKMARK
+    - name: RED_CTL01
+      description: "Redundancy Control normal sectors 0,1"
+      byte_offset: 128
+      fieldset: RED_CTL01
+    - name: RED_CTL23
+      description: "Redundancy Controll normal sectors 2,3"
+      byte_offset: 132
+      fieldset: RED_CTL23
+    - name: RED_CTL45
+      description: "Redundancy Controll normal sectors 4,5"
+      byte_offset: 136
+      fieldset: RED_CTL45
+    - name: RED_CTL67
+      description: "Redundancy Controll normal sectors 6,7"
+      byte_offset: 140
+      fieldset: RED_CTL67
+    - name: RED_CTL_SM01
+      description: "Redundancy Controll special sectors 0,1"
+      byte_offset: 144
+      fieldset: RED_CTL_SM01
+    - name: TM_CMPR
+      description: Do Not Use
+      array:
+        len: 32
+        stride: 4
+      byte_offset: 256
+      access: Read
+      fieldset: TM_CMPR
+    - name: FM_HV_DATA
+      description: Flash macro high Voltage page latches data
+      array:
+        len: 256
+        stride: 4
+      byte_offset: 2048
+      fieldset: FM_HV_DATA
+    - name: FM_MEM_DATA
+      description: Flash macro memory sense amplifier and column decoder data
+      array:
+        len: 256
+        stride: 4
+      byte_offset: 3072
+      access: Read
+      fieldset: FM_MEM_DATA
+fieldset/ACLK_CTL:
+  description: Aclk control
+  fields:
+    - name: ACLK_GEN
+      description: "A write to this register generates a ACLK pulse for the flash macro (also requires FM_CTL.IF_SEL to be '1')."
+      bit_offset: 0
+      bit_size: 1
+fieldset/ANA_CTL0:
+  description: Analog control 0
+  fields:
+    - name: CSLDAC
+      description: Trimming of common source line DAC.
+      bit_offset: 8
+      bit_size: 3
+    - name: VCC_SEL
+      description: "Vcc select: '0': 1.2 V : LP reset value '1': 0.95 V: ULP reset value Note: the flash macro compiler has a configuration option that specifies the default/reset value of this field."
+      bit_offset: 24
+      bit_size: 1
+    - name: FLIP_AMUXBUS_AB
+      description: "Flips amuxbusa and amuxbusb '0': amuxbusa, amuxbusb '1': amuxbusb, amuxbusb"
+      bit_offset: 27
+      bit_size: 1
+fieldset/ANA_CTL1:
+  description: Analog control 1
+  fields:
+    - name: MDAC
+      description: Trimming of the output margin Voltage as a function of Vpos and Vneg.
+      bit_offset: 0
+      bit_size: 8
+    - name: PDAC
+      description: "Trimming of positive pump output Voltage:"
+      bit_offset: 16
+      bit_size: 4
+    - name: NDAC
+      description: "Trimming of negative pump output Voltage:"
+      bit_offset: 24
+      bit_size: 4
+    - name: VPROT_OVERRIDE
+      description: "'0': vprot = BG.vprot. '1': vprot = vcc"
+      bit_offset: 28
+      bit_size: 1
+    - name: R_GRANT_CTL
+      description: "r_grant control: '0': r_grant normal functionality '1': forces r_grant LO synchronized on clk_r"
+      bit_offset: 29
+      bit_size: 1
+    - name: RST_SFT_HVPL
+      description: "'1': Page Latches Soft Reset"
+      bit_offset: 30
+      bit_size: 1
+fieldset/BIST_ADDR:
+  description: BIST address register
+  fields:
+    - name: COL_ADDR
+      description: Current column address.
+      bit_offset: 0
+      bit_size: 16
+    - name: ROW_ADDR
+      description: Current row address.
+      bit_offset: 16
+      bit_size: 16
+fieldset/BIST_ADDR_START:
+  description: BIST address start register
+  fields:
+    - name: COL_ADDR_START
+      description: "Column start address. Useful to apply BIST to a part of an Flash. The value of this field should be in a legal range (a value outside of the legal range has an undefined result, and may lock up the BIST state machine). This legal range is dependent on the number of columns of the SRAM the BIST is applied to (as specified by BIST_CTL.SRAMS_ENABLED). E.g. for a Flash with n columns, the legal range is [0, n-1]."
+      bit_offset: 0
+      bit_size: 16
+    - name: ROW_ADDR_START
+      description: "Row start address. Useful to apply BIST to a part of an Flash. The value of this field should be in a legal range (a value outside of the legal range has an undefined result, and may lock up the BIST state machine). This legal range is dependent on the number of rows of the SRAM the BIST is applied to (as specified by BIST_CTL.SRAMS_ENABLED). E.g. for a Flash with m columns, the legal range is [0, m-1]."
+      bit_offset: 16
+      bit_size: 16
+fieldset/BIST_CMD:
+  description: BIST command
+  fields:
+    - name: START
+      description: "1: Start FLASH BIST. Hardware set this field to '0' when BIST is completed."
+      bit_offset: 0
+      bit_size: 1
+fieldset/BIST_CTL:
+  description: BIST control
+  fields:
+    - name: OPCODE
+      description: "This field specifies how the data check should be performed after reading the data from Flash memory. 0: Read the Flash and compare the output to BIST_DATA (R0). 1: Read the Flash and compare the output to the binary complement of BIST_DATA (R1). 3: Read the Flash and compare with BIST_DATA[] and compliment of BIST_DATA alternately (R01). The expected data of the first read is BIST_DATA, expected data of the second read is binary compliment of BIST_DATA, third read expected data is BIST_DATA, fourth read expected data is binary compliment of BIST_DATA and so on."
+      bit_offset: 0
+      bit_size: 2
+    - name: UP
+      description: "Specifies direction in which Flash BIST steps through addresses: 0: BIST steps through the Flash from the maximum row and column addresses (as specified by a design time configuration parameter when ADDR_START_ENABLED is '0' and as specified by BIST_ADDR_START when ADDR_START_ENABLED is '1') to the minimum row and column addresses. 1: BIST steps through the Flash from the minimum row and column addresses ('0' when ADDR_START_ENABLED is '0' and as specified by BIST_ADDR_START when ADDR_START_ENABLED is '1'' to the maximum row and column addresses."
+      bit_offset: 2
+      bit_size: 1
+    - name: ROW_FIRST
+      description: "Specifies how the Flash BIST addresses are generated: '0': Column address is incremented/decremented till it reaches its maximum/minimum value. Once it reach its maximum/minimum value, it is set to its minimum/maximum value and only then is the row address incremented/decremented. '1': Row address is incremented/decremented till it reaches its maximum/minimum value. Once it reach its maximum/minimum value, it is set to its minimum/maximum value and only then is the column address incremented/decremented."
+      bit_offset: 3
+      bit_size: 1
+    - name: ADDR_START_ENABLED
+      description: "Specifies Flash BIST start addresses: '0': Row and column addresses start with their maximum/minimum values. '1': Row and column addresses start with their values as specified by BIST_ADDR_START. This feature is supported only for simple increment/decrement patterns. It is not supported with address compliment pattern (BIST_CTL.ADDR_COMPLIMENT_ENABLED) or address pattern which increments/decrements both row address and column address (BIST_CTL.INCR_DECR_BOTH) for every read."
+      bit_offset: 4
+      bit_size: 1
+    - name: ADDR_COMPLIMENT_ENABLED
+      description: "Specifies to generate address compliment patterns. 0: Generate normal increment/decrement patterns. 1: Generate address patterns which interleaves compliment of previous address in between. Example: The following is an example pattern, With UP=1 and ROW_FIRST =0 00_00 11_11 00_01 11_10 00_10 11_01 ..."
+      bit_offset: 5
+      bit_size: 1
+    - name: INCR_DECR_BOTH
+      description: "Specifies to generate patterns where both column address and row address are incremented/decremented simultaneously. 0: Generate normal increment/decrement patterns. 1: Generate address patterns with both row and column address changing. Example: With UP = 1 and ROW_FIRST = 0 00_00 01_01 10_10 11_11 00_01 01_10 10_11 11_00 00_10 ..."
+      bit_offset: 6
+      bit_size: 1
+    - name: STOP_ON_ERROR
+      description: "Specifies the BIST to continue indefinitely, regardless of occurrence of errors or not. 0: BIST controller doesn't stop on the data failures, it continues regardless of the errors. 1: BIST controller stops on when the first data failure is encountered."
+      bit_offset: 7
+      bit_size: 1
+fieldset/BIST_DATA:
+  description: BIST data register(s)
+  fields:
+    - name: DATA
+      description: "BIST data register to store the expected value for data comparison. For a 128-bit Flash memory, there will be 4 BIST_DATA registers to store 128-bit value."
+      bit_offset: 0
+      bit_size: 32
+fieldset/BIST_DATA_ACT:
+  description: BIST data actual register(s)
+  fields:
+    - name: DATA
+      description: This field specified the actual Flash data output that caused the BIST failure.
+      bit_offset: 0
+      bit_size: 32
+fieldset/BIST_DATA_EXP:
+  description: BIST data expected register(s)
+  fields:
+    - name: DATA
+      description: This field specified the expected Flash data output.
+      bit_offset: 0
+      bit_size: 32
+fieldset/BIST_STATUS:
+  description: BIST status register
+  fields:
+    - name: FAIL
+      description: "0: BIST passed. 1: BIST failed."
+      bit_offset: 0
+      bit_size: 1
+fieldset/BOOKMARK:
+  description: Bookmark register - keeps the current FW HV seq
+  fields:
+    - name: BOOKMARK
+      description: Used by FW. Keeps the Current HV cycle sequence
+      bit_offset: 0
+      bit_size: 32
+fieldset/CAL_CTL0:
+  description: Cal control BG LO trim bits
+  fields:
+    - name: VCT_TRIM_LO_HV
+      description: LO Bandgap Voltage Temperature Compensation trim control.
+      bit_offset: 0
+      bit_size: 5
+    - name: CDAC_LO_HV
+      description: LO Temperature compensated trim DAC. To control Vcstat slope for Vpos.
+      bit_offset: 5
+      bit_size: 3
+    - name: VBG_TRIM_LO_HV
+      description: LO Bandgap Voltage trim control.
+      bit_offset: 8
+      bit_size: 5
+    - name: VBG_TC_TRIM_LO_HV
+      description: LO Bandgap Voltage Temperature Compensation trim control
+      bit_offset: 13
+      bit_size: 3
+    - name: IPREF_TRIM_LO_HV
+      description: LO Bandgap IPTAT trim control.
+      bit_offset: 16
+      bit_size: 4
+fieldset/CAL_CTL1:
+  description: Cal control BG HI trim bits
+  fields:
+    - name: VCT_TRIM_HI_HV
+      description: HI Bandgap Voltage Temperature Compensation trim control.
+      bit_offset: 0
+      bit_size: 5
+    - name: CDAC_HI_HV
+      description: HI Temperature compensated trim DAC. To control Vcstat slope for Vpos.
+      bit_offset: 5
+      bit_size: 3
+    - name: VBG_TRIM_HI_HV
+      description: HI Bandgap Voltage trim control.
+      bit_offset: 8
+      bit_size: 5
+    - name: VBG_TC_TRIM_HI_HV
+      description: HI Bandgap Voltage Temperature Compensation trim control.
+      bit_offset: 13
+      bit_size: 3
+    - name: IPREF_TRIM_HI_HV
+      description: HI Bandgap IPTAT trim control.
+      bit_offset: 16
+      bit_size: 4
+fieldset/CAL_CTL2:
+  description: "Cal control BG LO&HI ipref trim, ref sel, fm_active, turbo_ext"
+  fields:
+    - name: ICREF_TRIM_LO_HV
+      description: LO Bandgap Current trim control.
+      bit_offset: 0
+      bit_size: 5
+    - name: ICREF_TC_TRIM_LO_HV
+      description: LO Bandgap Current Temperature Compensation trim control
+      bit_offset: 5
+      bit_size: 3
+    - name: ICREF_TRIM_HI_HV
+      description: HI Bandgap Current trim control.
+      bit_offset: 8
+      bit_size: 5
+    - name: ICREF_TC_TRIM_HI_HV
+      description: HI Bandgap Current Temperature Compensation trim control.
+      bit_offset: 13
+      bit_size: 3
+    - name: VREF_SEL_HV
+      description: "Voltage reference: '0': internal bandgap reference '1': external voltage reference"
+      bit_offset: 16
+      bit_size: 1
+    - name: IREF_SEL_HV
+      description: "Current reference: '0': internal current reference '1': external current reference"
+      bit_offset: 17
+      bit_size: 1
+    - name: FM_ACTIVE_HV
+      description: "0: No Action 1: Forces FM SYS in active mode"
+      bit_offset: 18
+      bit_size: 1
+    - name: TURBO_EXT_HV
+      description: "0: turbo signal generated internally 1: turbo cleared by clk_pump_ext HI"
+      bit_offset: 19
+      bit_size: 1
+fieldset/CAL_CTL3:
+  description: "Cal control osc trim bits, idac, sdac, itim, bdac."
+  fields:
+    - name: OSC_TRIM_HV
+      description: Flash macro pump clock trim control.
+      bit_offset: 0
+      bit_size: 4
+    - name: OSC_RANGE_TRIM_HV
+      description: "0: Oscillator High Frequency Range 1: Oscillator Low Frequency range"
+      bit_offset: 4
+      bit_size: 1
+    - name: IDAC_HV
+      description: N/A
+      bit_offset: 5
+      bit_size: 4
+    - name: SDAC_HV
+      description: N/A
+      bit_offset: 9
+      bit_size: 2
+    - name: ITIM_HV
+      description: Trimming of timing current
+      bit_offset: 11
+      bit_size: 4
+    - name: VDDHI_HV
+      description: "0': vdd<2.3V '1': vdd>=2.3V"
+      bit_offset: 15
+      bit_size: 1
+    - name: TURBO_PULSEW_HV
+      description: Turbo pulse width trim
+      bit_offset: 16
+      bit_size: 2
+    - name: BGLO_EN_HV
+      description: LO Bandgap Enable
+      bit_offset: 18
+      bit_size: 1
+    - name: BGHI_EN_HV
+      description: HI Bandgap Enable
+      bit_offset: 19
+      bit_size: 1
+fieldset/CM0_CA_CMD:
+  description: CM0+ cache command
+  fields:
+    - name: INV
+      description: "FLASH cache invalidation. SW writes a '1' to clear the cache. W sets this field to '0' when the operation is completed. The operation takes a maximum of three clock cycles on the slowest of the clk_slow and clk_fast clocks. The cache's LRU structure is also reset to its default state."
+      bit_offset: 0
+      bit_size: 1
+fieldset/CM0_CA_CTL0:
+  description: CM0+ cache control
+  fields:
+    - name: WAY
+      description: Specifies the cache way for which cache information is provided in CM0_CA_STATUS0/1/2.
+      bit_offset: 16
+      bit_size: 2
+    - name: SET_ADDR
+      description: Specifies the cache set for which cache information is provided in CM0_CA_STATUS0/1/2.
+      bit_offset: 24
+      bit_size: 3
+    - name: PREF_EN
+      description: "Prefetch enable: 0: Disabled. 1: Enabled. Prefetching requires the cache to be enabled; i.e. ENABLED is '1'."
+      bit_offset: 30
+      bit_size: 1
+    - name: ENABLED
+      description: "Cache enable: 0: Disabled. The cache tag valid bits are reset to '0's and the cache LRU information is set to '1's (making way 0 the LRU way and way 3 the MRU way). 1: Enabled."
+      bit_offset: 31
+      bit_size: 1
+fieldset/CM0_CA_CTL1:
+  description: CM0+ cache control
+  fields:
+    - name: PWR_MODE
+      description: Set Power mode for CM0 cache
+      bit_offset: 0
+      bit_size: 2
+      enum: CM0_CA_CTL1_PWR_MODE
+    - name: VECTKEYSTAT
+      description: Register key (to prevent accidental writes). - Should be written with a 0x05fa key value for the write to take effect. - Always reads as 0xfa05.
+      bit_offset: 16
+      bit_size: 16
+fieldset/CM0_CA_CTL2:
+  description: CM0+ cache control
+  fields:
+    - name: PWRUP_DELAY
+      description: Number clock cycles delay needed after power domain power up
+      bit_offset: 0
+      bit_size: 10
+fieldset/CM0_CA_STATUS0:
+  description: CM0+ cache status 0
+  fields:
+    - name: VALID16
+      description: Sixteen valid bits of the cache line specified by CM0_CA_CTL.WAY and CM0_CA_CTL.SET_ADDR.
+      bit_offset: 0
+      bit_size: 16
+fieldset/CM0_CA_STATUS1:
+  description: CM0+ cache status 1
+  fields:
+    - name: TAG
+      description: Cache line address of the cache line specified by CM0_CA_CTL.WAY and CM0_CA_CTL.SET_ADDR.
+      bit_offset: 0
+      bit_size: 32
+fieldset/CM0_CA_STATUS2:
+  description: CM0+ cache status 2
+  fields:
+    - name: LRU
+      description: "Six bit LRU representation of the cache set specified by CM0_CA_CTL.SET_ADDR. The encoding of the field is as follows ('X_LRU_Y' indicates that way X is Less Recently Used than way Y): Bit 5: 0_LRU_1: way 0 less recently used than way 1. Bit 4: 0_LRU_2. Bit 3: 0_LRU_3. Bit 2: 1_LRU_2. Bit 1: 1_LRU_3. Bit 0: 2_LRU_3."
+      bit_offset: 0
+      bit_size: 6
+fieldset/CM4_CA_CMD:
+  description: CM4 cache command
+  fields:
+    - name: INV
+      description: See CM0_CA_CMD.
+      bit_offset: 0
+      bit_size: 1
+fieldset/CM4_CA_CTL0:
+  description: CM4 cache control
+  fields:
+    - name: WAY
+      description: See CM0_CA_CTL.
+      bit_offset: 16
+      bit_size: 2
+    - name: SET_ADDR
+      description: See CM0_CA_CTL.
+      bit_offset: 24
+      bit_size: 3
+    - name: PREF_EN
+      description: See CM0_CA_CTL.
+      bit_offset: 30
+      bit_size: 1
+    - name: ENABLED
+      description: See CM0_CA_CTL.
+      bit_offset: 31
+      bit_size: 1
+fieldset/CM4_CA_CTL1:
+  description: CM4 cache control
+  fields:
+    - name: PWR_MODE
+      description: Set Power mode for CM4 cache
+      bit_offset: 0
+      bit_size: 2
+      enum: CM4_CA_CTL1_PWR_MODE
+    - name: VECTKEYSTAT
+      description: Register key (to prevent accidental writes). - Should be written with a 0x05fa key value for the write to take effect. - Always reads as 0xfa05.
+      bit_offset: 16
+      bit_size: 16
+fieldset/CM4_CA_CTL2:
+  description: CM4 cache control
+  fields:
+    - name: PWRUP_DELAY
+      description: Number clock cycles delay needed after power domain power up
+      bit_offset: 0
+      bit_size: 10
+fieldset/CM4_CA_STATUS0:
+  description: CM4 cache status 0
+  fields:
+    - name: VALID16
+      description: See CM0_CA_STATUS0.
+      bit_offset: 0
+      bit_size: 16
+fieldset/CM4_CA_STATUS1:
+  description: CM4 cache status 1
+  fields:
+    - name: TAG
+      description: See CM0_CA_STATUS1.
+      bit_offset: 0
+      bit_size: 32
+fieldset/CM4_CA_STATUS2:
+  description: CM4 cache status 2
+  fields:
+    - name: LRU
+      description: See CM0_CA_STATUS2.
+      bit_offset: 0
+      bit_size: 6
+fieldset/CRYPTO_BUFF_CMD:
+  description: Cryptography buffer command
+  fields:
+    - name: INV
+      description: "FLASH buffer invalidation. SW writes a '1' to clear the buffer. HW sets this field to '0' when the operation is completed."
+      bit_offset: 0
+      bit_size: 1
+fieldset/CRYPTO_BUFF_CTL:
+  description: Cryptography buffer control
+  fields:
+    - name: PREF_EN
+      description: "Prefetch enable: 0: Disabled. 1: Enabled. Prefetching requires the buffer to be enabled; i.e. ENABLED is '1'."
+      bit_offset: 30
+      bit_size: 1
+    - name: ENABLED
+      description: "Cache enable: 0: Disabled. 1: Enabled."
+      bit_offset: 31
+      bit_size: 1
+fieldset/DAP_BUFF_CMD:
+  description: Debug access port buffer command
+  fields:
+    - name: INV
+      description: See CRYPTO_BUFF_CMD.
+      bit_offset: 0
+      bit_size: 1
+fieldset/DAP_BUFF_CTL:
+  description: Debug access port buffer control
+  fields:
+    - name: PREF_EN
+      description: See CRYPTO_BUFF_CTL.
+      bit_offset: 30
+      bit_size: 1
+    - name: ENABLED
+      description: See CRYPTO_BUFF_CTL.
+      bit_offset: 31
+      bit_size: 1
+fieldset/DW0_BUFF_CMD:
+  description: Datawire 0 buffer command
+  fields:
+    - name: INV
+      description: See CRYPTO_BUFF_CMD.
+      bit_offset: 0
+      bit_size: 1
+fieldset/DW0_BUFF_CTL:
+  description: Datawire 0 buffer control
+  fields:
+    - name: PREF_EN
+      description: See CRYPTO_BUFF_CTL.
+      bit_offset: 30
+      bit_size: 1
+    - name: ENABLED
+      description: See CRYPTO_BUFF_CTL.
+      bit_offset: 31
+      bit_size: 1
+fieldset/DW1_BUFF_CMD:
+  description: Datawire 1 buffer command
+  fields:
+    - name: INV
+      description: See CRYPTO_BUFF_CMD.
+      bit_offset: 0
+      bit_size: 1
+fieldset/DW1_BUFF_CTL:
+  description: Datawire 1 buffer control
+  fields:
+    - name: PREF_EN
+      description: See CRYPTO_BUFF_CTL.
+      bit_offset: 30
+      bit_size: 1
+    - name: ENABLED
+      description: See CRYPTO_BUFF_CTL.
+      bit_offset: 31
+      bit_size: 1
+fieldset/EXT_MS0_BUFF_CMD:
+  description: External master 0 buffer command
+  fields:
+    - name: INV
+      description: See CRYPTO_BUFF_CMD.
+      bit_offset: 0
+      bit_size: 1
+fieldset/EXT_MS0_BUFF_CTL:
+  description: External master 0 buffer control
+  fields:
+    - name: PREF_EN
+      description: See CRYPTO_BUFF_CTL.
+      bit_offset: 30
+      bit_size: 1
+    - name: ENABLED
+      description: See CRYPTO_BUFF_CTL.
+      bit_offset: 31
+      bit_size: 1
+fieldset/EXT_MS1_BUFF_CMD:
+  description: External master 1 buffer command
+  fields:
+    - name: INV
+      description: See CRYPTO_BUFF_CMD.
+      bit_offset: 0
+      bit_size: 1
+fieldset/EXT_MS1_BUFF_CTL:
+  description: External master 1 buffer control
+  fields:
+    - name: PREF_EN
+      description: See CRYPTO_BUFF_CTL.
+      bit_offset: 30
+      bit_size: 1
+    - name: ENABLED
+      description: See CRYPTO_BUFF_CTL.
+      bit_offset: 31
+      bit_size: 1
+fieldset/FLASH_CMD:
+  description: Command
+  fields:
+    - name: INV
+      description: "FLASH cache and buffer invalidation for ALL cache and buffers. SW writes a '1' to clear the cache and buffers. HW sets this field to '0' when the operation is completed. The operation takes a maximum of three clock cycles on the slowest of the clk_slow and clk_fast clocks. The caches' LRU structures are also reset to their default state."
+      bit_offset: 0
+      bit_size: 1
+fieldset/FLASH_CTL:
+  description: Control
+  fields:
+    - name: MAIN_WS
+      description: "FLASH macro main interface wait states: 0: 0 wait states. ... 15: 15 wait states"
+      bit_offset: 0
+      bit_size: 4
+    - name: REMAP
+      description: "Specifies remapping of FLASH macro main region. 0: No remapping. 1: Remapping. The highest address bit of the FLASH main region is inverted. This effectively remaps the location of FLASH main region physical sectors in the logical address space. In other words, the higher half physical sectors are swapped with the lower half physical sectors. Note: remapping only affects reading of the FLASH main region (over the R interface). It does NOT affect programming/erasing of the FLASH memory region (over the C interface). E.g., for a 512 KB / 4 Mb main region, the logical address space ranges from [0x1000:0000, 0x1007:ffff] (the highest bit if the FLASH main region is bit 18). The memory has four physical sectors: sectors 0, 1, 2 and 3. If REMAP is '0', the physical regions logical addresses are as follows: - The physical region 0: [0x1000:0000, 0x1001:ffff]. - The physical region 1: [0x1002:0000, 0x1003:ffff]. - The physical region 2: [0x1004:0000, 0x1005:ffff]. - The physical region 3: [0x1006:0000, 0x1007:ffff]. If REMAP is '1', the physical regions logical addresses are as follows: - The physical region 0: [0x1004:0000, 0x1005:ffff]. - The physical region 1: [0x1006:0000, 0x1007:ffff]. - The physical region 2: [0x1000:0000, 0x1001:ffff]. - The physical region 3: [0x1002:0000, 0x1003:ffff]. Note: when the REMAP is changed, SW should invalidate the caches and buffers."
+      bit_offset: 8
+      bit_size: 1
+fieldset/FLASH_PWR_CTL:
+  description: Flash power control
+  fields:
+    - name: ENABLE
+      description: "Controls 'enable' pin of the Flash memory."
+      bit_offset: 0
+      bit_size: 1
+    - name: ENABLE_HV
+      description: "Controls 'enable_hv' pin of the Flash memory."
+      bit_offset: 1
+      bit_size: 1
+fieldset/FM_ADDR:
+  description: Flash macro address
+  fields:
+    - name: RA
+      description: Row address.
+      bit_offset: 0
+      bit_size: 16
+    - name: BA
+      description: Bank address.
+      bit_offset: 16
+      bit_size: 8
+    - name: AXA
+      description: "Auxiliary address field: '0': regular flash memory. '1': supervisory flash memory."
+      bit_offset: 24
+      bit_size: 1
+fieldset/FM_CTL:
+  description: Flash macro control
+  fields:
+    - name: FM_MODE
+      description: "Flash macro mode selection: '0': Normal functional mode. '1': Sets 'pre-program control bit' for soft pre-program operation of all selected SONOS cells. the control bit is cleared by the HW after any program operation. '2': Sets ... '15': TBD"
+      bit_offset: 0
+      bit_size: 4
+    - name: FM_SEQ
+      description: "Flash macro sequence select: '0': TBD '1': TBD '2': TBD '3': TBD"
+      bit_offset: 8
+      bit_size: 2
+    - name: DAA_MUX_SEL
+      description: Direct memory cell access address.
+      bit_offset: 16
+      bit_size: 7
+    - name: IF_SEL
+      description: "Interface selection. Specifies the interface that is used for flash memory read operations: '0': R interface is used (default value). In this case, the flash memory address is provided as part of the R signal interface. '1': C interface is used. In this case, the flash memory address is provided by FM_MEM_ADDR (the page address) and by the C interface access offset in the FM_MEM_DATA structure."
+      bit_offset: 24
+      bit_size: 1
+    - name: WR_EN
+      description: "'0': normal mode '1': Fm Write Enable"
+      bit_offset: 25
+      bit_size: 1
+fieldset/FM_HV_DATA:
+  description: Flash macro high Voltage page latches data
+  fields:
+    - name: DATA32
+      description: "Four page latch Bytes (when writing to the page latches, it also requires FM_CTL.IF_SEL to be '1'). Note: the high Voltage page latches are readable for test mode functionality."
+      bit_offset: 0
+      bit_size: 32
+fieldset/FM_HV_DATA_ALL:
+  description: Flash macro high Voltage page latches data (for all page latches)
+  fields:
+    - name: DATA32
+      description: Write all high Voltage page latches with the same 32-bit data in a single write cycle
+      bit_offset: 0
+      bit_size: 32
+fieldset/FM_MEM_DATA:
+  description: Flash macro memory sense amplifier and column decoder data
+  fields:
+    - name: DATA32
+      description: "Sense amplifier and column multiplexer structure Bytes. The read data is dependent on FM_CTL.IF_SEL: - IF_SEL is '0': data as specified by the R interface address - IF_SEL is '1': data as specified by FM_MEM_ADDR and the offset of the accessed FM_MEM_DATA register."
+      bit_offset: 0
+      bit_size: 32
+fieldset/GEOMETRY:
+  description: Regular flash geometry
+  fields:
+    - name: WORD_SIZE_LOG2
+      description: "Number of Bytes per word (log 2). A word is defined as the data that is read from the flash macro over the R interface with a single read access: '0': 1 Byte '1': 2 Bytes '2': 4 Bytes ... '7': 128 Bytes The currently planned flash macros have a word size of either 32-bit, 64-bit or 128-bit, resulting in WORD_SIZE_LOG2 settings of 2, 3 and 4 respectively."
+      bit_offset: 0
+      bit_size: 4
+    - name: PAGE_SIZE_LOG2
+      description: "Number of Bytes per page (log 2): '0': 1 Byte '1': 2 Bytes '2': 4 Bytes ... '15': 32768 Bytes The currently planned flash macros have a page size of either 256 Byte or 512 Byte, resulting in PAGE_SIZE_LOG2 settings of 8 and 9 respectively."
+      bit_offset: 4
+      bit_size: 4
+    - name: ROW_COUNT
+      description: "Number of rows (minus 1): '0': 1 row '1': 2 rows '2': 3 rows ... '65535': 65536 rows"
+      bit_offset: 8
+      bit_size: 16
+    - name: BANK_COUNT
+      description: "Number of banks (minus 1): '0': 1 bank '1': 2 banks ... '255': 256 banks"
+      bit_offset: 24
+      bit_size: 8
+fieldset/GEOMETRY_GEN:
+  description: "N/A, DNU"
+  fields:
+    - name: DNU_0X20_1
+      description: N/A
+      bit_offset: 1
+      bit_size: 1
+    - name: DNU_0X20_2
+      description: N/A
+      bit_offset: 2
+      bit_size: 1
+    - name: DNU_0X20_3
+      description: N/A
+      bit_offset: 3
+      bit_size: 1
+fieldset/GEOMETRY_SUPERVISORY:
+  description: Supervisory flash geometry
+  fields:
+    - name: WORD_SIZE_LOG2
+      description: "Number of Bytes per word (log 2). See GEOMETRY.WORD_SIZE_LOG2. Typically, WORD_SIZE_LOG2 equals GEOMETRY.WORD_SIZE_LOG2."
+      bit_offset: 0
+      bit_size: 4
+    - name: PAGE_SIZE_LOG2
+      description: "Number of Bytes per page (log 2). See GEOMETRY.PAGE_SIZE_LOG2. Typically, PAGE_SIZE_LOG2 equals GEOMETRY.PAGE_SIZE_LOG2."
+      bit_offset: 4
+      bit_size: 4
+    - name: ROW_COUNT
+      description: Number of rows (minus 1). ROW_COUNT is typically less than GEOMETRY.ROW_COUNT
+      bit_offset: 8
+      bit_size: 16
+    - name: BANK_COUNT
+      description: Number of banks (minus 1). BANK_COUNT is less or equal to GEOMETRY.BANK_COUNT.
+      bit_offset: 24
+      bit_size: 8
+fieldset/HV_CTL:
+  description: High voltage control
+  fields:
+    - name: TIMER_CLOCK_FREQ
+      description: "Specifies the frequency in MHz of the timer clock 'clk_t' as provide to the flash macro. E.g., if '4', the timer clock 'clk_t' has a frequency of 4 MHz."
+      bit_offset: 0
+      bit_size: 8
+fieldset/INTR:
+  description: Interrupt
+  fields:
+    - name: TIMER_EXPIRED
+      description: "Set to '1', when event is detected. Write INTR field with '1', to clear bit. Write INTR_SET field with '1', to set bit."
+      bit_offset: 0
+      bit_size: 1
+fieldset/INTR_MASK:
+  description: Interrupt mask
+  fields:
+    - name: TIMER_EXPIRED
+      description: Mask for corresponding field in INTR register.
+      bit_offset: 0
+      bit_size: 1
+fieldset/INTR_MASKED:
+  description: Interrupt masked
+  fields:
+    - name: TIMER_EXPIRED
+      description: Logical and of corresponding request and mask fields.
+      bit_offset: 0
+      bit_size: 1
+fieldset/INTR_SET:
+  description: Interrupt set
+  fields:
+    - name: TIMER_EXPIRED
+      description: "Write INTR_SET field with '1' to set corresponding INTR field (a write of '0' has no effect)."
+      bit_offset: 0
+      bit_size: 1
+fieldset/MONITOR_STATUS:
+  description: Monitor Status
+  fields:
+    - name: POS_PUMP_VLO
+      description: POS pump VLO
+      bit_offset: 1
+      bit_size: 1
+    - name: NEG_PUMP_VHI
+      description: NEG pump VHI
+      bit_offset: 2
+      bit_size: 1
+fieldset/RED_CTL01:
+  description: "Redundancy Control normal sectors 0,1"
+  fields:
+    - name: RED_ADDR_0
+      description: Bad Row Pair Address for Sector 0
+      bit_offset: 0
+      bit_size: 8
+    - name: RED_EN_0
+      description: "'1': Redundancy Enable for Sector 0"
+      bit_offset: 8
+      bit_size: 1
+    - name: RED_ADDR_1
+      description: Bad Row Pair Address for Sector 1
+      bit_offset: 16
+      bit_size: 8
+    - name: RED_EN_1
+      description: "'1': Redundancy Enable for Sector 1"
+      bit_offset: 24
+      bit_size: 1
+fieldset/RED_CTL23:
+  description: "Redundancy Controll normal sectors 2,3"
+  fields:
+    - name: RED_ADDR_2
+      description: Bad Row Pair Address for Sector 2
+      bit_offset: 0
+      bit_size: 8
+    - name: RED_EN_2
+      description: "1': Redundancy Enable for Sector 2"
+      bit_offset: 8
+      bit_size: 1
+    - name: RED_ADDR_3
+      description: Bad Row Pair Address for Sector 3
+      bit_offset: 16
+      bit_size: 8
+    - name: RED_EN_3
+      description: "1': Redundancy Enable for Sector 3"
+      bit_offset: 24
+      bit_size: 1
+fieldset/RED_CTL45:
+  description: "Redundancy Controll normal sectors 4,5"
+  fields:
+    - name: DNU_45_1
+      description: Not Used
+      bit_offset: 0
+      bit_size: 1
+    - name: REG_ACT_HV
+      description: Forces the VBST regulator in active mode all the time
+      bit_offset: 1
+      bit_size: 1
+    - name: DNU_45_3
+      description: Not Used
+      bit_offset: 2
+      bit_size: 1
+    - name: FDIV_TRIM_HV_0
+      description: "'2b00' F = 1MHz see fdiv_trim_hv<1> value as well '2b01' F = 0.5MHz '2b10' F = 2MHz '2b11' F = 4Mhz"
+      bit_offset: 3
+      bit_size: 1
+    - name: DNU_45_5
+      description: Not Used
+      bit_offset: 4
+      bit_size: 1
+    - name: FDIV_TRIM_HV_1
+      description: "'2b00' F = 1MHz see fdiv_trim_hv<0> value as well '2b01' F = 0.5MHz '2b10' F = 2MHz '2b11' F = 4Mhz"
+      bit_offset: 5
+      bit_size: 1
+    - name: DNU_45_6
+      description: Not Used
+      bit_offset: 6
+      bit_size: 1
+    - name: VLIM_TRIM_HV_0
+      description: "'2b00' V2 = 650mV see vlim_trim_hv<1> value as well '2b01' V2 = 600mV '2b10' V2 = 750mV '2b11' V2 = 700mV"
+      bit_offset: 7
+      bit_size: 1
+    - name: DNU_45_8
+      description: Not Used
+      bit_offset: 8
+      bit_size: 1
+    - name: DNU_45_23_16
+      description: Not Used
+      bit_offset: 16
+      bit_size: 8
+fieldset/RED_CTL67:
+  description: "Redundancy Controll normal sectors 6,7"
+  fields:
+    - name: VLIM_TRIM_HV_1
+      description: "'2b00' V2 = 650mV see vlim_trim_hv<0> value as well '2b01' V2 = 600mV '2b10' V2 = 750mV '2b11' V2 = 700mV"
+      bit_offset: 0
+      bit_size: 1
+    - name: DNU_67_1
+      description: Not Used
+      bit_offset: 1
+      bit_size: 1
+    - name: VPROT_ACT_HV
+      description: Forces VPROT in active mode all the time
+      bit_offset: 2
+      bit_size: 1
+    - name: DNU_67_3
+      description: Not Used
+      bit_offset: 3
+      bit_size: 1
+    - name: IPREF_TC_HV
+      description: Reduces the IPREF Tempco by not subtracting ICREF form IPREF - IPREF will be 1uA
+      bit_offset: 4
+      bit_size: 1
+    - name: DNU_67_5
+      description: Not Used
+      bit_offset: 5
+      bit_size: 1
+    - name: IPREF_TRIMA_HI_HV
+      description: Adds 200-300nA boost on IPREF_HI
+      bit_offset: 6
+      bit_size: 1
+    - name: DNU_67_7
+      description: Not Used
+      bit_offset: 7
+      bit_size: 1
+    - name: IPREF_TRIMA_LO_HV
+      description: Adds 200-300nA boost on IPREF_LO
+      bit_offset: 8
+      bit_size: 1
+    - name: DNU_67_23_16
+      description: Not Used
+      bit_offset: 16
+      bit_size: 8
+fieldset/RED_CTL_SM01:
+  description: "Redundancy Controll special sectors 0,1"
+  fields:
+    - name: RED_ADDR_SM0
+      description: Bad Row Pair Address for Special Sector 0
+      bit_offset: 0
+      bit_size: 8
+    - name: RED_EN_SM0
+      description: Redundancy Enable for Special Sector 0
+      bit_offset: 8
+      bit_size: 1
+    - name: RED_ADDR_SM1
+      description: Bad Row Pair Address for Special Sector 1
+      bit_offset: 16
+      bit_size: 8
+    - name: RED_EN_SM1
+      description: Redundancy Enable for Special Sector 1
+      bit_offset: 24
+      bit_size: 1
+    - name: TRKD
+      description: Sense Amp Control tracking delay
+      bit_offset: 30
+      bit_size: 1
+    - name: R_GRANT_EN
+      description: "'0': r_grant handshake disabled, r_grant always 1. '1': r_grand handshake enabled"
+      bit_offset: 31
+      bit_size: 1
+fieldset/SCRATCH_CTL:
+  description: Scratch Control
+  fields:
+    - name: DUMMY32
+      description: Scratchpad register fields. Provided for test purposes.
+      bit_offset: 0
+      bit_size: 32
+fieldset/STATUS:
+  description: Status
+  fields:
+    - name: HV_TIMER_RUNNING
+      description: "Indicates if the high voltage timer is running: '0': not running '1': running"
+      bit_offset: 0
+      bit_size: 1
+    - name: HV_REGS_ISOLATED
+      description: "Indicates the isolation status at HV trim and redundancy registers inputs '0' - Not isolated, writing permitted '1' - isolated writing disabled"
+      bit_offset: 1
+      bit_size: 1
+    - name: ILLEGAL_HVOP
+      description: "Indicates a bulk, sector erase, program has been requested when axa=1 '0' - no error '1' - illegal HV operation error"
+      bit_offset: 2
+      bit_size: 1
+    - name: TURBO_N
+      description: "After FM power up indicates the analog blocks currents are boosted to faster reach their functional state.. Used in the testchip boot only as an 'FM READY' flag. '0' - turbo mode '1' - normal mode"
+      bit_offset: 3
+      bit_size: 1
+    - name: WR_EN_MON
+      description: FM_CTL.WR_EN bit after being synchronized in clk_r domain
+      bit_offset: 4
+      bit_size: 1
+    - name: IF_SEL_MON
+      description: FM_CTL.IF_SEL bit after being synchronized in clk_r domain
+      bit_offset: 5
+      bit_size: 1
+fieldset/TEST_CTL:
+  description: Test mode control
+  fields:
+    - name: TEST_MODE
+      description: "Test mode control: '0'-'31': TBD"
+      bit_offset: 0
+      bit_size: 5
+    - name: PN_CTL
+      description: "Positive/negative margin mode control: '0': negative margin control '1': positive margin control"
+      bit_offset: 8
+      bit_size: 1
+    - name: TM_PE
+      description: "PUMP_EN override: Pump Enable =PUMP_EN | PE_TM"
+      bit_offset: 9
+      bit_size: 1
+    - name: TM_DISPOS
+      description: Test mode positive pump disable
+      bit_offset: 10
+      bit_size: 1
+    - name: TM_DISNEG
+      description: Test mode negative pump disable
+      bit_offset: 11
+      bit_size: 1
+    - name: EN_CLK_MON
+      description: "1: enables the oscillator output monitor"
+      bit_offset: 16
+      bit_size: 1
+    - name: CSL_DEBUG
+      description: Engineering Debug Register
+      bit_offset: 17
+      bit_size: 1
+    - name: ENABLE_OSC
+      description: "0': the oscillator enable logic has control over the internal oscillator '1': forces oscillator enable HI"
+      bit_offset: 18
+      bit_size: 1
+    - name: UNSCRAMBLE_WA
+      description: "See BSN-242 memo '0': normal '1': disables the Word Address scrambling"
+      bit_offset: 31
+      bit_size: 1
+fieldset/TIMER_CTL:
+  description: Timer control
+  fields:
+    - name: PERIOD
+      description: "Timer period in either microseconds (SCALE is '0') or 100's of microseconds (SCALE is '1') multiples."
+      bit_offset: 0
+      bit_size: 16
+    - name: SCALE
+      description: "Timer tick scale: '0': 1 microsecond. '1': 100 microseconds."
+      bit_offset: 16
+      bit_size: 1
+    - name: PUMP_CLOCK_SEL
+      description: "Pump clock select: '0': internal clock. '1': external clock."
+      bit_offset: 24
+      bit_size: 1
+    - name: PRE_PROG
+      description: "'1' during pre-program operation"
+      bit_offset: 25
+      bit_size: 1
+    - name: PRE_PROG_CSL
+      description: "'0' CSL lines driven by CSL_DAC '1' CSL lines driven by VNEG_G"
+      bit_offset: 26
+      bit_size: 1
+    - name: PUMP_EN
+      description: "Pump enable: '0': disabled '1': enabled (also requires FM_CTL.IF_SEL to be '1', this additional restriction is required to prevent non intentional clearing of the FM). SW sets this field to '1' to generate a single PE pulse. HW clears this field when timer is expired."
+      bit_offset: 29
+      bit_size: 1
+    - name: ACLK_EN
+      description: "ACLK enable (generates a single cycle pulse for the FM): '0': disabled '1': enabled. SW set this field to '1' to generate a single cycle pulse. HW sets this field to '0' when the pulse is generated."
+      bit_offset: 30
+      bit_size: 1
+    - name: TIMER_EN
+      description: "Timer enable: '0': disabled '1': enabled. SW sets this field to '1' to start the timer. HW sets this field to '0' when the timer is expired."
+      bit_offset: 31
+      bit_size: 1
+fieldset/TM_CMPR:
+  description: Do Not Use
+  fields:
+    - name: DATA_COMP_RESULT
+      description: "The result of a comparison between the flash macro data output and the content of the high voltage page latches. The comparison result for a given column 'Column_Number' is updated in this register field on a read to address: 0x100+4*Column_Number. The number of wait states is given by WAIT_CTL.WAIT_FM_HV_RD. '0': FALSE (not equal) '1': TRUE (equal)"
+      bit_offset: 0
+      bit_size: 1
+fieldset/WAIT_CTL:
+  description: Wiat State control
+  fields:
+    - name: WAIT_FM_MEM_RD
+      description: "Number of C interface wait cycles (on 'clk_c') for a read from the memory"
+      bit_offset: 0
+      bit_size: 4
+    - name: WAIT_FM_HV_RD
+      description: "Number of C interface wait cycles (on 'clk_c') for a read from the high Voltage page latches. Common for reading HV Page Latches and the DATA_COMP_RESULT bit"
+      bit_offset: 8
+      bit_size: 4
+    - name: WAIT_FM_HV_WR
+      description: "Number of C interface wait cycles (on 'clk_c') for a write to the high Voltage page latches."
+      bit_offset: 16
+      bit_size: 3
+enum/CM0_CA_CTL1_PWR_MODE:
+  bit_size: 2
+  variants:
+    - name: "OFF"
+      description: See CM4_PWR_CTL
+      value: 0
+    - name: RSVD
+      description: undefined
+      value: 1
+    - name: RETAINED
+      description: See CM4_PWR_CTL
+      value: 2
+    - name: ENABLED
+      description: See CM4_PWR_CTL
+      value: 3
+enum/CM4_CA_CTL1_PWR_MODE:
+  bit_size: 2
+  variants:
+    - name: "OFF"
+      description: See CM4_PWR_CTL
+      value: 0
+    - name: RSVD
+      description: undefined
+      value: 1
+    - name: RETAINED
+      description: See CM4_PWR_CTL
+      value: 2
+    - name: ENABLED
+      description: See CM4_PWR_CTL
+      value: 3

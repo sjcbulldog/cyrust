@@ -1,0 +1,1018 @@
+---
+block/GPIO:
+  description: GPIO port control/configuration
+  items:
+    - name: PRT
+      description: GPIO port registers
+      array:
+        len: 15
+        stride: 128
+      byte_offset: 0
+      block: PRT
+    - name: INTR_CAUSE0
+      description: Interrupt port cause register 0
+      byte_offset: 16384
+      access: Read
+      fieldset: INTR_CAUSE0
+    - name: INTR_CAUSE1
+      description: Interrupt port cause register 1
+      byte_offset: 16388
+      access: Read
+      fieldset: INTR_CAUSE1
+    - name: INTR_CAUSE2
+      description: Interrupt port cause register 2
+      byte_offset: 16392
+      access: Read
+      fieldset: INTR_CAUSE2
+    - name: INTR_CAUSE3
+      description: Interrupt port cause register 3
+      byte_offset: 16396
+      access: Read
+      fieldset: INTR_CAUSE3
+    - name: VDD_ACTIVE
+      description: Extern power supply detection register
+      byte_offset: 16400
+      access: Read
+      fieldset: VDD_ACTIVE
+    - name: VDD_INTR
+      description: Supply detection interrupt register
+      byte_offset: 16404
+      fieldset: VDD_INTR
+    - name: VDD_INTR_MASK
+      description: Supply detection interrupt mask register
+      byte_offset: 16408
+      fieldset: VDD_INTR_MASK
+    - name: VDD_INTR_MASKED
+      description: Supply detection interrupt masked register
+      byte_offset: 16412
+      access: Read
+      fieldset: VDD_INTR_MASKED
+    - name: VDD_INTR_SET
+      description: Supply detection interrupt set register
+      byte_offset: 16416
+      fieldset: VDD_INTR_SET
+block/PRT:
+  description: GPIO port registers
+  items:
+    - name: OUT
+      description: Port output data register
+      byte_offset: 0
+      fieldset: OUT
+    - name: OUT_CLR
+      description: Port output data clear register
+      byte_offset: 4
+      fieldset: OUT_CLR
+    - name: OUT_SET
+      description: Port output data set register
+      byte_offset: 8
+      fieldset: OUT_SET
+    - name: OUT_INV
+      description: Port output data invert register
+      byte_offset: 12
+      fieldset: OUT_INV
+    - name: IN
+      description: Port input state register
+      byte_offset: 16
+      access: Read
+      fieldset: IN
+    - name: INTR
+      description: Port interrupt status register
+      byte_offset: 20
+      fieldset: INTR
+    - name: INTR_MASK
+      description: Port interrupt mask register
+      byte_offset: 24
+      fieldset: INTR_MASK
+    - name: INTR_MASKED
+      description: Port interrupt masked status register
+      byte_offset: 28
+      access: Read
+      fieldset: INTR_MASKED
+    - name: INTR_SET
+      description: Port interrupt set register
+      byte_offset: 32
+      fieldset: INTR_SET
+    - name: INTR_CFG
+      description: Port interrupt configuration register
+      byte_offset: 64
+      fieldset: INTR_CFG
+    - name: CFG
+      description: Port configuration register
+      byte_offset: 68
+      fieldset: CFG
+    - name: CFG_IN
+      description: Port input buffer configuration register
+      byte_offset: 72
+      fieldset: CFG_IN
+    - name: CFG_OUT
+      description: Port output buffer configuration register
+      byte_offset: 76
+      fieldset: CFG_OUT
+    - name: CFG_SIO
+      description: Port SIO configuration register
+      byte_offset: 80
+      fieldset: CFG_SIO
+    - name: CFG_IN_AUTOLVL
+      description: Port input buffer AUTOLVL configuration register
+      byte_offset: 88
+      fieldset: CFG_IN_AUTOLVL
+fieldset/CFG:
+  description: Port configuration register
+  fields:
+    - name: DRIVE_MODE0
+      description: "The GPIO drive mode for IO pin 0. Resistive pull-up and pull-down is selected in the drive mode. Note: when initializing IO's that are connected to a live bus (such as I2C), make sure the peripheral and HSIOM (HSIOM_PRT_SELx) is properly configured before turning the IO on here to avoid producing glitches on the bus. Note: that peripherals other than GPIO & UDB/DSI directly control both the output and output-enable of the output buffer (peripherals can drive strong 0 or strong 1 in any mode except OFF='0'). Note: D_OUT, D_OUT_EN are pins of GPIO cell."
+      bit_offset: 0
+      bit_size: 3
+      enum: DRIVE_MODE0
+    - name: IN_EN0
+      description: "Enables the input buffer for IO pin 0. This bit should be cleared when analog signals are present on the pin to avoid crowbar currents. The output buffer can be used to drive analog signals high or low without issue. '0': Input buffer disabled '1': Input buffer enabled"
+      bit_offset: 3
+      bit_size: 1
+    - name: DRIVE_MODE1
+      description: The GPIO drive mode for IO pin 1
+      bit_offset: 4
+      bit_size: 3
+    - name: IN_EN1
+      description: Enables the input buffer for IO pin 1
+      bit_offset: 7
+      bit_size: 1
+    - name: DRIVE_MODE2
+      description: The GPIO drive mode for IO pin 2
+      bit_offset: 8
+      bit_size: 3
+    - name: IN_EN2
+      description: Enables the input buffer for IO pin 2
+      bit_offset: 11
+      bit_size: 1
+    - name: DRIVE_MODE3
+      description: The GPIO drive mode for IO pin 3
+      bit_offset: 12
+      bit_size: 3
+    - name: IN_EN3
+      description: Enables the input buffer for IO pin 3
+      bit_offset: 15
+      bit_size: 1
+    - name: DRIVE_MODE4
+      description: The GPIO drive mode for IO pin4
+      bit_offset: 16
+      bit_size: 3
+    - name: IN_EN4
+      description: Enables the input buffer for IO pin 4
+      bit_offset: 19
+      bit_size: 1
+    - name: DRIVE_MODE5
+      description: The GPIO drive mode for IO pin 5
+      bit_offset: 20
+      bit_size: 3
+    - name: IN_EN5
+      description: Enables the input buffer for IO pin 5
+      bit_offset: 23
+      bit_size: 1
+    - name: DRIVE_MODE6
+      description: The GPIO drive mode for IO pin 6
+      bit_offset: 24
+      bit_size: 3
+    - name: IN_EN6
+      description: Enables the input buffer for IO pin 6
+      bit_offset: 27
+      bit_size: 1
+    - name: DRIVE_MODE7
+      description: The GPIO drive mode for IO pin 7
+      bit_offset: 28
+      bit_size: 3
+    - name: IN_EN7
+      description: Enables the input buffer for IO pin 7
+      bit_offset: 31
+      bit_size: 1
+fieldset/CFG_IN:
+  description: Port input buffer configuration register
+  fields:
+    - name: VTRIP_SEL0_0
+      description: Configures the pin 0 input buffer mode (trip points and hysteresis)
+      bit_offset: 0
+      bit_size: 1
+      enum: VTRIP_SEL0_0
+    - name: VTRIP_SEL1_0
+      description: Configures the pin 1 input buffer mode (trip points and hysteresis)
+      bit_offset: 1
+      bit_size: 1
+    - name: VTRIP_SEL2_0
+      description: Configures the pin 2 input buffer mode (trip points and hysteresis)
+      bit_offset: 2
+      bit_size: 1
+    - name: VTRIP_SEL3_0
+      description: Configures the pin 3 input buffer mode (trip points and hysteresis)
+      bit_offset: 3
+      bit_size: 1
+    - name: VTRIP_SEL4_0
+      description: Configures the pin 4 input buffer mode (trip points and hysteresis)
+      bit_offset: 4
+      bit_size: 1
+    - name: VTRIP_SEL5_0
+      description: Configures the pin 5 input buffer mode (trip points and hysteresis)
+      bit_offset: 5
+      bit_size: 1
+    - name: VTRIP_SEL6_0
+      description: Configures the pin 6 input buffer mode (trip points and hysteresis)
+      bit_offset: 6
+      bit_size: 1
+    - name: VTRIP_SEL7_0
+      description: Configures the pin 7 input buffer mode (trip points and hysteresis)
+      bit_offset: 7
+      bit_size: 1
+fieldset/CFG_IN_AUTOLVL:
+  description: Port input buffer AUTOLVL configuration register
+  fields:
+    - name: VTRIP_SEL0_1
+      description: "Configures the input buffer mode (trip points and hysteresis) for GPIO upper bit. Lower bit is still selected by CFG_IN.VTRIP_SEL0_0 field. This field is used along with CFG_IN.VTRIP_SEL0_0 field as below: {CFG_IN_AUTOLVL.VTRIP_SEL0_1,CFG_IN.VTRIP_SEL0_0}: 0,0: CMOS 0,1: TTL 1,0: input buffer is compatible with automotive. 1,1: input buffer is compatible with automotvie"
+      bit_offset: 0
+      bit_size: 1
+      enum: VTRIP_SEL0_1
+    - name: VTRIP_SEL1_1
+      description: Input buffer compatible with automotive (elevated Vil) interfaces.
+      bit_offset: 1
+      bit_size: 1
+    - name: VTRIP_SEL2_1
+      description: Input buffer compatible with automotive (elevated Vil) interfaces.
+      bit_offset: 2
+      bit_size: 1
+    - name: VTRIP_SEL3_1
+      description: Input buffer compatible with automotive (elevated Vil) interfaces.
+      bit_offset: 3
+      bit_size: 1
+    - name: VTRIP_SEL4_1
+      description: Input buffer compatible with automotive (elevated Vil) interfaces.
+      bit_offset: 4
+      bit_size: 1
+    - name: VTRIP_SEL5_1
+      description: Input buffer compatible with automotive (elevated Vil) interfaces.
+      bit_offset: 5
+      bit_size: 1
+    - name: VTRIP_SEL6_1
+      description: Input buffer compatible with automotive (elevated Vil) interfaces.
+      bit_offset: 6
+      bit_size: 1
+    - name: VTRIP_SEL7_1
+      description: Input buffer compatible with automotive (elevated Vil) interfaces.
+      bit_offset: 7
+      bit_size: 1
+fieldset/CFG_OUT:
+  description: Port output buffer configuration register
+  fields:
+    - name: SLOW0
+      description: "Enables slow slew rate for IO pin 0 '0': Fast slew rate '1': Slow slew rate"
+      bit_offset: 0
+      bit_size: 1
+    - name: SLOW1
+      description: Enables slow slew rate for IO pin 1
+      bit_offset: 1
+      bit_size: 1
+    - name: SLOW2
+      description: Enables slow slew rate for IO pin 2
+      bit_offset: 2
+      bit_size: 1
+    - name: SLOW3
+      description: Enables slow slew rate for IO pin 3
+      bit_offset: 3
+      bit_size: 1
+    - name: SLOW4
+      description: Enables slow slew rate for IO pin 4
+      bit_offset: 4
+      bit_size: 1
+    - name: SLOW5
+      description: Enables slow slew rate for IO pin 5
+      bit_offset: 5
+      bit_size: 1
+    - name: SLOW6
+      description: Enables slow slew rate for IO pin 6
+      bit_offset: 6
+      bit_size: 1
+    - name: SLOW7
+      description: Enables slow slew rate for IO pin 7
+      bit_offset: 7
+      bit_size: 1
+    - name: DRIVE_SEL0
+      description: Sets the GPIO drive strength for IO pin 0
+      bit_offset: 16
+      bit_size: 2
+      enum: DRIVE_SEL0
+    - name: DRIVE_SEL1
+      description: Sets the GPIO drive strength for IO pin 1
+      bit_offset: 18
+      bit_size: 2
+    - name: DRIVE_SEL2
+      description: Sets the GPIO drive strength for IO pin 2
+      bit_offset: 20
+      bit_size: 2
+    - name: DRIVE_SEL3
+      description: Sets the GPIO drive strength for IO pin 3
+      bit_offset: 22
+      bit_size: 2
+    - name: DRIVE_SEL4
+      description: Sets the GPIO drive strength for IO pin 4
+      bit_offset: 24
+      bit_size: 2
+    - name: DRIVE_SEL5
+      description: Sets the GPIO drive strength for IO pin 5
+      bit_offset: 26
+      bit_size: 2
+    - name: DRIVE_SEL6
+      description: Sets the GPIO drive strength for IO pin 6
+      bit_offset: 28
+      bit_size: 2
+    - name: DRIVE_SEL7
+      description: Sets the GPIO drive strength for IO pin 7
+      bit_offset: 30
+      bit_size: 2
+fieldset/CFG_SIO:
+  description: Port SIO configuration register
+  fields:
+    - name: VREG_EN01
+      description: "Selects the output buffer mode: '0': Unregulated output buffer '1': Regulated output buffer The regulated output mode is selected ONLY if the CFG.DRIVE_MODE bits are set to the strong pull up (Z_1 = '5') mode. If the CFG.DRIVE_MODE bits are set to any other mode the regulated output buffer will be disabled and the standard CMOS output buffer is used."
+      bit_offset: 0
+      bit_size: 1
+    - name: IBUF_SEL01
+      description: "Selects the input buffer mode: 0: Singled ended input buffer 1: Differential input buffer"
+      bit_offset: 1
+      bit_size: 1
+    - name: VTRIP_SEL01
+      description: "Selects the input buffer trip-point in single ended input buffer mode (IBUF_SEL = '0'): '0': Input buffer functions as a CMOS input buffer. '1': Input buffer functions as a TTL input buffer. In differential input buffer mode (IBUF_SEL = '1') '0': Trip-point is 0.5*Vddio or 0.5*Voh (depends on VREF_SEL/VOH_SEL) '1': Trip-point is 0.4*Vddio or 1.0*Vref (depends on VREF_SEL)"
+      bit_offset: 2
+      bit_size: 1
+    - name: VREF_SEL01
+      description: "Selects reference voltage (Vref) trip-point of the input buffer: '0': Trip-point reference from pin_ref '1': Trip-point reference of SRSS internal reference Vref (1.2 V) '2': Trip-point reference of AMUXBUS_A '3': Trip-point reference of AMUXBUS_B"
+      bit_offset: 3
+      bit_size: 2
+    - name: VOH_SEL01
+      description: "Selects the regulated Voh output level and trip point of the input buffer for a specific SIO pin pair. Voh depends on the selected reference voltage (VREF_SEL). '0': Voh = 1*reference; e.g. reference at 1.2V -> Voh = 1.2V '1': Voh = 1.25*reference; e.g. reference at 1.2V -> Voh = 1.5V '2': Voh = 1.49*reference; e.g. reference at 1.2V -> Voh = ~1.8V '3': Voh = 1.67*reference; e.g. reference at 1.2V -> Voh = 2V '4': Voh = 2.08*reference; e.g. reference at 1.2V -> Voh = 2.5V '5': Voh = 2.5*reference; e.g. reference at 1.2V -> Voh = 3V '6': Voh = 2.78*reference; e.g. reference at 1.2V -> Voh = ~3.3V '7': Voh = 4.16*reference; e.g. reference at 1.2V -> Voh = 5.0V Note: The upper value on Voh is limited to Vddio - 400mV"
+      bit_offset: 5
+      bit_size: 3
+    - name: VREG_EN23
+      description: See corresponding definition for IO pins 0 and 1
+      bit_offset: 8
+      bit_size: 1
+    - name: IBUF_SEL23
+      description: See corresponding definition for IO pins 0 and 1
+      bit_offset: 9
+      bit_size: 1
+    - name: VTRIP_SEL23
+      description: See corresponding definition for IO pins 0 and 1
+      bit_offset: 10
+      bit_size: 1
+    - name: VREF_SEL23
+      description: See corresponding definition for IO pins 0 and 1
+      bit_offset: 11
+      bit_size: 2
+    - name: VOH_SEL23
+      description: See corresponding definition for IO pins 0 and 1
+      bit_offset: 13
+      bit_size: 3
+    - name: VREG_EN45
+      description: See corresponding definition for IO pins 0 and 1
+      bit_offset: 16
+      bit_size: 1
+    - name: IBUF_SEL45
+      description: See corresponding definition for IO pins 0 and 1
+      bit_offset: 17
+      bit_size: 1
+    - name: VTRIP_SEL45
+      description: See corresponding definition for IO pins 0 and 1
+      bit_offset: 18
+      bit_size: 1
+    - name: VREF_SEL45
+      description: See corresponding definition for IO pins 0 and 1
+      bit_offset: 19
+      bit_size: 2
+    - name: VOH_SEL45
+      description: See corresponding definition for IO pins 0 and 1
+      bit_offset: 21
+      bit_size: 3
+    - name: VREG_EN67
+      description: See corresponding definition for IO pins 0 and 1
+      bit_offset: 24
+      bit_size: 1
+    - name: IBUF_SEL67
+      description: See corresponding definition for IO pins 0 and 1
+      bit_offset: 25
+      bit_size: 1
+    - name: VTRIP_SEL67
+      description: See corresponding definition for IO pins 0 and 1
+      bit_offset: 26
+      bit_size: 1
+    - name: VREF_SEL67
+      description: See corresponding definition for IO pins 0 and 1
+      bit_offset: 27
+      bit_size: 2
+    - name: VOH_SEL67
+      description: See corresponding definition for IO pins 0 and 1
+      bit_offset: 29
+      bit_size: 3
+fieldset/IN:
+  description: Port input state register
+  fields:
+    - name: IN0
+      description: "IO pin state for pin 0 '0': Low logic level present on pin. '1': High logic level present on pin."
+      bit_offset: 0
+      bit_size: 1
+    - name: IN1
+      description: IO pin state for pin 1
+      bit_offset: 1
+      bit_size: 1
+    - name: IN2
+      description: IO pin state for pin 2
+      bit_offset: 2
+      bit_size: 1
+    - name: IN3
+      description: IO pin state for pin 3
+      bit_offset: 3
+      bit_size: 1
+    - name: IN4
+      description: IO pin state for pin 4
+      bit_offset: 4
+      bit_size: 1
+    - name: IN5
+      description: IO pin state for pin 5
+      bit_offset: 5
+      bit_size: 1
+    - name: IN6
+      description: IO pin state for pin 6
+      bit_offset: 6
+      bit_size: 1
+    - name: IN7
+      description: IO pin state for pin 7
+      bit_offset: 7
+      bit_size: 1
+    - name: FLT_IN
+      description: Reads of this register return the logical state of the filtered pin as selected in the INTR_CFG.FLT_SEL register.
+      bit_offset: 8
+      bit_size: 1
+fieldset/INTR:
+  description: Port interrupt status register
+  fields:
+    - name: EDGE0
+      description: "Edge detect for IO pin 0 '0': No edge was detected on pin. '1': An edge was detected on pin."
+      bit_offset: 0
+      bit_size: 1
+    - name: EDGE1
+      description: Edge detect for IO pin 1
+      bit_offset: 1
+      bit_size: 1
+    - name: EDGE2
+      description: Edge detect for IO pin 2
+      bit_offset: 2
+      bit_size: 1
+    - name: EDGE3
+      description: Edge detect for IO pin 3
+      bit_offset: 3
+      bit_size: 1
+    - name: EDGE4
+      description: Edge detect for IO pin 4
+      bit_offset: 4
+      bit_size: 1
+    - name: EDGE5
+      description: Edge detect for IO pin 5
+      bit_offset: 5
+      bit_size: 1
+    - name: EDGE6
+      description: Edge detect for IO pin 6
+      bit_offset: 6
+      bit_size: 1
+    - name: EDGE7
+      description: Edge detect for IO pin 7
+      bit_offset: 7
+      bit_size: 1
+    - name: FLT_EDGE
+      description: Edge detected on filtered pin selected by INTR_CFG.FLT_SEL
+      bit_offset: 8
+      bit_size: 1
+    - name: IN_IN0
+      description: IO pin state for pin 0
+      bit_offset: 16
+      bit_size: 1
+    - name: IN_IN1
+      description: IO pin state for pin 1
+      bit_offset: 17
+      bit_size: 1
+    - name: IN_IN2
+      description: IO pin state for pin 2
+      bit_offset: 18
+      bit_size: 1
+    - name: IN_IN3
+      description: IO pin state for pin 3
+      bit_offset: 19
+      bit_size: 1
+    - name: IN_IN4
+      description: IO pin state for pin 4
+      bit_offset: 20
+      bit_size: 1
+    - name: IN_IN5
+      description: IO pin state for pin 5
+      bit_offset: 21
+      bit_size: 1
+    - name: IN_IN6
+      description: IO pin state for pin 6
+      bit_offset: 22
+      bit_size: 1
+    - name: IN_IN7
+      description: IO pin state for pin 7
+      bit_offset: 23
+      bit_size: 1
+    - name: FLT_IN_IN
+      description: Filtered pin state for pin selected by INTR_CFG.FLT_SEL
+      bit_offset: 24
+      bit_size: 1
+fieldset/INTR_CAUSE0:
+  description: Interrupt port cause register 0
+  fields:
+    - name: PORT_INT
+      description: "Each IO port has an associated bit field in this register. The bit field reflects the IO port's interrupt line (bit field i reflects 'gpio_interrupts[i]' for IO port i). The register is used when the system uses a combined interrupt line 'gpio_interrupt'. The software ISR reads the register to determine which IO port(s) is responsible for the combined interrupt line. Once, the IO port(s) is determined, the IO port's GPIO_PRT_INTR register is read to determine the IO pin(s) in the IO port that caused the interrupt. '0': Port has no pending interrupt '1': Port has pending interrupt"
+      bit_offset: 0
+      bit_size: 32
+fieldset/INTR_CAUSE1:
+  description: Interrupt port cause register 1
+  fields:
+    - name: PORT_INT
+      description: "Each IO port has an associated bit field in this register. The bit field reflects the IO port's interrupt line (bit field i reflects 'gpio_interrupts[i]' for IO port i). The register is used when the system uses a combined interrupt line 'gpio_interrupt'. The software ISR reads the register to determine which IO port(s) is responsible for the combined interrupt line. Once, the IO port(s) is determined, the IO port's GPIO_PORT_INTR register is read to determine the IO pin(s) in the IO port that caused the interrupt. '0': Port has no pending interrupt '1': Port has pending interrupt"
+      bit_offset: 0
+      bit_size: 32
+fieldset/INTR_CAUSE2:
+  description: Interrupt port cause register 2
+  fields:
+    - name: PORT_INT
+      description: "Each IO port has an associated bit field in this register. The bit field reflects the IO port's interrupt line (bit field i reflects 'gpio_interrupts[i]' for IO port i). The register is used when the system uses a combined interrupt line 'gpio_interrupt'. The software ISR reads the register to determine which IO port(s) is responsible for the combined interrupt line. Once, the IO port(s) is determined, the IO port's GPIO_PORT_INTR register is read to determine the IO pin(s) in the IO port that caused the interrupt. '0': Port has no pending interrupt '1': Port has pending interrupt"
+      bit_offset: 0
+      bit_size: 32
+fieldset/INTR_CAUSE3:
+  description: Interrupt port cause register 3
+  fields:
+    - name: PORT_INT
+      description: "Each IO port has an associated bit field in this register. The bit field reflects the IO port's interrupt line (bit field i reflects 'gpio_interrupts[i]' for IO port i). The register is used when the system uses a combined interrupt line 'gpio_interrupt'. The software ISR reads the register to determine which IO port(s) is responsible for the combined interrupt line. Once, the IO port(s) is determined, the IO port's GPIO_PORT_INTR register is read to determine the IO pin(s) in the IO port that caused the interrupt. '0': Port has no pending interrupt '1': Port has pending interrupt"
+      bit_offset: 0
+      bit_size: 32
+fieldset/INTR_CFG:
+  description: Port interrupt configuration register
+  fields:
+    - name: EDGE0_SEL
+      description: Sets which edge will trigger an IRQ for IO pin 0
+      bit_offset: 0
+      bit_size: 2
+      enum: EDGE0_SEL
+    - name: EDGE1_SEL
+      description: Sets which edge will trigger an IRQ for IO pin 1
+      bit_offset: 2
+      bit_size: 2
+    - name: EDGE2_SEL
+      description: Sets which edge will trigger an IRQ for IO pin 2
+      bit_offset: 4
+      bit_size: 2
+    - name: EDGE3_SEL
+      description: Sets which edge will trigger an IRQ for IO pin 3
+      bit_offset: 6
+      bit_size: 2
+    - name: EDGE4_SEL
+      description: Sets which edge will trigger an IRQ for IO pin 4
+      bit_offset: 8
+      bit_size: 2
+    - name: EDGE5_SEL
+      description: Sets which edge will trigger an IRQ for IO pin 5
+      bit_offset: 10
+      bit_size: 2
+    - name: EDGE6_SEL
+      description: Sets which edge will trigger an IRQ for IO pin 6
+      bit_offset: 12
+      bit_size: 2
+    - name: EDGE7_SEL
+      description: Sets which edge will trigger an IRQ for IO pin 7
+      bit_offset: 14
+      bit_size: 2
+    - name: FLT_EDGE_SEL
+      description: Sets which edge will trigger an IRQ for the glitch filtered pin (selected by INTR_CFG.FLT_SEL
+      bit_offset: 16
+      bit_size: 2
+      enum: FLT_EDGE_SEL
+    - name: FLT_SEL
+      description: Selects which pin is routed through the 50ns glitch filter to provide a glitch-safe interrupt.
+      bit_offset: 18
+      bit_size: 3
+fieldset/INTR_MASK:
+  description: Port interrupt mask register
+  fields:
+    - name: EDGE0
+      description: "Masks edge interrupt on IO pin 0 '0': Pin interrupt forwarding disabled '1': Pin interrupt forwarding enabled"
+      bit_offset: 0
+      bit_size: 1
+    - name: EDGE1
+      description: Masks edge interrupt on IO pin 1
+      bit_offset: 1
+      bit_size: 1
+    - name: EDGE2
+      description: Masks edge interrupt on IO pin 2
+      bit_offset: 2
+      bit_size: 1
+    - name: EDGE3
+      description: Masks edge interrupt on IO pin 3
+      bit_offset: 3
+      bit_size: 1
+    - name: EDGE4
+      description: Masks edge interrupt on IO pin 4
+      bit_offset: 4
+      bit_size: 1
+    - name: EDGE5
+      description: Masks edge interrupt on IO pin 5
+      bit_offset: 5
+      bit_size: 1
+    - name: EDGE6
+      description: Masks edge interrupt on IO pin 6
+      bit_offset: 6
+      bit_size: 1
+    - name: EDGE7
+      description: Masks edge interrupt on IO pin 7
+      bit_offset: 7
+      bit_size: 1
+    - name: FLT_EDGE
+      description: Masks edge interrupt on filtered pin selected by INTR_CFG.FLT_SEL
+      bit_offset: 8
+      bit_size: 1
+fieldset/INTR_MASKED:
+  description: Port interrupt masked status register
+  fields:
+    - name: EDGE0
+      description: "Edge detected AND masked on IO pin 0 '0': Interrupt was not forwarded to CPU '1': Interrupt occurred and was forwarded to CPU"
+      bit_offset: 0
+      bit_size: 1
+    - name: EDGE1
+      description: Edge detected and masked on IO pin 1
+      bit_offset: 1
+      bit_size: 1
+    - name: EDGE2
+      description: Edge detected and masked on IO pin 2
+      bit_offset: 2
+      bit_size: 1
+    - name: EDGE3
+      description: Edge detected and masked on IO pin 3
+      bit_offset: 3
+      bit_size: 1
+    - name: EDGE4
+      description: Edge detected and masked on IO pin 4
+      bit_offset: 4
+      bit_size: 1
+    - name: EDGE5
+      description: Edge detected and masked on IO pin 5
+      bit_offset: 5
+      bit_size: 1
+    - name: EDGE6
+      description: Edge detected and masked on IO pin 6
+      bit_offset: 6
+      bit_size: 1
+    - name: EDGE7
+      description: Edge detected and masked on IO pin 7
+      bit_offset: 7
+      bit_size: 1
+    - name: FLT_EDGE
+      description: Edge detected and masked on filtered pin selected by INTR_CFG.FLT_SEL
+      bit_offset: 8
+      bit_size: 1
+fieldset/INTR_SET:
+  description: Port interrupt set register
+  fields:
+    - name: EDGE0
+      description: "Sets edge detect interrupt for IO pin 0 '0': Interrupt state not affected '1': Interrupt set"
+      bit_offset: 0
+      bit_size: 1
+    - name: EDGE1
+      description: Sets edge detect interrupt for IO pin 1
+      bit_offset: 1
+      bit_size: 1
+    - name: EDGE2
+      description: Sets edge detect interrupt for IO pin 2
+      bit_offset: 2
+      bit_size: 1
+    - name: EDGE3
+      description: Sets edge detect interrupt for IO pin 3
+      bit_offset: 3
+      bit_size: 1
+    - name: EDGE4
+      description: Sets edge detect interrupt for IO pin 4
+      bit_offset: 4
+      bit_size: 1
+    - name: EDGE5
+      description: Sets edge detect interrupt for IO pin 5
+      bit_offset: 5
+      bit_size: 1
+    - name: EDGE6
+      description: Sets edge detect interrupt for IO pin 6
+      bit_offset: 6
+      bit_size: 1
+    - name: EDGE7
+      description: Sets edge detect interrupt for IO pin 7
+      bit_offset: 7
+      bit_size: 1
+    - name: FLT_EDGE
+      description: Sets edge detect interrupt for filtered pin selected by INTR_CFG.FLT_SEL
+      bit_offset: 8
+      bit_size: 1
+fieldset/OUT:
+  description: Port output data register
+  fields:
+    - name: OUT0
+      description: "IO output data for pin 0 '0': Output state set to '0' '1': Output state set to '1'"
+      bit_offset: 0
+      bit_size: 1
+    - name: OUT1
+      description: IO output data for pin 1
+      bit_offset: 1
+      bit_size: 1
+    - name: OUT2
+      description: IO output data for pin 2
+      bit_offset: 2
+      bit_size: 1
+    - name: OUT3
+      description: IO output data for pin 3
+      bit_offset: 3
+      bit_size: 1
+    - name: OUT4
+      description: IO output data for pin 4
+      bit_offset: 4
+      bit_size: 1
+    - name: OUT5
+      description: IO output data for pin 5
+      bit_offset: 5
+      bit_size: 1
+    - name: OUT6
+      description: IO output data for pin 6
+      bit_offset: 6
+      bit_size: 1
+    - name: OUT7
+      description: IO output data for pin 7
+      bit_offset: 7
+      bit_size: 1
+fieldset/OUT_CLR:
+  description: Port output data clear register
+  fields:
+    - name: OUT0
+      description: "IO clear output for pin 0: '0': Output state not affected. '1': Output state set to '0'."
+      bit_offset: 0
+      bit_size: 1
+    - name: OUT1
+      description: IO clear output for pin 1
+      bit_offset: 1
+      bit_size: 1
+    - name: OUT2
+      description: IO clear output for pin 2
+      bit_offset: 2
+      bit_size: 1
+    - name: OUT3
+      description: IO clear output for pin 3
+      bit_offset: 3
+      bit_size: 1
+    - name: OUT4
+      description: IO clear output for pin 4
+      bit_offset: 4
+      bit_size: 1
+    - name: OUT5
+      description: IO clear output for pin 5
+      bit_offset: 5
+      bit_size: 1
+    - name: OUT6
+      description: IO clear output for pin 6
+      bit_offset: 6
+      bit_size: 1
+    - name: OUT7
+      description: IO clear output for pin 7
+      bit_offset: 7
+      bit_size: 1
+fieldset/OUT_INV:
+  description: Port output data invert register
+  fields:
+    - name: OUT0
+      description: "IO invert output for pin 0: '0': Output state not affected. '1': Output state inverted ('0' => '1', '1' => '0')."
+      bit_offset: 0
+      bit_size: 1
+    - name: OUT1
+      description: IO invert output for pin 1
+      bit_offset: 1
+      bit_size: 1
+    - name: OUT2
+      description: IO invert output for pin 2
+      bit_offset: 2
+      bit_size: 1
+    - name: OUT3
+      description: IO invert output for pin 3
+      bit_offset: 3
+      bit_size: 1
+    - name: OUT4
+      description: IO invert output for pin 4
+      bit_offset: 4
+      bit_size: 1
+    - name: OUT5
+      description: IO invert output for pin 5
+      bit_offset: 5
+      bit_size: 1
+    - name: OUT6
+      description: IO invert output for pin 6
+      bit_offset: 6
+      bit_size: 1
+    - name: OUT7
+      description: IO invert output for pin 7
+      bit_offset: 7
+      bit_size: 1
+fieldset/OUT_SET:
+  description: Port output data set register
+  fields:
+    - name: OUT0
+      description: "IO set output for pin 0: '0': Output state not affected. '1': Output state set to '1'."
+      bit_offset: 0
+      bit_size: 1
+    - name: OUT1
+      description: IO set output for pin 1
+      bit_offset: 1
+      bit_size: 1
+    - name: OUT2
+      description: IO set output for pin 2
+      bit_offset: 2
+      bit_size: 1
+    - name: OUT3
+      description: IO set output for pin 3
+      bit_offset: 3
+      bit_size: 1
+    - name: OUT4
+      description: IO set output for pin 4
+      bit_offset: 4
+      bit_size: 1
+    - name: OUT5
+      description: IO set output for pin 5
+      bit_offset: 5
+      bit_size: 1
+    - name: OUT6
+      description: IO set output for pin 6
+      bit_offset: 6
+      bit_size: 1
+    - name: OUT7
+      description: IO set output for pin 7
+      bit_offset: 7
+      bit_size: 1
+fieldset/VDD_ACTIVE:
+  description: Extern power supply detection register
+  fields:
+    - name: VDDIO_ACTIVE
+      description: "Indicates presence or absence of VDDIO supplies (i.e. other than VDDD, VDDA) on the device (supplies are numbered 0..n-1). Note that VDDIO supplies have basic (crude) supply detectors only. If separate, robust, brown-out detection is desired on IO supplies, on-chip or off-chip analog resources need to provide it. For these bits to work reliable, the supply must be within valid spec range (per datasheet) or held at ground. Any in-between voltage has an undefined result. '0': Supply is not present '1': Supply is present When multiple VDDIO supplies are present, they will be assigned in alphanumeric ascending order to these bits during implementation. For example 'vddusb, vddio_0, vddio_a, vbackup, vddio_r, vddio_1' are present then they will be assigned to these bits as below: 0: vbackup, 1: vddio_0, 2: vddio_1, 3: vddio_a, 4: vddio_r, 5: vddusb'"
+      bit_offset: 0
+      bit_size: 16
+    - name: VDDA_ACTIVE
+      description: Same as VDDIO_ACTIVE for the analog supply VDDA.
+      bit_offset: 30
+      bit_size: 1
+    - name: VDDD_ACTIVE
+      description: This bit indicates presence of the VDDD supply. This bit will always read-back 1. The VDDD supply has robust brown-out protection monitoring and it is not possible to read back this register without a valid supply. (This bit is used in certain test-modes to observe the brown-out detector status.)
+      bit_offset: 31
+      bit_size: 1
+fieldset/VDD_INTR:
+  description: Supply detection interrupt register
+  fields:
+    - name: VDDIO_ACTIVE
+      description: "Supply state change detected. '0': No change to supply detected '1': Change to supply detected"
+      bit_offset: 0
+      bit_size: 16
+    - name: VDDA_ACTIVE
+      description: Same as VDDIO_ACTIVE for the analog supply VDDA.
+      bit_offset: 30
+      bit_size: 1
+    - name: VDDD_ACTIVE
+      description: "The VDDD supply is always present during operation so a supply transition can not occur. This bit will always read back '1'."
+      bit_offset: 31
+      bit_size: 1
+fieldset/VDD_INTR_MASK:
+  description: Supply detection interrupt mask register
+  fields:
+    - name: VDDIO_ACTIVE
+      description: "Masks supply interrupt on VDDIO. '0': VDDIO interrupt forwarding disabled '1': VDDIO interrupt forwarding enabled"
+      bit_offset: 0
+      bit_size: 16
+    - name: VDDA_ACTIVE
+      description: Same as VDDIO_ACTIVE for the analog supply VDDA.
+      bit_offset: 30
+      bit_size: 1
+    - name: VDDD_ACTIVE
+      description: Same as VDDIO_ACTIVE for the digital supply VDDD.
+      bit_offset: 31
+      bit_size: 1
+fieldset/VDD_INTR_MASKED:
+  description: Supply detection interrupt masked register
+  fields:
+    - name: VDDIO_ACTIVE
+      description: "Supply transition detected AND masked '0': Interrupt was not forwarded to CPU '1': Interrupt occurred and was forwarded to CPU"
+      bit_offset: 0
+      bit_size: 16
+    - name: VDDA_ACTIVE
+      description: Same as VDDIO_ACTIVE for the analog supply VDDA.
+      bit_offset: 30
+      bit_size: 1
+    - name: VDDD_ACTIVE
+      description: Same as VDDIO_ACTIVE for the digital supply VDDD.
+      bit_offset: 31
+      bit_size: 1
+fieldset/VDD_INTR_SET:
+  description: Supply detection interrupt set register
+  fields:
+    - name: VDDIO_ACTIVE
+      description: "Sets supply interrupt. '0': Interrupt state not affected '1': Interrupt set"
+      bit_offset: 0
+      bit_size: 16
+    - name: VDDA_ACTIVE
+      description: Same as VDDIO_ACTIVE for the analog supply VDDA.
+      bit_offset: 30
+      bit_size: 1
+    - name: VDDD_ACTIVE
+      description: Same as VDDIO_ACTIVE for the digital supply VDDD.
+      bit_offset: 31
+      bit_size: 1
+enum/DRIVE_MODE0:
+  bit_size: 3
+  variants:
+    - name: HIGHZ
+      description: "Output buffer is off creating a high impedance input D_OUT = '0': High Impedance D_OUT = '1': High Impedance"
+      value: 0
+    - name: RSVD
+      description: N/A
+      value: 1
+    - name: PULLUP
+      description: "Resistive pull up For GPIO & UDB/DSI peripherals: When D_OUT_EN = 1: D_OUT = '0': Strong pull down D_OUT = '1': Weak/resistive pull up When D_OUT_EN = 0: D_OUT = '0': High impedance D_OUT = '1': High impedance For peripherals other than GPIO & UDB/DSI: When D_OUT_EN = 1: D_OUT = '0': Strong pull down D_OUT = '1': Strong pull up When D_OUT_EN = 0: D_OUT = '0': Weak/resistive pull up D_OUT = '1': Weak/resistive pull up"
+      value: 2
+    - name: PULLDOWN
+      description: "Resistive pull down For GPIO & UDB/DSI peripherals: When D_OUT_EN = 1: D_OUT = '0': Weak/resistive pull down D_OUT = '1': Strong pull up When D_OUT_EN = 0: D_OUT = '0': High impedance D_OUT = '1': High impedance For peripherals other than GPIO & UDB/DSI: When D_OUT_EN = 1: D_OUT = '0': Strong pull down D_OUT = '1': Strong pull up When D_OUT_EN = 0: D_OUT = '0': Weak/resistive pull down D_OUT = '1': Weak/resistive pull down"
+      value: 3
+    - name: OD_DRIVESLOW
+      description: "Open drain, drives low For GPIO & UDB/DSI peripherals: When D_OUT_EN = 1: D_OUT = '0': Strong pull down D_OUT = '1': High Impedance When D_OUT_EN = 0: D_OUT = '0': High impedance D_OUT = '1': High impedance For peripherals other than GPIO & UDB/DSI: When D_OUT_EN = 1: D_OUT = '0': Strong pull down D_OUT = '1': Strong pull up When D_OUT_EN = 0: D_OUT = '0': High Impedance D_OUT = '1': High Impedance"
+      value: 4
+    - name: OD_DRIVESHIGH
+      description: "Open drain, drives high For GPIO & UDB/DSI peripherals: When D_OUT_EN = 1: D_OUT = '0': High Impedance D_OUT = '1': Strong pull up When D_OUT_EN = 0: D_OUT = '0': High impedance D_OUT = '1': High impedance For peripherals other than GPIO & UDB/DSI: When D_OUT_EN = 1: D_OUT = '0': Strong pull down D_OUT = '1': Strong pull up When D_OUT_EN = 0: D_OUT = '0': High Impedance D_OUT = '1': High Impedance"
+      value: 5
+    - name: STRONG
+      description: "Strong D_OUTput buffer For GPIO & UDB/DSI peripherals: When D_OUT_EN = 1: D_OUT = '0': Strong pull down D_OUT = '1': Strong pull up When D_OUT_EN = 0: D_OUT = '0': High impedance D_OUT = '1': High impedance For peripherals other than GPIO & UDB/DSI: When D_OUT_EN = 1: D_OUT = '0': Strong pull down D_OUT = '1': Strong pull up When D_OUT_EN = 0: D_OUT = '0': High Impedance D_OUT = '1': High Impedance"
+      value: 6
+    - name: PULLUP_DOWN
+      description: "Pull up or pull down For GPIO & UDB/DSI peripherals: When D_OUT_EN = '0': GPIO_DSI_OUT = '0': Weak/resistive pull down GPIO_DSI_OUT = '1': Weak/resistive pull up where 'GPIO_DSI_OUT' is a function of PORT_SEL, OUT & DSI_DATA_OUT. For peripherals other than GPIO & UDB/DSI: When D_OUT_EN = 1: D_OUT = '0': Strong pull down D_OUT = '1': Strong pull up When D_OUT_EN = 0: D_OUT = '0': Weak/resistive pull down D_OUT = '1': Weak/resistive pull up"
+      value: 7
+enum/DRIVE_SEL0:
+  bit_size: 2
+  variants:
+    - name: DRIVE_SEL_ZERO
+      description: "Traveo II: GPIO_STD/GPIO_ENH: Full drive strengh: GPIO drives current at its max rated spec. Traveo II:_GPIO_SMC: GPIO_SMC default mode. Traveo II:_HSIO_STD: HSIO default mode. PSoC 6: GPIO cells and HSIO_STD cells: Full drive strength: GPIO drives current at its max rated spec."
+      value: 0
+    - name: DRIVE_SEL_ONE
+      description: "Traveo II: GPIO_STD/GPIO_ENH: Full drive strengh: GPIO drives current at its max rated spec. Traveo II:_GPIO_SMC: GPIO full drive strength. Traveo II:_HSIO_STD: GPIO full drive strength. PSoC 6: GPIO cells and HSIO_STD cells: 1/2 drive strength: GPIO drives current at 1/2 of its max rated spec"
+      value: 1
+    - name: DRIVE_SEL_TWO
+      description: "Traveo II: GPIO_STD/GPIO_ENH: 1/2 drive strength: GPIO drives current at 1/2 of its max rated spec. Traveo II:_GPIO_SMC: GPIO 1/2 drive strength. Traveo II:_HSIO_STD: GPIO 1/2 drive strength. PSoC 6: GPIO cells and HSIO_STD cells: 1/4 drive strength. GPIO drives current at 1/4 of its max rated spec."
+      value: 2
+    - name: DRIVE_SEL_THREE
+      description: "Traveo II: GPIO_STD/GPIO_ENH: 1/4 drive strength: GPIO drives current at 1/4 of its max rated spec. Traveo II:_GPIO_SMC: GPIO 1/4 drive strength. Traveo II:_HSIO_STD: GPIO 1/4 drive strength. PSoC 6: GPIO cells and HSIO_STD cells: 1/8 drive strength. GPIO drives current at 1/8 of its max rated spec."
+      value: 3
+enum/EDGE0_SEL:
+  bit_size: 2
+  variants:
+    - name: DISABLE
+      description: Disabled
+      value: 0
+    - name: RISING
+      description: Rising edge
+      value: 1
+    - name: FALLING
+      description: Falling edge
+      value: 2
+    - name: BOTH
+      description: Both rising and falling edges
+      value: 3
+enum/FLT_EDGE_SEL:
+  bit_size: 2
+  variants:
+    - name: DISABLE
+      description: Disabled
+      value: 0
+    - name: RISING
+      description: Rising edge
+      value: 1
+    - name: FALLING
+      description: Falling edge
+      value: 2
+    - name: BOTH
+      description: Both rising and falling edges
+      value: 3
+enum/VTRIP_SEL0_0:
+  bit_size: 1
+  variants:
+    - name: CMOS
+      description: "PSoC 6:: Input buffer compatible with CMOS and I2C interfaces Traveo II: Full encoding is shown in CFG_IN_AUTOLVL.VTRIP_SEL0_1"
+      value: 0
+    - name: TTL
+      description: "PSoC 6:: Input buffer compatible with TTL and MediaLB interfaces Traveo II: full encoding is shown in CFG_IN_AUTOLVL.VTRIP_SEL0_1"
+      value: 1
+enum/VTRIP_SEL0_1:
+  bit_size: 1
+  variants:
+    - name: CMOS_OR_TTL
+      description: Input buffer compatible with CMOS/TTL interfaces as described in CFG_IN.VTRIP_SEL0_0.
+      value: 0
+    - name: AUTO
+      description: Input buffer compatible with AUTO (elevated Vil) interfaces when used along with CFG_IN.VTRIP_SEL0_0.
+      value: 1

@@ -1,0 +1,449 @@
+---
+block/CH:
+  description: DMA controller channel
+  items:
+    - name: CTL
+      description: Channel control
+      byte_offset: 0
+      fieldset: CH_CTL
+    - name: IDX
+      description: Channel current indices
+      byte_offset: 16
+      access: Read
+      fieldset: IDX
+    - name: SRC
+      description: Channel current source address
+      byte_offset: 20
+      access: Read
+      fieldset: SRC
+    - name: DST
+      description: Channel current destination address
+      byte_offset: 24
+      access: Read
+      fieldset: DST
+    - name: CURR
+      description: Channel current descriptor pointer
+      byte_offset: 32
+      fieldset: CURR
+    - name: TR_CMD
+      description: Channle software trigger
+      byte_offset: 40
+      fieldset: TR_CMD
+    - name: DESCR_STATUS
+      description: Channel descriptor status
+      byte_offset: 64
+      access: Read
+      fieldset: DESCR_STATUS
+    - name: DESCR_CTL
+      description: Channel descriptor control
+      byte_offset: 96
+      access: Read
+      fieldset: DESCR_CTL
+    - name: DESCR_SRC
+      description: Channel descriptor source
+      byte_offset: 100
+      access: Read
+      fieldset: DESCR_SRC
+    - name: DESCR_DST
+      description: Channel descriptor destination
+      byte_offset: 104
+      access: Read
+      fieldset: DESCR_DST
+    - name: DESCR_X_SIZE
+      description: Channel descriptor X size
+      byte_offset: 108
+      access: Read
+      fieldset: DESCR_X_SIZE
+    - name: DESCR_X_INCR
+      description: Channel descriptor X increment
+      byte_offset: 112
+      access: Read
+      fieldset: DESCR_X_INCR
+    - name: DESCR_Y_SIZE
+      description: Channel descriptor Y size
+      byte_offset: 116
+      access: Read
+      fieldset: DESCR_Y_SIZE
+    - name: DESCR_Y_INCR
+      description: Channel descriptor Y increment
+      byte_offset: 120
+      access: Read
+      fieldset: DESCR_Y_INCR
+    - name: DESCR_NEXT
+      description: Channel descriptor next pointer
+      byte_offset: 124
+      access: Read
+      fieldset: DESCR_NEXT
+    - name: INTR
+      description: Interrupt
+      byte_offset: 128
+      fieldset: INTR
+    - name: INTR_SET
+      description: Interrupt set
+      byte_offset: 132
+      fieldset: INTR_SET
+    - name: INTR_MASK
+      description: Interrupt mask
+      byte_offset: 136
+      fieldset: INTR_MASK
+    - name: INTR_MASKED
+      description: Interrupt masked
+      byte_offset: 140
+      access: Read
+      fieldset: INTR_MASKED
+block/DMAC:
+  description: DMAC
+  items:
+    - name: CTL
+      description: Control
+      byte_offset: 0
+      fieldset: DMAC_CTL
+    - name: ACTIVE
+      description: Active channels
+      byte_offset: 8
+      access: Read
+      fieldset: ACTIVE
+    - name: CH
+      description: DMA controller channel
+      array:
+        len: 4
+        stride: 256
+      byte_offset: 4096
+      block: CH
+fieldset/ACTIVE:
+  description: Active channels
+  fields:
+    - name: ACTIVE
+      description: Specifies active channels; i.e. enabled channels whose trigger got activated.
+      bit_offset: 0
+      bit_size: 8
+fieldset/CH_CTL:
+  description: Channel control
+  fields:
+    - name: P
+      description: "User/privileged access control: '0': user mode. '1': privileged mode. This field is set with the user/privileged access control of the transaction that writes this register; i.e. the access control is inherited from the write transaction and not specified by the transaction write data. All transactions for this channel use the P field for the user/privileged access control ('hprot[1]')."
+      bit_offset: 0
+      bit_size: 1
+    - name: NS
+      description: "Secure/on-secure access control: '0': secure. '1': non-secure. This field is set with the secure/non-secure access control of the transaction that writes this register; i.e. the access control is inherited from the write transaction and not specified by the transaction write data. All transactions for this channel use the NS field for the secure/non-secure access control ('hprot[4]')."
+      bit_offset: 1
+      bit_size: 1
+    - name: B
+      description: "Non-bufferable/bufferable access control: '0': non-bufferable. '1': bufferable. This field is used to indicate to an AMBA bridge that a write transaction can complete without waiting for the destination to accept the write transaction data. All transactions for this channel uses the B field for the non-bufferable/bufferable access control ('hprot[2]')."
+      bit_offset: 2
+      bit_size: 1
+    - name: PC
+      description: Protection context. This field is set with the protection context of the transaction that writes this register; i.e. the context is inherited from the write transaction and not specified by the transaction write data. All transactions for this channel uses the PC field for the protection context.
+      bit_offset: 4
+      bit_size: 4
+    - name: PRIO
+      description: "Channel priority: '0': highest priority. '1' '2' '3': lowest priority. Channels with the same priority constitute a priority group and within this priority group, the following 'roundrobin' arbitration is applied. A 'round' consists of a contiguous sequence of channel activations, within this priority group, without any repetition. Within a round, higher priority is given to the lower channel indices. The notion of a round guarantees that within a group, higher channel indices do not yield to lower indices indefinitely."
+      bit_offset: 8
+      bit_size: 2
+    - name: ENABLED
+      description: "Channel enable: '0': Disabled. The channel's trigger is ignored and the channel cannot be made pending and therefore cannot be made active. If a pending channel is disabled, the channel is made non pending. If the activate channel is disabled, the channel is de-activated (bus transactions are completed). '1': Enabled. SW sets this field to '1' to enable a specific channel. HW sets this field to '0' when an error interrupt cause is activated."
+      bit_offset: 31
+      bit_size: 1
+fieldset/CURR:
+  description: Channel current descriptor pointer
+  fields:
+    - name: PTR
+      description: "Address of current descriptor. When this field is '0', there is no valid descriptor. Note: HW updates the current descriptor pointer CH_CURR_PTR with DESCR_NEXT_PTR after execution of the current descriptor."
+      bit_offset: 2
+      bit_size: 30
+fieldset/DESCR_CTL:
+  description: Channel descriptor control
+  fields:
+    - name: WAIT_FOR_DEACT
+      description: N/A
+      bit_offset: 0
+      bit_size: 2
+    - name: INTR_TYPE
+      description: N/A
+      bit_offset: 2
+      bit_size: 2
+    - name: TR_OUT_TYPE
+      description: N/A
+      bit_offset: 4
+      bit_size: 2
+    - name: TR_IN_TYPE
+      description: N/A
+      bit_offset: 6
+      bit_size: 2
+    - name: DATA_PREFETCH
+      description: N/A
+      bit_offset: 8
+      bit_size: 1
+    - name: DATA_SIZE
+      description: N/A
+      bit_offset: 16
+      bit_size: 2
+    - name: CH_DISABLE
+      description: N/A
+      bit_offset: 24
+      bit_size: 1
+    - name: SRC_TRANSFER_SIZE
+      description: N/A
+      bit_offset: 26
+      bit_size: 1
+    - name: DST_TRANSFER_SIZE
+      description: N/A
+      bit_offset: 27
+      bit_size: 1
+    - name: DESCR_TYPE
+      description: N/A
+      bit_offset: 28
+      bit_size: 3
+fieldset/DESCR_DST:
+  description: Channel descriptor destination
+  fields:
+    - name: ADDR
+      description: N/A
+      bit_offset: 0
+      bit_size: 32
+fieldset/DESCR_NEXT:
+  description: Channel descriptor next pointer
+  fields:
+    - name: PTR
+      description: N/A
+      bit_offset: 2
+      bit_size: 30
+fieldset/DESCR_SRC:
+  description: Channel descriptor source
+  fields:
+    - name: ADDR
+      description: N/A
+      bit_offset: 0
+      bit_size: 32
+fieldset/DESCR_STATUS:
+  description: Channel descriptor status
+  fields:
+    - name: VALID
+      description: "Indicates whether the descriptor information present in DESCR_CTL, DESCR_SRC, DESCR_DST, DESCR_X_SIZE, DESCR_X_INCR, DESCR_Y_SIZE, DESCR_Y_INCR, DESCR_NEXT status registers is valid or not."
+      bit_offset: 31
+      bit_size: 1
+fieldset/DESCR_X_INCR:
+  description: Channel descriptor X increment
+  fields:
+    - name: SRC_X
+      description: N/A
+      bit_offset: 0
+      bit_size: 16
+    - name: DST_X
+      description: N/A
+      bit_offset: 16
+      bit_size: 16
+fieldset/DESCR_X_SIZE:
+  description: Channel descriptor X size
+  fields:
+    - name: X_COUNT
+      description: N/A
+      bit_offset: 0
+      bit_size: 16
+fieldset/DESCR_Y_INCR:
+  description: Channel descriptor Y increment
+  fields:
+    - name: SRC_Y
+      description: N/A
+      bit_offset: 0
+      bit_size: 16
+    - name: DST_Y
+      description: N/A
+      bit_offset: 16
+      bit_size: 16
+fieldset/DESCR_Y_SIZE:
+  description: Channel descriptor Y size
+  fields:
+    - name: Y_COUNT
+      description: N/A
+      bit_offset: 0
+      bit_size: 16
+fieldset/DMAC_CTL:
+  description: Control
+  fields:
+    - name: ENABLED
+      description: "IP enable: '0': Disabled. All non-retention registers (command and status registers) are reset to their default value when the IP is disabled. All retention registers retain their value when the IP is disabled. '1': Enabled."
+      bit_offset: 31
+      bit_size: 1
+      enum: ENABLED
+fieldset/DST:
+  description: Channel current destination address
+  fields:
+    - name: ADDR
+      description: Current address of destination location.
+      bit_offset: 0
+      bit_size: 32
+fieldset/IDX:
+  description: Channel current indices
+  fields:
+    - name: X
+      description: "Specifies the X loop index. In the range of [0, X_COUNT], with X_COUNT taken from the current descriptor. Note: HW sets this field to '0' when it loads a descriptor."
+      bit_offset: 0
+      bit_size: 16
+    - name: Y
+      description: "Specifies the Y loop index, with Y_COUNT taken from the current descriptor. Note: HW sets this field to '0' when it loads a descriptor.."
+      bit_offset: 16
+      bit_size: 16
+fieldset/INTR:
+  description: Interrupt
+  fields:
+    - name: COMPLETION
+      description: "Activated (set to '1') on completion of data transfer(s) as specified by the descriptor's CH_DESCR_CTL.INTR_TYPE."
+      bit_offset: 0
+      bit_size: 1
+    - name: SRC_BUS_ERROR
+      description: "Activated (set to '1') on a bus error for a load from the source."
+      bit_offset: 1
+      bit_size: 1
+    - name: DST_BUS_ERROR
+      description: "Activated (set to '1') on a bus error for a store to the destination."
+      bit_offset: 2
+      bit_size: 1
+    - name: SRC_MISAL
+      description: "Activated (set to '1') on a misalignment of the source address."
+      bit_offset: 3
+      bit_size: 1
+    - name: DST_MISAL
+      description: "Activated (set to '1') on a misalignment of the destination address."
+      bit_offset: 4
+      bit_size: 1
+    - name: CURR_PTR_NULL
+      description: "Activated (set to '1') when the channel is enabled (CH_CTL.ENABLED is '1') and CH_CURR_PTR is '0'."
+      bit_offset: 5
+      bit_size: 1
+    - name: ACTIVE_CH_DISABLED
+      description: "Activated (set to '1') if the channel is disabled by SW (accidentally/incorrectly) when the data transfer engine is busy."
+      bit_offset: 6
+      bit_size: 1
+    - name: DESCR_BUS_ERROR
+      description: "Activated (set to '1') on a bus error for a load of the descriptor."
+      bit_offset: 7
+      bit_size: 1
+fieldset/INTR_MASK:
+  description: Interrupt mask
+  fields:
+    - name: COMPLETION
+      description: Mask for corresponding field in INTR register.
+      bit_offset: 0
+      bit_size: 1
+    - name: SRC_BUS_ERROR
+      description: N/A
+      bit_offset: 1
+      bit_size: 1
+    - name: DST_BUS_ERROR
+      description: N/A
+      bit_offset: 2
+      bit_size: 1
+    - name: SRC_MISAL
+      description: N/A
+      bit_offset: 3
+      bit_size: 1
+    - name: DST_MISAL
+      description: N/A
+      bit_offset: 4
+      bit_size: 1
+    - name: CURR_PTR_NULL
+      description: N/A
+      bit_offset: 5
+      bit_size: 1
+    - name: ACTIVE_CH_DISABLED
+      description: N/A
+      bit_offset: 6
+      bit_size: 1
+    - name: DESCR_BUS_ERROR
+      description: N/A
+      bit_offset: 7
+      bit_size: 1
+fieldset/INTR_MASKED:
+  description: Interrupt masked
+  fields:
+    - name: COMPLETION
+      description: Logical and of corresponding INTR and INTR_MASK fields.
+      bit_offset: 0
+      bit_size: 1
+    - name: SRC_BUS_ERROR
+      description: N/A
+      bit_offset: 1
+      bit_size: 1
+    - name: DST_BUS_ERROR
+      description: N/A
+      bit_offset: 2
+      bit_size: 1
+    - name: SRC_MISAL
+      description: N/A
+      bit_offset: 3
+      bit_size: 1
+    - name: DST_MISAL
+      description: N/A
+      bit_offset: 4
+      bit_size: 1
+    - name: CURR_PTR_NULL
+      description: N/A
+      bit_offset: 5
+      bit_size: 1
+    - name: ACTIVE_CH_DISABLED
+      description: N/A
+      bit_offset: 6
+      bit_size: 1
+    - name: DESCR_BUS_ERROR
+      description: N/A
+      bit_offset: 7
+      bit_size: 1
+fieldset/INTR_SET:
+  description: Interrupt set
+  fields:
+    - name: COMPLETION
+      description: "Write this field with '1' to set corresponding INTR field to '1' (a write of '0' has no effect)."
+      bit_offset: 0
+      bit_size: 1
+    - name: SRC_BUS_ERROR
+      description: N/A
+      bit_offset: 1
+      bit_size: 1
+    - name: DST_BUS_ERROR
+      description: N/A
+      bit_offset: 2
+      bit_size: 1
+    - name: SRC_MISAL
+      description: N/A
+      bit_offset: 3
+      bit_size: 1
+    - name: DST_MISAL
+      description: N/A
+      bit_offset: 4
+      bit_size: 1
+    - name: CURR_PTR_NULL
+      description: N/A
+      bit_offset: 5
+      bit_size: 1
+    - name: ACTIVE_CH_DISABLED
+      description: N/A
+      bit_offset: 6
+      bit_size: 1
+    - name: DESCR_BUS_ERROR
+      description: N/A
+      bit_offset: 7
+      bit_size: 1
+fieldset/SRC:
+  description: Channel current source address
+  fields:
+    - name: ADDR
+      description: Current address of source location.
+      bit_offset: 0
+      bit_size: 32
+fieldset/TR_CMD:
+  description: Channle software trigger
+  fields:
+    - name: ACTIVATE
+      description: "Software trigger. When written with '1', a trigger is generated which sets 'trigger pending' (only if the channel is enabled). A read always returns a 0."
+      bit_offset: 0
+      bit_size: 1
+enum/ENABLED:
+  bit_size: 1
+  variants:
+    - name: DISABLED
+      description: N/A
+      value: 0
+    - name: ENABLED
+      description: N/A
+      value: 1

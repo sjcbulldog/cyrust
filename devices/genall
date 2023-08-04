@@ -1,0 +1,28 @@
+#!/bin/bash
+
+if [ ! -f chiptool/target/debug/chiptool.exe ];
+then
+    echo -n "Cloning 'chiptool' ..."
+    git clone https://github.com/embassy-rs/chiptool.git >& /dev/null 2>&1
+    echo done
+    pushd chiptool
+    echo -n "Building 'chiptool' ... "
+    cargo build >& /dev/null 2>&1
+    echo done
+    popd
+else
+    echo "Chiptool already exists"
+fi
+
+for SVD in svd/*.svd
+do
+    SVDFILE="$(basename -- $SVD)"
+    TARGET="${SVDFILE%.*}"
+    echo $TARGET
+    rm -rf $TARGET
+    mkdir $TARGET
+    pushd $TARGET
+    echo Processing SVD file $SVDFILE
+    ../genrs $TARGET ../svd/$TARGET.svd ../svd/$TARGET.peris
+    popd
+done

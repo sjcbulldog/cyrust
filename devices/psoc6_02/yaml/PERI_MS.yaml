@@ -1,0 +1,1526 @@
+---
+block/PERI_MS:
+  description: "Peripheral interconnect, master interface"
+  items:
+    - name: PPU_PR
+      description: Programmable protection structure pair
+      array:
+        len: 8
+        stride: 64
+      byte_offset: 0
+      block: PPU_PR
+    - name: PPU_FX
+      description: Fixed protection structure pair
+      array:
+        len: 229
+        stride: 64
+      byte_offset: 2048
+      block: PPU_FX
+block/PPU_FX:
+  description: Fixed protection structure pair
+  items:
+    - name: SL_ADDR
+      description: "Slave region, base address"
+      byte_offset: 0
+      access: Read
+      fieldset: PPU_FX_SL_ADDR
+    - name: SL_SIZE
+      description: "Slave region, size"
+      byte_offset: 4
+      access: Read
+      fieldset: PPU_FX_SL_SIZE
+    - name: SL_ATT0
+      description: Slave attributes 0
+      byte_offset: 16
+      fieldset: PPU_FX_SL_ATT0
+    - name: SL_ATT1
+      description: Slave attributes 1
+      byte_offset: 20
+      fieldset: PPU_FX_SL_ATT1
+    - name: SL_ATT2
+      description: Slave attributes 2
+      byte_offset: 24
+      fieldset: PPU_FX_SL_ATT2
+    - name: SL_ATT3
+      description: Slave attributes 3
+      byte_offset: 28
+      fieldset: PPU_FX_SL_ATT3
+    - name: MS_ADDR
+      description: "Master region, base address"
+      byte_offset: 32
+      access: Read
+      fieldset: PPU_FX_MS_ADDR
+    - name: MS_SIZE
+      description: "Master region, size"
+      byte_offset: 36
+      access: Read
+      fieldset: PPU_FX_MS_SIZE
+    - name: MS_ATT0
+      description: Master attributes 0
+      byte_offset: 48
+      fieldset: PPU_FX_MS_ATT0
+    - name: MS_ATT1
+      description: Master attributes 1
+      byte_offset: 52
+      fieldset: PPU_FX_MS_ATT1
+    - name: MS_ATT2
+      description: Master attributes 2
+      byte_offset: 56
+      fieldset: PPU_FX_MS_ATT2
+    - name: MS_ATT3
+      description: Master attributes 3
+      byte_offset: 60
+      fieldset: PPU_FX_MS_ATT3
+block/PPU_PR:
+  description: Programmable protection structure pair
+  items:
+    - name: SL_ADDR
+      description: "Slave region, base address"
+      byte_offset: 0
+      fieldset: PPU_PR_SL_ADDR
+    - name: SL_SIZE
+      description: "Slave region, size"
+      byte_offset: 4
+      fieldset: PPU_PR_SL_SIZE
+    - name: SL_ATT0
+      description: Slave attributes 0
+      byte_offset: 16
+      fieldset: PPU_PR_SL_ATT0
+    - name: SL_ATT1
+      description: Slave attributes 1
+      byte_offset: 20
+      fieldset: PPU_PR_SL_ATT1
+    - name: SL_ATT2
+      description: Slave attributes 2
+      byte_offset: 24
+      fieldset: PPU_PR_SL_ATT2
+    - name: SL_ATT3
+      description: Slave attributes 3
+      byte_offset: 28
+      fieldset: PPU_PR_SL_ATT3
+    - name: MS_ADDR
+      description: "Master region, base address"
+      byte_offset: 32
+      access: Read
+      fieldset: PPU_PR_MS_ADDR
+    - name: MS_SIZE
+      description: "Master region, size"
+      byte_offset: 36
+      access: Read
+      fieldset: PPU_PR_MS_SIZE
+    - name: MS_ATT0
+      description: Master attributes 0
+      byte_offset: 48
+      fieldset: PPU_PR_MS_ATT0
+    - name: MS_ATT1
+      description: Master attributes 1
+      byte_offset: 52
+      fieldset: PPU_PR_MS_ATT1
+    - name: MS_ATT2
+      description: Master attributes 2
+      byte_offset: 56
+      fieldset: PPU_PR_MS_ATT2
+    - name: MS_ATT3
+      description: Master attributes 3
+      byte_offset: 60
+      fieldset: PPU_PR_MS_ATT3
+fieldset/PPU_FX_MS_ADDR:
+  description: "Master region, base address"
+  fields:
+    - name: ADDR26
+      description: This field specifies the base address of the master region. The base address of the region is the address of the SL_ADDR register.
+      bit_offset: 6
+      bit_size: 26
+fieldset/PPU_FX_MS_ATT0:
+  description: Master attributes 0
+  fields:
+    - name: PC0_UR
+      description: "Protection context 0, user read enable: '0': Disabled (user, read accesses are NOT allowed). '1': Enabled (user, read accesses are allowed)."
+      bit_offset: 0
+      bit_size: 1
+    - name: PC0_UW
+      description: "Protection context 0, user write enable: '0': Disabled (user, write accesses are NOT allowed). '1': Enabled (user, write accesses are allowed)."
+      bit_offset: 1
+      bit_size: 1
+    - name: PC0_PR
+      description: "Protection context 0, privileged read enable: '0': Disabled (privileged, read accesses are NOT allowed). '1': Enabled (privileged, read accesses are allowed)."
+      bit_offset: 2
+      bit_size: 1
+    - name: PC0_PW
+      description: "Protection context 0, privileged write enable: '0': Disabled (privileged, write accesses are NOT allowed). '1': Enabled (privileged, write accesses are allowed)."
+      bit_offset: 3
+      bit_size: 1
+    - name: PC0_NS
+      description: "Protection context 0, non-secure: '0': Secure (secure accesses allowed, non-secure access NOT allowed). '1': Non-secure (both secure and non-secure accesses allowed)."
+      bit_offset: 4
+      bit_size: 1
+    - name: PC1_UR
+      description: "Protection context 1, user read enable."
+      bit_offset: 8
+      bit_size: 1
+    - name: PC1_UW
+      description: "Protection context 1, user write enable."
+      bit_offset: 9
+      bit_size: 1
+    - name: PC1_PR
+      description: "Protection context 1, privileged read enable."
+      bit_offset: 10
+      bit_size: 1
+    - name: PC1_PW
+      description: "Protection context 1, privileged write enable."
+      bit_offset: 11
+      bit_size: 1
+    - name: PC1_NS
+      description: "Protection context 1, non-secure."
+      bit_offset: 12
+      bit_size: 1
+    - name: PC2_UR
+      description: "Protection context 2, user read enable."
+      bit_offset: 16
+      bit_size: 1
+    - name: PC2_UW
+      description: "Protection context 2, user write enable."
+      bit_offset: 17
+      bit_size: 1
+    - name: PC2_PR
+      description: "Protection context 2, privileged read enable."
+      bit_offset: 18
+      bit_size: 1
+    - name: PC2_PW
+      description: "Protection context 2, privileged write enable."
+      bit_offset: 19
+      bit_size: 1
+    - name: PC2_NS
+      description: "Protection context 2, non-secure."
+      bit_offset: 20
+      bit_size: 1
+    - name: PC3_UR
+      description: "Protection context 3, user read enable."
+      bit_offset: 24
+      bit_size: 1
+    - name: PC3_UW
+      description: "Protection context 3, user write enable."
+      bit_offset: 25
+      bit_size: 1
+    - name: PC3_PR
+      description: "Protection context 3, privileged read enable."
+      bit_offset: 26
+      bit_size: 1
+    - name: PC3_PW
+      description: "Protection context 3, privileged write enable."
+      bit_offset: 27
+      bit_size: 1
+    - name: PC3_NS
+      description: "Protection context 3, non-secure."
+      bit_offset: 28
+      bit_size: 1
+fieldset/PPU_FX_MS_ATT1:
+  description: Master attributes 1
+  fields:
+    - name: PC4_UR
+      description: "Protection context 4, user read enable."
+      bit_offset: 0
+      bit_size: 1
+    - name: PC4_UW
+      description: "Protection context 4, user write enable."
+      bit_offset: 1
+      bit_size: 1
+    - name: PC4_PR
+      description: "Protection context 4, privileged read enable."
+      bit_offset: 2
+      bit_size: 1
+    - name: PC4_PW
+      description: "Protection context 4, privileged write enable."
+      bit_offset: 3
+      bit_size: 1
+    - name: PC4_NS
+      description: "Protection context 4, non-secure."
+      bit_offset: 4
+      bit_size: 1
+    - name: PC5_UR
+      description: "Protection context 5, user read enable."
+      bit_offset: 8
+      bit_size: 1
+    - name: PC5_UW
+      description: "Protection context 5, user write enable."
+      bit_offset: 9
+      bit_size: 1
+    - name: PC5_PR
+      description: "Protection context 5, privileged read enable."
+      bit_offset: 10
+      bit_size: 1
+    - name: PC5_PW
+      description: "Protection context 5, privileged write enable."
+      bit_offset: 11
+      bit_size: 1
+    - name: PC5_NS
+      description: "Protection context 5, non-secure."
+      bit_offset: 12
+      bit_size: 1
+    - name: PC6_UR
+      description: "Protection context 6, user read enable."
+      bit_offset: 16
+      bit_size: 1
+    - name: PC6_UW
+      description: "Protection context 6, user write enable."
+      bit_offset: 17
+      bit_size: 1
+    - name: PC6_PR
+      description: "Protection context 6, privileged read enable."
+      bit_offset: 18
+      bit_size: 1
+    - name: PC6_PW
+      description: "Protection context 6, privileged write enable."
+      bit_offset: 19
+      bit_size: 1
+    - name: PC6_NS
+      description: "Protection context 6, non-secure."
+      bit_offset: 20
+      bit_size: 1
+    - name: PC7_UR
+      description: "Protection context 7, user read enable."
+      bit_offset: 24
+      bit_size: 1
+    - name: PC7_UW
+      description: "Protection context 7, user write enable."
+      bit_offset: 25
+      bit_size: 1
+    - name: PC7_PR
+      description: "Protection context 7, privileged read enable."
+      bit_offset: 26
+      bit_size: 1
+    - name: PC7_PW
+      description: "Protection context 7, privileged write enable."
+      bit_offset: 27
+      bit_size: 1
+    - name: PC7_NS
+      description: "Protection context 7, non-secure."
+      bit_offset: 28
+      bit_size: 1
+fieldset/PPU_FX_MS_ATT2:
+  description: Master attributes 2
+  fields:
+    - name: PC8_UR
+      description: "Protection context 8, user read enable."
+      bit_offset: 0
+      bit_size: 1
+    - name: PC8_UW
+      description: "Protection context 8, user write enable."
+      bit_offset: 1
+      bit_size: 1
+    - name: PC8_PR
+      description: "Protection context 8, privileged read enable."
+      bit_offset: 2
+      bit_size: 1
+    - name: PC8_PW
+      description: "Protection context 8, privileged write enable."
+      bit_offset: 3
+      bit_size: 1
+    - name: PC8_NS
+      description: "Protection context 8, non-secure."
+      bit_offset: 4
+      bit_size: 1
+    - name: PC9_UR
+      description: "Protection context 9, user read enable."
+      bit_offset: 8
+      bit_size: 1
+    - name: PC9_UW
+      description: "Protection context 9, user write enable."
+      bit_offset: 9
+      bit_size: 1
+    - name: PC9_PR
+      description: "Protection context 9, privileged read enable."
+      bit_offset: 10
+      bit_size: 1
+    - name: PC9_PW
+      description: "Protection context 9, privileged write enable."
+      bit_offset: 11
+      bit_size: 1
+    - name: PC9_NS
+      description: "Protection context 9, non-secure."
+      bit_offset: 12
+      bit_size: 1
+    - name: PC10_UR
+      description: "Protection context 10, user read enable."
+      bit_offset: 16
+      bit_size: 1
+    - name: PC10_UW
+      description: "Protection context 10, user write enable."
+      bit_offset: 17
+      bit_size: 1
+    - name: PC10_PR
+      description: "Protection context 10, privileged read enable."
+      bit_offset: 18
+      bit_size: 1
+    - name: PC10_PW
+      description: "Protection context 10, privileged write enable."
+      bit_offset: 19
+      bit_size: 1
+    - name: PC10_NS
+      description: "Protection context 10, non-secure."
+      bit_offset: 20
+      bit_size: 1
+    - name: PC11_UR
+      description: "Protection context 11, user read enable."
+      bit_offset: 24
+      bit_size: 1
+    - name: PC11_UW
+      description: "Protection context 11, user write enable."
+      bit_offset: 25
+      bit_size: 1
+    - name: PC11_PR
+      description: "Protection context 11, privileged read enable."
+      bit_offset: 26
+      bit_size: 1
+    - name: PC11_PW
+      description: "Protection context 11, privileged write enable."
+      bit_offset: 27
+      bit_size: 1
+    - name: PC11_NS
+      description: "Protection context 11, non-secure."
+      bit_offset: 28
+      bit_size: 1
+fieldset/PPU_FX_MS_ATT3:
+  description: Master attributes 3
+  fields:
+    - name: PC12_UR
+      description: "Protection context 12, user read enable."
+      bit_offset: 0
+      bit_size: 1
+    - name: PC12_UW
+      description: "Protection context 12, user write enable."
+      bit_offset: 1
+      bit_size: 1
+    - name: PC12_PR
+      description: "Protection context 12, privileged read enable."
+      bit_offset: 2
+      bit_size: 1
+    - name: PC12_PW
+      description: "Protection context 12, privileged write enable."
+      bit_offset: 3
+      bit_size: 1
+    - name: PC12_NS
+      description: "Protection context 12, non-secure."
+      bit_offset: 4
+      bit_size: 1
+    - name: PC13_UR
+      description: "Protection context 13, user read enable."
+      bit_offset: 8
+      bit_size: 1
+    - name: PC13_UW
+      description: "Protection context 13, user write enable."
+      bit_offset: 9
+      bit_size: 1
+    - name: PC13_PR
+      description: "Protection context 13, privileged read enable."
+      bit_offset: 10
+      bit_size: 1
+    - name: PC13_PW
+      description: "Protection context 13, privileged write enable."
+      bit_offset: 11
+      bit_size: 1
+    - name: PC13_NS
+      description: "Protection context 13, non-secure."
+      bit_offset: 12
+      bit_size: 1
+    - name: PC14_UR
+      description: "Protection context 14, user read enable."
+      bit_offset: 16
+      bit_size: 1
+    - name: PC14_UW
+      description: "Protection context 14, user write enable."
+      bit_offset: 17
+      bit_size: 1
+    - name: PC14_PR
+      description: "Protection context 14, privileged read enable."
+      bit_offset: 18
+      bit_size: 1
+    - name: PC14_PW
+      description: "Protection context 14, privileged write enable."
+      bit_offset: 19
+      bit_size: 1
+    - name: PC14_NS
+      description: "Protection context 14, non-secure."
+      bit_offset: 20
+      bit_size: 1
+    - name: PC15_UR
+      description: "Protection context 15, user read enable."
+      bit_offset: 24
+      bit_size: 1
+    - name: PC15_UW
+      description: "Protection context 15, user write enable."
+      bit_offset: 25
+      bit_size: 1
+    - name: PC15_PR
+      description: "Protection context 15, privileged read enable."
+      bit_offset: 26
+      bit_size: 1
+    - name: PC15_PW
+      description: "Protection context 15, privileged write enable."
+      bit_offset: 27
+      bit_size: 1
+    - name: PC15_NS
+      description: "Protection context 15, non-secure."
+      bit_offset: 28
+      bit_size: 1
+fieldset/PPU_FX_MS_SIZE:
+  description: "Master region, size"
+  fields:
+    - name: REGION_SIZE
+      description: "This field specifies the size of the master region: '5': 64 B region The master region includes the SL_ADDR, SL_SIZE, SL_ATT0, ..., SL_ATT3, MS_ADDR, MS_SIZE, MS_ATT0, ..., MS_ATT3 registers. Therefore, the access privileges for all these registers is determined by MS_ATT0, ..., MS_ATT3."
+      bit_offset: 24
+      bit_size: 5
+    - name: VALID
+      description: "Master region enable: '1': Enabled."
+      bit_offset: 31
+      bit_size: 1
+fieldset/PPU_FX_SL_ADDR:
+  description: "Slave region, base address"
+  fields:
+    - name: ADDR30
+      description: "This field specifies the base address of the slave region. The region size is defined by SL_SIZE.REGION_SIZE. A region of n Bytes must be n Byte aligned. Therefore, some of the lesser significant address bits of ADDR30 must be '0's. E.g., a 64 KB address region (REGION_SIZE is '15') must be 64 KByte aligned, and ADDR30[13:0] must be '0's."
+      bit_offset: 2
+      bit_size: 30
+fieldset/PPU_FX_SL_ATT0:
+  description: Slave attributes 0
+  fields:
+    - name: PC0_UR
+      description: "Protection context 0, user read enable: '0': Disabled (user, read accesses are NOT allowed). '1': Enabled (user, read accesses are allowed)."
+      bit_offset: 0
+      bit_size: 1
+    - name: PC0_UW
+      description: "Protection context 0, user write enable: '0': Disabled (user, write accesses are NOT allowed). '1': Enabled (user, write accesses are allowed)."
+      bit_offset: 1
+      bit_size: 1
+    - name: PC0_PR
+      description: "Protection context 0, privileged read enable: '0': Disabled (privileged, read accesses are NOT allowed). '1': Enabled (privileged, read accesses are allowed)."
+      bit_offset: 2
+      bit_size: 1
+    - name: PC0_PW
+      description: "Protection context 0, privileged write enable: '0': Disabled (privileged, write accesses are NOT allowed). '1': Enabled (privileged, write accesses are allowed)."
+      bit_offset: 3
+      bit_size: 1
+    - name: PC0_NS
+      description: "Protection context 0, non-secure: '0': Secure (secure accesses allowed, non-secure access NOT allowed). '1': Non-secure (both secure and non-secure accesses allowed)."
+      bit_offset: 4
+      bit_size: 1
+    - name: PC1_UR
+      description: "Protection context 1, user read enable."
+      bit_offset: 8
+      bit_size: 1
+    - name: PC1_UW
+      description: "Protection context 1, user write enable."
+      bit_offset: 9
+      bit_size: 1
+    - name: PC1_PR
+      description: "Protection context 1, privileged read enable."
+      bit_offset: 10
+      bit_size: 1
+    - name: PC1_PW
+      description: "Protection context 1, privileged write enable."
+      bit_offset: 11
+      bit_size: 1
+    - name: PC1_NS
+      description: "Protection context 1, non-secure."
+      bit_offset: 12
+      bit_size: 1
+    - name: PC2_UR
+      description: "Protection context 2, user read enable."
+      bit_offset: 16
+      bit_size: 1
+    - name: PC2_UW
+      description: "Protection context 2, user write enable."
+      bit_offset: 17
+      bit_size: 1
+    - name: PC2_PR
+      description: "Protection context 2, privileged read enable."
+      bit_offset: 18
+      bit_size: 1
+    - name: PC2_PW
+      description: "Protection context 2, privileged write enable."
+      bit_offset: 19
+      bit_size: 1
+    - name: PC2_NS
+      description: "Protection context 2, non-secure."
+      bit_offset: 20
+      bit_size: 1
+    - name: PC3_UR
+      description: "Protection context 3, user read enable."
+      bit_offset: 24
+      bit_size: 1
+    - name: PC3_UW
+      description: "Protection context 3, user write enable."
+      bit_offset: 25
+      bit_size: 1
+    - name: PC3_PR
+      description: "Protection context 3, privileged read enable."
+      bit_offset: 26
+      bit_size: 1
+    - name: PC3_PW
+      description: "Protection context 3, privileged write enable."
+      bit_offset: 27
+      bit_size: 1
+    - name: PC3_NS
+      description: "Protection context 3, non-secure."
+      bit_offset: 28
+      bit_size: 1
+fieldset/PPU_FX_SL_ATT1:
+  description: Slave attributes 1
+  fields:
+    - name: PC4_UR
+      description: "Protection context 4, user read enable."
+      bit_offset: 0
+      bit_size: 1
+    - name: PC4_UW
+      description: "Protection context 4, user write enable."
+      bit_offset: 1
+      bit_size: 1
+    - name: PC4_PR
+      description: "Protection context 4, privileged read enable."
+      bit_offset: 2
+      bit_size: 1
+    - name: PC4_PW
+      description: "Protection context 4, privileged write enable."
+      bit_offset: 3
+      bit_size: 1
+    - name: PC4_NS
+      description: "Protection context 4, non-secure."
+      bit_offset: 4
+      bit_size: 1
+    - name: PC5_UR
+      description: "Protection context 5, user read enable."
+      bit_offset: 8
+      bit_size: 1
+    - name: PC5_UW
+      description: "Protection context 5, user write enable."
+      bit_offset: 9
+      bit_size: 1
+    - name: PC5_PR
+      description: "Protection context 5, privileged read enable."
+      bit_offset: 10
+      bit_size: 1
+    - name: PC5_PW
+      description: "Protection context 5, privileged write enable."
+      bit_offset: 11
+      bit_size: 1
+    - name: PC5_NS
+      description: "Protection context 5, non-secure."
+      bit_offset: 12
+      bit_size: 1
+    - name: PC6_UR
+      description: "Protection context 6, user read enable."
+      bit_offset: 16
+      bit_size: 1
+    - name: PC6_UW
+      description: "Protection context 6, user write enable."
+      bit_offset: 17
+      bit_size: 1
+    - name: PC6_PR
+      description: "Protection context 6, privileged read enable."
+      bit_offset: 18
+      bit_size: 1
+    - name: PC6_PW
+      description: "Protection context 6, privileged write enable."
+      bit_offset: 19
+      bit_size: 1
+    - name: PC6_NS
+      description: "Protection context 6, non-secure."
+      bit_offset: 20
+      bit_size: 1
+    - name: PC7_UR
+      description: "Protection context 7, user read enable."
+      bit_offset: 24
+      bit_size: 1
+    - name: PC7_UW
+      description: "Protection context 7, user write enable."
+      bit_offset: 25
+      bit_size: 1
+    - name: PC7_PR
+      description: "Protection context 7, privileged read enable."
+      bit_offset: 26
+      bit_size: 1
+    - name: PC7_PW
+      description: "Protection context 7, privileged write enable."
+      bit_offset: 27
+      bit_size: 1
+    - name: PC7_NS
+      description: "Protection context 7, non-secure."
+      bit_offset: 28
+      bit_size: 1
+fieldset/PPU_FX_SL_ATT2:
+  description: Slave attributes 2
+  fields:
+    - name: PC8_UR
+      description: "Protection context 8, user read enable."
+      bit_offset: 0
+      bit_size: 1
+    - name: PC8_UW
+      description: "Protection context 8, user write enable."
+      bit_offset: 1
+      bit_size: 1
+    - name: PC8_PR
+      description: "Protection context 8, privileged read enable."
+      bit_offset: 2
+      bit_size: 1
+    - name: PC8_PW
+      description: "Protection context 8, privileged write enable."
+      bit_offset: 3
+      bit_size: 1
+    - name: PC8_NS
+      description: "Protection context 8, non-secure."
+      bit_offset: 4
+      bit_size: 1
+    - name: PC9_UR
+      description: "Protection context 9, user read enable."
+      bit_offset: 8
+      bit_size: 1
+    - name: PC9_UW
+      description: "Protection context 9, user write enable."
+      bit_offset: 9
+      bit_size: 1
+    - name: PC9_PR
+      description: "Protection context 9, privileged read enable."
+      bit_offset: 10
+      bit_size: 1
+    - name: PC9_PW
+      description: "Protection context 9, privileged write enable."
+      bit_offset: 11
+      bit_size: 1
+    - name: PC9_NS
+      description: "Protection context 9, non-secure."
+      bit_offset: 12
+      bit_size: 1
+    - name: PC10_UR
+      description: "Protection context 10, user read enable."
+      bit_offset: 16
+      bit_size: 1
+    - name: PC10_UW
+      description: "Protection context 10, user write enable."
+      bit_offset: 17
+      bit_size: 1
+    - name: PC10_PR
+      description: "Protection context 10, privileged read enable."
+      bit_offset: 18
+      bit_size: 1
+    - name: PC10_PW
+      description: "Protection context 10, privileged write enable."
+      bit_offset: 19
+      bit_size: 1
+    - name: PC10_NS
+      description: "Protection context 10, non-secure."
+      bit_offset: 20
+      bit_size: 1
+    - name: PC11_UR
+      description: "Protection context 11, user read enable."
+      bit_offset: 24
+      bit_size: 1
+    - name: PC11_UW
+      description: "Protection context 11, user write enable."
+      bit_offset: 25
+      bit_size: 1
+    - name: PC11_PR
+      description: "Protection context 11, privileged read enable."
+      bit_offset: 26
+      bit_size: 1
+    - name: PC11_PW
+      description: "Protection context 11, privileged write enable."
+      bit_offset: 27
+      bit_size: 1
+    - name: PC11_NS
+      description: "Protection context 11, non-secure."
+      bit_offset: 28
+      bit_size: 1
+fieldset/PPU_FX_SL_ATT3:
+  description: Slave attributes 3
+  fields:
+    - name: PC12_UR
+      description: "Protection context 12, user read enable."
+      bit_offset: 0
+      bit_size: 1
+    - name: PC12_UW
+      description: "Protection context 12, user write enable."
+      bit_offset: 1
+      bit_size: 1
+    - name: PC12_PR
+      description: "Protection context 12, privileged read enable."
+      bit_offset: 2
+      bit_size: 1
+    - name: PC12_PW
+      description: "Protection context 12, privileged write enable."
+      bit_offset: 3
+      bit_size: 1
+    - name: PC12_NS
+      description: "Protection context 12, non-secure."
+      bit_offset: 4
+      bit_size: 1
+    - name: PC13_UR
+      description: "Protection context 13, user read enable."
+      bit_offset: 8
+      bit_size: 1
+    - name: PC13_UW
+      description: "Protection context 13, user write enable."
+      bit_offset: 9
+      bit_size: 1
+    - name: PC13_PR
+      description: "Protection context 13, privileged read enable."
+      bit_offset: 10
+      bit_size: 1
+    - name: PC13_PW
+      description: "Protection context 13, privileged write enable."
+      bit_offset: 11
+      bit_size: 1
+    - name: PC13_NS
+      description: "Protection context 13, non-secure."
+      bit_offset: 12
+      bit_size: 1
+    - name: PC14_UR
+      description: "Protection context 14, user read enable."
+      bit_offset: 16
+      bit_size: 1
+    - name: PC14_UW
+      description: "Protection context 14, user write enable."
+      bit_offset: 17
+      bit_size: 1
+    - name: PC14_PR
+      description: "Protection context 14, privileged read enable."
+      bit_offset: 18
+      bit_size: 1
+    - name: PC14_PW
+      description: "Protection context 14, privileged write enable."
+      bit_offset: 19
+      bit_size: 1
+    - name: PC14_NS
+      description: "Protection context 14, non-secure."
+      bit_offset: 20
+      bit_size: 1
+    - name: PC15_UR
+      description: "Protection context 15, user read enable."
+      bit_offset: 24
+      bit_size: 1
+    - name: PC15_UW
+      description: "Protection context 15, user write enable."
+      bit_offset: 25
+      bit_size: 1
+    - name: PC15_PR
+      description: "Protection context 15, privileged read enable."
+      bit_offset: 26
+      bit_size: 1
+    - name: PC15_PW
+      description: "Protection context 15, privileged write enable."
+      bit_offset: 27
+      bit_size: 1
+    - name: PC15_NS
+      description: "Protection context 15, non-secure."
+      bit_offset: 28
+      bit_size: 1
+fieldset/PPU_FX_SL_SIZE:
+  description: "Slave region, size"
+  fields:
+    - name: REGION_SIZE
+      description: "This field specifies the size of the slave region: '0': Undefined. '1': 4 B region (this is the smallest region size). '2': 8 B region '3': 16 B region '4': 32 B region '5': 64 B region '6': 128 B region '7': 256 B region '8': 512 B region '9': 1 KB region '10': 2 KB region '11': 4 KB region '12': 8 KB region '13': 16 KB region '14': 32 KB region '15': 64 KB region '16': 128 KB region '17': 256 KB region '18': 512 KB region '19': 1 MB region '20': 2 MB region '21': 4 MB region '22': 8 MB region '23': 16 MB region '24': 32 MB region '25': 64 MB region '26': 128 MB region '27': 256 MB region '28': 512 MB region '29': 1 GB region '30': 2 GB region '31': 4 GB region"
+      bit_offset: 24
+      bit_size: 5
+    - name: VALID
+      description: "Slave region enable: '0': Disabled. A disabled region will never result in a match on the transfer address. '1': Enabled."
+      bit_offset: 31
+      bit_size: 1
+fieldset/PPU_PR_MS_ADDR:
+  description: "Master region, base address"
+  fields:
+    - name: ADDR26
+      description: This field specifies the base address of the master region. The base address of the region is the address of the SL_ADDR register.
+      bit_offset: 6
+      bit_size: 26
+fieldset/PPU_PR_MS_ATT0:
+  description: Master attributes 0
+  fields:
+    - name: PC0_UR
+      description: "Protection context 0, user read enable: '0': Disabled (user, read accesses are NOT allowed). '1': Enabled (user, read accesses are allowed)."
+      bit_offset: 0
+      bit_size: 1
+    - name: PC0_UW
+      description: "Protection context 0, user write enable: '0': Disabled (user, write accesses are NOT allowed). '1': Enabled (user, write accesses are allowed)."
+      bit_offset: 1
+      bit_size: 1
+    - name: PC0_PR
+      description: "Protection context 0, privileged read enable: '0': Disabled (privileged, read accesses are NOT allowed). '1': Enabled (privileged, read accesses are allowed)."
+      bit_offset: 2
+      bit_size: 1
+    - name: PC0_PW
+      description: "Protection context 0, privileged write enable: '0': Disabled (privileged, write accesses are NOT allowed). '1': Enabled (privileged, write accesses are allowed)."
+      bit_offset: 3
+      bit_size: 1
+    - name: PC0_NS
+      description: "Protection context 0, non-secure: '0': Secure (secure accesses allowed, non-secure access NOT allowed). '1': Non-secure (both secure and non-secure accesses allowed)."
+      bit_offset: 4
+      bit_size: 1
+    - name: PC1_UR
+      description: "Protection context 1, user read enable."
+      bit_offset: 8
+      bit_size: 1
+    - name: PC1_UW
+      description: "Protection context 1, user write enable."
+      bit_offset: 9
+      bit_size: 1
+    - name: PC1_PR
+      description: "Protection context 1, privileged read enable."
+      bit_offset: 10
+      bit_size: 1
+    - name: PC1_PW
+      description: "Protection context 1, privileged write enable."
+      bit_offset: 11
+      bit_size: 1
+    - name: PC1_NS
+      description: "Protection context 1, non-secure."
+      bit_offset: 12
+      bit_size: 1
+    - name: PC2_UR
+      description: "Protection context 2, user read enable."
+      bit_offset: 16
+      bit_size: 1
+    - name: PC2_UW
+      description: "Protection context 2, user write enable."
+      bit_offset: 17
+      bit_size: 1
+    - name: PC2_PR
+      description: "Protection context 2, privileged read enable."
+      bit_offset: 18
+      bit_size: 1
+    - name: PC2_PW
+      description: "Protection context 2, privileged write enable."
+      bit_offset: 19
+      bit_size: 1
+    - name: PC2_NS
+      description: "Protection context 2, non-secure."
+      bit_offset: 20
+      bit_size: 1
+    - name: PC3_UR
+      description: "Protection context 3, user read enable."
+      bit_offset: 24
+      bit_size: 1
+    - name: PC3_UW
+      description: "Protection context 3, user write enable."
+      bit_offset: 25
+      bit_size: 1
+    - name: PC3_PR
+      description: "Protection context 3, privileged read enable."
+      bit_offset: 26
+      bit_size: 1
+    - name: PC3_PW
+      description: "Protection context 3, privileged write enable."
+      bit_offset: 27
+      bit_size: 1
+    - name: PC3_NS
+      description: "Protection context 3, non-secure."
+      bit_offset: 28
+      bit_size: 1
+fieldset/PPU_PR_MS_ATT1:
+  description: Master attributes 1
+  fields:
+    - name: PC4_UR
+      description: "Protection context 4, user read enable."
+      bit_offset: 0
+      bit_size: 1
+    - name: PC4_UW
+      description: "Protection context 4, user write enable."
+      bit_offset: 1
+      bit_size: 1
+    - name: PC4_PR
+      description: "Protection context 4, privileged read enable."
+      bit_offset: 2
+      bit_size: 1
+    - name: PC4_PW
+      description: "Protection context 4, privileged write enable."
+      bit_offset: 3
+      bit_size: 1
+    - name: PC4_NS
+      description: "Protection context 4, non-secure."
+      bit_offset: 4
+      bit_size: 1
+    - name: PC5_UR
+      description: "Protection context 5, user read enable."
+      bit_offset: 8
+      bit_size: 1
+    - name: PC5_UW
+      description: "Protection context 5, user write enable."
+      bit_offset: 9
+      bit_size: 1
+    - name: PC5_PR
+      description: "Protection context 5, privileged read enable."
+      bit_offset: 10
+      bit_size: 1
+    - name: PC5_PW
+      description: "Protection context 5, privileged write enable."
+      bit_offset: 11
+      bit_size: 1
+    - name: PC5_NS
+      description: "Protection context 5, non-secure."
+      bit_offset: 12
+      bit_size: 1
+    - name: PC6_UR
+      description: "Protection context 6, user read enable."
+      bit_offset: 16
+      bit_size: 1
+    - name: PC6_UW
+      description: "Protection context 6, user write enable."
+      bit_offset: 17
+      bit_size: 1
+    - name: PC6_PR
+      description: "Protection context 6, privileged read enable."
+      bit_offset: 18
+      bit_size: 1
+    - name: PC6_PW
+      description: "Protection context 6, privileged write enable."
+      bit_offset: 19
+      bit_size: 1
+    - name: PC6_NS
+      description: "Protection context 6, non-secure."
+      bit_offset: 20
+      bit_size: 1
+    - name: PC7_UR
+      description: "Protection context 7, user read enable."
+      bit_offset: 24
+      bit_size: 1
+    - name: PC7_UW
+      description: "Protection context 7, user write enable."
+      bit_offset: 25
+      bit_size: 1
+    - name: PC7_PR
+      description: "Protection context 7, privileged read enable."
+      bit_offset: 26
+      bit_size: 1
+    - name: PC7_PW
+      description: "Protection context 7, privileged write enable."
+      bit_offset: 27
+      bit_size: 1
+    - name: PC7_NS
+      description: "Protection context 7, non-secure."
+      bit_offset: 28
+      bit_size: 1
+fieldset/PPU_PR_MS_ATT2:
+  description: Master attributes 2
+  fields:
+    - name: PC8_UR
+      description: "Protection context 8, user read enable."
+      bit_offset: 0
+      bit_size: 1
+    - name: PC8_UW
+      description: "Protection context 8, user write enable."
+      bit_offset: 1
+      bit_size: 1
+    - name: PC8_PR
+      description: "Protection context 8, privileged read enable."
+      bit_offset: 2
+      bit_size: 1
+    - name: PC8_PW
+      description: "Protection context 8, privileged write enable."
+      bit_offset: 3
+      bit_size: 1
+    - name: PC8_NS
+      description: "Protection context 8, non-secure."
+      bit_offset: 4
+      bit_size: 1
+    - name: PC9_UR
+      description: "Protection context 9, user read enable."
+      bit_offset: 8
+      bit_size: 1
+    - name: PC9_UW
+      description: "Protection context 9, user write enable."
+      bit_offset: 9
+      bit_size: 1
+    - name: PC9_PR
+      description: "Protection context 9, privileged read enable."
+      bit_offset: 10
+      bit_size: 1
+    - name: PC9_PW
+      description: "Protection context 9, privileged write enable."
+      bit_offset: 11
+      bit_size: 1
+    - name: PC9_NS
+      description: "Protection context 9, non-secure."
+      bit_offset: 12
+      bit_size: 1
+    - name: PC10_UR
+      description: "Protection context 10, user read enable."
+      bit_offset: 16
+      bit_size: 1
+    - name: PC10_UW
+      description: "Protection context 10, user write enable."
+      bit_offset: 17
+      bit_size: 1
+    - name: PC10_PR
+      description: "Protection context 10, privileged read enable."
+      bit_offset: 18
+      bit_size: 1
+    - name: PC10_PW
+      description: "Protection context 10, privileged write enable."
+      bit_offset: 19
+      bit_size: 1
+    - name: PC10_NS
+      description: "Protection context 10, non-secure."
+      bit_offset: 20
+      bit_size: 1
+    - name: PC11_UR
+      description: "Protection context 11, user read enable."
+      bit_offset: 24
+      bit_size: 1
+    - name: PC11_UW
+      description: "Protection context 11, user write enable."
+      bit_offset: 25
+      bit_size: 1
+    - name: PC11_PR
+      description: "Protection context 11, privileged read enable."
+      bit_offset: 26
+      bit_size: 1
+    - name: PC11_PW
+      description: "Protection context 11, privileged write enable."
+      bit_offset: 27
+      bit_size: 1
+    - name: PC11_NS
+      description: "Protection context 11, non-secure."
+      bit_offset: 28
+      bit_size: 1
+fieldset/PPU_PR_MS_ATT3:
+  description: Master attributes 3
+  fields:
+    - name: PC12_UR
+      description: "Protection context 12, user read enable."
+      bit_offset: 0
+      bit_size: 1
+    - name: PC12_UW
+      description: "Protection context 12, user write enable."
+      bit_offset: 1
+      bit_size: 1
+    - name: PC12_PR
+      description: "Protection context 12, privileged read enable."
+      bit_offset: 2
+      bit_size: 1
+    - name: PC12_PW
+      description: "Protection context 12, privileged write enable."
+      bit_offset: 3
+      bit_size: 1
+    - name: PC12_NS
+      description: "Protection context 12, non-secure."
+      bit_offset: 4
+      bit_size: 1
+    - name: PC13_UR
+      description: "Protection context 13, user read enable."
+      bit_offset: 8
+      bit_size: 1
+    - name: PC13_UW
+      description: "Protection context 13, user write enable."
+      bit_offset: 9
+      bit_size: 1
+    - name: PC13_PR
+      description: "Protection context 13, privileged read enable."
+      bit_offset: 10
+      bit_size: 1
+    - name: PC13_PW
+      description: "Protection context 13, privileged write enable."
+      bit_offset: 11
+      bit_size: 1
+    - name: PC13_NS
+      description: "Protection context 13, non-secure."
+      bit_offset: 12
+      bit_size: 1
+    - name: PC14_UR
+      description: "Protection context 14, user read enable."
+      bit_offset: 16
+      bit_size: 1
+    - name: PC14_UW
+      description: "Protection context 14, user write enable."
+      bit_offset: 17
+      bit_size: 1
+    - name: PC14_PR
+      description: "Protection context 14, privileged read enable."
+      bit_offset: 18
+      bit_size: 1
+    - name: PC14_PW
+      description: "Protection context 14, privileged write enable."
+      bit_offset: 19
+      bit_size: 1
+    - name: PC14_NS
+      description: "Protection context 14, non-secure."
+      bit_offset: 20
+      bit_size: 1
+    - name: PC15_UR
+      description: "Protection context 15, user read enable."
+      bit_offset: 24
+      bit_size: 1
+    - name: PC15_UW
+      description: "Protection context 15, user write enable."
+      bit_offset: 25
+      bit_size: 1
+    - name: PC15_PR
+      description: "Protection context 15, privileged read enable."
+      bit_offset: 26
+      bit_size: 1
+    - name: PC15_PW
+      description: "Protection context 15, privileged write enable."
+      bit_offset: 27
+      bit_size: 1
+    - name: PC15_NS
+      description: "Protection context 15, non-secure."
+      bit_offset: 28
+      bit_size: 1
+fieldset/PPU_PR_MS_SIZE:
+  description: "Master region, size"
+  fields:
+    - name: REGION_SIZE
+      description: "This field specifies the size of the master region: '5': 64 B region The master region includes the SL_ADDR, SL_SIZE, SL_ATT0, ..., SL_ATT3, MS_ADDR, MS_SIZE, MS_ATT0, ..., MS_ATT3 registers. Therefore, the access privileges for all these registers is determined by MS_ATT0, ..., MS_ATT3."
+      bit_offset: 24
+      bit_size: 5
+    - name: VALID
+      description: "Master region enable: '1': Enabled."
+      bit_offset: 31
+      bit_size: 1
+fieldset/PPU_PR_SL_ADDR:
+  description: "Slave region, base address"
+  fields:
+    - name: ADDR30
+      description: "This field specifies the base address of the slave region. The region size is defined by SL_SIZE.REGION_SIZE. A region of n Bytes must be n Byte aligned. Therefore, some of the lesser significant address bits of ADDR30 must be '0's. E.g., a 64 KB address region (REGION_SIZE is '15') must be 64 KByte aligned, and ADDR30[13:0] must be '0's."
+      bit_offset: 2
+      bit_size: 30
+fieldset/PPU_PR_SL_ATT0:
+  description: Slave attributes 0
+  fields:
+    - name: PC0_UR
+      description: "Protection context 0, user read enable: '0': Disabled (user, read accesses are NOT allowed). '1': Enabled (user, read accesses are allowed)."
+      bit_offset: 0
+      bit_size: 1
+    - name: PC0_UW
+      description: "Protection context 0, user write enable: '0': Disabled (user, write accesses are NOT allowed). '1': Enabled (user, write accesses are allowed)."
+      bit_offset: 1
+      bit_size: 1
+    - name: PC0_PR
+      description: "Protection context 0, privileged read enable: '0': Disabled (privileged, read accesses are NOT allowed). '1': Enabled (privileged, read accesses are allowed)."
+      bit_offset: 2
+      bit_size: 1
+    - name: PC0_PW
+      description: "Protection context 0, privileged write enable: '0': Disabled (privileged, write accesses are NOT allowed). '1': Enabled (privileged, write accesses are allowed)."
+      bit_offset: 3
+      bit_size: 1
+    - name: PC0_NS
+      description: "Protection context 0, non-secure: '0': Secure (secure accesses allowed, non-secure access NOT allowed). '1': Non-secure (both secure and non-secure accesses allowed)."
+      bit_offset: 4
+      bit_size: 1
+    - name: PC1_UR
+      description: "Protection context 1, user read enable."
+      bit_offset: 8
+      bit_size: 1
+    - name: PC1_UW
+      description: "Protection context 1, user write enable."
+      bit_offset: 9
+      bit_size: 1
+    - name: PC1_PR
+      description: "Protection context 1, privileged read enable."
+      bit_offset: 10
+      bit_size: 1
+    - name: PC1_PW
+      description: "Protection context 1, privileged write enable."
+      bit_offset: 11
+      bit_size: 1
+    - name: PC1_NS
+      description: "Protection context 1, non-secure."
+      bit_offset: 12
+      bit_size: 1
+    - name: PC2_UR
+      description: "Protection context 2, user read enable."
+      bit_offset: 16
+      bit_size: 1
+    - name: PC2_UW
+      description: "Protection context 2, user write enable."
+      bit_offset: 17
+      bit_size: 1
+    - name: PC2_PR
+      description: "Protection context 2, privileged read enable."
+      bit_offset: 18
+      bit_size: 1
+    - name: PC2_PW
+      description: "Protection context 2, privileged write enable."
+      bit_offset: 19
+      bit_size: 1
+    - name: PC2_NS
+      description: "Protection context 2, non-secure."
+      bit_offset: 20
+      bit_size: 1
+    - name: PC3_UR
+      description: "Protection context 3, user read enable."
+      bit_offset: 24
+      bit_size: 1
+    - name: PC3_UW
+      description: "Protection context 3, user write enable."
+      bit_offset: 25
+      bit_size: 1
+    - name: PC3_PR
+      description: "Protection context 3, privileged read enable."
+      bit_offset: 26
+      bit_size: 1
+    - name: PC3_PW
+      description: "Protection context 3, privileged write enable."
+      bit_offset: 27
+      bit_size: 1
+    - name: PC3_NS
+      description: "Protection context 3, non-secure."
+      bit_offset: 28
+      bit_size: 1
+fieldset/PPU_PR_SL_ATT1:
+  description: Slave attributes 1
+  fields:
+    - name: PC4_UR
+      description: "Protection context 4, user read enable."
+      bit_offset: 0
+      bit_size: 1
+    - name: PC4_UW
+      description: "Protection context 4, user write enable."
+      bit_offset: 1
+      bit_size: 1
+    - name: PC4_PR
+      description: "Protection context 4, privileged read enable."
+      bit_offset: 2
+      bit_size: 1
+    - name: PC4_PW
+      description: "Protection context 4, privileged write enable."
+      bit_offset: 3
+      bit_size: 1
+    - name: PC4_NS
+      description: "Protection context 4, non-secure."
+      bit_offset: 4
+      bit_size: 1
+    - name: PC5_UR
+      description: "Protection context 5, user read enable."
+      bit_offset: 8
+      bit_size: 1
+    - name: PC5_UW
+      description: "Protection context 5, user write enable."
+      bit_offset: 9
+      bit_size: 1
+    - name: PC5_PR
+      description: "Protection context 5, privileged read enable."
+      bit_offset: 10
+      bit_size: 1
+    - name: PC5_PW
+      description: "Protection context 5, privileged write enable."
+      bit_offset: 11
+      bit_size: 1
+    - name: PC5_NS
+      description: "Protection context 5, non-secure."
+      bit_offset: 12
+      bit_size: 1
+    - name: PC6_UR
+      description: "Protection context 6, user read enable."
+      bit_offset: 16
+      bit_size: 1
+    - name: PC6_UW
+      description: "Protection context 6, user write enable."
+      bit_offset: 17
+      bit_size: 1
+    - name: PC6_PR
+      description: "Protection context 6, privileged read enable."
+      bit_offset: 18
+      bit_size: 1
+    - name: PC6_PW
+      description: "Protection context 6, privileged write enable."
+      bit_offset: 19
+      bit_size: 1
+    - name: PC6_NS
+      description: "Protection context 6, non-secure."
+      bit_offset: 20
+      bit_size: 1
+    - name: PC7_UR
+      description: "Protection context 7, user read enable."
+      bit_offset: 24
+      bit_size: 1
+    - name: PC7_UW
+      description: "Protection context 7, user write enable."
+      bit_offset: 25
+      bit_size: 1
+    - name: PC7_PR
+      description: "Protection context 7, privileged read enable."
+      bit_offset: 26
+      bit_size: 1
+    - name: PC7_PW
+      description: "Protection context 7, privileged write enable."
+      bit_offset: 27
+      bit_size: 1
+    - name: PC7_NS
+      description: "Protection context 7, non-secure."
+      bit_offset: 28
+      bit_size: 1
+fieldset/PPU_PR_SL_ATT2:
+  description: Slave attributes 2
+  fields:
+    - name: PC8_UR
+      description: "Protection context 8, user read enable."
+      bit_offset: 0
+      bit_size: 1
+    - name: PC8_UW
+      description: "Protection context 8, user write enable."
+      bit_offset: 1
+      bit_size: 1
+    - name: PC8_PR
+      description: "Protection context 8, privileged read enable."
+      bit_offset: 2
+      bit_size: 1
+    - name: PC8_PW
+      description: "Protection context 8, privileged write enable."
+      bit_offset: 3
+      bit_size: 1
+    - name: PC8_NS
+      description: "Protection context 8, non-secure."
+      bit_offset: 4
+      bit_size: 1
+    - name: PC9_UR
+      description: "Protection context 9, user read enable."
+      bit_offset: 8
+      bit_size: 1
+    - name: PC9_UW
+      description: "Protection context 9, user write enable."
+      bit_offset: 9
+      bit_size: 1
+    - name: PC9_PR
+      description: "Protection context 9, privileged read enable."
+      bit_offset: 10
+      bit_size: 1
+    - name: PC9_PW
+      description: "Protection context 9, privileged write enable."
+      bit_offset: 11
+      bit_size: 1
+    - name: PC9_NS
+      description: "Protection context 9, non-secure."
+      bit_offset: 12
+      bit_size: 1
+    - name: PC10_UR
+      description: "Protection context 10, user read enable."
+      bit_offset: 16
+      bit_size: 1
+    - name: PC10_UW
+      description: "Protection context 10, user write enable."
+      bit_offset: 17
+      bit_size: 1
+    - name: PC10_PR
+      description: "Protection context 10, privileged read enable."
+      bit_offset: 18
+      bit_size: 1
+    - name: PC10_PW
+      description: "Protection context 10, privileged write enable."
+      bit_offset: 19
+      bit_size: 1
+    - name: PC10_NS
+      description: "Protection context 10, non-secure."
+      bit_offset: 20
+      bit_size: 1
+    - name: PC11_UR
+      description: "Protection context 11, user read enable."
+      bit_offset: 24
+      bit_size: 1
+    - name: PC11_UW
+      description: "Protection context 11, user write enable."
+      bit_offset: 25
+      bit_size: 1
+    - name: PC11_PR
+      description: "Protection context 11, privileged read enable."
+      bit_offset: 26
+      bit_size: 1
+    - name: PC11_PW
+      description: "Protection context 11, privileged write enable."
+      bit_offset: 27
+      bit_size: 1
+    - name: PC11_NS
+      description: "Protection context 11, non-secure."
+      bit_offset: 28
+      bit_size: 1
+fieldset/PPU_PR_SL_ATT3:
+  description: Slave attributes 3
+  fields:
+    - name: PC12_UR
+      description: "Protection context 12, user read enable."
+      bit_offset: 0
+      bit_size: 1
+    - name: PC12_UW
+      description: "Protection context 12, user write enable."
+      bit_offset: 1
+      bit_size: 1
+    - name: PC12_PR
+      description: "Protection context 12, privileged read enable."
+      bit_offset: 2
+      bit_size: 1
+    - name: PC12_PW
+      description: "Protection context 12, privileged write enable."
+      bit_offset: 3
+      bit_size: 1
+    - name: PC12_NS
+      description: "Protection context 12, non-secure."
+      bit_offset: 4
+      bit_size: 1
+    - name: PC13_UR
+      description: "Protection context 13, user read enable."
+      bit_offset: 8
+      bit_size: 1
+    - name: PC13_UW
+      description: "Protection context 13, user write enable."
+      bit_offset: 9
+      bit_size: 1
+    - name: PC13_PR
+      description: "Protection context 13, privileged read enable."
+      bit_offset: 10
+      bit_size: 1
+    - name: PC13_PW
+      description: "Protection context 13, privileged write enable."
+      bit_offset: 11
+      bit_size: 1
+    - name: PC13_NS
+      description: "Protection context 13, non-secure."
+      bit_offset: 12
+      bit_size: 1
+    - name: PC14_UR
+      description: "Protection context 14, user read enable."
+      bit_offset: 16
+      bit_size: 1
+    - name: PC14_UW
+      description: "Protection context 14, user write enable."
+      bit_offset: 17
+      bit_size: 1
+    - name: PC14_PR
+      description: "Protection context 14, privileged read enable."
+      bit_offset: 18
+      bit_size: 1
+    - name: PC14_PW
+      description: "Protection context 14, privileged write enable."
+      bit_offset: 19
+      bit_size: 1
+    - name: PC14_NS
+      description: "Protection context 14, non-secure."
+      bit_offset: 20
+      bit_size: 1
+    - name: PC15_UR
+      description: "Protection context 15, user read enable."
+      bit_offset: 24
+      bit_size: 1
+    - name: PC15_UW
+      description: "Protection context 15, user write enable."
+      bit_offset: 25
+      bit_size: 1
+    - name: PC15_PR
+      description: "Protection context 15, privileged read enable."
+      bit_offset: 26
+      bit_size: 1
+    - name: PC15_PW
+      description: "Protection context 15, privileged write enable."
+      bit_offset: 27
+      bit_size: 1
+    - name: PC15_NS
+      description: "Protection context 15, non-secure."
+      bit_offset: 28
+      bit_size: 1
+fieldset/PPU_PR_SL_SIZE:
+  description: "Slave region, size"
+  fields:
+    - name: REGION_SIZE
+      description: "This field specifies the size of the slave region: '0': Undefined. '1': 4 B region (this is the smallest region size). '2': 8 B region '3': 16 B region '4': 32 B region '5': 64 B region '6': 128 B region '7': 256 B region '8': 512 B region '9': 1 KB region '10': 2 KB region '11': 4 KB region '12': 8 KB region '13': 16 KB region '14': 32 KB region '15': 64 KB region '16': 128 KB region '17': 256 KB region '18': 512 KB region '19': 1 MB region '20': 2 MB region '21': 4 MB region '22': 8 MB region '23': 16 MB region '24': 32 MB region '25': 64 MB region '26': 128 MB region '27': 256 MB region '28': 512 MB region '29': 1 GB region '30': 2 GB region '31': 4 GB region"
+      bit_offset: 24
+      bit_size: 5
+    - name: VALID
+      description: "Slave region enable: '0': Disabled. A disabled region will never result in a match on the transfer address. '1': Enabled."
+      bit_offset: 31
+      bit_size: 1

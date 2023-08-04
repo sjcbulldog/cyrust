@@ -1,0 +1,441 @@
+---
+block/BACKUP:
+  description: SRSS Backup Domain
+  items:
+    - name: CTL
+      description: Control
+      byte_offset: 0
+      fieldset: CTL
+    - name: RTC_RW
+      description: RTC Read Write register
+      byte_offset: 8
+      fieldset: RTC_RW
+    - name: CAL_CTL
+      description: Oscillator calibration for absolute frequency
+      byte_offset: 12
+      fieldset: CAL_CTL
+    - name: STATUS
+      description: Status
+      byte_offset: 16
+      access: Read
+      fieldset: STATUS
+    - name: RTC_TIME
+      description: "Calendar Seconds, Minutes, Hours, Day of Week"
+      byte_offset: 20
+      fieldset: RTC_TIME
+    - name: RTC_DATE
+      description: "Calendar Day of Month, Month, Year"
+      byte_offset: 24
+      fieldset: RTC_DATE
+    - name: ALM1_TIME
+      description: "Alarm 1 Seconds, Minute, Hours, Day of Week"
+      byte_offset: 28
+      fieldset: ALM1_TIME
+    - name: ALM1_DATE
+      description: "Alarm 1 Day of Month, Month"
+      byte_offset: 32
+      fieldset: ALM1_DATE
+    - name: ALM2_TIME
+      description: "Alarm 2 Seconds, Minute, Hours, Day of Week"
+      byte_offset: 36
+      fieldset: ALM2_TIME
+    - name: ALM2_DATE
+      description: "Alarm 2 Day of Month, Month"
+      byte_offset: 40
+      fieldset: ALM2_DATE
+    - name: INTR
+      description: Interrupt request register
+      byte_offset: 44
+      fieldset: INTR
+    - name: INTR_SET
+      description: Interrupt set request register
+      byte_offset: 48
+      fieldset: INTR_SET
+    - name: INTR_MASK
+      description: Interrupt mask register
+      byte_offset: 52
+      fieldset: INTR_MASK
+    - name: INTR_MASKED
+      description: Interrupt masked request register
+      byte_offset: 56
+      access: Read
+      fieldset: INTR_MASKED
+    - name: OSCCNT
+      description: 32kHz oscillator counter
+      byte_offset: 60
+      access: Read
+      fieldset: OSCCNT
+    - name: TICKS
+      description: 128Hz tick counter
+      byte_offset: 64
+      access: Read
+      fieldset: TICKS
+    - name: PMIC_CTL
+      description: PMIC control register
+      byte_offset: 68
+      fieldset: PMIC_CTL
+    - name: RESET
+      description: Backup reset register
+      byte_offset: 72
+      fieldset: RESET
+    - name: BREG
+      description: Backup register region
+      array:
+        len: 64
+        stride: 4
+      byte_offset: 4096
+      fieldset: BREG
+    - name: TRIM
+      description: Trim Register
+      byte_offset: 65280
+      fieldset: TRIM
+fieldset/ALM1_DATE:
+  description: "Alarm 1 Day of Month, Month"
+  fields:
+    - name: ALM_DATE
+      description: "Alarm Day of the Month in BCD, 1-31 Leap Year corrected"
+      bit_offset: 0
+      bit_size: 6
+    - name: ALM_DATE_EN
+      description: "Alarm Day of the Month enable: 0=ignore, 1=match"
+      bit_offset: 7
+      bit_size: 1
+    - name: ALM_MON
+      description: "Alarm Month in BCD, 1-12"
+      bit_offset: 8
+      bit_size: 5
+    - name: ALM_MON_EN
+      description: "Alarm Month enable: 0=ignore, 1=match"
+      bit_offset: 15
+      bit_size: 1
+    - name: ALM_EN
+      description: "Master enable for alarm 1. 0: Alarm 1 is disabled. Fields for date and time are ignored. 1: Alarm 1 is enabled. Alarm triggers whenever the new date and time matches all the enabled date and time fields, which can happen more than once depending on configuration. If none of the date and time fields are enabled, then this alarm triggers once every second."
+      bit_offset: 31
+      bit_size: 1
+fieldset/ALM1_TIME:
+  description: "Alarm 1 Seconds, Minute, Hours, Day of Week"
+  fields:
+    - name: ALM_SEC
+      description: "Alarm seconds in BCD, 0-59"
+      bit_offset: 0
+      bit_size: 7
+    - name: ALM_SEC_EN
+      description: "Alarm second enable: 0=ignore, 1=match"
+      bit_offset: 7
+      bit_size: 1
+    - name: ALM_MIN
+      description: "Alarm minutes in BCD, 0-59"
+      bit_offset: 8
+      bit_size: 7
+    - name: ALM_MIN_EN
+      description: "Alarm minutes enable: 0=ignore, 1=match"
+      bit_offset: 15
+      bit_size: 1
+    - name: ALM_HOUR
+      description: "Alarm hours in BCD, value depending on 12/24HR mode 12HR: [5]:0=AM, 1=PM, [4:0]=1-12 24HR: [5:0]=0-23"
+      bit_offset: 16
+      bit_size: 6
+    - name: ALM_HOUR_EN
+      description: "Alarm hour enable: 0=ignore, 1=match"
+      bit_offset: 23
+      bit_size: 1
+    - name: ALM_DAY
+      description: "Alarm Day of the week in BCD, 1-7 It is up to the user to define the meaning of the values, but 1=Monday is recommended"
+      bit_offset: 24
+      bit_size: 3
+    - name: ALM_DAY_EN
+      description: "Alarm Day of the Week enable: 0=ignore, 1=match"
+      bit_offset: 31
+      bit_size: 1
+fieldset/ALM2_DATE:
+  description: "Alarm 2 Day of Month, Month"
+  fields:
+    - name: ALM_DATE
+      description: "Alarm Day of the Month in BCD, 1-31 Leap Year corrected"
+      bit_offset: 0
+      bit_size: 6
+    - name: ALM_DATE_EN
+      description: "Alarm Day of the Month enable: 0=ignore, 1=match"
+      bit_offset: 7
+      bit_size: 1
+    - name: ALM_MON
+      description: "Alarm Month in BCD, 1-12"
+      bit_offset: 8
+      bit_size: 5
+    - name: ALM_MON_EN
+      description: "Alarm Month enable: 0=ignore, 1=match"
+      bit_offset: 15
+      bit_size: 1
+    - name: ALM_EN
+      description: "Master enable for alarm 2. 0: Alarm 2 is disabled. Fields for date and time are ignored. 1: Alarm 2 is enabled. Alarm triggers whenever the new date and time matches all the enabled date and time fields, which can happen more than once depending on configuration. If none of the date and time fields are enabled, then this alarm triggers once every second."
+      bit_offset: 31
+      bit_size: 1
+fieldset/ALM2_TIME:
+  description: "Alarm 2 Seconds, Minute, Hours, Day of Week"
+  fields:
+    - name: ALM_SEC
+      description: "Alarm seconds in BCD, 0-59"
+      bit_offset: 0
+      bit_size: 7
+    - name: ALM_SEC_EN
+      description: "Alarm second enable: 0=ignore, 1=match"
+      bit_offset: 7
+      bit_size: 1
+    - name: ALM_MIN
+      description: "Alarm minutes in BCD, 0-59"
+      bit_offset: 8
+      bit_size: 7
+    - name: ALM_MIN_EN
+      description: "Alarm minutes enable: 0=ignore, 1=match"
+      bit_offset: 15
+      bit_size: 1
+    - name: ALM_HOUR
+      description: "Alarm hours in BCD, value depending on 12/24HR mode 12HR: [5]:0=AM, 1=PM, [4:0]=1-12 24HR: [5:0]=0-23"
+      bit_offset: 16
+      bit_size: 6
+    - name: ALM_HOUR_EN
+      description: "Alarm hour enable: 0=ignore, 1=match"
+      bit_offset: 23
+      bit_size: 1
+    - name: ALM_DAY
+      description: "Alarm Day of the week in BCD, 1-7 It is up to the user to define the meaning of the values, but 1=Monday is recommended"
+      bit_offset: 24
+      bit_size: 3
+    - name: ALM_DAY_EN
+      description: "Alarm Day of the Week enable: 0=ignore, 1=match"
+      bit_offset: 31
+      bit_size: 1
+fieldset/BREG:
+  description: Backup register region
+  fields:
+    - name: BREG
+      description: Backup memory that contains application-specific data. Memory is retained on vbackup supply.
+      bit_offset: 0
+      bit_size: 32
+fieldset/CAL_CTL:
+  description: Oscillator calibration for absolute frequency
+  fields:
+    - name: CALIB_VAL
+      description: "Calibration value for absolute frequency (at a fixed temperature). Each step causes 128 ticks to be added or removed each hour. Effectively that means that each step is 1.085ppm (= 128/(60*60*32,768)). Positive values 0x01-0x3c (1..60) add pulses, negative values remove pulses, thus giving a range of +/-65.1 ppm (limited by 60 minutes per hour, not the range of this field) Calibration is performed hourly, starting at 59 minutes and 59 seconds, and applied as 64 ticks every 30 seconds until there have been 2*CALIB_VAL adjustments."
+      bit_offset: 0
+      bit_size: 6
+    - name: CALIB_SIGN
+      description: "Calibration sign: 0= Negative sign: remove pulses (it takes more clock ticks to count one second) 1= Positive sign: add pulses (it takes less clock ticks to count one second)"
+      bit_offset: 6
+      bit_size: 1
+    - name: CAL_OUT
+      description: Output enable for 512Hz signal for calibration and allow CALIB_VAL to be written. Note that calibration does not affect the 512Hz output signal.
+      bit_offset: 31
+      bit_size: 1
+fieldset/CTL:
+  description: Control
+  fields:
+    - name: WCO_EN
+      description: "Watch-crystal oscillator (WCO) enable. If there is a write in progress when this bit is cleared, the WCO will be internally kept on until the write completes. After enabling the WCO software must wait until STATUS.WCO_OK=1 before configuring any component that depends on clk_lf/clk_bak, like for example RTC or WDTs. Follow the procedure in BACKUP_RTC_RW to access this bit."
+      bit_offset: 3
+      bit_size: 1
+    - name: CLK_SEL
+      description: Clock select for BAK clock
+      bit_offset: 8
+      bit_size: 2
+      enum: CLK_SEL
+    - name: PRESCALER
+      description: N/A
+      bit_offset: 12
+      bit_size: 2
+    - name: WCO_BYPASS
+      description: "Configures the WCO for different board-level connections to the WCO pins. For example, this can be used to connect an external watch crystal oscillator instead of a watch crystal. In all cases, the two related GPIO pins (WCO input and output pins) must be configured as analog connections using GPIO registers, and they must be hooked at the board level as described below. Configure this field before enabling the WCO, and do not change this setting when WCO_EN=1. 0: Watch crystal. Connect a 32.768 kHz watch crystal between WCO input and output pins. 1: Clock signal, either a square wave or sine wave. See PRESCALER field for connection information."
+      bit_offset: 16
+      bit_size: 1
+    - name: VDDBAK_CTL
+      description: "Controls the behavior of the switch that generates vddbak from vbackup or vddd. 0: automatically select vddd if its brownout detector says it is valid. If the brownout says its not valid, then use vmax which is the highest of vddd or vbackup. 1,2,3: force vddbak and vmax to select vbackup, regardless of its voltage."
+      bit_offset: 17
+      bit_size: 2
+    - name: VBACKUP_MEAS
+      description: "Connect vbackup supply to the vbackup_meas output for measurement by an ADC attached to amuxbusa_adft_vddd. The vbackup_meas signal is scaled to 10 percent of vbackup, so it is within the supply range of the ADC."
+      bit_offset: 19
+      bit_size: 1
+    - name: EN_CHARGE_KEY
+      description: "When set to 3C, the supercap charger circuit is enabled. Any other code disables the supercap charger. THIS CHARGING CIRCUIT IS FOR A SUPERCAP ONLY AND CANNOT SAFELY CHARGE A BATTERY. DO NOT WRITE THIS KEY WHEN VBACKUP IS CONNECTED TO A BATTERY."
+      bit_offset: 24
+      bit_size: 8
+fieldset/INTR:
+  description: Interrupt request register
+  fields:
+    - name: ALARM1
+      description: Alarm 1 Interrupt
+      bit_offset: 0
+      bit_size: 1
+    - name: ALARM2
+      description: Alarm 2 Interrupt
+      bit_offset: 1
+      bit_size: 1
+    - name: CENTURY
+      description: Century overflow interrupt
+      bit_offset: 2
+      bit_size: 1
+fieldset/INTR_MASK:
+  description: Interrupt mask register
+  fields:
+    - name: ALARM1
+      description: Mask bit for corresponding bit in interrupt request register.
+      bit_offset: 0
+      bit_size: 1
+    - name: ALARM2
+      description: Mask bit for corresponding bit in interrupt request register.
+      bit_offset: 1
+      bit_size: 1
+    - name: CENTURY
+      description: Mask bit for corresponding bit in interrupt request register.
+      bit_offset: 2
+      bit_size: 1
+fieldset/INTR_MASKED:
+  description: Interrupt masked request register
+  fields:
+    - name: ALARM1
+      description: Logical and of corresponding request and mask bits.
+      bit_offset: 0
+      bit_size: 1
+    - name: ALARM2
+      description: Logical and of corresponding request and mask bits.
+      bit_offset: 1
+      bit_size: 1
+    - name: CENTURY
+      description: Logical and of corresponding request and mask bits.
+      bit_offset: 2
+      bit_size: 1
+fieldset/INTR_SET:
+  description: Interrupt set request register
+  fields:
+    - name: ALARM1
+      description: "Write with '1' to set corresponding bit in interrupt request register."
+      bit_offset: 0
+      bit_size: 1
+    - name: ALARM2
+      description: "Write with '1' to set corresponding bit in interrupt request register."
+      bit_offset: 1
+      bit_size: 1
+    - name: CENTURY
+      description: "Write with '1' to set corresponding bit in interrupt request register."
+      bit_offset: 2
+      bit_size: 1
+fieldset/OSCCNT:
+  description: 32kHz oscillator counter
+  fields:
+    - name: CNT32KHZ
+      description: "32kHz oscillator count (msb=128Hz), calibration can cause bit 6 to skip. Reset when RTC_TIME.RTC_SEC fields is written."
+      bit_offset: 0
+      bit_size: 8
+fieldset/PMIC_CTL:
+  description: PMIC control register
+  fields:
+    - name: UNLOCK
+      description: "This byte must be set to 0x3A for PMIC to be disabled. When the UNLOCK code is not present: writes to PMIC_EN field are ignored and the hardware ignores the value in PMIC_EN. Do not change PMIC_EN in the same write cycle as setting/clearing the UNLOCK code; do these in separate write cycles."
+      bit_offset: 8
+      bit_size: 8
+    - name: POLARITY
+      description: N/A
+      bit_offset: 16
+      bit_size: 1
+    - name: PMIC_EN_OUTEN
+      description: "Output enable for the output driver in the PMIC_EN pad. 0: Output pad is tristate for PMIC_EN pin. This can allow this pin to be used for another purpose. Tristate condition is kept only if the UNLOCK key (0x3A) is present 1: Output pad is enabled for PMIC_EN pin."
+      bit_offset: 29
+      bit_size: 1
+    - name: PMIC_ALWAYSEN
+      description: "Override normal PMIC controls to prevent accidentally turning off the PMIC by errant firmware. 0: Normal operation, PMIC_EN and PMIC_OUTEN work as described 1: PMIC_EN and PMIC_OUTEN are ignored and the output pad is forced enabled. Note: This bit is a write-once bit until the next backup reset."
+      bit_offset: 30
+      bit_size: 1
+    - name: PMIC_EN
+      description: "Enable for external PMIC that supplies vddd (if present). This bit will only clear if UNLOCK was written correctly in a previous write operation and PMIC_ALWAYSEN=0. When PMIC_EN=0, the system functions normally until vddd is no longer present (OFF w/Backup mode). Firmware can set this bit, if it does so before vddd is actually removed. This bit is also set by any RTC alarm or PMIC pin wakeup event regardless of UNLOCK setting."
+      bit_offset: 31
+      bit_size: 1
+fieldset/RESET:
+  description: Backup reset register
+  fields:
+    - name: RESET
+      description: "Writing 1 to this register resets the backup logic. Hardware clears it when the reset is complete. After setting this register, firmware should confirm it reads as 0 before attempting to write other backup registers."
+      bit_offset: 31
+      bit_size: 1
+fieldset/RTC_DATE:
+  description: "Calendar Day of Month, Month, Year"
+  fields:
+    - name: RTC_DATE
+      description: "Calendar Day of the Month in BCD, 1-31 Automatic Leap Year Correction"
+      bit_offset: 0
+      bit_size: 6
+    - name: RTC_MON
+      description: "Calendar Month in BCD, 1-12"
+      bit_offset: 8
+      bit_size: 5
+    - name: RTC_YEAR
+      description: "Calendar year in BCD, 0-99"
+      bit_offset: 16
+      bit_size: 8
+fieldset/RTC_RW:
+  description: RTC Read Write register
+  fields:
+    - name: READ
+      description: Read bit When this bit is set the RTC registers will be copied to user registers and frozen so that a coherent RTC value can safely be read. The RTC will keep on running. Do not set the read bit if the RTC is still busy with a previous update (see RTC_BUSY bit) or if the Write bit is set. Do not set the Read bit at the same time that the Write bit is cleared.
+      bit_offset: 0
+      bit_size: 1
+    - name: WRITE
+      description: "Write bit Only when this bit is set can the RTC registers be written to (otherwise writes are ignored). This bit cannot be set if the RTC is still busy with a previous update (see RTC_BUSY bit) or if the Read bit is set or getting set. The user writes to the RTC user registers, when the Write bit is cleared by the user then the user registers content is copied to the actual RTC registers. Only user RTC registers that were written to will get copied, others will not be affected. When the SECONDS field is updated then TICKS will also be reset (WDT is not affected). When the Write bit is cleared by a reset (brown out/DeepSleep) then the RTC update will be ignored/lost. Do not set the Write bit if the RTC if the RTC is still busy with a previous update (see RTC_BUSY). Do not set the Write bit at the same time that the Read bit is cleared."
+      bit_offset: 1
+      bit_size: 1
+fieldset/RTC_TIME:
+  description: "Calendar Seconds, Minutes, Hours, Day of Week"
+  fields:
+    - name: RTC_SEC
+      description: "Calendar seconds in BCD, 0-59"
+      bit_offset: 0
+      bit_size: 7
+    - name: RTC_MIN
+      description: "Calendar minutes in BCD, 0-59"
+      bit_offset: 8
+      bit_size: 7
+    - name: RTC_HOUR
+      description: "Calendar hours in BCD, value depending on 12/24HR mode 0=24HR: [21:16]=0-23 1=12HR: [21]:0=AM, 1=PM, [20:16]=1-12"
+      bit_offset: 16
+      bit_size: 6
+    - name: CTRL_12HR
+      description: "Select 12/24HR mode: 1=12HR, 0=24HR"
+      bit_offset: 22
+      bit_size: 1
+    - name: RTC_DAY
+      description: "Calendar Day of the week in BCD, 1-7 It is up to the user to define the meaning of the values, but 1=Monday is recommended"
+      bit_offset: 24
+      bit_size: 3
+fieldset/STATUS:
+  description: Status
+  fields:
+    - name: RTC_BUSY
+      description: pending RTC write
+      bit_offset: 0
+      bit_size: 1
+    - name: WCO_OK
+      description: Indicates that output has transitioned.
+      bit_offset: 2
+      bit_size: 1
+fieldset/TICKS:
+  description: 128Hz tick counter
+  fields:
+    - name: CNT128HZ
+      description: 128Hz counter (msb=2Hz) When SECONDS is written this field will be reset.
+      bit_offset: 0
+      bit_size: 6
+fieldset/TRIM:
+  description: Trim Register
+  fields:
+    - name: TRIM
+      description: WCO trim
+      bit_offset: 0
+      bit_size: 6
+enum/CLK_SEL:
+  bit_size: 2
+  variants:
+    - name: WCO
+      description: Watch-crystal oscillator input.
+      value: 0
+    - name: ALTBAK
+      description: "This allows to use the LFCLK selection as an alternate backup domain clock. Note that LFCLK is not available in all power modes, and clock glitches can propagate into the backup logic when the clock is stopped. For this reason, if the WCO is intended as the clock source then choose it directly instead of routing through LFCLK."
+      value: 1

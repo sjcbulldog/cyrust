@@ -1,0 +1,1529 @@
+---
+block/FLASHC:
+  description: Flash controller
+  items:
+    - name: FLASH_CTL
+      description: Control
+      byte_offset: 0
+      fieldset: FLASH_CTL
+    - name: FLASH_PWR_CTL
+      description: Flash power control
+      byte_offset: 4
+      fieldset: FLASH_PWR_CTL
+    - name: FLASH_CMD
+      description: Command
+      byte_offset: 8
+      fieldset: FLASH_CMD
+    - name: ECC_CTL
+      description: ECC control
+      byte_offset: 672
+      fieldset: ECC_CTL
+    - name: FM_SRAM_ECC_CTL0
+      description: eCT Flash SRAM ECC control 0
+      byte_offset: 688
+      fieldset: FM_SRAM_ECC_CTL0
+    - name: FM_SRAM_ECC_CTL1
+      description: eCT Flash SRAM ECC control 1
+      byte_offset: 692
+      fieldset: FM_SRAM_ECC_CTL1
+    - name: FM_SRAM_ECC_CTL2
+      description: eCT Flash SRAM ECC control 2
+      byte_offset: 696
+      access: Read
+      fieldset: FM_SRAM_ECC_CTL2
+    - name: FM_SRAM_ECC_CTL3
+      description: eCT Flash SRAM ECC control 3
+      byte_offset: 700
+      fieldset: FM_SRAM_ECC_CTL3
+    - name: CM0_CA_CTL0
+      description: CM0+ cache control
+      byte_offset: 1024
+      fieldset: CM0_CA_CTL0
+    - name: CM0_CA_CTL1
+      description: CM0+ cache control
+      byte_offset: 1028
+      fieldset: CM0_CA_CTL1
+    - name: CM0_CA_CTL2
+      description: CM0+ cache control
+      byte_offset: 1032
+      fieldset: CM0_CA_CTL2
+    - name: CM0_CA_STATUS0
+      description: CM0+ cache status 0
+      byte_offset: 1088
+      access: Read
+      fieldset: CM0_CA_STATUS0
+    - name: CM0_CA_STATUS1
+      description: CM0+ cache status 1
+      byte_offset: 1092
+      access: Read
+      fieldset: CM0_CA_STATUS1
+    - name: CM0_CA_STATUS2
+      description: CM0+ cache status 2
+      byte_offset: 1096
+      access: Read
+      fieldset: CM0_CA_STATUS2
+    - name: CM0_STATUS
+      description: CM0+ interface status
+      byte_offset: 1120
+      fieldset: CM0_STATUS
+    - name: CM4_CA_CTL0
+      description: CM4 cache control
+      byte_offset: 1152
+      fieldset: CM4_CA_CTL0
+    - name: CM4_CA_CTL1
+      description: CM4 cache control
+      byte_offset: 1156
+      fieldset: CM4_CA_CTL1
+    - name: CM4_CA_CTL2
+      description: CM4 cache control
+      byte_offset: 1160
+      fieldset: CM4_CA_CTL2
+    - name: CM4_CA_STATUS0
+      description: CM4 cache status 0
+      byte_offset: 1216
+      access: Read
+      fieldset: CM4_CA_STATUS0
+    - name: CM4_CA_STATUS1
+      description: CM4 cache status 1
+      byte_offset: 1220
+      access: Read
+      fieldset: CM4_CA_STATUS1
+    - name: CM4_CA_STATUS2
+      description: CM4 cache status 2
+      byte_offset: 1224
+      access: Read
+      fieldset: CM4_CA_STATUS2
+    - name: CM4_STATUS
+      description: CM4 interface status
+      byte_offset: 1248
+      fieldset: CM4_STATUS
+    - name: CRYPTO_BUFF_CTL
+      description: Cryptography buffer control
+      byte_offset: 1280
+      fieldset: CRYPTO_BUFF_CTL
+    - name: DW0_BUFF_CTL
+      description: Datawire 0 buffer control
+      byte_offset: 1408
+      fieldset: DW0_BUFF_CTL
+    - name: DW1_BUFF_CTL
+      description: Datawire 1 buffer control
+      byte_offset: 1536
+      fieldset: DW1_BUFF_CTL
+    - name: DMAC_BUFF_CTL
+      description: DMA controller buffer control
+      byte_offset: 1664
+      fieldset: DMAC_BUFF_CTL
+    - name: EXT_MS0_BUFF_CTL
+      description: External master 0 buffer control
+      byte_offset: 1792
+      fieldset: EXT_MS0_BUFF_CTL
+    - name: EXT_MS1_BUFF_CTL
+      description: External master 1 buffer control
+      byte_offset: 1920
+      fieldset: EXT_MS1_BUFF_CTL
+    - name: FM_CTL
+      description: Flash Macro Registers
+      byte_offset: 61440
+      block: FM_CTL
+block/FM_CTL:
+  description: Flash Macro Registers
+  items:
+    - name: FM_CTL
+      description: Flash macro control
+      byte_offset: 0
+      fieldset: FM_CTL
+    - name: STATUS
+      description: Status
+      byte_offset: 4
+      access: Read
+      fieldset: STATUS
+    - name: FM_ADDR
+      description: Flash macro address
+      byte_offset: 8
+      fieldset: FM_ADDR
+    - name: BOOKMARK
+      description: Bookmark register - keeps the current FW HV seq
+      byte_offset: 12
+      fieldset: BOOKMARK
+    - name: GEOMETRY
+      description: Regular flash geometry
+      byte_offset: 16
+      access: Read
+      fieldset: GEOMETRY
+    - name: GEOMETRY_SUPERVISORY
+      description: Supervisory flash geometry
+      byte_offset: 20
+      access: Read
+      fieldset: GEOMETRY_SUPERVISORY
+    - name: ANA_CTL0
+      description: Analog control 0
+      byte_offset: 24
+      fieldset: ANA_CTL0
+    - name: ANA_CTL1
+      description: Analog control 1
+      byte_offset: 28
+      fieldset: ANA_CTL1
+    - name: WAIT_CTL
+      description: Wait State control
+      byte_offset: 40
+      fieldset: WAIT_CTL
+    - name: TIMER_CLK_CTL
+      description: Timer prescaler (clk_t to timer clock frequency divider)
+      byte_offset: 52
+      fieldset: TIMER_CLK_CTL
+    - name: TIMER_CTL
+      description: Timer control
+      byte_offset: 56
+      fieldset: TIMER_CTL
+    - name: ACLK_CTL
+      description: MPCON clock
+      byte_offset: 60
+      access: Write
+      fieldset: ACLK_CTL
+    - name: INTR
+      description: Interrupt
+      byte_offset: 64
+      fieldset: INTR
+    - name: INTR_SET
+      description: Interrupt set
+      byte_offset: 68
+      fieldset: INTR_SET
+    - name: INTR_MASK
+      description: Interrupt mask
+      byte_offset: 72
+      fieldset: INTR_MASK
+    - name: INTR_MASKED
+      description: Interrupt masked
+      byte_offset: 76
+      access: Read
+      fieldset: INTR_MASKED
+    - name: CAL_CTL0
+      description: Cal control BG LO trim bits
+      byte_offset: 80
+      fieldset: CAL_CTL0
+    - name: CAL_CTL1
+      description: Cal control BG HI trim bits
+      byte_offset: 84
+      fieldset: CAL_CTL1
+    - name: CAL_CTL2
+      description: Cal control BG LO&HI trim bits
+      byte_offset: 88
+      fieldset: CAL_CTL2
+    - name: CAL_CTL3
+      description: "Cal control osc trim bits, idac, sdac, itim"
+      byte_offset: 92
+      fieldset: CAL_CTL3
+    - name: CAL_CTL4
+      description: "Cal Control Vlim, SA, fdiv, reg_act"
+      byte_offset: 96
+      fieldset: CAL_CTL4
+    - name: CAL_CTL5
+      description: Cal control
+      byte_offset: 100
+      fieldset: CAL_CTL5
+    - name: CAL_CTL6
+      description: SA trim LP/ULP
+      byte_offset: 104
+      fieldset: CAL_CTL6
+    - name: CAL_CTL7
+      description: Cal control
+      byte_offset: 108
+      fieldset: CAL_CTL7
+    - name: RED_CTL01
+      description: "Redundancy Control normal sectors 0,1"
+      byte_offset: 128
+      fieldset: RED_CTL01
+    - name: RED_CTL23
+      description: "Redundancy Control normal sectors 2,3"
+      byte_offset: 132
+      fieldset: RED_CTL23
+    - name: RED_CTL45
+      description: "Redundancy Control normal sectors 4,5"
+      byte_offset: 136
+      fieldset: RED_CTL45
+    - name: RED_CTL67
+      description: "Redundancy Control normal sectors 6,7"
+      byte_offset: 140
+      fieldset: RED_CTL67
+    - name: RED_CTL_SM01
+      description: "Redundancy Control special sectors 0,1"
+      byte_offset: 144
+      fieldset: RED_CTL_SM01
+    - name: RGRANT_DELAY_PRG
+      description: R-grant delay for program
+      byte_offset: 152
+      fieldset: RGRANT_DELAY_PRG
+    - name: PW_SEQ12
+      description: HV Pulse Delay for seq 1&2 pre
+      byte_offset: 160
+      fieldset: PW_SEQ12
+    - name: PW_SEQ23
+      description: HV Pulse Delay for seq2 post & seq3
+      byte_offset: 164
+      fieldset: PW_SEQ23
+    - name: RGRANT_SCALE_ERS
+      description: R-grant delay scale for erase
+      byte_offset: 168
+      fieldset: RGRANT_SCALE_ERS
+    - name: RGRANT_DELAY_ERS
+      description: R-grant delay for erase
+      byte_offset: 172
+      fieldset: RGRANT_DELAY_ERS
+    - name: FM_PL_WRDATA_ALL
+      description: Flash macro write page latches all
+      byte_offset: 2044
+      fieldset: FM_PL_WRDATA_ALL
+    - name: FM_PL_DATA
+      description: Flash macro Page Latches data
+      array:
+        len: 256
+        stride: 4
+      byte_offset: 2048
+      fieldset: FM_PL_DATA
+    - name: FM_MEM_DATA
+      description: Flash macro memory sense amplifier and column decoder data
+      array:
+        len: 256
+        stride: 4
+      byte_offset: 3072
+      access: Read
+      fieldset: FM_MEM_DATA
+fieldset/ACLK_CTL:
+  description: MPCON clock
+  fields:
+    - name: ACLK_GEN
+      description: A write to this register generates the clock pulse for HV control registers (mpcon outputs)
+      bit_offset: 0
+      bit_size: 1
+fieldset/ANA_CTL0:
+  description: Analog control 0
+  fields:
+    - name: MDAC
+      description: Trimming of the output margin Voltage as a function of Vpos and Vneg.
+      bit_offset: 0
+      bit_size: 8
+    - name: CSLDAC
+      description: Trimming of common source line DAC.
+      bit_offset: 8
+      bit_size: 3
+    - name: FLIP_AMUXBUS_AB
+      description: "Flips amuxbusa and amuxbusb 0: amuxbusa, amuxbusb 1: amuxbusb, amuxbusb"
+      bit_offset: 11
+      bit_size: 1
+    - name: NDAC_MIN
+      description: NDAC staircase min value
+      bit_offset: 12
+      bit_size: 4
+    - name: PDAC_MIN
+      description: PDAC staircase min value
+      bit_offset: 16
+      bit_size: 4
+    - name: SCALE_PRG_SEQ01
+      description: "PROG&PRE_PROG: Scale for R_GRANT_DELAY on seq0-seq1 transition: 00: 0.125uS 01: 1uS 10: 10uS 11: 100uS"
+      bit_offset: 20
+      bit_size: 2
+    - name: SCALE_PRG_SEQ12
+      description: "PROG&PRE_PROG: Scale for R_GRANT_DELAY on seq1-seq2 transition: 00: 0.125uS 01: 1uS 10: 10uS 11: 100uS"
+      bit_offset: 22
+      bit_size: 2
+    - name: SCALE_PRG_SEQ23
+      description: "PROG&PRE_PROG: Scale for R_GRANT_DELAY on seq2-seq3 transition: 00: 0.125uS 01: 1uS 10: 10uS 11: 100uS"
+      bit_offset: 24
+      bit_size: 2
+    - name: SCALE_SEQ30
+      description: "PROG&PRE_PROG& ERASE: Scale for R_GRANT_DELAY on seq3-seq0 transition: 00: 0.125uS 01: 1uS 10: 10uS 11: 100uS"
+      bit_offset: 26
+      bit_size: 2
+    - name: SCALE_PRG_PEON
+      description: "PROG&PRE_PROG: Scale for R_GRANT_DELAY on PE On transition: 00: 0.125uS 01: 1uS 10: 10uS 11: 100uS"
+      bit_offset: 28
+      bit_size: 2
+    - name: SCALE_PRG_PEOFF
+      description: "PROG&PRE_PROG: Scale for R_GRANT_DELAY on PE OFF transition: 00: 0.125uS 01: 1uS 10: 10uS 11: 100uS"
+      bit_offset: 30
+      bit_size: 2
+fieldset/ANA_CTL1:
+  description: Analog control 1
+  fields:
+    - name: NDAC_MAX
+      description: Ndac Max Value.Trimming of negative pump output Voltage.
+      bit_offset: 0
+      bit_size: 4
+    - name: NDAC_STEP
+      description: Ndac step increment
+      bit_offset: 4
+      bit_size: 4
+    - name: PDAC_MAX
+      description: "Pdac Max Value.Trimming of positive pump output Voltage:"
+      bit_offset: 8
+      bit_size: 4
+    - name: PDAC_STEP
+      description: Pdac step increment
+      bit_offset: 12
+      bit_size: 4
+    - name: NPDAC_STEP_TIME
+      description: "Ndac/Pdac step duration: (1uS .. 255uS) * 8 When = 0 N/PDAC_MAX control the pumps"
+      bit_offset: 16
+      bit_size: 8
+    - name: NPDAC_ZERO_TIME
+      description: "Ndac/Pdac LO duration: (1uS .. 255uS) * 8 When 0, N/PDAC don't return to 0"
+      bit_offset: 24
+      bit_size: 8
+fieldset/BOOKMARK:
+  description: Bookmark register - keeps the current FW HV seq
+  fields:
+    - name: BOOKMARK
+      description: Used by FW. Keeps the Current HV cycle sequence
+      bit_offset: 0
+      bit_size: 32
+fieldset/CAL_CTL0:
+  description: Cal control BG LO trim bits
+  fields:
+    - name: VCT_TRIM_LO_HV
+      description: LO Bandgap Voltage Temperature Compensation trim control.
+      bit_offset: 0
+      bit_size: 5
+    - name: CDAC_LO_HV
+      description: LO Temperature compensated trim DAC. To control Vcstat slope for Vpos.
+      bit_offset: 5
+      bit_size: 3
+    - name: VBG_TRIM_LO_HV
+      description: LO Bandgap Voltage trim control.
+      bit_offset: 8
+      bit_size: 5
+    - name: VBG_TC_TRIM_LO_HV
+      description: LO Bandgap Voltage Temperature Compensation trim control
+      bit_offset: 13
+      bit_size: 3
+    - name: ICREF_TC_TRIM_LO_HV
+      description: LO Bandgap Current Temperature Compensation trim control
+      bit_offset: 16
+      bit_size: 3
+    - name: IPREF_TRIMA_LO_HV
+      description: Adds 100-150nA boost on IPREF_LO
+      bit_offset: 19
+      bit_size: 1
+fieldset/CAL_CTL1:
+  description: Cal control BG HI trim bits
+  fields:
+    - name: VCT_TRIM_HI_HV
+      description: HI Bandgap Voltage Temperature Compensation trim control.
+      bit_offset: 0
+      bit_size: 5
+    - name: CDAC_HI_HV
+      description: HI Temperature compensated trim DAC. To control Vcstat slope for Vpos.
+      bit_offset: 5
+      bit_size: 3
+    - name: VBG_TRIM_HI_HV
+      description: HI Bandgap Voltage trim control.
+      bit_offset: 8
+      bit_size: 5
+    - name: VBG_TC_TRIM_HI_HV
+      description: HI Bandgap Voltage Temperature Compensation trim control.
+      bit_offset: 13
+      bit_size: 3
+    - name: ICREF_TC_TRIM_HI_HV
+      description: HI Bandgap Current Temperature Compensation trim control.
+      bit_offset: 16
+      bit_size: 3
+    - name: IPREF_TRIMA_HI_HV
+      description: Adds 100-150nA boost on IPREF_HI
+      bit_offset: 19
+      bit_size: 1
+fieldset/CAL_CTL2:
+  description: Cal control BG LO&HI trim bits
+  fields:
+    - name: ICREF_TRIM_LO_HV
+      description: LO Bandgap Current trim control.
+      bit_offset: 0
+      bit_size: 5
+    - name: ICREF_TRIM_HI_HV
+      description: HI Bandgap Current trim control.
+      bit_offset: 5
+      bit_size: 5
+    - name: IPREF_TRIM_LO_HV
+      description: LO Bandgap IPTAT trim control.
+      bit_offset: 10
+      bit_size: 5
+    - name: IPREF_TRIM_HI_HV
+      description: HI Bandgap IPTAT trim control.
+      bit_offset: 15
+      bit_size: 5
+fieldset/CAL_CTL3:
+  description: "Cal control osc trim bits, idac, sdac, itim"
+  fields:
+    - name: OSC_TRIM_HV
+      description: Flash macro pump clock trim control.
+      bit_offset: 0
+      bit_size: 4
+    - name: OSC_RANGE_TRIM_HV
+      description: "0: Oscillator High Frequency Range 1: Oscillator Low Frequency range"
+      bit_offset: 4
+      bit_size: 1
+    - name: VPROT_ACT_HV
+      description: Forces VPROT in active mode all the time
+      bit_offset: 5
+      bit_size: 1
+    - name: IPREF_TC_HV
+      description: "0: Increases the IPREF Tempco by subtracting ICREF from IPREF - IPREF internal will be 0.5uA 1: Reduces the IPREF Tempco without subtracting ICREF from IPREF - IPREF internal will be 1uA"
+      bit_offset: 6
+      bit_size: 1
+    - name: VREF_SEL_HV
+      description: "Voltage reference: 0: internal bandgap reference 1: external voltage reference"
+      bit_offset: 7
+      bit_size: 1
+    - name: IREF_SEL_HV
+      description: "Current reference: 0: internal current reference 1: external current reference"
+      bit_offset: 8
+      bit_size: 1
+    - name: REG_ACT_HV
+      description: "0: VBST regulator will operate in active/standby mode based on control signal. 1: Forces the VBST regulator in active mode all the time"
+      bit_offset: 9
+      bit_size: 1
+    - name: FDIV_TRIM_HV
+      description: "FDIV_TRIM_HV[1:0]: Assuming oscillator frequency of 8MHz in standby. Following are the clock frequencies seen by doubler 00: F = 1MHz 01: F = 0.5MHz 10: F = 2MHz 11: F = 4MHz"
+      bit_offset: 10
+      bit_size: 2
+    - name: VDDHI_HV
+      description: "0: vdd < 2.3V 1: vdd >= 2.3V '0' setting can used for vdd > 2.3V also, but with a current penalty."
+      bit_offset: 12
+      bit_size: 1
+    - name: TURBO_PULSEW_HV
+      description: "Turbo pulse width trim (Typical) 00: 40 us 01: 20 us 10: 15 us 11: 8 us"
+      bit_offset: 13
+      bit_size: 2
+    - name: BGLO_EN_HV
+      description: "0: Normal (Automatic change over from HI to LO) 1: Force enable LO Bandgap"
+      bit_offset: 15
+      bit_size: 1
+    - name: BGHI_EN_HV
+      description: "0: Normal (Automatic change over from HI to LO) 1: Force enable HI Bandgap When both BGLO_EN_HV and BGHI_EN_HV are HIGH, only BGHI output is used and turbo_hv_n pulse is active"
+      bit_offset: 16
+      bit_size: 1
+    - name: CL_ISO_DIS_HV
+      description: "0: The internal logic controls the CL isolation 1: Forces CL bypass"
+      bit_offset: 17
+      bit_size: 1
+    - name: R_GRANT_EN_HV
+      description: "0: r_grant handshake disabled, r_grant always 1. 1: r_grand handshake enabled"
+      bit_offset: 18
+      bit_size: 1
+    - name: LP_ULP_SW_HV
+      description: "LP<-->ULP switch for trim signals: 0: LP 1: ULP"
+      bit_offset: 19
+      bit_size: 1
+fieldset/CAL_CTL4:
+  description: "Cal Control Vlim, SA, fdiv, reg_act"
+  fields:
+    - name: VLIM_TRIM_ULP_HV
+      description: "VLIM_TRIM[1:0]: 00: V2 = 650mV 01: V2 = 600mV 10: V2 = 750mV 11: V2 = 700mV"
+      bit_offset: 0
+      bit_size: 2
+    - name: IDAC_ULP_HV
+      description: Sets the sense current reference offset value. Refer to trim tables for details.
+      bit_offset: 2
+      bit_size: 4
+    - name: SDAC_ULP_HV
+      description: Sets the sense current reference temp slope. Refer to trim tables for details.
+      bit_offset: 6
+      bit_size: 2
+    - name: ITIM_ULP_HV
+      description: Trimming of timing current
+      bit_offset: 8
+      bit_size: 5
+    - name: FM_READY_DEL_ULP_HV
+      description: "00: Default : delay 1ns 01: Delayed by 1.5us 10: Delayed by 2.0us 11: Delayed by 2.5us"
+      bit_offset: 13
+      bit_size: 2
+    - name: SPARE451_ULP_HV
+      description: N/A
+      bit_offset: 15
+      bit_size: 1
+    - name: READY_RESTART_N_HV
+      description: "Toggle: 1-->0, ready goes low, ready will remain low as long as the bit is low. Toggle the bit back to 1 to activate the ready logic. To be used by API only."
+      bit_offset: 16
+      bit_size: 1
+    - name: VBST_S_DIS_HV
+      description: "0: VBST_S voltage for each sector to allow VBST level to be dropped to VCC during Erase in the selected sector, reducing coupling to GBL. 1: VBST_S voltage for each sector stays at VBST level during Erase in the selected sector."
+      bit_offset: 17
+      bit_size: 1
+    - name: AUTO_HVPULSE_HV
+      description: "0: HV Pulse controlled by FW 1: HV Pulse controlled by Hardware"
+      bit_offset: 18
+      bit_size: 1
+    - name: UGB_EN_HV
+      description: UGB enable in TM control
+      bit_offset: 19
+      bit_size: 1
+fieldset/CAL_CTL5:
+  description: Cal control
+  fields:
+    - name: VLIM_TRIM_LP_HV
+      description: "VLIM_TRIM[1:0]: 00: V2 = 650mV 01: V2 = 600mV 10: V2 = 750mV 11: V2 = 700mV"
+      bit_offset: 0
+      bit_size: 2
+    - name: IDAC_LP_HV
+      description: Sets the sense current reference offset value. Refer to trim tables for details.
+      bit_offset: 2
+      bit_size: 4
+    - name: SDAC_LP_HV
+      description: Sets the sense current reference temp slope. Refer to trim tables for details.
+      bit_offset: 6
+      bit_size: 2
+    - name: ITIM_LP_HV
+      description: Trimming of timing current
+      bit_offset: 8
+      bit_size: 5
+    - name: FM_READY_DEL_LP_HV
+      description: "00: Delayed by 1us 01: Delayed by 1.5us 10: Delayed by 2.0us 11: Delayed by 2.5us"
+      bit_offset: 13
+      bit_size: 2
+    - name: SPARE451_LP_HV
+      description: N/A
+      bit_offset: 15
+      bit_size: 1
+    - name: SPARE52_HV
+      description: N/A
+      bit_offset: 16
+      bit_size: 2
+    - name: AMUX_SEL_HV
+      description: "Amux Select in AMUX_UGB 00: Bypass UGB for both amuxbusa and amuxbusb 01: Bypass UGB for amuxbusb while passing amuxbusa through UGB. 10: Bypass UGB for amuxbusa while passing amuxbusb through UGB. 11: UGB Calibrate mode"
+      bit_offset: 18
+      bit_size: 2
+fieldset/CAL_CTL6:
+  description: SA trim LP/ULP
+  fields:
+    - name: SA_CTL_TRIM_T1_ULP_HV
+      description: clk_trk delay
+      bit_offset: 0
+      bit_size: 1
+    - name: SA_CTL_TRIM_T4_ULP_HV
+      description: "SA_CTL_TRIM_T4_ULP_HV<2>= eqi (eq current trim) SA_CTL_TRIM_T4_ULP_HV<1:0> = eqc (eq cap trim)"
+      bit_offset: 1
+      bit_size: 3
+    - name: SA_CTL_TRIM_T5_ULP_HV
+      description: "SA_CTL_TRIM_T5_ULP_HV<2>= evi (integration current trim) SA_CTL_TRIM_T5_ULP_HV<1:0> = evc (integration cap trim)"
+      bit_offset: 4
+      bit_size: 3
+    - name: SA_CTL_TRIM_T6_ULP_HV
+      description: SA_CTL_TRIM_T6_ULP_HV<1>= eni (enable current trim) SA_CTL_TRIM_T6_ULP_HV<0> = ecn (enable cap trim)
+      bit_offset: 7
+      bit_size: 2
+    - name: SA_CTL_TRIM_T8_ULP_HV
+      description: saen3 pulse width trim (Current trim)
+      bit_offset: 9
+      bit_size: 1
+    - name: SA_CTL_TRIM_T1_LP_HV
+      description: clk_trk delay
+      bit_offset: 10
+      bit_size: 1
+    - name: SA_CTL_TRIM_T4_LP_HV
+      description: "SA_CTL_TRIM_T4_LP_HV<2>= eqi (eq current trim) SA_CTL_TRIM_T4_LP_HV<1:0> = eqc (eq cap trim)"
+      bit_offset: 11
+      bit_size: 3
+    - name: SA_CTL_TRIM_T5_LP_HV
+      description: "SA_CTL_TRIM_T5_LP_HV<2>= evi (integration current trim) SA_CTL_TRIM_T5_LP_HV<1:0> = evc (integration cap trim)"
+      bit_offset: 14
+      bit_size: 3
+    - name: SA_CTL_TRIM_T6_LP_HV
+      description: SA_CTL_TRIM_T6_LP_HV<1>= eni (enable current trim) SA_CTL_TRIM_T6_LP_HV<0> = ecn (enable cap trim)
+      bit_offset: 17
+      bit_size: 2
+    - name: SA_CTL_TRIM_T8_LP_HV
+      description: saen3 pulse width trim (Current trim)
+      bit_offset: 19
+      bit_size: 1
+fieldset/CAL_CTL7:
+  description: Cal control
+  fields:
+    - name: ERSX8_CLK_SEL_HV
+      description: "Clock frequency into the ersx8 shift register block 00: Oscillator clock 01: Oscillator clock / 2 10: Oscillator clock / 4 11: Oscillator clock"
+      bit_offset: 0
+      bit_size: 2
+    - name: FM_ACTIVE_HV
+      description: "0: Normal operation 1: Forces FM SYS in active mode"
+      bit_offset: 2
+      bit_size: 1
+    - name: TURBO_EXT_HV
+      description: "0: Normal operation 1: Uses external turbo pulse"
+      bit_offset: 3
+      bit_size: 1
+    - name: NPDAC_HWCTL_DIS_HV
+      description: "0': ndac, pdac staircase hardware controlled 1: ndac, pdac staircase disabled. Enables FW control."
+      bit_offset: 4
+      bit_size: 1
+    - name: FM_READY_DIS_HV
+      description: "0': fm ready is enabled 1: fm ready is disabled (fm_ready is always '1')"
+      bit_offset: 5
+      bit_size: 1
+    - name: ERSX8_EN_ALL_HV
+      description: "0': Staggered turn on/off of GWL 1: GWL are turned on/off at the same time (old FM legacy)"
+      bit_offset: 6
+      bit_size: 1
+    - name: DISABLE_LOAD_ONCE_HV
+      description: "0: Load common HV params during API HV operations depends on the HV_PARAMS_LOADED bit in RGRANT_DELAY_PRG register. 1: All HV params are loaded during every API HV operation irrespective of HV_PARAMS_LOADED bit in the RGRANT_DELAY_PRG register."
+      bit_offset: 7
+      bit_size: 1
+    - name: SPARE7_HV
+      description: N/A
+      bit_offset: 8
+      bit_size: 2
+    - name: SPARE7_ULP_HV
+      description: N/A
+      bit_offset: 10
+      bit_size: 5
+    - name: SPARE7_LP_HV
+      description: N/A
+      bit_offset: 15
+      bit_size: 5
+fieldset/CM0_CA_CTL0:
+  description: CM0+ cache control
+  fields:
+    - name: RAM_ECC_EN
+      description: "Enable ECC checking for cache accesses: 0: Disabled. 1: Enabled."
+      bit_offset: 0
+      bit_size: 1
+    - name: RAM_ECC_INJ_EN
+      description: "Enable error injection for cache. When '1', the parity (ECC_CTL.PARITY[6:0]) is used when a refill is done from the FLASH macro to the ECC_CTL.WORD_ADDR[23:0] word address."
+      bit_offset: 1
+      bit_size: 1
+    - name: WAY
+      description: Specifies the cache way for which cache information is provided in CM0_CA_STATUS0/1/2.
+      bit_offset: 16
+      bit_size: 2
+    - name: SET_ADDR
+      description: Specifies the cache set for which cache information is provided in CM0_CA_STATUS0/1/2.
+      bit_offset: 24
+      bit_size: 3
+    - name: PREF_EN
+      description: "Prefetch enable: 0: Disabled. 1: Enabled. Prefetching requires the cache to be enabled; i.e. ENABLED is '1'."
+      bit_offset: 30
+      bit_size: 1
+    - name: CA_EN
+      description: "Cache enable: 0: Disabled. The cache tag valid bits are reset to '0's and the cache LRU information is set to '1's (making way 0 the LRU way and way 3 the MRU way). 1: Enabled."
+      bit_offset: 31
+      bit_size: 1
+fieldset/CM0_CA_CTL1:
+  description: CM0+ cache control
+  fields:
+    - name: PWR_MODE
+      description: "Specifies power mode for CM0 cache. The following sequnece should be followed for truning OFF/ON the cache SRAM. Turn OFF sequence: a) Write CM0_CA_CTL0 to disable cache. b) Write CM0_CA_CTL1 to turn OFF cache SRAM. Turn ON sequence: a) Write CM0_CA_CTL1 to turn ON cache SRAM. b) Delay to allow power up of cache SRAM. Delay should be at a minimum of CM0_CA_CTL2.PWRUP_DELAY CLK_SLOW clock cycles. c) Write CM0_CA_CTL0 to enable cache."
+      bit_offset: 0
+      bit_size: 2
+      enum: CM0_CA_CTL1_PWR_MODE
+    - name: VECTKEYSTAT
+      description: "Register key (to prevent accidental writes). - Should be written with a 0x05fa key value for the write to take effect. - Always reads as 0xfa05. Note: Although the SW attribute for this field says ''R', SW need to write the key 0x05fa in this field for this register write to happen. This is a built in protection provided to prevent accidental writes from SW."
+      bit_offset: 16
+      bit_size: 16
+fieldset/CM0_CA_CTL2:
+  description: CM0+ cache control
+  fields:
+    - name: PWRUP_DELAY
+      description: Number clock cycles delay needed after power domain power up
+      bit_offset: 0
+      bit_size: 10
+fieldset/CM0_CA_STATUS0:
+  description: CM0+ cache status 0
+  fields:
+    - name: VALID32
+      description: Sixteen valid bits of the cache line specified by CM0_CA_CTL.WAY and CM0_CA_CTL.SET_ADDR.
+      bit_offset: 0
+      bit_size: 32
+fieldset/CM0_CA_STATUS1:
+  description: CM0+ cache status 1
+  fields:
+    - name: TAG
+      description: Cache line address of the cache line specified by CM0_CA_CTL.WAY and CM0_CA_CTL.SET_ADDR.
+      bit_offset: 0
+      bit_size: 32
+fieldset/CM0_CA_STATUS2:
+  description: CM0+ cache status 2
+  fields:
+    - name: LRU
+      description: "Six bit LRU representation of the cache set specified by CM0_CA_CTL.SET_ADDR. The encoding of the field is as follows ('X_LRU_Y' indicates that way X is Less Recently Used than way Y): Bit 5: 0_LRU_1: way 0 less recently used than way 1. Bit 4: 0_LRU_2. Bit 3: 0_LRU_3. Bit 2: 1_LRU_2. Bit 1: 1_LRU_3. Bit 0: 2_LRU_3."
+      bit_offset: 0
+      bit_size: 6
+fieldset/CM0_STATUS:
+  description: CM0+ interface status
+  fields:
+    - name: MAIN_INTERNAL_ERR
+      description: "Specifies/registers the occurrence of a FLASH macro main interface internal error (typically the result of a read access while a program erase operation is ongoing) as a result of a CM0+ access. SW clears this field to '0'. HW sets this field to '1' on a FLASH macro main interface internal error. Typically, SW reads this field after a code section to detect the occurrence of an error. Note: this field is independent of FLASH_CTL.MAIN_ERR_SILENT."
+      bit_offset: 0
+      bit_size: 1
+    - name: WORK_INTERNAL_ERR
+      description: See CM0_STATUS.MAIN_INTERNAL_ERROR.
+      bit_offset: 1
+      bit_size: 1
+fieldset/CM4_CA_CTL0:
+  description: CM4 cache control
+  fields:
+    - name: RAM_ECC_EN
+      description: See CM0_CA_CTL.
+      bit_offset: 0
+      bit_size: 1
+    - name: RAM_ECC_INJ_EN
+      description: See CM0_CA_CTL.
+      bit_offset: 1
+      bit_size: 1
+    - name: WAY
+      description: See CM0_CA_CTL.
+      bit_offset: 16
+      bit_size: 2
+    - name: SET_ADDR
+      description: See CM0_CA_CTL.
+      bit_offset: 24
+      bit_size: 3
+    - name: PREF_EN
+      description: See CM0_CA_CTL.
+      bit_offset: 30
+      bit_size: 1
+    - name: CA_EN
+      description: See CM0_CA_CTL.
+      bit_offset: 31
+      bit_size: 1
+fieldset/CM4_CA_CTL1:
+  description: CM4 cache control
+  fields:
+    - name: PWR_MODE
+      description: Specifies power mode for CM4 cache. Refer CM0_CA_CTL1 for more details.
+      bit_offset: 0
+      bit_size: 2
+      enum: CM4_CA_CTL1_PWR_MODE
+    - name: VECTKEYSTAT
+      description: "Register key (to prevent accidental writes). - Should be written with a 0x05fa key value for the write to take effect. - Always reads as 0xfa05. Note: Although the SW attribute for this field says ''R', SW need to write the key 0x05fa in this field for this register write to happen. This is a built in protection provided to prevent accidental writes from SW."
+      bit_offset: 16
+      bit_size: 16
+fieldset/CM4_CA_CTL2:
+  description: CM4 cache control
+  fields:
+    - name: PWRUP_DELAY
+      description: Number clock cycles delay needed after power domain power up
+      bit_offset: 0
+      bit_size: 10
+fieldset/CM4_CA_STATUS0:
+  description: CM4 cache status 0
+  fields:
+    - name: VALID32
+      description: See CM0_CA_STATUS0.
+      bit_offset: 0
+      bit_size: 32
+fieldset/CM4_CA_STATUS1:
+  description: CM4 cache status 1
+  fields:
+    - name: TAG
+      description: See CM0_CA_STATUS1.
+      bit_offset: 0
+      bit_size: 32
+fieldset/CM4_CA_STATUS2:
+  description: CM4 cache status 2
+  fields:
+    - name: LRU
+      description: See CM0_CA_STATUS2.
+      bit_offset: 0
+      bit_size: 6
+fieldset/CM4_STATUS:
+  description: CM4 interface status
+  fields:
+    - name: MAIN_INTERNAL_ERR
+      description: See CM0_STATUS.MAIN_INTERNAL_ERROR.
+      bit_offset: 0
+      bit_size: 1
+    - name: WORK_INTERNAL_ERR
+      description: See CM0_STATUS.MAIN_INTERNAL_ERROR.
+      bit_offset: 1
+      bit_size: 1
+fieldset/CRYPTO_BUFF_CTL:
+  description: Cryptography buffer control
+  fields:
+    - name: PREF_EN
+      description: "Prefetch enable: 0: Disabled. 1: Enabled. A prefetch will be done when there is read 'hit' on the last 32-bit word of the buffer. For eCT work Flash, prefetch will not be done."
+      bit_offset: 30
+      bit_size: 1
+fieldset/DMAC_BUFF_CTL:
+  description: DMA controller buffer control
+  fields:
+    - name: PREF_EN
+      description: See CRYPTO_BUFF_CTL.
+      bit_offset: 30
+      bit_size: 1
+fieldset/DW0_BUFF_CTL:
+  description: Datawire 0 buffer control
+  fields:
+    - name: PREF_EN
+      description: See CRYPTO_BUFF_CTL.
+      bit_offset: 30
+      bit_size: 1
+fieldset/DW1_BUFF_CTL:
+  description: Datawire 1 buffer control
+  fields:
+    - name: PREF_EN
+      description: See CRYPTO_BUFF_CTL.
+      bit_offset: 30
+      bit_size: 1
+fieldset/ECC_CTL:
+  description: ECC control
+  fields:
+    - name: WORD_ADDR
+      description: "Specifies the word address where an error will be injected. - For cache SRAM ECC, the word address WORD_ADDR[23:0] is device address A[25:2]. On a FLASH macro refill to this word address and when the corresponding CM0/4_CA_CTL.RAM_ECC_INJ_EN bit is '1', the parity (PARITY[6:0]) is injected and stored in the cache. - For FLASH main interface ECC, the word address WORD_ADDR[23:0] is device address A[26:3]. On a FLASH main interface read and when FLASH_CTL.MAIN_ECC_INJ_EN bit is '1', the parity (PARITY[7:0]) replaces the FLASH macro parity (FLASH main interface read path is manipulated). - For FLASH work interface ECC, the word address WORD_ADDR[23:0] is device address A[24:2]. On a FLASH work interface read and when FLASH_CTL.WORK_ECC_INJ_EN bit is '1', the parity (PARITY[6:0]) replaces the FLASH macro parity (FLASH work interface read path is manipulated)."
+      bit_offset: 0
+      bit_size: 24
+    - name: PARITY
+      description: "ECC parity to use for ECC error injection at address WORD_ADDR. - For cache SRAM ECC, the 7-bit parity PARITY[6:0] is for a 32-bit word. - For FLASH main interface ECC, the 8-bit parity PARITY[7:0] is for a 64-bit word. - For FLASH work interface ECC, the 7-bit parity PARITY[6:0] is for a 32-bit word."
+      bit_offset: 24
+      bit_size: 8
+fieldset/EXT_MS0_BUFF_CTL:
+  description: External master 0 buffer control
+  fields:
+    - name: PREF_EN
+      description: See CRYPTO_BUFF_CTL.
+      bit_offset: 30
+      bit_size: 1
+fieldset/EXT_MS1_BUFF_CTL:
+  description: External master 1 buffer control
+  fields:
+    - name: PREF_EN
+      description: See CRYPTO_BUFF_CTL.
+      bit_offset: 30
+      bit_size: 1
+fieldset/FLASH_CMD:
+  description: Command
+  fields:
+    - name: INV
+      description: "Invalidation of ALL caches (for CM0+ and CM4) and ALL buffers. SW writes a '1' to clear the caches. HW sets this field to '0' when the operation is completed. The operation takes a maximum of three clock cycles on the slowest of the clk_slow and clk_fast clocks. The caches' LRU structures are also reset to their default state."
+      bit_offset: 0
+      bit_size: 1
+    - name: BUFF_INV
+      description: "Invalidation of ALL buffers (does not invalidate the caches). SW writes a '1' to clear the buffers. HW sets this field to '0' when the operation is completed. The operation takes a maximum of three clock cycles on the slowest of the clk_slow and clk_fast clocks. Note: the caches only capture FLASH macro main array data. Therefore, invalidating just the buffers (BUFF_INV) does not invalidate captures main array data in the caches."
+      bit_offset: 1
+      bit_size: 1
+fieldset/FLASH_CTL:
+  description: Control
+  fields:
+    - name: MAIN_WS
+      description: "FLASH macro main interface wait states: '0': 0 wait states. ... '15': 15 wait states"
+      bit_offset: 0
+      bit_size: 4
+    - name: MAIN_MAP
+      description: "Specifies mapping of FLASH macro main array. 0: Mapping A. 1: Mapping B. This field is only used when MAIN_BANK_MODE is '1' (dual bank mode)."
+      bit_offset: 8
+      bit_size: 1
+    - name: WORK_MAP
+      description: "Specifies mapping of FLASH macro work array. 0: Mapping A. 1: Mapping B. This field is only used when WORK_BANK_MODE is '1' (dual bank mode)."
+      bit_offset: 9
+      bit_size: 1
+    - name: MAIN_BANK_MODE
+      description: "Specifies bank mode of FLASH macro main array. 0: Single bank mode. 1: Dual bank mode."
+      bit_offset: 12
+      bit_size: 1
+    - name: WORK_BANK_MODE
+      description: "Specifies bank mode of FLASH macro work array. 0: Single bank mode. 1: Dual bank mode."
+      bit_offset: 13
+      bit_size: 1
+    - name: MAIN_ECC_EN
+      description: "Enable ECC checking for FLASH main interface: 0: Disabled. ECC checking/reporting on FLASH main interface is disabled. No correctable or non-correctable faults are reported. 1: Enabled."
+      bit_offset: 16
+      bit_size: 1
+    - name: MAIN_ECC_INJ_EN
+      description: "Enable error injection for FLASH main interface. When'1', the parity (ECC_CTL.PARITY[7:0]) is used for a load from the ECC_CTL.WORD_ADDR[23:0] word address."
+      bit_offset: 17
+      bit_size: 1
+    - name: MAIN_ERR_SILENT
+      description: "Specifies bus transfer behavior for a non-recoverable error on the FLASH macro main interface (either a non-correctable ECC error, a FLASH macro main interface internal error, a FLASH macro main interface memory hole access): 0: Bus transfer has a bus error. 1: Bus transfer does NOT have a bus error; i.e. the error is 'silent' In either case, the erroneous FLASH macro data is returned by the bus master interface. The erroneous data is NOT placed in a bus master interface's cache and/or buffer. This field is ONLY used by CPU bus transfers. Non-CPU bus transfers always have a bus transfer with a bus error, in case of a non-recoverable error. Note: All CPU bus masters have dedicated status registers (CM0_STATUS and CM4_STATUS) to register the occurrence of FLASH macro main interface internal errors (non-correctable ECC errors and memory hole errors are NOT registered). Note: fault reporting can be used to identify the error that occurred: - FLASH macro main interface internal error. - FLASH macro main interface non-recoverable ECC error. - FLASH macro main interface recoverable ECC error. - FLASH macro main interface memory hole error."
+      bit_offset: 18
+      bit_size: 1
+    - name: WORK_ECC_EN
+      description: "Enable ECC checking for FLASH work interface: 0: Disabled. ECC checking/reporting on FLASH work interface is disabled. No correctable or non-correctable faults are reported. 1: Enabled."
+      bit_offset: 20
+      bit_size: 1
+    - name: WORK_ECC_INJ_EN
+      description: "Enable error injection for FLASH work interface. When'1', the parity (ECC_CTL.PARITY[6:0]) is used for a load from the ECC_CTL.WORD_ADDR[23:0] word address."
+      bit_offset: 21
+      bit_size: 1
+    - name: WORK_ERR_SILENT
+      description: "Specifies bus transfer behavior for a non-recoverable error on the FLASH macro work interface (either a non-correctable ECC error, a FLASH macro work interface internal error, a FLASH macro work interface memory hole access): 0: Bus transfer has a bus error. 1: Bus transfer does NOT have a bus error; i.e. the error is 'silent' In either case, the erroneous FLASH macro data is returned by the bus master interface. The erroneous data is NOT placed in a bus master interface's cache and/or buffer. This field is ONLY used by CPU bus transfers. Non-CPU bus transfers always have a bus transfer with a bus error, in case of a non-recoverable error. Note: All CPU bus masters have dedicated status registers (CM0_STATUS and CM4_STATUS) to register the occurrence of FLASH macro work interface internal errors (non-correctable ECC errors and memory hole errors are NOT registered). Note: fault reporting can be used to identify the error that occurred: - FLASH macro work interface internal error. - FLASH macro work interface non-recoverable ECC error. - FLASH macro work interface recoverable ECC error. - FLASH macro work interface memory hole error."
+      bit_offset: 22
+      bit_size: 1
+fieldset/FLASH_PWR_CTL:
+  description: Flash power control
+  fields:
+    - name: ENABLE
+      description: "Controls 'enable' pin of the Flash memory."
+      bit_offset: 0
+      bit_size: 1
+    - name: ENABLE_HV
+      description: "Controls 'enable_hv' pin of the Flash memory."
+      bit_offset: 1
+      bit_size: 1
+fieldset/FM_ADDR:
+  description: Flash macro address
+  fields:
+    - name: RA
+      description: Row address.
+      bit_offset: 0
+      bit_size: 16
+    - name: BA
+      description: Bank address.
+      bit_offset: 16
+      bit_size: 8
+    - name: AXA
+      description: "Auxiliary address field: 0: regular flash memory. 1: supervisory flash memory."
+      bit_offset: 24
+      bit_size: 1
+fieldset/FM_CTL:
+  description: Flash macro control
+  fields:
+    - name: FM_MODE
+      description: Requires (IF_SEL|WR_EN)=1 Flash macro mode selection
+      bit_offset: 0
+      bit_size: 4
+    - name: FM_SEQ
+      description: Requires (IF_SEL|WR_EN)=1 Flash macro sequence selection
+      bit_offset: 8
+      bit_size: 2
+    - name: DAA_MUX_SEL
+      description: Direct memory cell access address.
+      bit_offset: 16
+      bit_size: 7
+    - name: IF_SEL
+      description: "Interface selection. Specifies the interface that is used for flash memory read operations: 0: R interface is used (default value). In this case, the flash memory address is provided as part of the R signal interface. 1: C interface is used. In this case, the flash memory address is provided by FM_MEM_ADDR (the page address) and by the C interface access offset in the FM_MEM_DATA structure. Note: IF_SEL and WR_EN cannot be changed at the same time"
+      bit_offset: 24
+      bit_size: 1
+    - name: WR_EN
+      description: "0: normal mode 1: Fm Write Enable Note: IF_SEL and WR_EN cannot be changed at the same time"
+      bit_offset: 25
+      bit_size: 1
+fieldset/FM_MEM_DATA:
+  description: Flash macro memory sense amplifier and column decoder data
+  fields:
+    - name: DATA32
+      description: "Sense amplifier and column multiplexer structure Bytes. The read data is dependent on FM_CTL.IF_SEL: - IF_SEL is 0: data as specified by the R interface address - IF_SEL is 1: data as specified by FM_MEM_ADDR and the offset of the accessed FM_MEM_DATA register."
+      bit_offset: 0
+      bit_size: 32
+fieldset/FM_PL_DATA:
+  description: Flash macro Page Latches data
+  fields:
+    - name: DATA32
+      description: "Four page latch Bytes When reading the page latches it requires FM_CTL.IF_SEL to be '1' Note: the high Voltage page latches are readable for test mode functionality."
+      bit_offset: 0
+      bit_size: 32
+fieldset/FM_PL_WRDATA_ALL:
+  description: Flash macro write page latches all
+  fields:
+    - name: DATA32
+      description: Write all high Voltage page latches with the same 32-bit data in a single write cycle Read always returns 0.
+      bit_offset: 0
+      bit_size: 32
+fieldset/FM_SRAM_ECC_CTL0:
+  description: eCT Flash SRAM ECC control 0
+  fields:
+    - name: ECC_INJ_DATA
+      description: 32-bit data for ECC error injection test of eCT Flash SRAM ECC logic.
+      bit_offset: 0
+      bit_size: 32
+fieldset/FM_SRAM_ECC_CTL1:
+  description: eCT Flash SRAM ECC control 1
+  fields:
+    - name: ECC_INJ_PARITY
+      description: 7-bit parity for ECC error injection test of eCT Flash SRAM ECC logic.
+      bit_offset: 0
+      bit_size: 7
+fieldset/FM_SRAM_ECC_CTL2:
+  description: eCT Flash SRAM ECC control 2
+  fields:
+    - name: CORRECTED_DATA
+      description: 32-bit corrected data output of the ECC syndrome logic.
+      bit_offset: 0
+      bit_size: 32
+fieldset/FM_SRAM_ECC_CTL3:
+  description: eCT Flash SRAM ECC control 3
+  fields:
+    - name: ECC_ENABLE
+      description: ECC generation/check enable for eCT Flash SRAM memory.
+      bit_offset: 0
+      bit_size: 1
+    - name: ECC_INJ_EN
+      description: "eCT Flash SRAM ECC error injection test enable. Follow the steps below for ECC logic test: 1. Write corrupted or uncorrupted 39-bit data to FM_SRAM_ECC_CTL0/1 registers. 2. Set the ECC_INJ_EN bit to '1'. 3. Confirm that the bit ECC_TEST_FAIL is '0'. If this is not the case, start over at item 1 because the eCT Flash was not idle. 4. Check the corrected data in FM_SRAM_ECC_CTL2. 5. Confirm that fault was reported to fault structure, and check syndrome (only applicable if corrupted data was written in step 1). 6. If not finished, start over at 1 with different data."
+      bit_offset: 4
+      bit_size: 1
+    - name: ECC_TEST_FAIL
+      description: "Status of ECC test. 1 : ECC test failed because eCT Flash macro is busy and using the SRAM. 0: ECC was performed."
+      bit_offset: 8
+      bit_size: 1
+fieldset/GEOMETRY:
+  description: Regular flash geometry
+  fields:
+    - name: ROW_COUNT
+      description: "Number of rows (minus 1): 0: 1 row 1: 2 rows 2: 3 rows ... '65535': 65536 rows"
+      bit_offset: 0
+      bit_size: 16
+    - name: BANK_COUNT
+      description: "Number of banks (minus 1): 0: 1 bank 1: 2 banks ... '255': 256 banks"
+      bit_offset: 16
+      bit_size: 8
+    - name: WORD_SIZE_LOG2
+      description: "Number of Bytes per word (log 2). A word is defined as the data that is read from the flash macro over the R interface with a single read access: 0: 1 Byte 1: 2 Bytes 2: 4 Bytes ... 3: 128 Bytes The currently planned flash macros have a word size of either 32-bit, 64-bit or 128-bit, resulting in WORD_SIZE_LOG2 settings of 2, 3 and 4 respectively."
+      bit_offset: 24
+      bit_size: 4
+    - name: PAGE_SIZE_LOG2
+      description: "Number of Bytes per page (log 2): 0: 1 Byte 1: 2 Bytes 2: 4 Bytes ... 15: 32768 Bytes The currently planned flash macros have a page size of either 256 Byte or 512 Byte, resulting in PAGE_SIZE_LOG2 settings of 8 and 9 respectively."
+      bit_offset: 28
+      bit_size: 4
+fieldset/GEOMETRY_SUPERVISORY:
+  description: Supervisory flash geometry
+  fields:
+    - name: ROW_COUNT
+      description: Number of rows (minus 1). ROW_COUNT is typically less than GEOMETRY.ROW_COUNT
+      bit_offset: 0
+      bit_size: 16
+    - name: BANK_COUNT
+      description: Number of banks (minus 1). BANK_COUNT is less or equal to GEOMETRY.BANK_COUNT.
+      bit_offset: 16
+      bit_size: 8
+    - name: WORD_SIZE_LOG2
+      description: "Number of Bytes per word (log 2). See GEOMETRY.WORD_SIZE_LOG2. Typically, WORD_SIZE_LOG2 equals GEOMETRY.WORD_SIZE_LOG2."
+      bit_offset: 24
+      bit_size: 4
+    - name: PAGE_SIZE_LOG2
+      description: "Number of Bytes per page (log 2). See GEOMETRY.PAGE_SIZE_LOG2. Typically, PAGE_SIZE_LOG2 equals GEOMETRY.PAGE_SIZE_LOG2."
+      bit_offset: 28
+      bit_size: 4
+fieldset/INTR:
+  description: Interrupt
+  fields:
+    - name: TIMER_EXPIRED
+      description: "Set to '1', when event is detected. Write INTR field with '1', to clear bit. Write INTR_SET field with '1', to set bit."
+      bit_offset: 0
+      bit_size: 1
+fieldset/INTR_MASK:
+  description: Interrupt mask
+  fields:
+    - name: TIMER_EXPIRED
+      description: Mask for corresponding field in INTR register.
+      bit_offset: 0
+      bit_size: 1
+fieldset/INTR_MASKED:
+  description: Interrupt masked
+  fields:
+    - name: TIMER_EXPIRED
+      description: Logical and of corresponding request and mask fields.
+      bit_offset: 0
+      bit_size: 1
+fieldset/INTR_SET:
+  description: Interrupt set
+  fields:
+    - name: TIMER_EXPIRED
+      description: "Write INTR_SET field with '1' to set corresponding INTR field (a write of '0' has no effect)."
+      bit_offset: 0
+      bit_size: 1
+fieldset/PW_SEQ12:
+  description: HV Pulse Delay for seq 1&2 pre
+  fields:
+    - name: PW_SEQ1
+      description: Seq1 delay
+      bit_offset: 0
+      bit_size: 16
+    - name: PW_SEQ2_PRE
+      description: Seq2 pre delay
+      bit_offset: 16
+      bit_size: 16
+fieldset/PW_SEQ23:
+  description: HV Pulse Delay for seq2 post & seq3
+  fields:
+    - name: PW_SEQ2_POST
+      description: Seq2 post delay
+      bit_offset: 0
+      bit_size: 16
+    - name: PW_SEQ3
+      description: Seq3 delay
+      bit_offset: 16
+      bit_size: 16
+fieldset/RED_CTL01:
+  description: "Redundancy Control normal sectors 0,1"
+  fields:
+    - name: RED_ADDR_0
+      description: Bad Row Pair Address for Sector 0
+      bit_offset: 0
+      bit_size: 8
+    - name: RED_EN_0
+      description: "1: Redundancy Enable for Sector 0"
+      bit_offset: 8
+      bit_size: 1
+    - name: RED_ADDR_1
+      description: Bad Row Pair Address for Sector 1
+      bit_offset: 16
+      bit_size: 8
+    - name: RED_EN_1
+      description: "1: Redundancy Enable for Sector 1"
+      bit_offset: 24
+      bit_size: 1
+fieldset/RED_CTL23:
+  description: "Redundancy Control normal sectors 2,3"
+  fields:
+    - name: RED_ADDR_2
+      description: Bad Row Pair Address for Sector 2
+      bit_offset: 0
+      bit_size: 8
+    - name: RED_EN_2
+      description: "1: Redundancy Enable for Sector 2"
+      bit_offset: 8
+      bit_size: 1
+    - name: RED_ADDR_3
+      description: Bad Row Pair Address for Sector 3
+      bit_offset: 16
+      bit_size: 8
+    - name: RED_EN_3
+      description: "1: Redundancy Enable for Sector 3"
+      bit_offset: 24
+      bit_size: 1
+fieldset/RED_CTL45:
+  description: "Redundancy Control normal sectors 4,5"
+  fields:
+    - name: RED_ADDR_4
+      description: Bad Row Pair Address for Sector 4
+      bit_offset: 0
+      bit_size: 8
+    - name: RED_EN_4
+      description: "1: Redundancy Enable for Sector 4"
+      bit_offset: 8
+      bit_size: 1
+    - name: RED_ADDR_5
+      description: Bad Row Pair Address for Sector 5
+      bit_offset: 16
+      bit_size: 8
+    - name: RED_EN_5
+      description: "1: Redundancy Enable for Sector 5"
+      bit_offset: 24
+      bit_size: 1
+fieldset/RED_CTL67:
+  description: "Redundancy Control normal sectors 6,7"
+  fields:
+    - name: RED_ADDR_6
+      description: Bad Row Pair Address for Sector 6
+      bit_offset: 0
+      bit_size: 8
+    - name: RED_EN_6
+      description: "1: Redundancy Enable for Sector 6"
+      bit_offset: 8
+      bit_size: 1
+    - name: RED_ADDR_7
+      description: Bad Row Pair Address for Sector 7
+      bit_offset: 16
+      bit_size: 8
+    - name: RED_EN_7
+      description: "1: Redundancy Enable for Sector 7"
+      bit_offset: 24
+      bit_size: 1
+fieldset/RED_CTL_SM01:
+  description: "Redundancy Control special sectors 0,1"
+  fields:
+    - name: RED_ADDR_SM0
+      description: Bad Row Pair Address for Special Sector 0
+      bit_offset: 0
+      bit_size: 8
+    - name: RED_EN_SM0
+      description: Redundancy Enable for Special Sector 0
+      bit_offset: 8
+      bit_size: 1
+    - name: RED_ADDR_SM1
+      description: Bad Row Pair Address for Special Sector 1
+      bit_offset: 16
+      bit_size: 8
+    - name: RED_EN_SM1
+      description: Redundancy Enable for Special Sector 1
+      bit_offset: 24
+      bit_size: 1
+fieldset/RGRANT_DELAY_ERS:
+  description: R-grant delay for erase
+  fields:
+    - name: RGRANT_DELAY_ERS_SEQ01
+      description: "ERASE: R-grant blocking delay on seq0-seq1 transition. Scale = ANA_CTL0.SCALE_SEQ01 When = 0 R_GRANT_DELAY control is disabled when IF_SEL=1 R_GRANT_DELAY control is disabled"
+      bit_offset: 0
+      bit_size: 8
+    - name: RGRANT_DELAY_ERS_SEQ12
+      description: "ERASE: R-grant blocking delay on seq1-seq2 transition. Scale = ANA_CTL0.SCALE_SEQ12 When = 0 R_GRANT_DELAY control is disabled when IF_SEL=1 R_GRANT_DELAY control is disabled"
+      bit_offset: 8
+      bit_size: 8
+    - name: RGRANT_DELAY_ERS_SEQ23
+      description: "ERASE: R-grant blocking delay on seq2-seq3 transition. Scale = ANA_CTL0.SCALE_SEQ23 When = 0 R_GRANT_DELAY control is disabled when IF_SEL=1 R_GRANT_DELAY control is disabled"
+      bit_offset: 16
+      bit_size: 8
+fieldset/RGRANT_DELAY_PRG:
+  description: R-grant delay for program
+  fields:
+    - name: RGRANT_DELAY_PRG_SEQ12
+      description: "PROG&PRE_PROG: R-grant blocking delay on seq1-seq2 transition. Scale = ANA_CTL0.SCALE_SEQ12 When = 0 R_GRANT_DELAY control is disabled when IF_SEL=1 R_GRANT_DELAY control is disabled"
+      bit_offset: 0
+      bit_size: 8
+    - name: RGRANT_DELAY_PRG_SEQ23
+      description: "PROG&PRE_PROG: R-grant blocking delay on seq2-seq3 transition. Scale = ANA_CTL0.SCALE_SEQ23 When = 0 R_GRANT_DELAY control is disabled when IF_SEL=1 R_GRANT_DELAY control is disabled"
+      bit_offset: 8
+      bit_size: 8
+    - name: RGRANT_DELAY_SEQ30
+      description: "PROG&PRE_PROG & ERASE: R-grant blocking delay on seq3-seq0 transition. Scale = ANA_CTL0.SCALE_SEQ30 When = 0 R_GRANT_DELAY control is disabled when IF_SEL=1 R_GRANT_DELAY control is disabled"
+      bit_offset: 16
+      bit_size: 8
+    - name: RGRANT_DELAY_CLK
+      description: "Frequency divider from clk_t to create the 8MHz reference clock for R_grant delay The value of this field is the integer result of 'clk_t frequency / 8'. Example: for clk_t=100 this field is INT(100/8) =12. This field is updated at runtime with the 'SW_RGRANT_DELAY_CLK ' value from the HV parameters table"
+      bit_offset: 24
+      bit_size: 4
+    - name: HV_PARAMS_LOADED
+      description: "0: HV Pulse common params not loaded 1: HV Pulse common params loaded: r-grant delays, r-grant scale, prescaler, timer values for seq1,seq2_pre, seq2_post, seq3"
+      bit_offset: 31
+      bit_size: 1
+fieldset/RGRANT_SCALE_ERS:
+  description: R-grant delay scale for erase
+  fields:
+    - name: SCALE_ERS_SEQ01
+      description: "ERASE: Scale for R_GRANT_DELAY on seq0-seq1 transition: 00: 0.125uS 01: 1uS 10: 10uS 11: 100uS"
+      bit_offset: 0
+      bit_size: 2
+    - name: SCALE_ERS_SEQ12
+      description: "ERASE: Scale for R_GRANT_DELAY on seq1-seq2 transition: 00: 0.125uS 01: 1uS 10: 10uS 11: 100uS"
+      bit_offset: 2
+      bit_size: 2
+    - name: SCALE_ERS_SEQ23
+      description: "ERASE: Scale for R_GRANT_DELAY on seq2-seq3 transition: 00: 0.125uS 01: 1uS 10: 10uS 11: 100uS"
+      bit_offset: 4
+      bit_size: 2
+    - name: SCALE_ERS_PEON
+      description: "ERASE: Scale for R_GRANT_DELAY on PE On transition: 00: 0.125uS 01: 1uS 10: 10uS 11: 100uS"
+      bit_offset: 6
+      bit_size: 2
+    - name: SCALE_ERS_PEOFF
+      description: "ERASE: Scale for R_GRANT_DELAY on PE OFF transition: 00: 0.125uS 01: 1uS 10: 10uS 11: 100uS"
+      bit_offset: 8
+      bit_size: 2
+    - name: RGRANT_DELAY_ERS_PEON
+      description: "ERASE: R-grant blocking delay on PE ON. Scale = ANA_CTL0.SCALE_PEON When = 0 R_GRANT_DELAY control is disabled when IF_SEL=1 R_GRANT_DELAY control is disabled"
+      bit_offset: 16
+      bit_size: 8
+    - name: RGRANT_DELAY_ERS_PEOFF
+      description: "ERASE: R-grant blocking delay on PE OFF. Scale = ANA_CTL0.SCALE_PEOFF When = 0 R_GRANT_DELAY control is disabled when IF_SEL=1 R_GRANT_DELAY control is disabled"
+      bit_offset: 24
+      bit_size: 8
+fieldset/STATUS:
+  description: Status
+  fields:
+    - name: TIMER_ENABLED
+      description: "This is the timer_en bit set by writing a '1' in the TIMER_CTL bit 31. It is reset by HW when the timer expires 0: timer not running 1: Timer is enabled and not expired yet"
+      bit_offset: 0
+      bit_size: 1
+    - name: HV_REGS_ISOLATED
+      description: "Indicates the isolation status at HV trim and redundancy registers inputs 0: Not isolated, writing permitted 1: isolated writing disabled"
+      bit_offset: 1
+      bit_size: 1
+    - name: ILLEGAL_HVOP
+      description: "Indicates a bulk, sector erase, program has been requested when axa=1 0: no error 1: illegal HV operation error"
+      bit_offset: 2
+      bit_size: 1
+    - name: TURBO_N
+      description: "After FM power up indicates the analog blocks currents are boosted to faster reach their functional state.. Used in the testchip boot only as an 'FM READY' flag. 0: turbo mode 1: normal mode"
+      bit_offset: 3
+      bit_size: 1
+    - name: WR_EN_MON
+      description: FM_CTL.WR_EN bit after being synchronized in clk_r domain
+      bit_offset: 4
+      bit_size: 1
+    - name: IF_SEL_MON
+      description: FM_CTL.IF_SEL bit after being synchronized in clk_r domain
+      bit_offset: 5
+      bit_size: 1
+    - name: TIMER_STATUS
+      description: "The actual timer state sync-ed in clk_c domain: 0: timer is not running: 1: timer is running;"
+      bit_offset: 6
+      bit_size: 1
+    - name: R_GRANT_DELAY_STATUS
+      description: "0: R_GRANT_DELAY timer is not running 1: R_GRANT_DELAY timer is running"
+      bit_offset: 7
+      bit_size: 1
+    - name: FM_BUSY
+      description: "0': FM not busy 1: FM BUSY : R_GRANT is 0 as result of a busy request from FM ready, or from HV operations."
+      bit_offset: 8
+      bit_size: 1
+    - name: FM_READY
+      description: "0: FM not ready 1: FM ready"
+      bit_offset: 9
+      bit_size: 1
+    - name: POS_PUMP_VLO
+      description: POS pump VLO
+      bit_offset: 10
+      bit_size: 1
+    - name: NEG_PUMP_VHI
+      description: NEG pump VHI
+      bit_offset: 11
+      bit_size: 1
+    - name: RWW
+      description: "FM Type (Read While Write or Not Read While Write): 0: Non RWW FM Type 1: RWW FM Type"
+      bit_offset: 12
+      bit_size: 1
+    - name: MAX_DOUT_WIDTH
+      description: "Internal memory core max data out size (number of data out bits per column): 0: x128 bits 1: x256 bits"
+      bit_offset: 13
+      bit_size: 1
+    - name: SECTOR0_SR
+      description: "0: Sector 0 does not contain special rows. The special rows are located in separate special sectors. 1: Sector 0 contains special rows"
+      bit_offset: 14
+      bit_size: 1
+    - name: RESET_MM
+      description: "Test_only, internal node: mpcon reset_mm"
+      bit_offset: 15
+      bit_size: 1
+    - name: ROW_ODD
+      description: "Test_only, internal node: mpcon row_odd"
+      bit_offset: 16
+      bit_size: 1
+    - name: ROW_EVEN
+      description: "Test_only, internal node: mpcon row_even"
+      bit_offset: 17
+      bit_size: 1
+    - name: HVOP_SUB_SECTOR_N
+      description: "Test_only, internal node: mpcon bk_subb"
+      bit_offset: 18
+      bit_size: 1
+    - name: HVOP_SECTOR
+      description: "Test_only, internal node: mpcon bk_sec"
+      bit_offset: 19
+      bit_size: 1
+    - name: HVOP_BULK_ALL
+      description: "Test_only, internal node: mpcon bk_all"
+      bit_offset: 20
+      bit_size: 1
+    - name: CBUS_RA_MATCH
+      description: "Test_only, internal node: mpcon ra match"
+      bit_offset: 21
+      bit_size: 1
+    - name: CBUS_RED_ROW_EN
+      description: "Test_only, internal node: mpcon red_row_en"
+      bit_offset: 22
+      bit_size: 1
+    - name: RQ_ERROR
+      description: "Test_only, internal node: rq_error sync-de in clk_c domain"
+      bit_offset: 23
+      bit_size: 1
+    - name: PUMP_PDAC
+      description: "Test_only, internal node: regif pdac outputs to pos pump"
+      bit_offset: 24
+      bit_size: 4
+    - name: PUMP_NDAC
+      description: "Test_only, internal node: regif ndac outputs to pos pump"
+      bit_offset: 28
+      bit_size: 4
+fieldset/TIMER_CLK_CTL:
+  description: Timer prescaler (clk_t to timer clock frequency divider)
+  fields:
+    - name: TIMER_CLOCK_FREQ
+      description: "Clk_t frequency divider to provide the 1MHz reference clock for the Regif Timer. Equal to the frequency in MHz of the timer clock 'clk_t'. Example: if 'clk_t' has a frequency of 4 MHz then this field value is '4' Max clk_t frequency = 100MHz. This field is updated at runtime with the 'SW_TIMER_CLOCK_FREQ ' value from the HV parameters table"
+      bit_offset: 0
+      bit_size: 8
+    - name: RGRANT_DELAY_PRG_PEON
+      description: "PROG&PRE_PROG: R-grant blocking delay on PE ON. Scale = ANA_CTL0.SCALE_PEON When = 0 R_GRANT_DELAY control is disabled when IF_SEL=1 R_GRANT_DELAY control is disabled"
+      bit_offset: 8
+      bit_size: 8
+    - name: RGRANT_DELAY_PRG_PEOFF
+      description: "PROG&PRE_PROG: R-grant blocking delay on PE OFF. Scale = ANA_CTL0.SCALE_PEOFF When = 0 R_GRANT_DELAY control is disabled when IF_SEL=1 R_GRANT_DELAY control is disabled"
+      bit_offset: 16
+      bit_size: 8
+    - name: RGRANT_DELAY_PRG_SEQ01
+      description: "PROG&PRE_PROG: R-grant blocking delay on seq0-seq1 transition. Scale = ANA_CTL0.SCALE_SEQ01 When = 0 R_GRANT_DELAY control is disabled when IF_SEL=1 R_GRANT_DELAY control is disabled"
+      bit_offset: 24
+      bit_size: 8
+fieldset/TIMER_CTL:
+  description: Timer control
+  fields:
+    - name: PERIOD
+      description: "Timer period in either microseconds (SCALE is '0') or 100's of microseconds (SCALE is '1') multiples."
+      bit_offset: 0
+      bit_size: 15
+    - name: SCALE
+      description: "Timer tick scale: 0: 1 microsecond. 1: 100 microseconds."
+      bit_offset: 15
+      bit_size: 1
+    - name: AUTO_SEQUENCE
+      description: "1': Starts1 the HV automatic sequencing Cleared by HW"
+      bit_offset: 24
+      bit_size: 1
+    - name: PRE_PROG
+      description: 1 during pre-program operation
+      bit_offset: 25
+      bit_size: 1
+    - name: PRE_PROG_CSL
+      description: "0: CSL lines driven by CSL_DAC 1: CSL lines driven by VNEG_G"
+      bit_offset: 26
+      bit_size: 1
+    - name: PUMP_EN
+      description: "Pump enable: 0: disabled 1: enabled (also requires FM_CTL.IF_SEL to be'1', this additional restriction is required to prevent non intentional clearing of the FM). SW sets this field to '1' to generate a single PE pulse. HW clears this field when timer is expired."
+      bit_offset: 29
+      bit_size: 1
+    - name: ACLK_EN
+      description: "ACLK enable (generates a single cycle pulse for the FM): 0: disabled 1: enabled. SW set this field to '1' to generate a single cycle pulse. HW sets this field to '0' when the pulse is generated."
+      bit_offset: 30
+      bit_size: 1
+    - name: TIMER_EN
+      description: "Timer enable: 0: disabled 1: enabled. SW sets this field to '1' to start the timer. HW sets this field to '0' when the timer is expired."
+      bit_offset: 31
+      bit_size: 1
+fieldset/WAIT_CTL:
+  description: Wait State control
+  fields:
+    - name: WAIT_FM_MEM_RD
+      description: "Number of C interface wait cycles (on 'clk_c') for a read from the memory"
+      bit_offset: 0
+      bit_size: 4
+    - name: WAIT_FM_HV_RD
+      description: "Number of C interface wait cycles (on 'clk_c') for a read from the high Voltage page latches. Common for reading HV Page Latches and the DATA_COMP_RESULT bit"
+      bit_offset: 8
+      bit_size: 4
+    - name: WAIT_FM_HV_WR
+      description: "Number of C interface wait cycles (on 'clk_c') for a write to the high Voltage page latches."
+      bit_offset: 16
+      bit_size: 3
+    - name: FM_RWW_MODE
+      description: "00: Full CBUS MODE 01: RWW 10: RWW. R_GRANT is stalling r_bus for the whole program/erase duration"
+      bit_offset: 24
+      bit_size: 2
+    - name: LV_SPARE_1
+      description: Spare register
+      bit_offset: 26
+      bit_size: 1
+    - name: DRMM
+      description: "0: Normal 1: Test mode to enable Margin mode for 2 rows at a time"
+      bit_offset: 27
+      bit_size: 1
+    - name: MBA
+      description: "0: Normal 1: Test mode to enable Master Bulk Access which allows both normal rows and redundant rows to be erased / programmed in one HV cycle (Bulk / Sector Erase and Sector Program)."
+      bit_offset: 28
+      bit_size: 1
+    - name: PL_SOFT_SET_EN
+      description: "Page latch soft set enable, 0 = disabled, 1 = enabled (at end of seq_2), taken care in API"
+      bit_offset: 29
+      bit_size: 1
+enum/CM0_CA_CTL1_PWR_MODE:
+  bit_size: 2
+  variants:
+    - name: "OFF"
+      description: Power OFF the CM0 cache SRAM.
+      value: 0
+    - name: RSVD
+      description: Undefined
+      value: 1
+    - name: RETAINED
+      description: Put CM0 cache SRAM in retained mode.
+      value: 2
+    - name: ENABLED
+      description: Enable/Turn ON the CM0 cache SRAM.
+      value: 3
+enum/CM4_CA_CTL1_PWR_MODE:
+  bit_size: 2
+  variants:
+    - name: "OFF"
+      description: See CM0_CA_CTL1
+      value: 0
+    - name: RSVD
+      description: Undefined
+      value: 1
+    - name: RETAINED
+      description: See CM0_CA_CTL1
+      value: 2
+    - name: ENABLED
+      description: See CM0_CA_CTL1
+      value: 3
