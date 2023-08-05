@@ -24,6 +24,8 @@ fi
 
 mkdir -p psoc6dev/src
 pushd psoc6dev >& /dev/null 2>&1
+cp ../svd/common.rs src
+cp -r ../svd/common src
 
 cat > Cargo.toml << EOF
 [package]
@@ -44,6 +46,8 @@ rt = ["cortex-m-rt/device"]
 cortex-m = "0.7.7"
 cortex-m-rt = "0.7.3"
 EOF
+
+echo "pub mod common ;" > src/lib.rs
 
 for SVD in ../svd/*.svd
 do

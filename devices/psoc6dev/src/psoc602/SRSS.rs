@@ -63,7 +63,7 @@ impl McwdtStruct {
     }
     #[doc = "Multi-Counter Watchdog Counter Lock Register"]
     #[inline(always)]
-    pub const fn mcwdt_lock(self) -> crate::common::Reg<McwdtLock, crate::common::RW> {
+    pub const fn mcwdt_lock_reg(self) -> crate::common::Reg<McwdtLockReg, crate::common::RW> {
         unsafe { crate::common::Reg::from_ptr(self.ptr.add(40usize) as _) }
     }
 }
@@ -2102,8 +2102,8 @@ impl Default for McwdtIntrSet {
 #[doc = "Multi-Counter Watchdog Counter Lock Register"]
 #[repr(transparent)]
 #[derive(Copy, Clone, Eq, PartialEq)]
-pub struct McwdtLock(pub u32);
-impl McwdtLock {
+pub struct McwdtLockReg(pub u32);
+impl McwdtLockReg {
     #[doc = "Prohibits writing control and configuration registers related to this MCWDT when not equal 0 (as specified in the other register descriptions). Requires at least two different writes to unlock. Note that this field is 2 bits to force multiple writes only. Each MCWDT has a separate local lock. LFCLK settings are locked by the global WDT_LOCK register, and this register has no effect on that."]
     #[inline(always)]
     pub const fn mcwdt_lock(&self) -> McwdtLock {
@@ -2116,10 +2116,10 @@ impl McwdtLock {
         self.0 = (self.0 & !(0x03 << 30usize)) | (((val.to_bits() as u32) & 0x03) << 30usize);
     }
 }
-impl Default for McwdtLock {
+impl Default for McwdtLockReg {
     #[inline(always)]
-    fn default() -> McwdtLock {
-        McwdtLock(0)
+    fn default() -> McwdtLockReg {
+        McwdtLockReg(0)
     }
 }
 #[doc = "Multi-Counter Watchdog Counter Match Register"]

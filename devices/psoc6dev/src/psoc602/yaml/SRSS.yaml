@@ -39,10 +39,10 @@ block/MCWDT_STRUCT:
       byte_offset: 36
       access: Read
       fieldset: MCWDT_INTR_MASKED
-    - name: MCWDT_LOCK
+    - name: MCWDT_LOCK_REG
       description: Multi-Counter Watchdog Counter Lock Register
       byte_offset: 40
-      fieldset: MCWDT_LOCK
+      fieldset: MCWDT_LOCK_REG
 block/SRSS:
   description: SRSS Core Registers
   items:
@@ -873,7 +873,7 @@ fieldset/MCWDT_INTR_SET:
       description: Set interrupt for MCWDT_INT2
       bit_offset: 2
       bit_size: 1
-fieldset/MCWDT_LOCK:
+fieldset/MCWDT_LOCK_REG:
   description: Multi-Counter Watchdog Counter Lock Register
   fields:
     - name: MCWDT_LOCK
