@@ -6,6 +6,7 @@ pub struct R;
 #[derive(Copy, Clone, PartialEq, Eq)]
 pub struct W;
 mod sealed;
+use core::prelude::v1::derive;
 pub trait Access: sealed::Access + Copy {}
 impl Access for R {}
 impl Access for W {}

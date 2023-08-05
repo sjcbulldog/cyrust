@@ -1,6 +1,6 @@
-#![allow(non_camel_case_types)]
 #![doc = "Peripheral access API (generated using chiptool v0.1.0 (0621765 2023-07-02))"]
 #[doc = "Flash controller"]
+use core::prelude::v1::derive;
 #[derive(Copy, Clone, Eq, PartialEq)]
 pub struct Flashc {
     ptr: *mut u8,

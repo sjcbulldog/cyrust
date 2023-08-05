@@ -24,7 +24,9 @@ if [ -d psoc6dev ]; then
 fi
 
 mkdir -p psoc6dev/src
+mkdir -p psoc6dev/.cargo
 pushd psoc6dev >& /dev/null 2>&1
+cp ../svd/config .cargo/config
 cp ../svd/common.rs src
 cp -r ../svd/common src
 
@@ -48,7 +50,10 @@ cortex-m = "0.7.7"
 cortex-m-rt = "0.7.3"
 EOF
 
-echo "#![allow(non_snake_case)]" > src/lib.rs
+echo "#![no_std]" > src/lib.rs
+echo "#![allow(non_snake_case)]" >> src/lib.rs
+echo "#![allow(non_camel_case_types)]" >> src/lib.rs
+echo >> src/lib.rs
 echo "pub mod common ;" >> src/lib.rs
 
 for SVD in ../svd/*.svd
