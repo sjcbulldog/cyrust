@@ -1,0 +1,24 @@
+#!/bin/bash
+
+#!/bin/bash
+
+TARGET=$1
+SVDFILE=$2
+PERIFILE=$3
+CHIPTOOL=$4
+
+echo "    TARGET is $TARGET"
+echo "    SVDFILE is $SVDFILE"
+echo "    PERIFILE is $PERIFILE"
+
+readarray -t PERIPHERALS < $PERIFILE
+
+for key in "${PERIPHERALS[@]}"
+do
+    PERIPHERAL=`echo $key | tr -d '\r'`
+    echo -n "Cleaning peripheral $PERIPHERAL ... "
+    sed '/no_std/d' $PERIPHERAL.rs > tmp
+    echo '#![allow(non_camel_case_types)]' > $PERIPHERAL.rs
+    cat tmp >> $PERIPHERAL.rs
+    echo done
+done

@@ -1,0 +1,1392 @@
+---
+block/CSD0:
+  description: Capsense Controller
+  items:
+    - name: CONFIG
+      description: Configuration and Control
+      byte_offset: 0
+      fieldset: CONFIG
+    - name: SPARE
+      description: Spare MMIO
+      byte_offset: 4
+      fieldset: SPARE
+    - name: STATUS
+      description: Status Register
+      byte_offset: 128
+      access: Read
+      fieldset: STATUS
+    - name: STAT_SEQ
+      description: Current Sequencer status
+      byte_offset: 132
+      access: Read
+      fieldset: STAT_SEQ
+    - name: STAT_CNTS
+      description: Current status counts
+      byte_offset: 136
+      access: Read
+      fieldset: STAT_CNTS
+    - name: STAT_HCNT
+      description: Current count of the HSCMP counter
+      byte_offset: 140
+      access: Read
+      fieldset: STAT_HCNT
+    - name: RESULT_VAL1
+      description: Result CSD/CSX accumulation counter value 1
+      byte_offset: 208
+      access: Read
+      fieldset: RESULT_VAL1
+    - name: RESULT_VAL2
+      description: Result CSX accumulation counter value 2
+      byte_offset: 212
+      access: Read
+      fieldset: RESULT_VAL2
+    - name: ADC_RES
+      description: ADC measurement
+      byte_offset: 224
+      access: Read
+      fieldset: ADC_RES
+    - name: INTR
+      description: CSD Interrupt Request Register
+      byte_offset: 240
+      fieldset: INTR
+    - name: INTR_SET
+      description: CSD Interrupt set register
+      byte_offset: 244
+      fieldset: INTR_SET
+    - name: INTR_MASK
+      description: CSD Interrupt mask register
+      byte_offset: 248
+      fieldset: INTR_MASK
+    - name: INTR_MASKED
+      description: CSD Interrupt masked register
+      byte_offset: 252
+      access: Read
+      fieldset: INTR_MASKED
+    - name: HSCMP
+      description: High Speed Comparator configuration
+      byte_offset: 384
+      fieldset: HSCMP
+    - name: AMBUF
+      description: Reference Generator configuration
+      byte_offset: 388
+      fieldset: AMBUF
+    - name: REFGEN
+      description: Reference Generator configuration
+      byte_offset: 392
+      fieldset: REFGEN
+    - name: CSDCMP
+      description: CSD Comparator configuration
+      byte_offset: 396
+      fieldset: CSDCMP
+    - name: SW_RES
+      description: Switch Resistance configuration
+      byte_offset: 496
+      fieldset: SW_RES
+    - name: SENSE_PERIOD
+      description: Sense clock period
+      byte_offset: 512
+      fieldset: SENSE_PERIOD
+    - name: SENSE_DUTY
+      description: Sense clock duty cycle
+      byte_offset: 516
+      fieldset: SENSE_DUTY
+    - name: SW_HS_P_SEL
+      description: HSCMP Pos input switch Waveform selection
+      byte_offset: 640
+      fieldset: SW_HS_P_SEL
+    - name: SW_HS_N_SEL
+      description: HSCMP Neg input switch Waveform selection
+      byte_offset: 644
+      fieldset: SW_HS_N_SEL
+    - name: SW_SHIELD_SEL
+      description: Shielding switches Waveform selection
+      byte_offset: 648
+      fieldset: SW_SHIELD_SEL
+    - name: SW_AMUXBUF_SEL
+      description: Amuxbuffer switches Waveform selection
+      byte_offset: 656
+      fieldset: SW_AMUXBUF_SEL
+    - name: SW_BYP_SEL
+      description: AMUXBUS bypass switches Waveform selection
+      byte_offset: 660
+      fieldset: SW_BYP_SEL
+    - name: SW_CMP_P_SEL
+      description: CSDCMP Pos Switch Waveform selection
+      byte_offset: 672
+      fieldset: SW_CMP_P_SEL
+    - name: SW_CMP_N_SEL
+      description: CSDCMP Neg Switch Waveform selection
+      byte_offset: 676
+      fieldset: SW_CMP_N_SEL
+    - name: SW_REFGEN_SEL
+      description: Reference Generator Switch Waveform selection
+      byte_offset: 680
+      fieldset: SW_REFGEN_SEL
+    - name: SW_FW_MOD_SEL
+      description: Full Wave Cmod Switch Waveform selection
+      byte_offset: 688
+      fieldset: SW_FW_MOD_SEL
+    - name: SW_FW_TANK_SEL
+      description: Full Wave Csh_tank Switch Waveform selection
+      byte_offset: 692
+      fieldset: SW_FW_TANK_SEL
+    - name: SW_DSI_SEL
+      description: DSI output switch control Waveform selection
+      byte_offset: 704
+      fieldset: SW_DSI_SEL
+    - name: IO_SEL
+      description: IO output control Waveform selection
+      byte_offset: 720
+      fieldset: IO_SEL
+    - name: SEQ_TIME
+      description: Sequencer Timing
+      byte_offset: 768
+      fieldset: SEQ_TIME
+    - name: SEQ_INIT_CNT
+      description: Sequencer Initial conversion and sample counts
+      byte_offset: 784
+      fieldset: SEQ_INIT_CNT
+    - name: SEQ_NORM_CNT
+      description: Sequencer Normal conversion and sample counts
+      byte_offset: 788
+      fieldset: SEQ_NORM_CNT
+    - name: ADC_CTL
+      description: ADC Control
+      byte_offset: 800
+      fieldset: ADC_CTL
+    - name: SEQ_START
+      description: Sequencer start
+      byte_offset: 832
+      fieldset: SEQ_START
+    - name: IDACA
+      description: IDACA Configuration
+      byte_offset: 1024
+      fieldset: IDACA
+    - name: IDACB
+      description: IDACB Configuration
+      byte_offset: 1280
+      fieldset: IDACB
+fieldset/ADC_CTL:
+  description: ADC Control
+  fields:
+    - name: ADC_TIME
+      description: "ADC timing -1 in csd_sense clock cycles (actual time is ADC_TIME+1 cycles), either used to discharge Cref1&2, or as the aperture to capture the input voltage on Cref1&2"
+      bit_offset: 0
+      bit_size: 8
+    - name: ADC_MODE
+      description: Enable ADC measurement. When enabled the ADC sequencer will be started when the main sequencer goes to the SAMPLE_NORM state
+      bit_offset: 16
+      bit_size: 2
+      enum: ADC_MODE
+fieldset/ADC_RES:
+  description: ADC measurement
+  fields:
+    - name: VIN_CNT
+      description: Count to source/sink Cref1 + Cref2 from Vin to Vrefhi.
+      bit_offset: 0
+      bit_size: 16
+    - name: HSCMP_POL
+      description: "Polarity used for IDACB for this last ADC result, 0= source, 1= sink"
+      bit_offset: 16
+      bit_size: 1
+    - name: ADC_OVERFLOW
+      description: This flag is set when the ADC counter overflows. This is an indication to the firmware that the IDACB current level is too low.
+      bit_offset: 30
+      bit_size: 1
+    - name: ADC_ABORT
+      description: This flag is set when the ADC sequencer was aborted before tripping HSCMP.
+      bit_offset: 31
+      bit_size: 1
+fieldset/AMBUF:
+  description: Reference Generator configuration
+  fields:
+    - name: PWR_MODE
+      description: Amux buffer power level
+      bit_offset: 0
+      bit_size: 2
+      enum: PWR_MODE
+fieldset/CONFIG:
+  description: Configuration and Control
+  fields:
+    - name: IREF_SEL
+      description: Select Iref supply.
+      bit_offset: 0
+      bit_size: 1
+      enum: IREF_SEL
+    - name: FILTER_DELAY
+      description: This value determines the number of cycles that the digital filter makes the CSDCMP output ignored while the counter counts and IDAC is on. When set to 0 the digital filter is off. When set to any other value the ignoring will last for FILTER_DELAY clk_csd cycles after the start of each measurement and from the first comparator trip to the end of each measurement.
+      bit_offset: 4
+      bit_size: 5
+    - name: SHIELD_DELAY
+      description: Selects the delay by which csd_shield is delayed relative to csd_sense.
+      bit_offset: 10
+      bit_size: 2
+      enum: SHIELD_DELAY
+    - name: SENSE_EN
+      description: "Enables the sense modulator output. 0: all switches, static or dynamic, are open and IDAC in CSD mode is off 1: switches and IDAC can be closed/on as per MMIO setting and CSD sequencer."
+      bit_offset: 12
+      bit_size: 1
+    - name: FULL_WAVE
+      description: Enables full wave cap sensing mode
+      bit_offset: 17
+      bit_size: 1
+      enum: FULL_WAVE
+    - name: MUTUAL_CAP
+      description: Enables mutual cap sensing mode
+      bit_offset: 18
+      bit_size: 1
+      enum: MUTUAL_CAP
+    - name: CSX_DUAL_CNT
+      description: "Enable the use of two counters for MUTUAL cap sensing mode (CSX), do not use when MUTUAL_CAP=0"
+      bit_offset: 19
+      bit_size: 1
+      enum: CSX_DUAL_CNT
+    - name: DSI_COUNT_SEL
+      description: Select what to output on the dsi_count bus.
+      bit_offset: 24
+      bit_size: 1
+      enum: DSI_COUNT_SEL
+    - name: DSI_SAMPLE_EN
+      description: Enables the use of the dsi_sample_in input instead of the comparator output to strobe COUNTER.
+      bit_offset: 25
+      bit_size: 1
+    - name: SAMPLE_SYNC
+      description: Enables double synchronizing of sample input from DSI (only relevant when DSI_SAMPLE_EN=1).
+      bit_offset: 26
+      bit_size: 1
+    - name: DSI_SENSE_EN
+      description: Enables the use of the dsi_sense_in input instead of the internally generated modulation signal to drive csd_sense and csd_shield signals.
+      bit_offset: 27
+      bit_size: 1
+    - name: LP_MODE
+      description: "Select the power mode for the CSD components (REFGEN, AMBUF, CSDCMP, HSCMP): 0: High Power mode 1: Low Power mode"
+      bit_offset: 30
+      bit_size: 1
+    - name: ENABLE
+      description: "Master enable of the CSDv2 IP. Must be set to 1 for any CSDv2, ADC or IDAC operation to function. When 0 all analog components will be off and all switches will be open."
+      bit_offset: 31
+      bit_size: 1
+fieldset/CSDCMP:
+  description: CSD Comparator configuration
+  fields:
+    - name: CSDCMP_EN
+      description: CSD Comparator Enable
+      bit_offset: 0
+      bit_size: 1
+      enum: CSDCMP_EN
+    - name: POLARITY_SEL
+      description: Select which IDAC polarity to use to detect CSDCMP triggering
+      bit_offset: 4
+      bit_size: 2
+      enum: POLARITY_SEL
+    - name: CMP_PHASE
+      description: "Select in what phase(s) the comparator is active, typically set to match the BAL_MODE of the used IDAC. Note, this also determines when a bad conversion is detected, namely at the beginning and end of the comparator active phase (also taking into account FILTER_DELAY and non-overlap)."
+      bit_offset: 8
+      bit_size: 2
+      enum: CMP_PHASE
+    - name: CMP_MODE
+      description: Select which signal to output on dsi_sample_out.
+      bit_offset: 28
+      bit_size: 1
+      enum: CMP_MODE
+    - name: FEEDBACK_MODE
+      description: "This bit controls whether the output directly from the comparator (csdcmp_out) or the flopped version (csdcmp_out_ff) is used. For CSD operation, the selected signal controls the IDAC(s), in GP mode the signal goes out on dsi_sample_out."
+      bit_offset: 29
+      bit_size: 1
+      enum: FEEDBACK_MODE
+    - name: AZ_EN
+      description: "Auto-Zero enable, allow the Sequencer to Auto-Zero this component"
+      bit_offset: 31
+      bit_size: 1
+fieldset/HSCMP:
+  description: High Speed Comparator configuration
+  fields:
+    - name: HSCMP_EN
+      description: High Speed Comparator enable
+      bit_offset: 0
+      bit_size: 1
+      enum: HSCMP_EN
+    - name: HSCMP_INVERT
+      description: Invert the HSCMP output before it is used to control switches and the CSD sequencer. This bit does not affect the ADC sequencer or the STATUS.HSCMP_OUT
+      bit_offset: 4
+      bit_size: 1
+    - name: AZ_EN
+      description: "Auto-Zero enable, allow the Sequencer to Auto-Zero this component"
+      bit_offset: 31
+      bit_size: 1
+fieldset/IDACA:
+  description: IDACA Configuration
+  fields:
+    - name: VAL
+      description: Current value setting for this IDAC (7 bits).
+      bit_offset: 0
+      bit_size: 7
+    - name: POL_DYN
+      description: "Polarity is dynamic, this bit does not influence the logic in the SoftIP, it only goes to the HardIP."
+      bit_offset: 7
+      bit_size: 1
+      enum: IDACA_POL_DYN
+    - name: POLARITY
+      description: "Selects the polarity of the IDAC (sensing operation). Normally the actual polarity depends on this bit, optionally mixed with DSI (see DSI_CTRL_EN) and if LEG1_MODE==CSD also mixed with the CSD configuration and operation. However in mutual cap mode with one IDAC (config.mutual_cap=1 & config.csx_dual_idac=0) the polarity of the IDAC is controlled by csd_sense."
+      bit_offset: 8
+      bit_size: 2
+      enum: IDACA_POLARITY
+    - name: BAL_MODE
+      description: "Balancing mode: only applies to legs configured as CSD."
+      bit_offset: 10
+      bit_size: 2
+      enum: IDACA_BAL_MODE
+    - name: LEG1_MODE
+      description: Controls the usage mode of LEG1 and the Polarity bit
+      bit_offset: 16
+      bit_size: 2
+      enum: IDACA_LEG1_MODE
+    - name: LEG2_MODE
+      description: Controls the usage mode of LEG2
+      bit_offset: 18
+      bit_size: 2
+      enum: IDACA_LEG2_MODE
+    - name: DSI_CTRL_EN
+      description: "Mix DSI inputs with MMIO controls or not (before getting mixed with CSD controls if enabled). 0: no DSI control IDACA_POLARITY = IDACA.POLARITY IDACA_LEG1_EN = IDACA.LEG1_EN IDACA_LEG2_EN = IDACA.LEG2_EN 1: Mix MMIO with DSI control IDACA_POLARITY = IDACA.POLARITY EXOR dsi_idaca_pol IDACA_LEG1_EN = IDACA.LEG1_EN AND dsi_idaca_leg1_en IDACA_LEG2_EN = IDACA.LEG2_EN AND dsi_idaca_leg2_en"
+      bit_offset: 21
+      bit_size: 1
+    - name: RANGE
+      description: IDAC multiplier
+      bit_offset: 22
+      bit_size: 2
+      enum: IDACA_RANGE
+    - name: LEG1_EN
+      description: output enable for leg 1 to CSDBUSA
+      bit_offset: 24
+      bit_size: 1
+    - name: LEG2_EN
+      description: output enable for leg 2 to CSDBUSA
+      bit_offset: 25
+      bit_size: 1
+fieldset/IDACB:
+  description: IDACB Configuration
+  fields:
+    - name: VAL
+      description: Current value setting for this IDAC (7 bits).
+      bit_offset: 0
+      bit_size: 7
+    - name: POL_DYN
+      description: "Polarity is dynamic, this bit does not influence the logic in the SoftIP, it only goes to the HardIP."
+      bit_offset: 7
+      bit_size: 1
+      enum: IDACB_POL_DYN
+    - name: POLARITY
+      description: "Selects the polarity of the IDAC (sensing operation). Normally the actual polarity depends on this bit, optionally mixed with DSI (see DSI_CTRL_EN) and if LEG1_EN==1 and LEG1_MODE==CSD also mixed with the CSD configuration and operation. In mutual cap mode however (see config.mutual_cap) the polarity of the IDAC is controlled by csd_sense. If LEG3_EN=1 (the other two legs must be off) then the ADC sequencer controls the IDACB polarity, optionally mixed with DSI."
+      bit_offset: 8
+      bit_size: 2
+      enum: IDACB_POLARITY
+    - name: BAL_MODE
+      description: same as corresponding IDACA Balancing mode
+      bit_offset: 10
+      bit_size: 2
+      enum: IDACB_BAL_MODE
+    - name: LEG1_MODE
+      description: Controls the usage mode of LEG1 and the Polarity bit
+      bit_offset: 16
+      bit_size: 2
+      enum: IDACB_LEG1_MODE
+    - name: LEG2_MODE
+      description: Controls the usage mode of LEG2
+      bit_offset: 18
+      bit_size: 2
+      enum: IDACB_LEG2_MODE
+    - name: DSI_CTRL_EN
+      description: "Mix DSI inputs with MMIO controls or not (before getting mixed with CSD controls if enabled) 0: no DSI control IDACB_POLARITY = IDACB.POLARITY IDACB_LEG1_EN = IDACB.LEG1_EN IDACB_LEG2_EN = IDACB.LEG2_EN IDACB_LEG3_EN = IDACB.LEG3_EN 1: Mix MMIO with DSI control IDACB_POLARITY = IDACB.POLARITY EXOR dsi_idacb_pol IDACB_LEG1_EN = IDACB.LEG1_EN AND dsi_idacb_leg1_en IDACB_LEG2_EN = IDACB.LEG2_EN AND dsi_idacb_leg2_en IDACB_LEG3_EN = IDACB.LEG3_EN AND dsi_idacb_leg3_en"
+      bit_offset: 21
+      bit_size: 1
+    - name: RANGE
+      description: IDAC multiplier
+      bit_offset: 22
+      bit_size: 2
+      enum: IDACB_RANGE
+    - name: LEG1_EN
+      description: output enable for leg 1 to CSDBUSB or CSDBUSA
+      bit_offset: 24
+      bit_size: 1
+    - name: LEG2_EN
+      description: output enable for leg 2 to CSDBUSB or CSDBUSA
+      bit_offset: 25
+      bit_size: 1
+    - name: LEG3_EN
+      description: "output enable for leg3 to CSDBUSC, only allowed when RANGE = IDAC_LO. When this bit is set both other legs should be off. Note that leg3 can only be used for ADC mode, not GP mode. Which means that leg3 can only be on when the ADC Sequencer is in the ADC_measure or Calib_measure state. In those states leg3 is controlled by the ADC configuration and the HSCMP output. In addition this leg3 enable bit can optionally be mixed with DSI (see DSI_CTRL_EN). When LEG3_EN=1 also the IDACB polarity is controlled by the ADC sequencer."
+      bit_offset: 26
+      bit_size: 1
+fieldset/INTR:
+  description: CSD Interrupt Request Register
+  fields:
+    - name: SAMPLE
+      description: A normal sample is complete
+      bit_offset: 1
+      bit_size: 1
+    - name: INIT
+      description: Coarse initialization complete or Sample initialization complete (the latter is typically ignored)
+      bit_offset: 2
+      bit_size: 1
+    - name: ADC_RES
+      description: ADC Result ready
+      bit_offset: 8
+      bit_size: 1
+fieldset/INTR_MASK:
+  description: CSD Interrupt mask register
+  fields:
+    - name: SAMPLE
+      description: Mask bit for corresponding bit in interrupt request register.
+      bit_offset: 1
+      bit_size: 1
+    - name: INIT
+      description: Mask bit for corresponding bit in interrupt request register.
+      bit_offset: 2
+      bit_size: 1
+    - name: ADC_RES
+      description: Mask bit for corresponding bit in interrupt request register.
+      bit_offset: 8
+      bit_size: 1
+fieldset/INTR_MASKED:
+  description: CSD Interrupt masked register
+  fields:
+    - name: SAMPLE
+      description: Logical and of corresponding request and mask bits.
+      bit_offset: 1
+      bit_size: 1
+    - name: INIT
+      description: Logical and of corresponding request and mask bits.
+      bit_offset: 2
+      bit_size: 1
+    - name: ADC_RES
+      description: Logical and of corresponding request and mask bits.
+      bit_offset: 8
+      bit_size: 1
+fieldset/INTR_SET:
+  description: CSD Interrupt set register
+  fields:
+    - name: SAMPLE
+      description: "Write with '1' to set corresponding bit in interrupt request register."
+      bit_offset: 1
+      bit_size: 1
+    - name: INIT
+      description: "Write with '1' to set corresponding bit in interrupt request register."
+      bit_offset: 2
+      bit_size: 1
+    - name: ADC_RES
+      description: "Write with '1' to set corresponding bit in interrupt request register."
+      bit_offset: 8
+      bit_size: 1
+fieldset/IO_SEL:
+  description: IO output control Waveform selection
+  fields:
+    - name: CSD_TX_OUT
+      description: Select waveform for csd_tx_out output signal
+      bit_offset: 0
+      bit_size: 4
+    - name: CSD_TX_OUT_EN
+      description: Select waveform for csd_tx_out_en output signal
+      bit_offset: 4
+      bit_size: 4
+    - name: CSD_TX_AMUXB_EN
+      description: Select waveform for csd_tx_amuxb_en output signal
+      bit_offset: 12
+      bit_size: 4
+    - name: CSD_TX_N_OUT
+      description: Select waveform for csd_tx_n_out output signal
+      bit_offset: 16
+      bit_size: 4
+    - name: CSD_TX_N_OUT_EN
+      description: Select waveform for csd_tx_n_out_en output signal
+      bit_offset: 20
+      bit_size: 4
+    - name: CSD_TX_N_AMUXA_EN
+      description: Select waveform for csd_tx_n_amuxa_en output signal
+      bit_offset: 24
+      bit_size: 4
+fieldset/REFGEN:
+  description: Reference Generator configuration
+  fields:
+    - name: REFGEN_EN
+      description: Reference Generator Enable
+      bit_offset: 0
+      bit_size: 1
+      enum: REFGEN_EN
+    - name: BYPASS
+      description: Bypass selected input reference unbuffered to Vrefhi
+      bit_offset: 4
+      bit_size: 1
+    - name: VDDA_EN
+      description: Close Vdda switch to top of resistor string (or Vrefhi?)
+      bit_offset: 5
+      bit_size: 1
+    - name: RES_EN
+      description: Resistor string enable; 0= open switch on top of the resistor string (Vreflo=Vssa)
+      bit_offset: 6
+      bit_size: 1
+    - name: GAIN
+      description: "Select resistor string tap for feedback, 0= minimum vout, 31= maximum vout = vrefhi -> gain=1 (only works if the resistor string is enabled; RES_EN=1)"
+      bit_offset: 8
+      bit_size: 5
+    - name: VREFLO_SEL
+      description: "Select resistor string tap for Vreflo/Vreflo_int, 0= minimum vout, 31= maximum vout = vrefhi (only works if the resistor string is enabled; RES_EN=1)"
+      bit_offset: 16
+      bit_size: 5
+    - name: VREFLO_INT
+      description: Ouput the resistor string tap either to Vreflo (0) or Vreflo_int (1).
+      bit_offset: 23
+      bit_size: 1
+fieldset/RESULT_VAL1:
+  description: Result CSD/CSX accumulation counter value 1
+  fields:
+    - name: VALUE
+      description: Accumulated counter value for this result. In case of Mutual cap with two counters (CSX = config.mutual_cap & config.csx_dual_cnt) this counter counts when csd_sense is high.
+      bit_offset: 0
+      bit_size: 16
+    - name: BAD_CONVS
+      description: "Number of 'bad' conversion for which the CSD comparator did not trigger within the normal time window, either because Vref was not crossed at all, or if the Vref was already crossed before the window started. This counter is reset when the sequencer is started and will saturate at 255 when more than 255 conversions are bad."
+      bit_offset: 16
+      bit_size: 8
+fieldset/RESULT_VAL2:
+  description: Result CSX accumulation counter value 2
+  fields:
+    - name: VALUE
+      description: "Only used in case of Mutual cap with two counters (CSX = config.mutual_cap & config.csx_dual_cnt), this counter counts when csd_sense is low."
+      bit_offset: 0
+      bit_size: 16
+fieldset/SENSE_DUTY:
+  description: Sense clock duty cycle
+  fields:
+    - name: SENSE_WIDTH
+      description: "Defines the length of the first phase of the sense clock in clk_csd cycles. A value of 0 disables this feature and the duty cycle of csd_sense will be 50 percent, which is equal to SENSE_WIDTH = (SENSE_DIV+1)/2, or when clock dithering is used that becomes [(SENSE_DIV+1) + (LFSR_OUT << LSFR_SCALE)]/2. At all times it must be assured that the phases are at least 2 clk_csd cycles (1 for non overlap, if used), if this rule is violated the result is undefined. Note that this feature is not available when SEL_LFSR_MSB (PRS) is selected."
+      bit_offset: 0
+      bit_size: 12
+    - name: SENSE_POL
+      description: Polarity of the sense clock 0 = start with low phase (typical for regular negative transfer CSD) 1 = start with high phase
+      bit_offset: 16
+      bit_size: 1
+    - name: OVERLAP_PHI1
+      description: "NonOverlap or not for Phi1 (csd_sense=0). 0 = Non-overlap for Phi1, the Phi1 signal is csd_sense inverted except that the signal goes low 1 clk_sample before csd_sense goes high. Intended usage: new low EMI CSD/CSX with static GPIO. 1 = 'Overlap' (= not non-overlap) for Phi1, the Phi1 signal is csd_sense inverted. Intended usage: legacy CSD with GPIO switching, the GPIO internal circuit ensures that the switches are non-overlapping."
+      bit_offset: 18
+      bit_size: 1
+    - name: OVERLAP_PHI2
+      description: Same as OVERLAP_PHI1 but for Phi2 (csd_sense=1).
+      bit_offset: 19
+      bit_size: 1
+fieldset/SENSE_PERIOD:
+  description: Sense clock period
+  fields:
+    - name: SENSE_DIV
+      description: "The length-1 of the Sense modulation 'clock' period in clk_csd cycles. For regular CSD one sense clock cycle = one conversion (=phi1+phi2) . Note this is the base divider, clock dithering may change the actual period length. Note that SENSE_DIV must be at least 1 and additionally also allow for one clk_hf of non overlap (if OVERLAP_HI1/2 is set) on both phases, i.e. if clk_csd=clk_hf then SENSE_DIV must be >=3. In addition the FILTER_DELAY needs to be added to the minimum allowed SENSE_DIV value."
+      bit_offset: 0
+      bit_size: 12
+    - name: LFSR_SIZE
+      description: Selects the length of the LFSR which determines the LFSR repeat period. LFSR_BITS LSB of the LFSR are used for the clock dithering variation on the base period (was PRS in CSDv1). Whenever the LFSR is used (non zero value in this field) the LFSR_CLEAR bit should also be set.
+      bit_offset: 16
+      bit_size: 3
+      enum: LFSR_SIZE
+    - name: LFSR_SCALE
+      description: "Shift the LFSR output left by LSFR_SCALE bits before adding to SENSE_DIV. This dithering is disabled when SEL_LSFR_MSB is set. The clock divider to be used = (SENSE_DIV+1) + (SEL_LSFR_MSB ? 0 : (LFSR_OUT<<LFSR_SCALE)). Note that the clock divider including the dithering term must fit in 12 bits, otherwise the result is undefined."
+      bit_offset: 20
+      bit_size: 4
+    - name: LFSR_CLEAR
+      description: "When set, forces the LFSR to it's initial state (all ones). This bit is automatically cleared by hardware after the LFSR is cleared, which is at the next clk_csd positive edge. This bit should be set whenever this register is written and the LFSR is used. Note that the LFSR will also get reset to all ones during the AutoZero_1/2 states."
+      bit_offset: 24
+      bit_size: 1
+    - name: SEL_LFSR_MSB
+      description: Use the MSB of configured LSFR size as csd_sense signal. Intended to be used only with bit 8 or 12-bit LFSR size for CSDv1 backward compatibility (PRS). When this bit is set then clock divider dithering is disabled and SENSE_WIDTH is disabled.
+      bit_offset: 25
+      bit_size: 1
+    - name: LFSR_BITS
+      description: "Selects the number of LSB bits to use from the LSFR to provide the clock dithering variation on the base period. Caveat make sure that SENSE_DIV > the maximum absolute range (e.g. for 4B SENSE_DIV > 8), otherwise results are undefined."
+      bit_offset: 26
+      bit_size: 2
+      enum: LFSR_BITS
+fieldset/SEQ_INIT_CNT:
+  description: Sequencer Initial conversion and sample counts
+  fields:
+    - name: CONV_CNT
+      description: "Number of conversion per Initialization sample, if set to 0 the Sample_init state will be skipped."
+      bit_offset: 0
+      bit_size: 16
+fieldset/SEQ_NORM_CNT:
+  description: Sequencer Normal conversion and sample counts
+  fields:
+    - name: CONV_CNT
+      description: "Number of conversion per sample, if set to 0 the Sample_norm state will be skipped. Sample window size = SEQ_NORM_CNT.CONV_CNT * (SENSE_PERIOD.SENSE_DIV+1). Note for CSDv1 Sample window size = PERIOD"
+      bit_offset: 0
+      bit_size: 16
+fieldset/SEQ_START:
+  description: Sequencer start
+  fields:
+    - name: START
+      description: "Start the CSD sequencer. The sequencer will clear this bit when it is done. Depending on the mode the sequencer is done when a sample has been accumulated, when the high speed comparator trips or if the sequencer is aborted. When the ADC is enabled the ADC sequencer will start when the CSD sequencer reaches the Sample_norm state (only with the regular CSD scan mode)."
+      bit_offset: 0
+      bit_size: 1
+    - name: SEQ_MODE
+      description: "0 = regular CSD scan + optional ADC 1 = coarse initialization, the Sequencer will go to the INIT_COARSE state."
+      bit_offset: 1
+      bit_size: 1
+    - name: ABORT
+      description: When a 1 is written the CSD and ADC sequencers will be aborted (if they are running) and the START bit will be cleared. This bit always read as 0.
+      bit_offset: 3
+      bit_size: 1
+    - name: DSI_START_EN
+      description: When this bit is set a positive edge on dsi_start will start the CSD sequencer and if enabled also the ADC sequencer.
+      bit_offset: 4
+      bit_size: 1
+    - name: AZ0_SKIP
+      description: When set the AutoZero_0 state will be skipped
+      bit_offset: 8
+      bit_size: 1
+    - name: AZ1_SKIP
+      description: When set the AutoZero_1 state will be skipped
+      bit_offset: 9
+      bit_size: 1
+fieldset/SEQ_TIME:
+  description: Sequencer Timing
+  fields:
+    - name: AZ_TIME
+      description: Define Auto-Zero time in csd_sense cycles -1.
+      bit_offset: 0
+      bit_size: 8
+fieldset/SPARE:
+  description: Spare MMIO
+  fields:
+    - name: SPARE
+      description: Spare MMIO
+      bit_offset: 0
+      bit_size: 4
+fieldset/STATUS:
+  description: Status Register
+  fields:
+    - name: CSD_SENSE
+      description: Signal used to drive the Cs switches.
+      bit_offset: 1
+      bit_size: 1
+    - name: HSCMP_OUT
+      description: Output of reference buffer comparator used to charge up Cmod and/or Csh_tank (synchronized)
+      bit_offset: 2
+      bit_size: 1
+      enum: HSCMP_OUT
+    - name: CSDCMP_OUT
+      description: Output of main sensing comparator (synchronized)
+      bit_offset: 3
+      bit_size: 1
+fieldset/STAT_CNTS:
+  description: Current status counts
+  fields:
+    - name: NUM_CONV
+      description: Current number of conversions remaining when in Sample_* states (note that in AutoZero* states the same down counter is reused to count the cycles)
+      bit_offset: 0
+      bit_size: 16
+fieldset/STAT_HCNT:
+  description: Current count of the HSCMP counter
+  fields:
+    - name: CNT
+      description: Current value of HSCMP counter
+      bit_offset: 0
+      bit_size: 16
+fieldset/STAT_SEQ:
+  description: Current Sequencer status
+  fields:
+    - name: SEQ_STATE
+      description: CSD sequencer state
+      bit_offset: 0
+      bit_size: 3
+    - name: ADC_STATE
+      description: ADC sequencer state (only relevant after SEQ_STATE has reached SAMPLE_NORM and ADC sequencer has started)
+      bit_offset: 16
+      bit_size: 3
+fieldset/SW_AMUXBUF_SEL:
+  description: Amuxbuffer switches Waveform selection
+  fields:
+    - name: SW_IRBY
+      description: Set corresponding switch
+      bit_offset: 4
+      bit_size: 1
+    - name: SW_IRLB
+      description: Set corresponding switch
+      bit_offset: 8
+      bit_size: 1
+    - name: SW_ICA
+      description: Set corresponding switch
+      bit_offset: 12
+      bit_size: 1
+    - name: SW_ICB
+      description: Select waveform for corresponding switch
+      bit_offset: 16
+      bit_size: 3
+    - name: SW_IRLI
+      description: Set corresponding switch
+      bit_offset: 20
+      bit_size: 1
+    - name: SW_IRH
+      description: Set corresponding switch
+      bit_offset: 24
+      bit_size: 1
+    - name: SW_IRL
+      description: Set corresponding switch
+      bit_offset: 28
+      bit_size: 1
+fieldset/SW_BYP_SEL:
+  description: AMUXBUS bypass switches Waveform selection
+  fields:
+    - name: SW_BYA
+      description: Set corresponding switch
+      bit_offset: 12
+      bit_size: 1
+    - name: SW_BYB
+      description: Set corresponding switch
+      bit_offset: 16
+      bit_size: 1
+    - name: SW_CBCC
+      description: Set corresponding switch If the ADC is enabled then this switch is directly controlled by the ADC sequencer.
+      bit_offset: 20
+      bit_size: 1
+fieldset/SW_CMP_N_SEL:
+  description: CSDCMP Neg Switch Waveform selection
+  fields:
+    - name: SW_SCRH
+      description: Select waveform for corresponding switch
+      bit_offset: 24
+      bit_size: 3
+    - name: SW_SCRL
+      description: Select waveform for corresponding switch
+      bit_offset: 28
+      bit_size: 3
+fieldset/SW_CMP_P_SEL:
+  description: CSDCMP Pos Switch Waveform selection
+  fields:
+    - name: SW_SFPM
+      description: Select waveform for corresponding switch
+      bit_offset: 0
+      bit_size: 3
+    - name: SW_SFPT
+      description: Select waveform for corresponding switch
+      bit_offset: 4
+      bit_size: 3
+    - name: SW_SFPS
+      description: Select waveform for corresponding switch
+      bit_offset: 8
+      bit_size: 3
+    - name: SW_SFMA
+      description: Set corresponding switch
+      bit_offset: 12
+      bit_size: 1
+    - name: SW_SFMB
+      description: Set corresponding switch
+      bit_offset: 16
+      bit_size: 1
+    - name: SW_SFCA
+      description: Set corresponding switch
+      bit_offset: 20
+      bit_size: 1
+    - name: SW_SFCB
+      description: Set corresponding switch
+      bit_offset: 24
+      bit_size: 1
+fieldset/SW_DSI_SEL:
+  description: DSI output switch control Waveform selection
+  fields:
+    - name: DSI_CSH_TANK
+      description: "Select waveform for dsi_csh_tank output signal 0: static open 1: static closed 2: phi1 3: phi2 4: phi1 & HSCMP 5: phi2 & HSCMP 6: HSCMP // ignores phi1/2 7: !sense // = phi1 but ignores OVERLAP_PHI1 8: phi1_delay // phi1 delayed with shield delay 9: phi2_delay // phi2 delayed with shield delay 10: !phi1 11: !phi2 12: !(phi1 & HSCMP) 13: !(phi2 & HSCMP) 14: !HSCMP // ignores phi1/2 15: sense // = phi2 but ignores OVERLAP_PHI2"
+      bit_offset: 0
+      bit_size: 4
+    - name: DSI_CMOD
+      description: Select waveform for dsi_cmod output signal
+      bit_offset: 4
+      bit_size: 4
+fieldset/SW_FW_MOD_SEL:
+  description: Full Wave Cmod Switch Waveform selection
+  fields:
+    - name: SW_F1PM
+      description: Set corresponding switch
+      bit_offset: 0
+      bit_size: 1
+    - name: SW_F1MA
+      description: Select waveform for corresponding switch
+      bit_offset: 8
+      bit_size: 3
+    - name: SW_F1CA
+      description: Select waveform for corresponding switch
+      bit_offset: 16
+      bit_size: 3
+    - name: SW_C1CC
+      description: Set corresponding switch
+      bit_offset: 20
+      bit_size: 1
+    - name: SW_C1CD
+      description: Set corresponding switch
+      bit_offset: 24
+      bit_size: 1
+    - name: SW_C1F1
+      description: Set corresponding switch
+      bit_offset: 28
+      bit_size: 1
+fieldset/SW_FW_TANK_SEL:
+  description: Full Wave Csh_tank Switch Waveform selection
+  fields:
+    - name: SW_F2PT
+      description: Set corresponding switch
+      bit_offset: 4
+      bit_size: 1
+    - name: SW_F2MA
+      description: Select waveform for corresponding switch
+      bit_offset: 8
+      bit_size: 3
+    - name: SW_F2CA
+      description: Select waveform for corresponding switch
+      bit_offset: 12
+      bit_size: 3
+    - name: SW_F2CB
+      description: Select waveform for corresponding switch
+      bit_offset: 16
+      bit_size: 3
+    - name: SW_C2CC
+      description: Set corresponding switch
+      bit_offset: 20
+      bit_size: 1
+    - name: SW_C2CD
+      description: Set corresponding switch
+      bit_offset: 24
+      bit_size: 1
+    - name: SW_C2F2
+      description: Set corresponding switch
+      bit_offset: 28
+      bit_size: 1
+fieldset/SW_HS_N_SEL:
+  description: HSCMP Neg input switch Waveform selection
+  fields:
+    - name: SW_HCCC
+      description: Set corresponding switch
+      bit_offset: 16
+      bit_size: 1
+    - name: SW_HCCD
+      description: Set corresponding switch
+      bit_offset: 20
+      bit_size: 1
+    - name: SW_HCRH
+      description: Select waveform for corresponding switch
+      bit_offset: 24
+      bit_size: 3
+    - name: SW_HCRL
+      description: Select waveform for corresponding switch
+      bit_offset: 28
+      bit_size: 3
+fieldset/SW_HS_P_SEL:
+  description: HSCMP Pos input switch Waveform selection
+  fields:
+    - name: SW_HMPM
+      description: "Set HMPM switch 0: static open 1: static closed"
+      bit_offset: 0
+      bit_size: 1
+    - name: SW_HMPT
+      description: Set corresponding switch
+      bit_offset: 4
+      bit_size: 1
+    - name: SW_HMPS
+      description: Set corresponding switch
+      bit_offset: 8
+      bit_size: 1
+    - name: SW_HMMA
+      description: Set corresponding switch
+      bit_offset: 12
+      bit_size: 1
+    - name: SW_HMMB
+      description: Set corresponding switch
+      bit_offset: 16
+      bit_size: 1
+    - name: SW_HMCA
+      description: Set corresponding switch
+      bit_offset: 20
+      bit_size: 1
+    - name: SW_HMCB
+      description: Set corresponding switch
+      bit_offset: 24
+      bit_size: 1
+    - name: SW_HMRH
+      description: Set corresponding switch
+      bit_offset: 28
+      bit_size: 1
+fieldset/SW_REFGEN_SEL:
+  description: Reference Generator Switch Waveform selection
+  fields:
+    - name: SW_IAIB
+      description: Set corresponding switch
+      bit_offset: 0
+      bit_size: 1
+    - name: SW_IBCB
+      description: Set corresponding switch
+      bit_offset: 4
+      bit_size: 1
+    - name: SW_SGMB
+      description: Set corresponding switch
+      bit_offset: 16
+      bit_size: 1
+    - name: SW_SGRP
+      description: Set corresponding switch
+      bit_offset: 20
+      bit_size: 1
+    - name: SW_SGRE
+      description: Set corresponding switch
+      bit_offset: 24
+      bit_size: 1
+    - name: SW_SGR
+      description: Set corresponding switch
+      bit_offset: 28
+      bit_size: 1
+fieldset/SW_RES:
+  description: Switch Resistance configuration
+  fields:
+    - name: RES_HCAV
+      description: Select resistance or low EMI (slow ramp) for the HCAV switch
+      bit_offset: 0
+      bit_size: 2
+      enum: RES_HCAV
+    - name: RES_HCAG
+      description: Select resistance or low EMI for the corresponding switch
+      bit_offset: 2
+      bit_size: 2
+    - name: RES_HCBV
+      description: Select resistance or low EMI for the corresponding switch
+      bit_offset: 4
+      bit_size: 2
+    - name: RES_HCBG
+      description: Select resistance or low EMI for the corresponding switch
+      bit_offset: 6
+      bit_size: 2
+    - name: RES_F1PM
+      description: Select resistance for the corresponding switch
+      bit_offset: 16
+      bit_size: 2
+      enum: RES_F1PM
+    - name: RES_F2PT
+      description: Select resistance for the corresponding switch
+      bit_offset: 18
+      bit_size: 2
+fieldset/SW_SHIELD_SEL:
+  description: Shielding switches Waveform selection
+  fields:
+    - name: SW_HCAV
+      description: N/A
+      bit_offset: 0
+      bit_size: 3
+    - name: SW_HCAG
+      description: Select waveform for corresponding switch
+      bit_offset: 4
+      bit_size: 3
+    - name: SW_HCBV
+      description: N/A
+      bit_offset: 8
+      bit_size: 3
+    - name: SW_HCBG
+      description: "Select waveform for corresponding switch, using csd_shield as base"
+      bit_offset: 12
+      bit_size: 3
+    - name: SW_HCCV
+      description: Set corresponding switch
+      bit_offset: 16
+      bit_size: 1
+    - name: SW_HCCG
+      description: Set corresponding switch If the ADC is enabled then this switch is directly controlled by the ADC sequencer.
+      bit_offset: 20
+      bit_size: 1
+enum/ADC_MODE:
+  bit_size: 2
+  variants:
+    - name: "OFF"
+      description: No ADC measurement
+      value: 0
+    - name: VREF_CNT
+      description: Count time A to bring Cref1 + Cref2 up from Vssa to Vrefhi with IDACB
+      value: 1
+    - name: VREF_BY2_CNT
+      description: Count time B to bring Cref1 + Cref2 back up to Vrefhi with IDACB (after bringing them down for time A/2 cycles with IDACB sinking)
+      value: 2
+    - name: VIN_CNT
+      description: Determine HSCMP polarity and count time C to source/sink Cref1 + Cref2 from Vin to Vrefhi.
+      value: 3
+enum/CMP_MODE:
+  bit_size: 1
+  variants:
+    - name: CSD
+      description: "CSD mode: output the filtered sample signal on dsi_sample_out"
+      value: 0
+    - name: GP
+      description: "General Purpose mode: output the unfiltered sample unfiltered comparator output, either asynchronous or flopped."
+      value: 1
+enum/CMP_PHASE:
+  bit_size: 2
+  variants:
+    - name: FULL
+      description: "Comparator is active from start of Phi2 and kept active into Phi1. Intended usage: legacy CSD for balancing over a full csd_sense period (non-overlap should be turned off)"
+      value: 0
+    - name: PHI1
+      description: Comparator is active during Phi1 only. Currently no known use-case.
+      value: 1
+    - name: PHI2
+      description: "Comparator is active during Phi2 only. Intended usage: CSD Low EMI."
+      value: 2
+    - name: PHI1_2
+      description: "Comparator is activated at the start of both Phi1 and Phi2 (non-overlap should be enabled). Intended usage: CSX, or Full-Wave."
+      value: 3
+enum/CSDCMP_EN:
+  bit_size: 1
+  variants:
+    - name: "OFF"
+      description: "Disable comparator, output is zero"
+      value: 0
+    - name: "ON"
+      description: "On, regular operation. Note that CONFIG.LP_MODE determines the power mode level"
+      value: 1
+enum/CSX_DUAL_CNT:
+  bit_size: 1
+  variants:
+    - name: ONE
+      description: Use one counter for both phases (source and sink).
+      value: 0
+    - name: TWO
+      description: "Use two counters, separate count for when csd_sense is high and when csd_sense is low."
+      value: 1
+enum/DSI_COUNT_SEL:
+  bit_size: 1
+  variants:
+    - name: CSD_RESULT
+      description: "depending on the dsi_count_val_sel input either output RESULT_VAL1.VALUE (0) or RESULT_VAL2.VALUE (1) on the dsi_count bus. Note that dsi_count_val_sel is not synchronized, i.e. it controls the mux combinatorially."
+      value: 0
+    - name: ADC_RESULT
+      description: output ADC_RES.VIN_CNT on the dsi_count bus
+      value: 1
+enum/FEEDBACK_MODE:
+  bit_size: 1
+  variants:
+    - name: FLOP
+      description: Use feedback from sampling flip-flop (used in most modes).
+      value: 0
+    - name: COMP
+      description: Use feedback from comparator directly (used in single Cmod mutual cap sensing only)
+      value: 1
+enum/FULL_WAVE:
+  bit_size: 1
+  variants:
+    - name: HALFWAVE
+      description: "Half Wave mode (normal). In this mode the comparator always trips in the same direction (positive or negative edge) and the same Vref, i.e. no polarity change."
+      value: 0
+    - name: FULLWAVE
+      description: "Full Wave mode. In this mode the comparator trips in opposite direction and with different Vref in each phase, i.e. the polarity flips."
+      value: 1
+enum/HSCMP_EN:
+  bit_size: 1
+  variants:
+    - name: "OFF"
+      description: "Disable comparator, output is zero"
+      value: 0
+    - name: "ON"
+      description: "On, regular operation. Note that CONFIG.LP_MODE determines the power mode level"
+      value: 1
+enum/HSCMP_OUT:
+  bit_size: 1
+  variants:
+    - name: C_LT_VREF
+      description: Vin < Vref
+      value: 0
+    - name: C_GT_VREF
+      description: Vin > Vref
+      value: 1
+enum/IDACA_BAL_MODE:
+  bit_size: 2
+  variants:
+    - name: FULL
+      description: "enabled from start of Phi2 until disabled by CSDCMP. Intended usage: legacy CSD for balancing over a full csd_sense period (non-overlap should be turned off)"
+      value: 0
+    - name: PHI1
+      description: "enabled from start of Phi1 and disabled by CSDCMP or at end of Phi1. Enables dual IDAC CSX or Full-Wave, one for sourcing and the other for sinking."
+      value: 1
+    - name: PHI2
+      description: "enabled from start of Phi2 and disabled by CSDCMP or at end of Phi2. Intended usage: CSD Low EMI or dual IDAC CSX or Full-Wave."
+      value: 2
+    - name: PHI1_2
+      description: "enabled from start of both Phi1 and Phi2 and disabled by CSDCMP or at end of Phi1 or Phi2 (if non-overlap enabled). Intended usage: single IDAC CSX, or Full-Wave."
+      value: 3
+enum/IDACA_LEG1_MODE:
+  bit_size: 2
+  variants:
+    - name: GP_STATIC
+      description: "General Purpose static mode: LEG1 and POLARITY are controlled by MMIO and optionally mixed with DSI (see DSI_CTRL_EN). No shunting is used, this saves power when off but also any on/off switching will take longer."
+      value: 0
+    - name: GP
+      description: "General Purpose dynamic mode: LEG1 and POLARITY are controlled by MMIO and optionally mixed with DSI (see DSI_CTRL_EN). Shunting is used, so on/off switching is faster, but power is wasted when the leg is disabled."
+      value: 1
+    - name: CSD_STATIC
+      description: "CSD static mode: LEG1 can only be on when the CSD Sequencer is in the Sample_init or Sample_norm state. In those states LEG1 is controlled by LEG1_EN, csd_sense and the CSD configuration. Polarity is controlled by the CSD configuration and operation. In addition leg1 enable and polarity can optionally be mixed with DSI (see DSI_CTRL_EN). No shunting is used, this saves power when off but also any on/off switching will take longer."
+      value: 2
+    - name: CSD
+      description: "CSD dynamic mode: LEG1 can only be on when the CSD Sequencer is in the Sample_init or Sample_norm state. In thoses states LEG1 is controlled by LEG1_EN, the CSD configuration, csd_sense and the flopped CSDCMP output (CSDCMP_OUT_FF). Polarity is controlled by the CSD configuration and operation. In addition leg1 enable and polarity can optionally be mixed with DSI (see DSI_CTRL_EN). Shunting is used, so on/off switching is faster, but power is wasted when the leg is disabled."
+      value: 3
+enum/IDACA_LEG2_MODE:
+  bit_size: 2
+  variants:
+    - name: GP_STATIC
+      description: "General Purpose static mode: LEG2 is controlled by MMIO and optionally mixed with DSI (see DSI_CTRL_EN). No shunting is used, this saves power when off but also any on/off switching will take longer."
+      value: 0
+    - name: GP
+      description: "General Purpose dynamic mode: LEG2 is controlled by MMIO and optionally mixed with DSI (see DSI_CTRL_EN). Shunting is used, so on/off switching is faster, but power is wasted when the leg is disabled."
+      value: 1
+    - name: CSD_STATIC
+      description: "CSD static mode: LEG2 can only be on when the CSD Sequencer is in the Sample_init or Sample_norm state. In those states LEG2 is controlled by LEG2_EN, csd_sense and the CSD configuration. Polarity is controlled by the CSD configuration and operation. In addition leg2 enable and polarity can optionally be mixed with DSI (see DSI_CTRL_EN). No shunting is used, this saves power when off but also any on/off switching will take longer."
+      value: 2
+    - name: CSD
+      description: "CSD dynamic mode: LEG2 can only be on when the CSD Sequencer is in the Sample_init or Sample_norm state. In those states LEG2 is controlled by LEG2_EN, the CSD configuration, csd_sense and the flopped CSDCMP output (CSDCMP_OUT_FF). In addition leg2 enable can optionally be mixed with DSI (see DSI_CTRL_EN). Shunting is used, so on/off switching is faster, but power is wasted when the leg is disabled."
+      value: 3
+enum/IDACA_POLARITY:
+  bit_size: 2
+  variants:
+    - name: VSSA_SRC
+      description: "Normal: switch between Vssa and Cmod. For non-CSD application, IDAC will source current."
+      value: 0
+    - name: VDDA_SNK
+      description: "Inverted: switch between Vdda and Cmod. For non-CSD application, IDAC will sink current."
+      value: 1
+    - name: SENSE
+      description: The polarity of the IDAC will follow the csd_sense signal (POL_DYN bit should be set too). The intended usage is for CSX using a single IDAC.
+      value: 2
+    - name: SENSE_INV
+      description: The polarity of the IDAC will follow the inverted csd_sense signal (POL_DYN bit should be set too). The intended usage is for CSX using a single IDAC.
+      value: 3
+enum/IDACA_POL_DYN:
+  bit_size: 1
+  variants:
+    - name: STATIC
+      description: "Static polarity. Polarity is expected to be stable, so to save power this avoids the shunting of the unused polarity, at the expense of response time."
+      value: 0
+    - name: DYNAMIC
+      description: "Dynamic polarity. Polarity is expected to change frequently (e.g. invert after every csd_sense phase), so to improve response time this keeps the shunt of the unused polarity on at the expense of power."
+      value: 1
+enum/IDACA_RANGE:
+  bit_size: 2
+  variants:
+    - name: IDAC_LO
+      description: 1 LSB = 37.5 nA
+      value: 0
+    - name: IDAC_MED
+      description: 1 LSB = 300 nA
+      value: 1
+    - name: IDAC_HI
+      description: 1 LSB = 2400 nA
+      value: 2
+enum/IDACB_BAL_MODE:
+  bit_size: 2
+  variants:
+    - name: FULL
+      description: same as corresponding IDACA Balancing mode
+      value: 0
+    - name: PHI1
+      description: same as corresponding IDACA Balancing mode
+      value: 1
+    - name: PHI2
+      description: same as corresponding IDACA Balancing mode
+      value: 2
+    - name: PHI1_2
+      description: same as corresponding IDACA Balancing mode
+      value: 3
+enum/IDACB_LEG1_MODE:
+  bit_size: 2
+  variants:
+    - name: GP_STATIC
+      description: same as corresponding IDACA.LEG1_MODE
+      value: 0
+    - name: GP
+      description: same as corresponding IDACA.LEG1_MODE
+      value: 1
+    - name: CSD_STATIC
+      description: same as corresponding IDACA.LEG1_MODE
+      value: 2
+    - name: CSD
+      description: same as corresponding IDACA.LEG1_MODE
+      value: 3
+enum/IDACB_LEG2_MODE:
+  bit_size: 2
+  variants:
+    - name: GP_STATIC
+      description: same as corresponding IDACA.LEG2_MODE
+      value: 0
+    - name: GP
+      description: same as corresponding IDACA.LEG2_MODE
+      value: 1
+    - name: CSD_STATIC
+      description: same as corresponding IDACA.LEG2_MODE
+      value: 2
+    - name: CSD
+      description: same as corresponding IDACA.LEG2_MODE
+      value: 3
+enum/IDACB_POLARITY:
+  bit_size: 2
+  variants:
+    - name: VSSA_SRC
+      description: "Normal: switch between Vssa and Cmod. For non-CSD application, IDAC will source current."
+      value: 0
+    - name: VDDA_SNK
+      description: "Inverted: switch between Vdda and Cmod. For non-CSD application, IDAC will sink current."
+      value: 1
+    - name: SENSE
+      description: The polarity of the IDAC will follow the csd_sense signal (POL_DYN bit should be set too). The intended usage is for CSX using a single IDAC.
+      value: 2
+    - name: SENSE_INV
+      description: The polarity of the IDAC will follow the inverted csd_sense signal (POL_DYN bit should be set too). The intended usage is for CSX using a single IDAC.
+      value: 3
+enum/IDACB_POL_DYN:
+  bit_size: 1
+  variants:
+    - name: STATIC
+      description: "Static polarity. Polarity is expected to be stable, so to save power this avoids the shunting of the unused polarity, at the expense of response time."
+      value: 0
+    - name: DYNAMIC
+      description: "Dynamic polarity. Polarity is expected to change frequently (e.g. invert after every csd_sense phase), so to improve response time this keeps the shunt of the unused polarity on at the expense of power."
+      value: 1
+enum/IDACB_RANGE:
+  bit_size: 2
+  variants:
+    - name: IDAC_LO
+      description: 1 LSB = 37.5 nA
+      value: 0
+    - name: IDAC_MED
+      description: 1 LSB = 300 nA
+      value: 1
+    - name: IDAC_HI
+      description: 1 LSB = 2400 nA
+      value: 2
+enum/IREF_SEL:
+  bit_size: 1
+  variants:
+    - name: IREF_SRSS
+      description: select SRSS Iref (default)
+      value: 0
+    - name: IREF_PASS
+      description: "select PASS.AREF Iref, only available if PASS IP is on the chip."
+      value: 1
+enum/LFSR_BITS:
+  bit_size: 2
+  variants:
+    - name: 2B
+      description: "use 2 bits: range = [-2,1]"
+      value: 0
+    - name: 3B
+      description: "use 3 bits: range = [-4,3]"
+      value: 1
+    - name: 4B
+      description: "use 4 bits: range = [-8,7]"
+      value: 2
+    - name: 5B
+      description: "use 5 bits: range = [-16,15] (default)"
+      value: 3
+enum/LFSR_SIZE:
+  bit_size: 3
+  variants:
+    - name: "OFF"
+      description: "Don't use clock dithering (=spreadspectrum) (LFSR output value is zero)"
+      value: 0
+    - name: 6B
+      description: "6-bit LFSR (G(x)=X^6 +X^4+X^3+ X+1, period= 63)"
+      value: 1
+    - name: 7B
+      description: "7-bit LFSR (G(x)=X^7 +X^4+X^3+X^2+1, period= 127)"
+      value: 2
+    - name: 9B
+      description: "9-bit LFSR (G(x)=X^9 +X^4+X^3+ X+1, period= 511)"
+      value: 3
+    - name: 10B
+      description: "10-bit LFSR (G(x)=X^10+X^4+X^3+ X+1, period= 1023)"
+      value: 4
+    - name: 8B
+      description: "8-bit LFSR (G(x)=X^8+X^4+X^3+X^2+1, period= 255)"
+      value: 5
+    - name: 12B
+      description: "12-bit LFSR (G(x)=X^12+X^7+X^4+X^3+1, period= 4095)"
+      value: 6
+enum/MUTUAL_CAP:
+  bit_size: 1
+  variants:
+    - name: SELFCAP
+      description: Self-cap mode (configure sense line as CSD_SENSE)
+      value: 0
+    - name: MUTUALCAP
+      description: "Mutual-cap mode (configure Tx line as CSD_SENSE, inverted Tx line as CSD_SHIELD and Rx Line as AMUXA). In this mode the polarity bit of the IDAC is controlled by csd_sense."
+      value: 1
+enum/POLARITY_SEL:
+  bit_size: 2
+  variants:
+    - name: IDACA_POL
+      description: "Use idaca_pol (firmware setting with CSX and optionally DSI mixed in) to determine the direction, this is the most common use-case, used for normal CSD and normal CSX"
+      value: 0
+    - name: IDACB_POL
+      description: "Use idacb_pol (firmware setting with optional DSI mixed in) to determine the direction, this is only used for normal CSD if IDACB is used i.s.o. IDACA (not common)"
+      value: 1
+    - name: DUAL_POL
+      description: "Use the expression (csd_sense ? idaca_pol : idacb_pol) to determine the direction, this is only useful for the CSX with DUAL_IDAC use-case"
+      value: 2
+enum/PWR_MODE:
+  bit_size: 2
+  variants:
+    - name: "OFF"
+      description: Disable buffer
+      value: 0
+    - name: NORM
+      description: "On, normal or low power level depending on CONFIG.LP_MODE."
+      value: 1
+    - name: HI
+      description: "On, high or low power level depending on CONFIG.LP_MODE."
+      value: 2
+enum/REFGEN_EN:
+  bit_size: 1
+  variants:
+    - name: "OFF"
+      description: Disable Reference Generator
+      value: 0
+    - name: "ON"
+      description: "On, regular operation. Note that CONFIG.LP_MODE determines the power mode level"
+      value: 1
+enum/RES_F1PM:
+  bit_size: 2
+  variants:
+    - name: LOW
+      description: Low
+      value: 0
+    - name: MED
+      description: Medium
+      value: 1
+    - name: HIGH
+      description: High
+      value: 2
+    - name: RSVD
+      description: N/A
+      value: 3
+enum/RES_HCAV:
+  bit_size: 2
+  variants:
+    - name: LOW
+      description: Low
+      value: 0
+    - name: MED
+      description: Medium
+      value: 1
+    - name: HIGH
+      description: High
+      value: 2
+    - name: LOWEMI
+      description: "Low EMI (slow ramp: 3 switches closed by fixed delay line)"
+      value: 3
+enum/SHIELD_DELAY:
+  bit_size: 2
+  variants:
+    - name: "OFF"
+      description: "Delay line is off, csd_shield=csd_sense"
+      value: 0
+    - name: D5NS
+      description: Introduces a 5ns delay (typ)
+      value: 1
+    - name: D10NS
+      description: Introduces a 10ns delay (typ)
+      value: 2
+    - name: D20NS
+      description: Introduces a 20ns delay (typ)
+      value: 3

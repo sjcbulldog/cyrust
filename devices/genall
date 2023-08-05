@@ -8,6 +8,7 @@ then
     git clone https://github.com/embassy-rs/chiptool.git >& /dev/null 2>&1
     echo done
     pushd chiptool
+    git checkout staging
     echo -n "Building 'chiptool' ... "
     cargo build >& /dev/null 2>&1
     echo done
@@ -47,7 +48,8 @@ cortex-m = "0.7.7"
 cortex-m-rt = "0.7.3"
 EOF
 
-echo "pub mod common ;" > src/lib.rs
+echo "#![allow(non_snake_case)]" > src/lib.rs
+echo "pub mod common ;" >> src/lib.rs
 
 for SVD in ../svd/*.svd
 do
@@ -68,5 +70,18 @@ done
 echo -n "Reformatting library source code ... "
 cargo fmt
 echo done
+
+for SVD in ../svd/*.svd
+do
+    SVDFILE="$(basename -- $SVD)"
+    TARGETFILE="${SVDFILE%.*}"
+    TARGET="${TARGETFILE/_/}"
+    pushd src/$TARGET >& /dev/null 2>&1
+    echo "================================================================================"
+    echo Cleaning  library $TARGET
+    ../../../cleanrs $TARGET ../../../svd/$TARGETFILE.svd ../../../svd/$TARGET.peris $CHIPTOOL
+    popd >& /dev/null 2>&1
+    echo "================================================================================"
+done
 
 popd >& /dev/null 2>&1

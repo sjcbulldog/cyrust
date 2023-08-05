@@ -1,4 +1,4 @@
-#![no_std]
+#![allow(non_camel_case_types)]
 #![doc = "Peripheral access API (generated using chiptool v0.1.0 (0621765 2023-07-02))"]
 #[doc = "Serial Communications Block (SPI/UART/I2C)"]
 #[derive(Copy, Clone, Eq, PartialEq)]

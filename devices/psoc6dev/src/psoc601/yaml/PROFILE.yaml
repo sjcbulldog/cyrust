@@ -1,0 +1,167 @@
+---
+block/CNT_STRUCT:
+  description: Profile counter structure
+  items:
+    - name: CTL
+      description: Profile counter configuration
+      byte_offset: 0
+      fieldset: CNT_STRUCT_CTL
+    - name: CNT
+      description: Profile counter value
+      byte_offset: 8
+      fieldset: CNT
+block/PROFILE:
+  description: Energy Profiler IP
+  items:
+    - name: CTL
+      description: Profile control
+      byte_offset: 0
+      fieldset: PROFILE_CTL
+    - name: STATUS
+      description: Profile status
+      byte_offset: 4
+      access: Read
+      fieldset: STATUS
+    - name: CMD
+      description: Profile command
+      byte_offset: 16
+      fieldset: CMD
+    - name: INTR
+      description: Profile interrupt
+      byte_offset: 1984
+      fieldset: INTR
+    - name: INTR_SET
+      description: Profile interrupt set
+      byte_offset: 1988
+      fieldset: INTR_SET
+    - name: INTR_MASK
+      description: Profile interrupt mask
+      byte_offset: 1992
+      fieldset: INTR_MASK
+    - name: INTR_MASKED
+      description: Profile interrupt masked
+      byte_offset: 1996
+      access: Read
+      fieldset: INTR_MASKED
+    - name: CNT_STRUCT
+      description: Profile counter structure
+      array:
+        len: 8
+        stride: 16
+      byte_offset: 2048
+      block: CNT_STRUCT
+fieldset/CMD:
+  description: Profile command
+  fields:
+    - name: START_TR
+      description: "Software start trigger for the profiling time window. When written with '1', the profiling time window is started. Can only be used in start / stop mode (PROFILE_WIN_MODE=0). Has no effect in enable mode (PROFILE_WIN_MODE=1)."
+      bit_offset: 0
+      bit_size: 1
+    - name: STOP_TR
+      description: "Software stop trigger for the profiling time window. When written with '1', the profiling time window is stopped. Can only be used in start / stop mode (PROFILE_WIN_MODE=0). Has no effect in enable mode (PROFILE_WIN_MODE=1)."
+      bit_offset: 1
+      bit_size: 1
+    - name: CLR_ALL_CNT
+      description: "Counter clear. When written with '1', all profiling counter registers are cleared to 0x00."
+      bit_offset: 8
+      bit_size: 1
+fieldset/CNT:
+  description: Profile counter value
+  fields:
+    - name: CNT
+      description: This field shows / specifies the actual value of the profiling counter. It allows reading as well as writing the profiling counter.
+      bit_offset: 0
+      bit_size: 32
+fieldset/CNT_STRUCT_CTL:
+  description: Profile counter configuration
+  fields:
+    - name: CNT_DURATION
+      description: "This field specifies if events (edges) or a duration of the monitor signal is counted. '0': Events are monitored. An edge detection is done. All edges of the selected monitor signal are counted. '1': A duration is monitored. No edge detection is done. The monitored signal is taken as a (high active) level signal for enabling the profiling counter. Note: All monitor signals which only can represent events are edge encoded in hardware, therefore a selection of CTL.CNT_DURATION=1 will not produce meaningful results."
+      bit_offset: 0
+      bit_size: 1
+    - name: REF_CLK_SEL
+      description: This field specifies the reference clock used for a counting time base when counting durations. Has no effect when CTL.CNT_DURATION=0.
+      bit_offset: 4
+      bit_size: 3
+      enum: REF_CLK_SEL
+    - name: MON_SEL
+      description: "This field specifies the montior input signal to be observed by the profiling counter. The monitor signals are product specific, see product definition spreadsheet tab 'Monitor' for details."
+      bit_offset: 16
+      bit_size: 7
+    - name: ENABLED
+      description: "Enables the profiling counter: '0': Disabled. '1': Enabled."
+      bit_offset: 31
+      bit_size: 1
+fieldset/INTR:
+  description: Profile interrupt
+  fields:
+    - name: CNT_OVFLW
+      description: "This interrupt cause field is activated (HW sets the field to '1') when an profiling counter overflow (from 0xFFFFFFFF to 0x00000000) is captured. There is one bit per profling counter. SW writes a '1' to a bit of this field to clear this bit to '0' (writing 0xFFFFFFFF clears all interrupt causes to '0')."
+      bit_offset: 0
+      bit_size: 32
+fieldset/INTR_MASK:
+  description: Profile interrupt mask
+  fields:
+    - name: CNT_OVFLW
+      description: Mask bit for corresponding field in the INTR register.
+      bit_offset: 0
+      bit_size: 32
+fieldset/INTR_MASKED:
+  description: Profile interrupt masked
+  fields:
+    - name: CNT_OVFLW
+      description: Logical and of corresponding INTR and INTR_MASK fields.
+      bit_offset: 0
+      bit_size: 32
+fieldset/INTR_SET:
+  description: Profile interrupt set
+  fields:
+    - name: CNT_OVFLW
+      description: "SW writes a '1' to a bit of this field to set the corresponding bit in the INTR register."
+      bit_offset: 0
+      bit_size: 32
+fieldset/PROFILE_CTL:
+  description: Profile control
+  fields:
+    - name: WIN_MODE
+      description: "Specifies the profiling time window mode: '0': Start / stop mode. The profiling time window is started when a rising edge of the start trigger signal occurs and stopped when a rising edge of the stop trigger signal occurs. In case both rising edges (of start and stop trigger signals) occur in the same cycle, the profiling time window is stopped. '1': Enable mode. The profiling time window is active as long as the start 'trigger' signal is active. The stop trigger signal has no effect."
+      bit_offset: 0
+      bit_size: 1
+    - name: ENABLED
+      description: "Enables the profiling block: '0': Disabled. '1': Enabled."
+      bit_offset: 31
+      bit_size: 1
+fieldset/STATUS:
+  description: Profile status
+  fields:
+    - name: WIN_ACTIVE
+      description: "Indicates if the profiling time window is active. '0': Not active. '1': Active."
+      bit_offset: 0
+      bit_size: 1
+enum/REF_CLK_SEL:
+  bit_size: 3
+  variants:
+    - name: CLK_TIMER
+      description: "Timer clock (divided or undivided high frequency clock, e.g. from IMO). Selection is done in SRSS register CLK_TIMER_CTL.TIMER_SEL."
+      value: 0
+    - name: CLK_IMO
+      description: IMO - Internal Main Oscillator
+      value: 1
+    - name: CLK_ECO
+      description: ECO - External-Crystal Oscillator
+      value: 2
+    - name: CLK_LF
+      description: "Low frequency clock (ILO, WCO or ALTLF). Selection is done in SRSS register CLK_SELECT.LFCLK_SEL."
+      value: 3
+    - name: CLK_HF
+      description: "High frequuency clock ('clk_hfx')."
+      value: 4
+    - name: CLK_PERI
+      description: "Peripheral clock ('clk_peri')."
+      value: 5
+    - name: RSVD_6
+      description: N/A
+      value: 6
+    - name: RSVD_7
+      description: N/A
+      value: 7

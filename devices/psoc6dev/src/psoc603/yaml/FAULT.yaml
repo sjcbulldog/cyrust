@@ -1,0 +1,176 @@
+---
+block/FAULT:
+  description: Fault structures
+  items:
+    - name: STRUCT
+      description: Fault structure
+      array:
+        len: 2
+        stride: 256
+      byte_offset: 0
+      block: STRUCT
+block/STRUCT:
+  description: Fault structure
+  items:
+    - name: CTL
+      description: Fault control
+      byte_offset: 0
+      fieldset: CTL
+    - name: STATUS
+      description: Fault status
+      byte_offset: 12
+      fieldset: STATUS
+    - name: DATA
+      description: Fault data
+      array:
+        len: 4
+        stride: 4
+      byte_offset: 16
+      fieldset: DATA
+    - name: PENDING0
+      description: Fault pending 0
+      byte_offset: 64
+      access: Read
+      fieldset: PENDING0
+    - name: PENDING1
+      description: Fault pending 1
+      byte_offset: 68
+      access: Read
+      fieldset: PENDING1
+    - name: PENDING2
+      description: Fault pending 2
+      byte_offset: 72
+      access: Read
+      fieldset: PENDING2
+    - name: MASK0
+      description: Fault mask 0
+      byte_offset: 80
+      fieldset: MASK0
+    - name: MASK1
+      description: Fault mask 1
+      byte_offset: 84
+      fieldset: MASK1
+    - name: MASK2
+      description: Fault mask 2
+      byte_offset: 88
+      fieldset: MASK2
+    - name: INTR
+      description: Interrupt
+      byte_offset: 192
+      fieldset: INTR
+    - name: INTR_SET
+      description: Interrupt set
+      byte_offset: 196
+      fieldset: INTR_SET
+    - name: INTR_MASK
+      description: Interrupt mask
+      byte_offset: 200
+      fieldset: INTR_MASK
+    - name: INTR_MASKED
+      description: Interrupt masked
+      byte_offset: 204
+      access: Read
+      fieldset: INTR_MASKED
+fieldset/CTL:
+  description: Fault control
+  fields:
+    - name: TR_EN
+      description: "Trigger output enable: '0': Disabled. The trigger output 'tr_fault' is '0'. '1': Enabled. The trigger output 'tr_fault' reflects STATUS.VALID. The trigger can be used to initiate a Datawire transfer of the FAULT data (FAULT_DATA0 through FAULT_DATA3)."
+      bit_offset: 0
+      bit_size: 1
+    - name: OUT_EN
+      description: "IO output signal enable: '0': Disabled. The IO output signal 'fault_out' is '0'. The IO output enable signal 'fault_out_en' is '0'. '1': Enabled. The IO output signal 'fault_out' reflects STATUS.VALID. The IO output enable signal 'fault_out_en' is '1'."
+      bit_offset: 1
+      bit_size: 1
+    - name: RESET_REQ_EN
+      description: "Reset request enable: '0': Disabled. '1': Enabled. The output reset request signal 'fault_reset_req' reflects STATUS.VALID. This reset causes a warm/soft/core reset. This warm/soft/core reset does not affect the fault logic STATUS, DATA0, ..., DATA3 registers (allowing for post soft reset failure analysis). The 'fault_reset_req' signals of the individual fault report structures are combined (logically OR'd) into a single SRSS 'fault_reset_req' signal."
+      bit_offset: 2
+      bit_size: 1
+fieldset/DATA:
+  description: Fault data
+  fields:
+    - name: DATA
+      description: "Captured fault source data. Note: the DATA registers can only be written when STATUS.VALID is '0'. Note: the fault source index STATUS.IDX specifies the format of the DATA registers."
+      bit_offset: 0
+      bit_size: 32
+fieldset/INTR:
+  description: Interrupt
+  fields:
+    - name: FAULT
+      description: "This interrupt cause field is activated (HW sets the field to '1') when an enabled (MASK0/MASK1/MASK2) pending fault source is captured: - STATUS.VALID is set to '1'. - STATUS.IDX specifies the fault source index. - DATA0 through DATA3 captures the fault source data. SW writes a '1' to this field to clear the interrupt cause to '0'. SW clear STATUS.VALID to '0' to enable capture of the next fault. Note that when there is an enabled pending fault source, the pending fault source is captured immediately and INTR.FAULT is immediately activated (set to '1')."
+      bit_offset: 0
+      bit_size: 1
+fieldset/INTR_MASK:
+  description: Interrupt mask
+  fields:
+    - name: FAULT
+      description: Mask bit for corresponding field in the INTR register.
+      bit_offset: 0
+      bit_size: 1
+fieldset/INTR_MASKED:
+  description: Interrupt masked
+  fields:
+    - name: FAULT
+      description: Logical and of corresponding INTR and INTR_MASK fields.
+      bit_offset: 0
+      bit_size: 1
+fieldset/INTR_SET:
+  description: Interrupt set
+  fields:
+    - name: FAULT
+      description: "SW writes a '1' to this field to set the corresponding field in the INTR register."
+      bit_offset: 0
+      bit_size: 1
+fieldset/MASK0:
+  description: Fault mask 0
+  fields:
+    - name: SOURCE
+      description: "Fault source enables: Bits 31-0: Fault sources 31 to 0."
+      bit_offset: 0
+      bit_size: 32
+fieldset/MASK1:
+  description: Fault mask 1
+  fields:
+    - name: SOURCE
+      description: "Fault source enables: Bits 31-0: Fault sources 63 to 32."
+      bit_offset: 0
+      bit_size: 32
+fieldset/MASK2:
+  description: Fault mask 2
+  fields:
+    - name: SOURCE
+      description: "Fault source enables: Bits 31-0: Fault sources 95 to 64."
+      bit_offset: 0
+      bit_size: 32
+fieldset/PENDING0:
+  description: Fault pending 0
+  fields:
+    - name: SOURCE
+      description: "This field specifies the following sources: Bit 0: CM0 MPU. Bit 1: CRYPTO MPU. Bit 2: DW 0 MPU. Bit 3: DW 1 MPU. Bit 4: DMA controller MPU. ... Bit 15: DAP MPU. Bit 16: CM4 system bus MPU. Bit 17: CM4 code bus MPU (for non FLASH controller accesses). Bit 18: CM4 code bus MPU (for FLASH controller accesses)."
+      bit_offset: 0
+      bit_size: 32
+fieldset/PENDING1:
+  description: Fault pending 1
+  fields:
+    - name: SOURCE
+      description: "This field specifies the following sources: Bit 0: Peripheral group 0 PPU. Bit 1: Peripheral group 1 PPU. Bit 2: Peripheral group 2 PPU. Bit 3: Peripheral group 3 PPU. Bit 4: Peripheral group 4 PPU. Bit 5: Peripheral group 5 PPU. Bit 6: Peripheral group 6 PPU. Bit 7: Peripheral group 7 PPU. ... Bit 15: Peripheral group 15 PPU. Bit 16 - 31: See STATUS register."
+      bit_offset: 0
+      bit_size: 32
+fieldset/PENDING2:
+  description: Fault pending 2
+  fields:
+    - name: SOURCE
+      description: "This field specifies the following sources: Bit 0 - 31: See STATUS register."
+      bit_offset: 0
+      bit_size: 32
+fieldset/STATUS:
+  description: Fault status
+  fields:
+    - name: IDX
+      description: "The fault source index for which fault information is captured in DATA0 through DATA3. The fault information is fault source specific and described below. Note: this register field (and associated fault source data in DATA0 through DATA3) should only be considered valid, when VALID is '1'."
+      bit_offset: 0
+      bit_size: 7
+    - name: VALID
+      description: "Valid indication: '0': Invalid. '1': Valid. STATUS.IDX, DATA0, ..., DATA3 specify the fault. Note: Typically, HW sets this field to '1' (on an activated HW fault source that is 'enabled' by the MASK registers) and SW clears this field to '0' (typically by boot code SW (after a warm system reset, when the fault is handled). In this typical use case scenario, the HW source fault data is simultaneously captured into DATA0, ..., DATA3 when the VALID field is set to '1'. An exceptional SW use case scenario is identified as well. In this scenario, SW sets this field to '1' with a fault source index different to one of the defined HW fault sources. SW update is not restricted by the MASK registers). In both use case scenarios, the following holds: - STATUS.IDX, DATA0, ..., DATA3 can only be written when STATUS.VALID is '0'; the fault structure is not in use yet. Writing STATUS.VALID to '1' effectively locks the fault structure (until SW clears STATUS.VALID to '0'). This restriction requires a SW update to sequentially update the DATA registers followed by an update of the STATUS register. Note: For the exceptional SW use case, sequential updates to the DATA and STATUS registers may be 'interrupted' by a HW fault capture. In this case, the SW DATA register updates are overwritten by the HW update (and the STATUS.IDX field will reflect the HW capture)"
+      bit_offset: 31
+      bit_size: 1
