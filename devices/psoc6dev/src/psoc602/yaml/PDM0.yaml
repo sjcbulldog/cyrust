@@ -1,0 +1,398 @@
+---
+block/PDM0:
+  description: PDM registers
+  items:
+    - name: CTL
+      description: Control
+      byte_offset: 0
+      fieldset: CTL
+    - name: CLOCK_CTL
+      description: Clock control
+      byte_offset: 16
+      fieldset: CLOCK_CTL
+    - name: MODE_CTL
+      description: Mode control
+      byte_offset: 20
+      fieldset: MODE_CTL
+    - name: DATA_CTL
+      description: Data control
+      byte_offset: 24
+      fieldset: DATA_CTL
+    - name: CMD
+      description: Command
+      byte_offset: 32
+      fieldset: CMD
+    - name: TR_CTL
+      description: Trigger control
+      byte_offset: 64
+      fieldset: TR_CTL
+    - name: RX_FIFO_CTL
+      description: RX FIFO control
+      byte_offset: 768
+      fieldset: RX_FIFO_CTL
+    - name: RX_FIFO_STATUS
+      description: RX FIFO status
+      byte_offset: 772
+      access: Read
+      fieldset: RX_FIFO_STATUS
+    - name: RX_FIFO_RD
+      description: RX FIFO read
+      byte_offset: 776
+      access: Read
+      fieldset: RX_FIFO_RD
+    - name: RX_FIFO_RD_SILENT
+      description: RX FIFO silent read
+      byte_offset: 780
+      access: Read
+      fieldset: RX_FIFO_RD_SILENT
+    - name: INTR
+      description: Interrupt register
+      byte_offset: 3840
+      fieldset: INTR
+    - name: INTR_SET
+      description: Interrupt set register
+      byte_offset: 3844
+      fieldset: INTR_SET
+    - name: INTR_MASK
+      description: Interrupt mask register
+      byte_offset: 3848
+      fieldset: INTR_MASK
+    - name: INTR_MASKED
+      description: Interrupt masked register
+      byte_offset: 3852
+      access: Read
+      fieldset: INTR_MASKED
+fieldset/CLOCK_CTL:
+  description: Clock control
+  fields:
+    - name: CLK_CLOCK_DIV
+      description: "PDM CLK (FPDM_CLK) (1st divider): This configures a frequency of PDM CLK. The configured frequency is used to operate PDM core. I.e. the frequency is input to MCLKQ_CLOCK_DIV register. Note: configure a frequency of PDM CLK as lower than or equal 50MHz with this divider."
+      bit_offset: 0
+      bit_size: 2
+      enum: CLK_CLOCK_DIV
+    - name: MCLKQ_CLOCK_DIV
+      description: "MCLKQ divider (2nd divider) (Note: These bits are connected to AR36U12.PDM_CORE2_CFG.DIV_MCLKQ)"
+      bit_offset: 4
+      bit_size: 2
+      enum: MCLKQ_CLOCK_DIV
+    - name: CKO_CLOCK_DIV
+      description: "PDM CKO (FPDM_CKO) clock divider (3rd divider): FPDM_CKO = MCLKQ / (CKO_CLOCK_DIV + 1) Note: To configure '0' to this field is prohibited. (Note: PDM_CKO is configured by MCLKQ_CLOCK_DIV, CLK_CLOCK_DIV and CKO_CLOCK_DIV. ) (Note: These bits are connected to AR36U12.PDM_CORE_CFG.MCLKDIV)"
+      bit_offset: 8
+      bit_size: 4
+    - name: SINC_RATE
+      description: "SINC Decimation Rate. For details, see the data sheet provided by Archband. Oversampling Ratio = Decimation Rate = 2 X SINC_RATE (Note: These bits are connected to AR36U12.PDM_CORE_CFG.SINC_RATE)"
+      bit_offset: 16
+      bit_size: 7
+fieldset/CMD:
+  description: Command
+  fields:
+    - name: STREAM_EN
+      description: "Enable data streaming flow: '0': Disabled. '1': Enabled. (Note: This bit is connected to AR36U12.PDM_CORE_CFG.PDMA_EN)"
+      bit_offset: 0
+      bit_size: 1
+fieldset/CTL:
+  description: Control
+  fields:
+    - name: PGA_R
+      description: "Right channel PGA gain: +1.5dB/step, -12dB ~ +10.5dB '0': -12 dB '1': -10.5 dB ... '15' +10.5 dB (Note: These bits are connected to AR36U12.PDM_CORE_CFG.PGA_R)"
+      bit_offset: 0
+      bit_size: 4
+    - name: PGA_L
+      description: "Left channel PGA gain: +1.5dB/step, -12dB ~ +10.5dB '0': -12 dB '1': -10.5 dB ... '15': +10.5 dB (Note: These bits are connected to AR36U12.PDM_CORE_CFG.PGA_L)"
+      bit_offset: 8
+      bit_size: 4
+    - name: SOFT_MUTE
+      description: "Soft mute function to mute the volume smoothly '0': Disabled. '1': Enabled. (Note: This bit is connected to AR36U12.PDM_CORE_CFG.SOFT_MUTE)"
+      bit_offset: 16
+      bit_size: 1
+    - name: STEP_SEL
+      description: "Set fine gain step for smooth PGA or Soft-Mute attenuation transition. '0': 0.13dB '1': 0.26dB (Note: This bit is connected to AR36U12.PDM_CORE2_CFG.SEL_STEP)"
+      bit_offset: 17
+      bit_size: 1
+    - name: ENABLED
+      description: "Enables the PDM component: '0': Disabled. '1': Enabled."
+      bit_offset: 31
+      bit_size: 1
+fieldset/DATA_CTL:
+  description: Data control
+  fields:
+    - name: WORD_LEN
+      description: "PCM Word Length in number of bits: (Note: These bits are connected to AR36U12.PDM_CORE2_CFG.PCM_IWL)"
+      bit_offset: 0
+      bit_size: 2
+      enum: WORD_LEN
+    - name: BIT_EXTENSION
+      description: "When reception word length is shorter than the word length of RX_FIFO_RD, extension mode of upper bit should be set. '0': Extended by '0' '1': Extended by sign bit (if MSB word is '1', then it is extended by '1', if MSB is '0' then it is extended by '0')"
+      bit_offset: 8
+      bit_size: 1
+fieldset/INTR:
+  description: Interrupt register
+  fields:
+    - name: RX_TRIGGER
+      description: More entries in the RX FIFO than the value specified by TRIGGER_LEVEL in RX_FIFO_CTL.
+      bit_offset: 16
+      bit_size: 1
+    - name: RX_NOT_EMPTY
+      description: RX FIFO is not empty.
+      bit_offset: 18
+      bit_size: 1
+    - name: RX_OVERFLOW
+      description: Attempt to write to a full RX FIFO
+      bit_offset: 21
+      bit_size: 1
+    - name: RX_UNDERFLOW
+      description: Attempt to read from an empty RX FIFO
+      bit_offset: 22
+      bit_size: 1
+fieldset/INTR_MASK:
+  description: Interrupt mask register
+  fields:
+    - name: RX_TRIGGER
+      description: Mask bit for corresponding bit in interrupt request register.
+      bit_offset: 16
+      bit_size: 1
+    - name: RX_NOT_EMPTY
+      description: Mask bit for corresponding bit in interrupt request register.
+      bit_offset: 18
+      bit_size: 1
+    - name: RX_OVERFLOW
+      description: Mask bit for corresponding bit in interrupt request register.
+      bit_offset: 21
+      bit_size: 1
+    - name: RX_UNDERFLOW
+      description: Mask bit for corresponding bit in interrupt request register.
+      bit_offset: 22
+      bit_size: 1
+fieldset/INTR_MASKED:
+  description: Interrupt masked register
+  fields:
+    - name: RX_TRIGGER
+      description: Logical and of corresponding request and mask bits.
+      bit_offset: 16
+      bit_size: 1
+    - name: RX_NOT_EMPTY
+      description: Logical and of corresponding request and mask bits.
+      bit_offset: 18
+      bit_size: 1
+    - name: RX_OVERFLOW
+      description: Logical and of corresponding request and mask bits.
+      bit_offset: 21
+      bit_size: 1
+    - name: RX_UNDERFLOW
+      description: Logical and of corresponding request and mask bits.
+      bit_offset: 22
+      bit_size: 1
+fieldset/INTR_SET:
+  description: Interrupt set register
+  fields:
+    - name: RX_TRIGGER
+      description: "Write with '1' to set corresponding bit in interrupt request register."
+      bit_offset: 16
+      bit_size: 1
+    - name: RX_NOT_EMPTY
+      description: "Write with '1' to set corresponding bit in interrupt request register."
+      bit_offset: 18
+      bit_size: 1
+    - name: RX_OVERFLOW
+      description: "Write with '1' to set corresponding bit in interrupt request register."
+      bit_offset: 21
+      bit_size: 1
+    - name: RX_UNDERFLOW
+      description: "Write with '1' to set corresponding bit in interrupt request register."
+      bit_offset: 22
+      bit_size: 1
+fieldset/MODE_CTL:
+  description: Mode control
+  fields:
+    - name: PCM_CH_SET
+      description: "Specifies PCM output channels as mono or stereo: (Note: These bits are connected to AR36U12.PDM_CORE2_CFG.PCM_CHSET)"
+      bit_offset: 0
+      bit_size: 2
+      enum: PCM_CH_SET
+    - name: SWAP_LR
+      description: "Input data L/R channel swap: '1': Right/Left channel recording swap '0': No Swap (Note: This bit is connected to AR36U12.PDM_CORE_CFG.LRSWAP)"
+      bit_offset: 2
+      bit_size: 1
+    - name: S_CYCLES
+      description: "Set time step for gain change during PGA or soft mute operation in number of 1/a sampling rate. (Note: These bits are connected to AR36U12.PDM_CORE_CFG.S_CYCLES)"
+      bit_offset: 8
+      bit_size: 3
+      enum: S_CYCLES
+    - name: CKO_DELAY
+      description: "Phase difference from the rising edge of internal sampler clock (CLK_IS) to that of PDM_CKO clock: (Note: These bits are connected to AR36U12.PDM_CORE2_CFG.PDMCKO_DLY)"
+      bit_offset: 16
+      bit_size: 3
+      enum: CKO_DELAY
+    - name: HPF_GAIN
+      description: "Adjust high pass filter coefficients. H(Z) = (1 - Z-1 ) / [1 - (1- 2 -HPF_GAIN) Z-1 ] (Note: These bits are connected to AR36U12.PDM_CORE_CFG.HPGAIN)"
+      bit_offset: 24
+      bit_size: 4
+    - name: HPF_EN_N
+      description: "Enable high pass filter (active low) '1': Disabled. '0': Enabled. (Note: This bit is connected to AR36U12.PDM_CORE_CFG.ADCHPD)"
+      bit_offset: 28
+      bit_size: 1
+fieldset/RX_FIFO_CTL:
+  description: RX FIFO control
+  fields:
+    - name: TRIGGER_LEVEL
+      description: "Trigger level. When the RX FIFO has more entries than the number of this field, a receiver trigger event is generated. Note: software can configure up to 254 in Mono channel enabled (MODE_CTL.PCM_CH_SET = '1' or '2'), up to 253 in Stereo channel enabled (MODE_CTL.PCM_CH_SET = '3')."
+      bit_offset: 0
+      bit_size: 8
+    - name: CLEAR
+      description: "When '1', the RX FIFO and RX_BUF are cleared/invalidated. Invalidation will last for as long as this field is '1'. If a quick clear/invalidation is required, the field should be set to '1' and be followed by a set to '0'. If a clear/invalidation is required for an extended time period, the field should be set to '1' during the complete time period."
+      bit_offset: 16
+      bit_size: 1
+    - name: FREEZE
+      description: "When '1', hardware writes to the RX FIFO have no effect. Freeze will not advance the RX FIFO write pointer.This field is used only for debugging purposes."
+      bit_offset: 17
+      bit_size: 1
+fieldset/RX_FIFO_RD:
+  description: RX FIFO read
+  fields:
+    - name: DATA
+      description: "Data read from the RX FIFO. Reading a data frame will remove the data frame from the FIFO; i.e. behavior is similar to that of a POP operation. Note: Don't access to this bit while RX_FIFO_CTL.CLEAR is '1'."
+      bit_offset: 0
+      bit_size: 32
+fieldset/RX_FIFO_RD_SILENT:
+  description: RX FIFO silent read
+  fields:
+    - name: DATA
+      description: "Data read from the RX FIFO. Reading a data frame will NOT remove the data frame from the RX FIFO; i.e. behavior is similar to that of a PEEK operation. This field is used only for debugging purposes. Note: Don't access to this bit while RX_FIFO_CTL.CLEAR is '1'."
+      bit_offset: 0
+      bit_size: 32
+fieldset/RX_FIFO_STATUS:
+  description: RX FIFO status
+  fields:
+    - name: USED
+      description: "Number of entries in the RX FIFO. The field value is in the range [0, 255]. When this is zero, the RX FIFO is empty."
+      bit_offset: 0
+      bit_size: 8
+    - name: RD_PTR
+      description: "RX FIFO read pointer: RX FIFO location from which a data frame is read by the host.This field is used only for debugging purposes."
+      bit_offset: 16
+      bit_size: 8
+    - name: WR_PTR
+      description: "RX FIFO write pointer: RX FIFO location at which a new data frame is written by the hardware.This field is used only for debugging purposes."
+      bit_offset: 24
+      bit_size: 8
+fieldset/TR_CTL:
+  description: Trigger control
+  fields:
+    - name: RX_REQ_EN
+      description: "Trigger output ('tr_pdm_rx_req') enable for requests of DMA transfer '0': Disabled. '1': Enabled."
+      bit_offset: 16
+      bit_size: 1
+enum/CKO_DELAY:
+  bit_size: 3
+  variants:
+    - name: ADV3
+      description: CLK_IS is 3*PDM_CLK period early
+      value: 0
+    - name: ADV2
+      description: CLK_IS is 2*PDM_CLK period early
+      value: 1
+    - name: ADV1
+      description: CLK_IS is 1*PDM_CLK period early
+      value: 2
+    - name: NO_DELAY
+      description: CLK_IS is the same as PDM_CKO
+      value: 3
+    - name: DLY1
+      description: CLK_IS is 1*PDM_CLK period late
+      value: 4
+    - name: DLY2
+      description: CLK_IS is 2*PDM_CLK period late
+      value: 5
+    - name: DLY3
+      description: CLK_IS is 3*PDM_CLK period late
+      value: 6
+    - name: DLY4
+      description: CLK_IS is 4*PDM_CLK period late
+      value: 7
+enum/CLK_CLOCK_DIV:
+  bit_size: 2
+  variants:
+    - name: DIVBY1
+      description: Divide by 1
+      value: 0
+    - name: DIVBY2
+      description: Divide by 2 (no 50 percent duty cycle)
+      value: 1
+    - name: DIVBY3
+      description: Divide by 3 (no 50 percent duty cycle)
+      value: 2
+    - name: DIVBY4
+      description: Divide by 4 (no 50 percent duty cycle)
+      value: 3
+enum/MCLKQ_CLOCK_DIV:
+  bit_size: 2
+  variants:
+    - name: DIVBY1
+      description: Divide by 1
+      value: 0
+    - name: DIVBY2
+      description: Divide by 2 (no 50 percent duty cycle)
+      value: 1
+    - name: DIVBY3
+      description: Divide by 3 (no 50 percent duty cycle)
+      value: 2
+    - name: DIVBY4
+      description: Divide by 4 (no 50 percent duty cycle)
+      value: 3
+enum/PCM_CH_SET:
+  bit_size: 2
+  variants:
+    - name: DISABLED
+      description: Channel disabled
+      value: 0
+    - name: MONO_L
+      description: Mono left channel enable
+      value: 1
+    - name: MONO_R
+      description: Mono right channel enable
+      value: 2
+    - name: STEREO
+      description: Stereo channel enable
+      value: 3
+enum/S_CYCLES:
+  bit_size: 3
+  variants:
+    - name: STEP_NUM64
+      description: 64steps
+      value: 0
+    - name: STEP_NUM96
+      description: 96steps
+      value: 1
+    - name: STEP_NUM128
+      description: 128steps
+      value: 2
+    - name: STEP_NUM160
+      description: 160steps
+      value: 3
+    - name: STEP_NUM192
+      description: 192steps
+      value: 4
+    - name: STEP_NUM256
+      description: 256steps
+      value: 5
+    - name: STEP_NUM384
+      description: 384steps
+      value: 6
+    - name: STEP_NUM512
+      description: 512steps
+      value: 7
+enum/WORD_LEN:
+  bit_size: 2
+  variants:
+    - name: BIT_LEN16
+      description: 16-bit
+      value: 0
+    - name: BIT_LEN18
+      description: 18-bit
+      value: 1
+    - name: BIT_LEN20
+      description: 20-bit
+      value: 2
+    - name: BIT_LEN24
+      description: 24-bit
+      value: 3

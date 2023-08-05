@@ -13,5 +13,5 @@ categories = ["embedded", "no-std"]
 rt = ["cortex-m-rt/device"]
 
 [dependencies]
-cortex-m = "0.6.3"
-cortex-m-rt = "0.6.12"
+cortex-m = "0.7.7"
+cortex-m-rt = "0.7.3"

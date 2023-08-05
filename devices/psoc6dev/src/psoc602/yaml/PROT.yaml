@@ -1,0 +1,706 @@
+---
+block/MPU:
+  description: MPU
+  items:
+    - name: MS_CTL
+      description: Master control
+      byte_offset: 0
+      fieldset: MS_CTL
+    - name: MS_CTL_READ_MIR
+      description: Master control read mirror
+      array:
+        len: 127
+        stride: 4
+      byte_offset: 4
+      access: Read
+      fieldset: MS_CTL_READ_MIR
+    - name: MPU_STRUCT
+      description: MPU structure
+      array:
+        len: 8
+        stride: 32
+      byte_offset: 512
+      block: MPU_STRUCT
+block/MPU_STRUCT:
+  description: MPU structure
+  items:
+    - name: ADDR
+      description: MPU region address
+      byte_offset: 0
+      fieldset: ADDR
+    - name: ATT
+      description: MPU region attrributes
+      byte_offset: 4
+      fieldset: ATT
+block/PROT:
+  description: Protection
+  items:
+    - name: SMPU
+      description: SMPU
+      byte_offset: 0
+      block: SMPU
+    - name: MPU
+      description: MPU
+      array:
+        len: 16
+        stride: 1024
+      byte_offset: 16384
+      block: MPU
+block/SMPU:
+  description: SMPU
+  items:
+    - name: MS0_CTL
+      description: Master 0 protection context control
+      byte_offset: 0
+      fieldset: MS0_CTL
+    - name: MS1_CTL
+      description: Master 1 protection context control
+      byte_offset: 4
+      fieldset: MS1_CTL
+    - name: MS2_CTL
+      description: Master 2 protection context control
+      byte_offset: 8
+      fieldset: MS2_CTL
+    - name: MS3_CTL
+      description: Master 3 protection context control
+      byte_offset: 12
+      fieldset: MS3_CTL
+    - name: MS4_CTL
+      description: Master 4 protection context control
+      byte_offset: 16
+      fieldset: MS4_CTL
+    - name: MS5_CTL
+      description: Master 5 protection context control
+      byte_offset: 20
+      fieldset: MS5_CTL
+    - name: MS6_CTL
+      description: Master 6 protection context control
+      byte_offset: 24
+      fieldset: MS6_CTL
+    - name: MS7_CTL
+      description: Master 7 protection context control
+      byte_offset: 28
+      fieldset: MS7_CTL
+    - name: MS8_CTL
+      description: Master 8 protection context control
+      byte_offset: 32
+      fieldset: MS8_CTL
+    - name: MS9_CTL
+      description: Master 9 protection context control
+      byte_offset: 36
+      fieldset: MS9_CTL
+    - name: MS10_CTL
+      description: Master 10 protection context control
+      byte_offset: 40
+      fieldset: MS10_CTL
+    - name: MS11_CTL
+      description: Master 11 protection context control
+      byte_offset: 44
+      fieldset: MS11_CTL
+    - name: MS12_CTL
+      description: Master 12 protection context control
+      byte_offset: 48
+      fieldset: MS12_CTL
+    - name: MS13_CTL
+      description: Master 13 protection context control
+      byte_offset: 52
+      fieldset: MS13_CTL
+    - name: MS14_CTL
+      description: Master 14 protection context control
+      byte_offset: 56
+      fieldset: MS14_CTL
+    - name: MS15_CTL
+      description: Master 15 protection context control
+      byte_offset: 60
+      fieldset: MS15_CTL
+    - name: SMPU_STRUCT
+      description: SMPU structure
+      array:
+        len: 16
+        stride: 64
+      byte_offset: 8192
+      block: SMPU_STRUCT
+block/SMPU_STRUCT:
+  description: SMPU structure
+  items:
+    - name: ADDR0
+      description: SMPU region address 0 (slave structure)
+      byte_offset: 0
+      fieldset: ADDR0
+    - name: ATT0
+      description: SMPU region attributes 0 (slave structure)
+      byte_offset: 4
+      fieldset: ATT0
+    - name: ADDR1
+      description: SMPU region address 1 (master structure)
+      byte_offset: 32
+      access: Read
+      fieldset: ADDR1
+    - name: ATT1
+      description: SMPU region attributes 1 (master structure)
+      byte_offset: 36
+      fieldset: ATT1
+fieldset/ADDR:
+  description: MPU region address
+  fields:
+    - name: SUBREGION_DISABLE
+      description: "This field is used to individually disabled the eight equally sized subregions in which a region is partitioned. Subregion disable: Bit 0: subregion 0 disable. Bit 1: subregion 1 disable. Bit 2: subregion 2 disable. Bit 3: subregion 3 disable. Bit 4: subregion 4 disable. Bit 5: subregion 5 disable. Bit 6: subregion 6 disable. Bit 7: subregion 7 disable. E.g., a 64 KByte address region (REGION_SIZE is '15') has eight 8 KByte subregions. The access control as defined by MPU_REGION_ATT applies if the bus transfer address is within the address region AND the addressed subregion is NOT disabled. Note that the smallest region size is 256 B and the smallest subregion size is 32 B."
+      bit_offset: 0
+      bit_size: 8
+    - name: ADDR24
+      description: "This field specifies the most significant bits of the 32-bit address of an address region. The region size is defined by ATT.REGION_SIZE. A region of n Byte is always n Byte aligned. As a result, some of the lesser significant address bits of ADDR24 may be ignored in determining whether a bus transfer address is within an address region. E.g., a 64 KByte address region (REGION_SIZE is '15') is 64 KByte aligned, and ADDR24[7:0] are ignored."
+      bit_offset: 8
+      bit_size: 24
+fieldset/ADDR0:
+  description: SMPU region address 0 (slave structure)
+  fields:
+    - name: SUBREGION_DISABLE
+      description: "This field is used to individually disabled the eight equally sized subregions in which a region is partitioned. Subregion disable: Bit 0: subregion 0 disable. Bit 1: subregion 1 disable. Bit 2: subregion 2 disable. Bit 3: subregion 3 disable. Bit 4: subregion 4 disable. Bit 5: subregion 5 disable. Bit 6: subregion 6 disable. Bit 7: subregion 7 disable. E.g., a 64 KByte address region (ATT0.REGION_SIZE is '15') has eight 8 KByte subregions. The access control as defined by ATT0 applies if the bus transfer address is within the address region AND the addressed subregion is NOT disabled. Note that the smallest region size is 256 B and the smallest subregion size is 32 B."
+      bit_offset: 0
+      bit_size: 8
+    - name: ADDR24
+      description: "This field specifies the most significant bits of the 32-bit address of an address region. The region size is defined by ATT0.REGION_SIZE. A region of n Byte is always n Byte aligned. As a result, some of the lesser significant address bits of ADDR24 may be ignored in determining whether a bus transfer address is within an address region. E.g., a 64 KByte address region (REGION_SIZE is '15') is 64 KByte aligned, and ADDR24[7:0] are ignored."
+      bit_offset: 8
+      bit_size: 24
+fieldset/ADDR1:
+  description: SMPU region address 1 (master structure)
+  fields:
+    - name: SUBREGION_DISABLE
+      description: "This field is used to individually disabled the eight equally sized subregions in which a region is partitioned. Subregion disable: Bit 0: subregion 0 disable. Bit 1: subregion 1 disable. Bit 2: subregion 2 disable. Bit 3: subregion 3 disable. Bit 4: subregion 4 disable. Bit 5: subregion 5 disable. Bit 6: subregion 6 disable. Bit 7: subregion 7 disable. Two out of a total of eight 32 B subregions are enabled. These subregions includes region structures 0 and 1. Note: this field is read-only."
+      bit_offset: 0
+      bit_size: 8
+    - name: ADDR24
+      description: "This field specifies the most significant bits of the 32-bit address of an address region. 'ADDR_DEF1': base address of structure. Note: this field is read-only."
+      bit_offset: 8
+      bit_size: 24
+fieldset/ATT:
+  description: MPU region attrributes
+  fields:
+    - name: UR
+      description: "User read enable: '0': Disabled (user, read accesses are NOT allowed). '1': Enabled (user, read accesses are allowed)."
+      bit_offset: 0
+      bit_size: 1
+    - name: UW
+      description: "User write enable: '0': Disabled (user, write accesses are NOT allowed). '1': Enabled (user, write accesses are allowed)."
+      bit_offset: 1
+      bit_size: 1
+    - name: UX
+      description: "User execute enable: '0': Disabled (user, execute accesses are NOT allowed). '1': Enabled (user, execute accesses are allowed)."
+      bit_offset: 2
+      bit_size: 1
+    - name: PR
+      description: "Privileged read enable: '0': Disabled (privileged, read accesses are NOT allowed). '1': Enabled (privileged, read accesses are allowed)."
+      bit_offset: 3
+      bit_size: 1
+    - name: PW
+      description: "Privileged write enable: '0': Disabled (privileged, write accesses are NOT allowed). '1': Enabled (privileged, write accesses are allowed)."
+      bit_offset: 4
+      bit_size: 1
+    - name: PX
+      description: "Privileged execute enable: '0': Disabled (privileged, execute accesses are NOT allowed). '1': Enabled (privileged, execute accesses are allowed)."
+      bit_offset: 5
+      bit_size: 1
+    - name: NS
+      description: "Non-secure: '0': Secure (secure accesses allowed, non-secure access NOT allowed). '1': Non-secure (both secure and non-secure accesses allowed)."
+      bit_offset: 6
+      bit_size: 1
+    - name: REGION_SIZE
+      description: "This field specifies the region size: '0'-'6': Undefined. '7': 256 B region '8': 512 B region '9': 1 KB region '10': 2 KB region '11': 4 KB region '12': 8 KB region '13': 16 KB region '14': 32 KB region '15': 64 KB region '16': 128 KB region '17': 256 KB region '18': 512 KB region '19': 1 MB region '20': 2 MB region '21': 4 MB region '22': 8 MB region '23': 16 MB region '24': 32 MB region '25': 64 MB region '26': 128 MB region '27': 256 MB region '28': 512 MB region '39': 1 GB region '30': 2 GB region '31': 4 GB region"
+      bit_offset: 24
+      bit_size: 5
+    - name: ENABLED
+      description: "Region enable: '0': Disabled. A disabled region will never result in a match on the bus transfer address. '1': Enabled. Note: a disabled address region performs logic gating to reduce dynamic power consumption."
+      bit_offset: 31
+      bit_size: 1
+fieldset/ATT0:
+  description: SMPU region attributes 0 (slave structure)
+  fields:
+    - name: UR
+      description: "User read enable: '0': Disabled (user, read accesses are NOT allowed). '1': Enabled (user, read accesses are allowed)."
+      bit_offset: 0
+      bit_size: 1
+    - name: UW
+      description: "User write enable: '0': Disabled (user, write accesses are NOT allowed). '1': Enabled (user, write accesses are allowed)."
+      bit_offset: 1
+      bit_size: 1
+    - name: UX
+      description: "User execute enable: '0': Disabled (user, execute accesses are NOT allowed). '1': Enabled (user, execute accesses are allowed)."
+      bit_offset: 2
+      bit_size: 1
+    - name: PR
+      description: "Privileged read enable: '0': Disabled (privileged, read accesses are NOT allowed). '1': Enabled (privileged, read accesses are allowed)."
+      bit_offset: 3
+      bit_size: 1
+    - name: PW
+      description: "Privileged write enable: '0': Disabled (privileged, write accesses are NOT allowed). '1': Enabled (privileged, write accesses are allowed)."
+      bit_offset: 4
+      bit_size: 1
+    - name: PX
+      description: "Privileged execute enable: '0': Disabled (privileged, execute accesses are NOT allowed). '1': Enabled (privileged, execute accesses are allowed)."
+      bit_offset: 5
+      bit_size: 1
+    - name: NS
+      description: "Non-secure: '0': Secure (secure accesses allowed, non-secure access NOT allowed). '1': Non-secure (both secure and non-secure accesses allowed)."
+      bit_offset: 6
+      bit_size: 1
+    - name: PC_MASK_0
+      description: "This field specifies protection context identifier based access control for protection context '0'."
+      bit_offset: 8
+      bit_size: 1
+    - name: PC_MASK_15_TO_1
+      description: "This field specifies protection context identifier based access control. Bit i: protection context i+1 enable. If '0', protection context i+1 access is disabled; i.e. not allowed. If '1', protection context i+1 access is enabled; i.e. allowed."
+      bit_offset: 9
+      bit_size: 15
+    - name: REGION_SIZE
+      description: "This field specifies the region size: '0'-'6': Undefined. '7': 256 B region '8': 512 B region '9': 1 KB region '10': 2 KB region '11': 4 KB region '12': 8 KB region '13': 16 KB region '14': 32 KB region '15': 64 KB region '16': 128 KB region '17': 256 KB region '18': 512 KB region '19': 1 MB region '20': 2 MB region '21': 4 MB region '22': 8 MB region '23': 16 MB region '24': 32 MB region '25': 64 MB region '26': 128 MB region '27': 256 MB region '28': 512 MB region '39': 1 GB region '30': 2 GB region '31': 4 GB region"
+      bit_offset: 24
+      bit_size: 5
+    - name: PC_MATCH
+      description: "This field specifies if the PC field participates in the 'matching' process or the 'access evaluation' process: '0': PC field participates in 'access evaluation'. '1': PC field participates in 'matching'. 'Matching' process. For each protection structure, the process identifies if a transfer address is contained within the address range. This identifies the 'matching' regions. 'Access evaluation' process. For each protection structure, the process evaluates the bus transfer access attributes against the access control attributes. Note that it is possible to define different access control for multiple protection contexts by using multiple protection structures with the same address region and PC_MATCH set to '1'."
+      bit_offset: 30
+      bit_size: 1
+    - name: ENABLED
+      description: "Region enable: '0': Disabled. A disabled region will never result in a match on the bus transfer address. '1': Enabled. Note: a disabled address region performs logic gating to reduce dynamic power consumption."
+      bit_offset: 31
+      bit_size: 1
+fieldset/ATT1:
+  description: SMPU region attributes 1 (master structure)
+  fields:
+    - name: UR
+      description: "User read enable: '0': Disabled (user, read accesses are NOT allowed). '1': Enabled (user, read accesses are allowed). Note that this register is constant '1'; i.e. user read accesses are ALWAYS allowed."
+      bit_offset: 0
+      bit_size: 1
+    - name: UW
+      description: "User write enable: '0': Disabled (user, write accesses are NOT allowed). '1': Enabled (user, write accesses are allowed)."
+      bit_offset: 1
+      bit_size: 1
+    - name: UX
+      description: "User execute enable: '0': Disabled (user, execute accesses are NOT allowed). '1': Enabled (user, execute accesses are allowed). Note that this register is constant '0'; i.e. user execute accesses are NEVER allowed."
+      bit_offset: 2
+      bit_size: 1
+    - name: PR
+      description: "Privileged read enable: '0': Disabled (privileged, read accesses are NOT allowed). '1': Enabled (privileged, read accesses are allowed). Note that this register is constant '1'; i.e. privileged read accesses are ALWAYS allowed."
+      bit_offset: 3
+      bit_size: 1
+    - name: PW
+      description: "Privileged write enable: '0': Disabled (privileged, write accesses are NOT allowed). '1': Enabled (privileged, write accesses are allowed)."
+      bit_offset: 4
+      bit_size: 1
+    - name: PX
+      description: "Privileged execute enable: '0': Disabled (privileged, execute accesses are NOT allowed). '1': Enabled (privileged, execute accesses are allowed). Note that this register is constant '0'; i.e. privileged execute accesses are NEVER allowed."
+      bit_offset: 5
+      bit_size: 1
+    - name: NS
+      description: "Non-secure: '0': Secure (secure accesses allowed, non-secure access NOT allowed). '1': Non-secure (both secure and non-secure accesses allowed)."
+      bit_offset: 6
+      bit_size: 1
+    - name: PC_MASK_0
+      description: "This field specifies protection context identifier based access control for protection context '0'."
+      bit_offset: 8
+      bit_size: 1
+    - name: PC_MASK_15_TO_1
+      description: "This field specifies protection context identifier based access control. Bit i: protection context i+1 enable. If '0', protection context i+1 access is disabled; i.e. not allowed. If '1', protection context i+1 access is enabled; i.e. allowed."
+      bit_offset: 9
+      bit_size: 15
+    - name: REGION_SIZE
+      description: "This field specifies the region size: '7': 256 B region (8 32 B subregions) Note: this field is read-only."
+      bit_offset: 24
+      bit_size: 5
+    - name: PC_MATCH
+      description: "This field specifies if the PC field participates in the 'matching' process or the 'access evaluation' process: '0': PC field participates in 'access evaluation'. '1': PC field participates in 'matching'. 'Matching' process. For each protection structure, the process identifies if a transfer address is contained within the address range. This identifies the 'matching' regions. 'Access evaluation' process. For each protection structure, the process evaluates the bus transfer access attributes against the access control attributes. Note that it is possible to define different access control for multiple protection contexts by using multiple protection structures with the same address region and PC_MATCH set to '1'."
+      bit_offset: 30
+      bit_size: 1
+    - name: ENABLED
+      description: "Region enable: '0': Disabled. A disabled region will never result in a match on the bus transfer address. '1': Enabled."
+      bit_offset: 31
+      bit_size: 1
+fieldset/MS0_CTL:
+  description: Master 0 protection context control
+  fields:
+    - name: P
+      description: "Privileged setting ('0': user mode; '1': privileged mode). Notes: This field is ONLY used for masters that do NOT provide their own user/privileged access control attribute. The default/reset field value provides privileged mode access capabilities."
+      bit_offset: 0
+      bit_size: 1
+    - name: NS
+      description: "Security setting ('0': secure mode; '1': non-secure mode). Notes: This field is ONLY used for masters that do NOT provide their own secure/non-secure access control attribute. Note that the default/reset field value provides non-secure mode access capabilities to all masters."
+      bit_offset: 1
+      bit_size: 1
+    - name: PRIO
+      description: "Device wide bus arbitration priority setting ('0': highest priority, '3': lowest priority). Notes: The AHB-Lite interconnect performs arbitration on the individual beats/transfers of a burst (this optimizes latency over locality/bandwidth). The AXI-Lite interconnects performs a single arbitration for the complete burst (this optimizes locality/bandwidth over latency). Masters with the same priority setting form a 'priority group'. Within a 'priority group', round robin arbitration is performed."
+      bit_offset: 8
+      bit_size: 2
+    - name: PC_MASK_0
+      description: "Protection context mask for protection context '0'. This field is a constant '0': - PC_MASK_0 is '0': MPU MS_CTL.PC[3:0] can NOT be set to '0' and PC[3:0] is not changed. If the protection context of the write transfer is '0', protection is not applied and PC[3:0] can be changed."
+      bit_offset: 16
+      bit_size: 1
+    - name: PC_MASK_15_TO_1
+      description: "Protection context mask for protection contexts '15' down to '1'. Bit PC_MASK_15_TO_1[i] indicates if the MPU MS_CTL.PC[3:0] protection context field can be set to the value 'i+1': - PC_MASK_15_TO_1[i] is '0': MPU MS_CTL.PC[3:0] can NOT be set to 'i+1'; and PC[3:0] is not changed. If the protection context of the write transfer is '0', protection is not applied and PC[3:0] can be changed. - PC_MASK_15_TO_1[i] is '1': MPU MS_CTL.PC[3:0] can be set to 'i+1'. Note: When CPUSS_CM0_PC_CTL.VALID[i] is '1' (the associated protection context handler is valid), write transfers to PC_MASK_15_TO_1[i-1] always write '0', regardless of data written. This ensures that when valid protection context handlers are used to enter protection contexts 1, 2 or 3 through (HW modifies MPU MS_CTL.PC[3:0] on entry of the handler), it is NOT possible for SW to enter those protection contexts (SW modifies MPU MS_CTL.PC[3:0])."
+      bit_offset: 17
+      bit_size: 15
+fieldset/MS10_CTL:
+  description: Master 10 protection context control
+  fields:
+    - name: P
+      description: See MS0_CTL.P.
+      bit_offset: 0
+      bit_size: 1
+    - name: NS
+      description: See MS0_CTL.NS.
+      bit_offset: 1
+      bit_size: 1
+    - name: PRIO
+      description: See MS0_CTL.PRIO
+      bit_offset: 8
+      bit_size: 2
+    - name: PC_MASK_0
+      description: See MS0_CTL.PC_MASK_0.
+      bit_offset: 16
+      bit_size: 1
+    - name: PC_MASK_15_TO_1
+      description: See MS0_CTL.PC_MASK_15_TO_1.
+      bit_offset: 17
+      bit_size: 15
+fieldset/MS11_CTL:
+  description: Master 11 protection context control
+  fields:
+    - name: P
+      description: See MS0_CTL.P.
+      bit_offset: 0
+      bit_size: 1
+    - name: NS
+      description: See MS0_CTL.NS.
+      bit_offset: 1
+      bit_size: 1
+    - name: PRIO
+      description: See MS0_CTL.PRIO
+      bit_offset: 8
+      bit_size: 2
+    - name: PC_MASK_0
+      description: See MS0_CTL.PC_MASK_0.
+      bit_offset: 16
+      bit_size: 1
+    - name: PC_MASK_15_TO_1
+      description: See MS0_CTL.PC_MASK_15_TO_1.
+      bit_offset: 17
+      bit_size: 15
+fieldset/MS12_CTL:
+  description: Master 12 protection context control
+  fields:
+    - name: P
+      description: See MS0_CTL.P.
+      bit_offset: 0
+      bit_size: 1
+    - name: NS
+      description: See MS0_CTL.NS.
+      bit_offset: 1
+      bit_size: 1
+    - name: PRIO
+      description: See MS0_CTL.PRIO
+      bit_offset: 8
+      bit_size: 2
+    - name: PC_MASK_0
+      description: See MS0_CTL.PC_MASK_0.
+      bit_offset: 16
+      bit_size: 1
+    - name: PC_MASK_15_TO_1
+      description: See MS0_CTL.PC_MASK_15_TO_1.
+      bit_offset: 17
+      bit_size: 15
+fieldset/MS13_CTL:
+  description: Master 13 protection context control
+  fields:
+    - name: P
+      description: See MS0_CTL.P.
+      bit_offset: 0
+      bit_size: 1
+    - name: NS
+      description: See MS0_CTL.NS.
+      bit_offset: 1
+      bit_size: 1
+    - name: PRIO
+      description: See MS0_CTL.PRIO
+      bit_offset: 8
+      bit_size: 2
+    - name: PC_MASK_0
+      description: See MS0_CTL.PC_MASK_0.
+      bit_offset: 16
+      bit_size: 1
+    - name: PC_MASK_15_TO_1
+      description: See MS0_CTL.PC_MASK_15_TO_1.
+      bit_offset: 17
+      bit_size: 15
+fieldset/MS14_CTL:
+  description: Master 14 protection context control
+  fields:
+    - name: P
+      description: See MS0_CTL.P.
+      bit_offset: 0
+      bit_size: 1
+    - name: NS
+      description: See MS0_CTL.NS.
+      bit_offset: 1
+      bit_size: 1
+    - name: PRIO
+      description: See MS0_CTL.PRIO
+      bit_offset: 8
+      bit_size: 2
+    - name: PC_MASK_0
+      description: See MS0_CTL.PC_MASK_0.
+      bit_offset: 16
+      bit_size: 1
+    - name: PC_MASK_15_TO_1
+      description: See MS0_CTL.PC_MASK_15_TO_1.
+      bit_offset: 17
+      bit_size: 15
+fieldset/MS15_CTL:
+  description: Master 15 protection context control
+  fields:
+    - name: P
+      description: See MS0_CTL.P.
+      bit_offset: 0
+      bit_size: 1
+    - name: NS
+      description: See MS0_CTL.NS.
+      bit_offset: 1
+      bit_size: 1
+    - name: PRIO
+      description: See MS0_CTL.PRIO
+      bit_offset: 8
+      bit_size: 2
+    - name: PC_MASK_0
+      description: See MS0_CTL.PC_MASK_0.
+      bit_offset: 16
+      bit_size: 1
+    - name: PC_MASK_15_TO_1
+      description: See MS0_CTL.PC_MASK_15_TO_1.
+      bit_offset: 17
+      bit_size: 15
+fieldset/MS1_CTL:
+  description: Master 1 protection context control
+  fields:
+    - name: P
+      description: See MS0_CTL.P.
+      bit_offset: 0
+      bit_size: 1
+    - name: NS
+      description: See MS0_CTL.NS.
+      bit_offset: 1
+      bit_size: 1
+    - name: PRIO
+      description: See MS0_CTL.PRIO
+      bit_offset: 8
+      bit_size: 2
+    - name: PC_MASK_0
+      description: See MS0_CTL.PC_MASK_0.
+      bit_offset: 16
+      bit_size: 1
+    - name: PC_MASK_15_TO_1
+      description: See MS0_CTL.PC_MASK_15_TO_1.
+      bit_offset: 17
+      bit_size: 15
+fieldset/MS2_CTL:
+  description: Master 2 protection context control
+  fields:
+    - name: P
+      description: See MS0_CTL.P.
+      bit_offset: 0
+      bit_size: 1
+    - name: NS
+      description: See MS0_CTL.NS.
+      bit_offset: 1
+      bit_size: 1
+    - name: PRIO
+      description: See MS0_CTL.PRIO
+      bit_offset: 8
+      bit_size: 2
+    - name: PC_MASK_0
+      description: See MS0_CTL.PC_MASK_0.
+      bit_offset: 16
+      bit_size: 1
+    - name: PC_MASK_15_TO_1
+      description: See MS0_CTL.PC_MASK_15_TO_1.
+      bit_offset: 17
+      bit_size: 15
+fieldset/MS3_CTL:
+  description: Master 3 protection context control
+  fields:
+    - name: P
+      description: See MS0_CTL.P.
+      bit_offset: 0
+      bit_size: 1
+    - name: NS
+      description: See MS0_CTL.NS.
+      bit_offset: 1
+      bit_size: 1
+    - name: PRIO
+      description: See MS0_CTL.PRIO
+      bit_offset: 8
+      bit_size: 2
+    - name: PC_MASK_0
+      description: See MS0_CTL.PC_MASK_0.
+      bit_offset: 16
+      bit_size: 1
+    - name: PC_MASK_15_TO_1
+      description: See MS0_CTL.PC_MASK_15_TO_1.
+      bit_offset: 17
+      bit_size: 15
+fieldset/MS4_CTL:
+  description: Master 4 protection context control
+  fields:
+    - name: P
+      description: See MS0_CTL.P.
+      bit_offset: 0
+      bit_size: 1
+    - name: NS
+      description: See MS0_CTL.NS.
+      bit_offset: 1
+      bit_size: 1
+    - name: PRIO
+      description: See MS0_CTL.PRIO
+      bit_offset: 8
+      bit_size: 2
+    - name: PC_MASK_0
+      description: See MS0_CTL.PC_MASK_0.
+      bit_offset: 16
+      bit_size: 1
+    - name: PC_MASK_15_TO_1
+      description: See MS0_CTL.PC_MASK_15_TO_1.
+      bit_offset: 17
+      bit_size: 15
+fieldset/MS5_CTL:
+  description: Master 5 protection context control
+  fields:
+    - name: P
+      description: See MS0_CTL.P.
+      bit_offset: 0
+      bit_size: 1
+    - name: NS
+      description: See MS0_CTL.NS.
+      bit_offset: 1
+      bit_size: 1
+    - name: PRIO
+      description: See MS0_CTL.PRIO
+      bit_offset: 8
+      bit_size: 2
+    - name: PC_MASK_0
+      description: See MS0_CTL.PC_MASK_0.
+      bit_offset: 16
+      bit_size: 1
+    - name: PC_MASK_15_TO_1
+      description: See MS0_CTL.PC_MASK_15_TO_1.
+      bit_offset: 17
+      bit_size: 15
+fieldset/MS6_CTL:
+  description: Master 6 protection context control
+  fields:
+    - name: P
+      description: See MS0_CTL.P.
+      bit_offset: 0
+      bit_size: 1
+    - name: NS
+      description: See MS0_CTL.NS.
+      bit_offset: 1
+      bit_size: 1
+    - name: PRIO
+      description: See MS0_CTL.PRIO
+      bit_offset: 8
+      bit_size: 2
+    - name: PC_MASK_0
+      description: See MS0_CTL.PC_MASK_0.
+      bit_offset: 16
+      bit_size: 1
+    - name: PC_MASK_15_TO_1
+      description: See MS0_CTL.PC_MASK_15_TO_1.
+      bit_offset: 17
+      bit_size: 15
+fieldset/MS7_CTL:
+  description: Master 7 protection context control
+  fields:
+    - name: P
+      description: See MS0_CTL.P.
+      bit_offset: 0
+      bit_size: 1
+    - name: NS
+      description: See MS0_CTL.NS.
+      bit_offset: 1
+      bit_size: 1
+    - name: PRIO
+      description: See MS0_CTL.PRIO
+      bit_offset: 8
+      bit_size: 2
+    - name: PC_MASK_0
+      description: See MS0_CTL.PC_MASK_0.
+      bit_offset: 16
+      bit_size: 1
+    - name: PC_MASK_15_TO_1
+      description: See MS0_CTL.PC_MASK_15_TO_1.
+      bit_offset: 17
+      bit_size: 15
+fieldset/MS8_CTL:
+  description: Master 8 protection context control
+  fields:
+    - name: P
+      description: See MS0_CTL.P.
+      bit_offset: 0
+      bit_size: 1
+    - name: NS
+      description: See MS0_CTL.NS.
+      bit_offset: 1
+      bit_size: 1
+    - name: PRIO
+      description: See MS0_CTL.PRIO
+      bit_offset: 8
+      bit_size: 2
+    - name: PC_MASK_0
+      description: See MS0_CTL.PC_MASK_0.
+      bit_offset: 16
+      bit_size: 1
+    - name: PC_MASK_15_TO_1
+      description: See MS0_CTL.PC_MASK_15_TO_1.
+      bit_offset: 17
+      bit_size: 15
+fieldset/MS9_CTL:
+  description: Master 9 protection context control
+  fields:
+    - name: P
+      description: See MS0_CTL.P.
+      bit_offset: 0
+      bit_size: 1
+    - name: NS
+      description: See MS0_CTL.NS.
+      bit_offset: 1
+      bit_size: 1
+    - name: PRIO
+      description: See MS0_CTL.PRIO
+      bit_offset: 8
+      bit_size: 2
+    - name: PC_MASK_0
+      description: See MS0_CTL.PC_MASK_0.
+      bit_offset: 16
+      bit_size: 1
+    - name: PC_MASK_15_TO_1
+      description: See MS0_CTL.PC_MASK_15_TO_1.
+      bit_offset: 17
+      bit_size: 15
+fieldset/MS_CTL:
+  description: Master control
+  fields:
+    - name: PC
+      description: "Active protection context (PC). Modifications to this field are constrained by the associated SMPU MS_CTL.PC_MASK_0 and MS_CTL.PC_MASK_15_TO_1[] fields. In addition, a write transfer with protection context '0' can change this field (protection context 0 has unrestricted access). The CM0+ MPU MS_CTL register is special: the PC field is modifiable by BOTH HW and SW (for all other masters, the MPU MS_CTL.PC field is modifiable by SW ONLY. For CM0+ PC field HW modifications, the following holds: * On entry of a CM0_PC0/1/2/3_HANDLER exception/interrupt handler: IF (the new PC is the same as MS_CTL.PC) PC is not affected; PC_SAVED is not affected. ELSE IF (CM0_PC_CTL.VALID[MS_CTL.PC]) An AHB-Lite bus error is generated for the exception handler fetch; PC is not affected; PC_SAVED is not affected. ELSE PC = 'new PC'; PC_SAVED = PC (push operation). * On entry of any other exception/interrupt handler: PC = PC_SAVED; PC_SAVED is not affected (pop operation). Note that the CM0_PC0/1/2/3_HANDLER and CM0_PC_CTL registers are part of repecitve CPUSS MMIO registers. Note: this field is NOT used by the DW controllers, DMA controller, AXI DMA controller, CRYPTO component and VIDEOSS."
+      bit_offset: 0
+      bit_size: 4
+    - name: PC_SAVED
+      description: "Saved protection context. Modifications to this field are constrained by the associated SMPU MS_CTL.PC_MASK_0 and MS_CTL.PC_MASK_15_TO_1[] fields. Note: this field is ONLY used by the CM0+."
+      bit_offset: 16
+      bit_size: 4
+fieldset/MS_CTL_READ_MIR:
+  description: Master control read mirror
+  fields:
+    - name: PC
+      description: Read-only mirror of MS_CTL.PC
+      bit_offset: 0
+      bit_size: 4
+    - name: PC_SAVED
+      description: Read-only mirror of MS_CTL.PC_SAVED
+      bit_offset: 16
+      bit_size: 4
