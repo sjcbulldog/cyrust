@@ -1,0 +1,10 @@
+Note, only the nightly or beta release of rust will build the
+devices subdirectory.  This is because the chiptool that is used
+depends on some features that are only valid with the nightly or
+beta release.
+
+To use the beta release, type 'rustup default beta'.
+To use the nightly release, type 'rustup default nightly'.
+
+If you don't want to change your default, you
+

@@ -10,11 +10,12 @@ cortex-m = "0.7.7"
 panic-halt = "0.2.0"
 volatile-register="0.2.0"
 
+[dependencies.cortex-m-rt]
+version="0.7.3"
+features = ["device"]
+
 [dependencies.psoc6dev]
 path = "../devices/psoc6dev"
-
-[dependencies.psoc6pdl]
-path = "../devices/psoc6pdl"
 
 # this lets you use `cargo fix`!
 [[bin]]

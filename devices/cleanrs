@@ -15,10 +15,10 @@ for key in "${PERIPHERALS[@]}"
 do
     PERIPHERAL=`echo $key | tr -d '\r'`
     echo -n "Cleaning peripheral $PERIPHERAL ... "
-    cp $PERIPHERAL.rs $PERIPHERAL.orig
     sed '/no_std/d' $PERIPHERAL.rs > tmp
     sed -n '1,2p' tmp > $PERIPHERAL.rs 
     echo 'use core::prelude::v1::derive;' >> $PERIPHERAL.rs
     sed -e '1,2d' < tmp >> $PERIPHERAL.rs
+    rm tmp
     echo done
 done
