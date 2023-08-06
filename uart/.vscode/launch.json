@@ -30,7 +30,7 @@
             "type": "cortex-debug",
             "request": "launch",
             "cwd": "${workspaceRoot}",
-            "executable": "target/thumbv7em-none-eabihf/debug/blinky",
+            "executable": "target/thumbv7em-none-eabihf/debug/uarttest",
             "servertype": "openocd",
             "searchDir": [
                 "${workspaceRoot}",
@@ -41,7 +41,7 @@
             ],
             "overrideLaunchCommands": [
                 "set mem inaccessible-by-default off",
-                "monitor program {target/thumbv7em-none-eabihf/debug/blinky}",
+                "monitor program {target/thumbv7em-none-eabihf/debug/uarttest}",
                 "-enable-pretty-printing",
                 "set remotetimeout 15",
                 "monitor reset init",
@@ -75,7 +75,7 @@
             "svdFile": "",
             "runToEntryPoint": "main",          // if true, program will halt at main. Not used for a restart
             "preLaunchTask": "",        // Set this to run a task from tasks.json before starting a debug session
-            "showDevDebugOutput": "none" // When set to true, displays output of GDB.
+            "showDevDebugOutput": "both"         // When set to true, displays output of GDB.
                                         // This is helpful when something is not working right
         },
         // When using 'attach', make sure your program is running on the board and that your
@@ -86,7 +86,7 @@
             "type": "cortex-debug",
             "request": "attach",
             "cwd": "${workspaceRoot}",
-            "executable": "target/thumbv7em-none-eabihf/debug/blinky",
+            "executable": "target/thumbv7em-none-eabihf/debug/uarttest",
             "servertype": "openocd",
             "searchDir": [
                 "${workspaceRoot}",
@@ -152,7 +152,7 @@
             "type": "cortex-debug",
             "request": "launch",
             "cwd": "${workspaceRoot}",
-            "executable": "target/thumbv7em-none-eabihf/debug/blinky",
+            "executable": "target/thumbv7em-none-eabihf/debug/uarttest",
             "servertype": "openocd",
             "searchDir": [
                 "${workspaceRoot}",
@@ -163,7 +163,7 @@
             ],
             "overrideLaunchCommands": [
                 "monitor psoc6 sflash_restrictions 1",
-                "monitor program {target/thumbv7em-none-eabihf/debug/blinky}",
+                "monitor program {target/thumbv7em-none-eabihf/debug/uarttest}",
                 "monitor reset_config srst_only",
                 "monitor reset run",
                 "monitor psoc6.dap dpreg 0x04 0x00",

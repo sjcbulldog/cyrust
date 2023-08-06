@@ -1,6 +1,6 @@
 [package]
 authors = ["Jack (Butch) Griffin <butchg@comcast.net>"]
-edition = "2021"
+edition = "2018"
 readme = "README.md"
 name = "uarttest"
 version = "0.1.0"

@@ -15,3 +15,7 @@ rt = ["cortex-m-rt/device"]
 [dependencies]
 cortex-m = "0.7.7"
 cortex-m-rt = "0.7.3"
+panic-halt = "0.2.0"
+volatile-register="0.2.0"
+bare-metal="1.0.0"
+vcell="0.1.2"
